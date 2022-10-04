@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/gnb.css" />
+        <script src="js/gnb.js"></script>
+        <!-- <script type="text/javascript" src="js/util.js"></script> -->
+
+        <title>도서 등록페이지 </title>
+        <style type="text/css">
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap');
+            .reg_wrapper{text-align: center; padding-right: 400px;margin-top: 40px;}
+            .image_update{display: inline-block; margin: 30px;}
+            .real-upload{display:inline-block; width:300px; height:400px; border-style: solid; border-width: 1px;}
+            .input_content{display: inline-block; position: absolute; margin: 17px 30px;}
+            .name{display:inline-block; width: 125px; font-size: 30px; font-family: 'Noto Serif KR', serif;}
+            .text{width: 300px;height: 30px;}
+            .text_inform{width: 300px;height: 255px;}
+            label {display: inline-block; padding: 6px 6px; color: #fff; vertical-align: middle; background-color:#46649B;
+                cursor: pointer; height: 19px; width: 110px; border-radius: 7px;}
+            #file_route{padding: 3px 2px;}
+            .update_button{color: #fff; vertical-align: middle; background-color:#46649B; cursor: pointer;
+                height: 39px; width: 95px; border-radius: 5px; border:none; font-size: 17px; margin-left: 347px; margin-top: -6px;}
+        </style>
+    </head>
+    <body>
+        <div class="reg_wrapper">
+            <div class="image_update">
+                <input type="image" class="real-upload">
+                <div class="file_upload_botton">
+                    <input type="text" id="file_route" disabled="disabled" value="파일 선택">
+                    <label for="upload_file">이미지 업로드</label>
+                    <input type="file" id="upload_file" accept="image/*" required=true 
+                    style="position:absolute; clip:rect(0, 0, 0, 0);">
+                </div>
+            </div>
+            <div class="input_content">
+                <b class="name"> 이름</b>
+                <input class="text" type="text" name="book_name" placeholder="책 이름"><br><br>
+
+                <b class="name">일자</b>
+                <input class="text" type="text" name="program_date" placeholder="북클럽 일자"><br><br>
+
+                <b class="name">책 정보</b>
+                <input class="text text_inform" type="text" name="book_inform" placeholder="책 정보"><br><br>
+                <button class="update_button">글 올리기</button>
+            </div>
+        </div>
+        <script>
+            const reader = new FileReader();
+    
+            reader.onload = (readerEvent) => {
+                document.querySelector(".real-upload").setAttribute("src", readerEvent.target.result);
+            };
+            
+            document.querySelector("#upload_file").addEventListener("change", (changeEvent) => {
+            
+                const imgFile = changeEvent.target.files[0];
+                reader.readAsDataURL(imgFile);
+            
+                const fileName = document.getElementById("file_route");
+                fileName.value = imgFile.name;
+                //파일 이름을 띄워줌
+            })
+    
+        </script>
+
+
+    </body>
+</html>
