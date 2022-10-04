@@ -1,0 +1,173 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 50%;
+    min-width: 600px;
+    margin: 0 auto;
+}
+
+h4 {
+    padding-left: 20px;
+    border-left: 5px solid #666;
+    margin: 0 0 20px;
+}
+
+.wrapper {
+    width: 100%;
+    min-width: 600px;
+    height: 400px;
+    background: #cacaca;
+    margin: 25px 0;
+}
+
+.info_wrapper {
+    position: relative;
+}
+
+.book_img {
+    background-color: #eee;
+    width: 250px;
+    height: calc(250px * 1.14142);
+    display: inline-block;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+.book_info {
+    background-color: #ddd;
+    width: 330px;
+    height: 265px;
+    position: absolute;
+    top: 50px;
+    left: 350px;
+    padding: 10px;
+}
+
+.book_info ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.book_info h2 {
+    margin : 0 0 12px;
+}
+
+.book_info li {
+    margin-bottom: 12px;
+}
+
+.book_info li span {
+    display: none;
+    margin: 0;
+}
+
+
+.sr_wrapper {
+    height: 150px;
+}
+
+.sr_box {
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    background: #bbb;
+    text-align: center;
+    line-height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sr_box .btn {
+    background: transparent;
+    font-size: 24px;
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+}
+
+.sr_box p {
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    display: inline-block;
+}
+
+.btn_write {
+    display: block;
+    float: right;
+}
+
+.mr_wrapper {
+    height: 600px;
+    position: relative;
+    /* text-align: center; */
+}
+
+.mr_wrapper .mr_board {
+    width: 650px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 10px 0 ;
+    background: #eaeaea;
+    /* display: inline-block; */
+    text-align: center;
+}
+
+.mr_wrapper table {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid;
+}
+
+.mr_wrapper .th_no {
+    border: 1px solid;
+    width: 10%;
+}
+
+.mr_wrapper .th_title {
+    border: 1px solid;
+    width: 70%;
+}
+
+.mr_wrapper .th_name {
+    border: 1px solid;
+    width: 20%;
+}
+
+.mr_wrapper td {
+    border: 1px solid;
+}
+
+.mr_wrapper a {
+    display: inline-block;
+}
+
+.mr_wrapper ol {
+    padding: 0;
+    list-style-type: none;
+    display: inline-block;
+}
+
+.mr_wrapper ol li {
+    display: inline-block;
+    margin: 5px;
+}
+
+.mr_wrapper .paging {
+    text-align: center;
+}
+
+.mr_wrapper button {
+    display: block;
+    float: right;
+}

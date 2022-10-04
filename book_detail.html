@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/gnb.css" />
+    <link rel="stylesheet" href="book_detail.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+    <script src="js/gnb.js"></script>
+    <script src="js/footer.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <!-- 도서 정보 -->
+        <div class="wrapper info_wrapper">
+            <h4>도서 정보</h4>
+            <div class="book_img">{img}</div>
+            <div class="book_info">
+                <ul>
+                    <li class="book_category">{category}</li>
+                    <h2 class="book_title">{title}</h2>
+                    <li class="book_desc">{desc}</li>
+                    <li class="book_author">저자
+                        <span>{author}</span>
+                    </li>
+                    <li class="book_translator">옮긴이
+                        <span>{translator}</span>
+                    </li>
+                    <li class="book_publisher">출판사
+                        <span>{publisher}</span>
+                    </li>
+                    <li class="book_publishDate">출간일
+                        <span>{publishDate}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 한줄평 슬라이드-->
+        <div class="wrapper sr_wrapper">
+            <h4>회원들의 한줄평</h4>
+            <div class="sr_box">
+                <button class="btn btn_left"><</button>
+                <p>한줄평 입니다.</p>
+                <button class="btn btn_right">></button>
+            </div>
+            <button class="btn btn_write">글쓰기</button>
+        </div>
+
+        <!-- 서평 보드 -->
+        <div class="wrapper mr_wrapper">
+            <h4>회원들의 서평 모음</h4>
+            <div class="mr_board">
+                <!-- 테이블 -->
+                <table>
+                    <tr>
+                        <th class="th th_no">no.</th>
+                        <th class="th th_title">title.</th>
+                        <th class="th th_name">name.</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div class="paging">
+                    <a href="#" class="btn_left"><</a>
+                    <ol>
+                        <a href="#"><li>1</li></a>
+                        <a href="#"><li>2</li></a>
+                        <a href="#"><li>3</li></a>
+                        <a href="#"><li>4</li></a>
+                        <a href="#"><li>5</li></a>
+                    </ol>
+                    <a href="" class="btn_right">></a>
+                </div>
+            </div>
+            <button>글쓰기</button>
+            <!-- 페이징 -->
+        </div>
+
+        <!-- 북토크 대화록 -->
+        <div class="wrapper">
+            <h4>북토크 대화록</h4>
+            <div class="box box_bt">
+
+            </div>
+        </div>
+
+        <!-- 댓글 -->
+        <div class="wrapper">
+            <h4>댓글</h4>
+        </div>
+
+    </div>
+</body>
+</html>
