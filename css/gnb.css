@@ -1,6 +1,7 @@
 #gnb {
+    position: fixed;
     background-color: white;
-    position: relative;
+    width: 100%;
     margin: 0 auto;
 }
 .gnb_container {

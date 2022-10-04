@@ -24,14 +24,17 @@ a {
     float: right;
 }
 input {
-    width: 50vw;
+    width: 300px;
     height: 30px;
-    margin: 10px 0 10px 0;
+    margin: 10px auto;
     display: block;}
 
 .btn_join {
-    display: block;
-    margin: 0 auto
-    ;width: 45vw;
+    background-color: rgb(60, 155, 93);
+    border-radius: 5px;
+    border: 0;
+    width: 312px;
     height: 30px;
+    margin: 10px auto;
+    display: block;
 }
