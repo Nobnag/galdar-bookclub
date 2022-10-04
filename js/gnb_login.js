@@ -9,7 +9,8 @@ $(document).ready(function(){
     html += '<a href="join.html" class="gnb_link">LIST</a>';
     html += '</div>';
     html += '<div class="gnb_right">';
-    html += '<a class="gnb_btn_login" href="login.html"><button>로그인</button></a>'
+    html += '<p class="gnb_btn_login">회원 이름</p>'
+    html += '<a class="gnb_btn_login" href="login.html"><button>로그아웃</button></a>'
     html += '<a class="gnb_btn_login" href="join.html"><button>회원가입</button></a>'
     html += '</div>'
     html += '</div>'

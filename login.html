@@ -1,79 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>nobangworld_login</title>]
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/validation.js"></script>
+    <title>galdar_login</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/gnb.css" />
+        <script src="js/gnb.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/join.css" />
+        <link rel="stylesheet" type="text/css" href="css/footer.css" />
+        <script src="js/footer.js"></script>
     <style>
-        h1 {
+        a{
+            text-decoration: none;
+        }
+        h1  {
             text-align:center;
         }
-
-        .login_container .f_msg {
-            display:inline-block;
-            width: 50px;
+        .login_container{
+            text-align:center;
         }
-
+        input {
+            display: block;
+            margin: 30px auto 0;
+            width: 300px; height: 50px;
+        }
         .btn_login {
             margin-top:10px;
+            width: 300px; height: 50px;
+            border-radius: 5px;
+            border: 0;
         }
-
+        .naver_btn_login{
+            background-color: green;
+        }
+        .kakao_btn_login{
+            background-color: yellow;
+        }
     </style>
-    <script>
-        $(document).on("click", ".btn_login", function(){
-            //입력한 ID와 PW의 값을 가져온다.
-            var id = $('input[name="id"]').val().trim();
-            var pw = $('input[name="pw"]').val();
-
-            /*
-                ID 혹은 PW가 입력되었는지 확인하고, 입력되지 않았다면
-                사용자에게 입력이 필요함을 안내한다.
-            */
-           if(id == ""){
-            alert("아이디를 입력해주세요.");
-            return false; 
-           }
-
-           if(pw == ""){
-            alert("비밀번호를 입력해주세요.");
-            return false;
-           }
-
-            /* API에 ID/PW를 전달하여 로그인을 시도한다. */
-            var params = {
-                id: id,
-                pw: pw
-            };
-
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:3000/member/login',
-                data: params,
-                success: function (data) {
-                    if(data.result == "false"){
-                        alert("로그인 정보가 없습니다.");
-                    }
-                    else if(data.result == "true"){
-                        alert("로그인 정보가 있습니다.");
-                        location.href = "./index.html";
-                    }
-                },
-                error: function (msg) {
-                    alert(msg.responseText);
-                }
-            });
-        });
-    </script>
 </head>
 <body>
     <h1>
-        nobangworld!
+        로그인
     </h1>
     <div class="login_container">
-        <div class="f_msg">ID: </div><input type="text" name="id"><br>
-        <div class="f_msg">PW: </div><input type="password" name="pw"><br>
+        <input type="text" name="id"placeholder="이메일을 입력해주세요" class="enter_keydown">
+        <input type="password" name="pw"placeholder="비밀번호를 입력해주세요" class="enter_keydown">
         <button type="text" class="btn_login">로그인</button><br>
-        처음 오셨나요? <a href="join.html">회원가입</a>하기
+        <button type="text" class="btn_login naver_btn_login">소셜 로그인</button><br>
+        <button type="text" class="btn_login kakao_btn_login">소셜 로그인</button>
     </div>
+    <script>
+        
+    </script>
 </body>
 </html>

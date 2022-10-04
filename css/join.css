@@ -1,0 +1,37 @@
+a {
+    text-decoration: none;
+}
+#wrap {
+    margin: 0 auto;
+    width:50vw;
+}
+.top {
+    margin-bottom: 50px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+}
+.join_info_warp {
+    font-size:20px;
+    margin: 0 auto;
+    width:50vw;
+}
+.info_id {
+    display: inline-block;
+}
+.btn_id_dup {
+    float: right;
+}
+input {
+    width: 50vw;
+    height: 30px;
+    margin: 10px 0 10px 0;
+    display: block;}
+
+.btn_join {
+    display: block;
+    margin: 0 auto
+    ;width: 45vw;
+    height: 30px;
+}

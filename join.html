@@ -5,17 +5,10 @@
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/gnb.css" />
         <script src="js/gnb.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/join.css" />
+        <link rel="stylesheet" type="text/css" href="css/footer.css" />
+        <script src="js/footer.js"></script>
         <style>
-            a {text-decoration: none;}
-            #wrap {margin: 0 auto;width:50vw;}
-            .top {margin-bottom: 50px; color: rgb(0, 0, 0); text-align: center; width: 100%;font-size: 50px;}
-            .join_info_warp {font-size:20px; margin: 0 auto;width:50vw;}
-            .info_id {display: inline-block;}
-            .btn_id_dup {float: right;}
-            input {width: 50vw; height: 30px; margin: 10px 0 10px 0; display: block;}
-            .btn_join {display: block; margin: 0 auto;width: 45vw;height: 30px;}
-
-            
         </style>
     </head>
     <body>
@@ -28,10 +21,13 @@
                 <input type="password" name="pw"placeholder="비밀번호" class="enter_keydown">
                 <input type="password" name="pw_confirm"placeholder="비밀번호 확인" class="enter_keydown">
                 <input type="text" name="name"placeholder="닉네임" class="enter_keydown">
-                <input type="text" name="hp" placeholder="연락처" class="enter_keydown">
-                <button type="text" class="btn_join">가입하기</button>
+                <input type="text" name="hp"placeholder="연락처" class="enter_keydown">
+                <button type="text" class="btn_join">
+                    가입하기
+                </button>
             </div>
         </div>
+        
         <script type="text/javascript">
             $(document).on("keydown", ".enter_keydown",function(keynum){
                 if(keynum.keyCode ==13){

@@ -1,0 +1,22 @@
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    word-break: break-word;
+}
+.footer_top {
+    margin-bottom: 30px;
+}
+.footer_container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.footer_content {
+    font-size: 15px;
+}
+.footer_link{
+    margin-bottom: 10px;
+}
