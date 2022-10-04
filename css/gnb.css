@@ -1,15 +1,42 @@
 #gnb {
-    text-decoration: none;
+    background-color: white;
+    position: relative;
+    margin: 0 auto;
 }
-
-#gnb .logo {
-    text-decoration: none;
-   
+.gnb_container {
+    margin: 0 auto;
+    width: 80vw;
 }
-
-#gnb a {
-    line-height: 50px;
+.gnb_home_link {
+    position: relative;
+    margin-right: 100px;
 }
-#gnb a:nth-child(n+2){
-    margin-left:10px;
+.gnb_logo {
+    position: relative;
+    max-width: 50%;
+    width: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.gnb_content {
+    position: absolute;
+    display: inline-block;
+    right: 15vw;
+    margin-top: 50px;
+    }
+.gnb_link {
+    position: relative;
+    font-size: 30px;
+    margin-left: 10px;
+    }
+.gnb_right {
+    position: absolute;
+    right: 1vw;
+    display: inline-block;
+    }
+.gnb_btn_login{
+    margin-right: 10px;
 }
