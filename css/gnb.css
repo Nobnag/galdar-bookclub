@@ -1,0 +1,15 @@
+#gnb {
+    text-decoration: none;
+}
+
+#gnb .logo {
+    text-decoration: none;
+   
+}
+
+#gnb a {
+    line-height: 50px;
+}
+#gnb a:nth-child(n+2){
+    margin-left:10px;
+}

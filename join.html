@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> galdar_join</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <style>
+            a {text-decoration: none;}
+            #wrap {margin: 0 auto;width:50vw;}
+            .top {margin-bottom: 50px; color: rgb(0, 0, 0); text-align: center; width: 100%;font-size: 50px;}
+            .join_info_warp {font-size:20px; margin: 0 auto;width:50vw;}
+            .info_id {display: inline-block;}
+            .btn_id_dup {float: right;}
+            input {width: 50vw; height: 30px; margin: 10px 0 10px 0; display: block;}
+            .btn_join {display: block; margin: 0 auto;width: 45vw;height: 30px;}
+
+            #gnb {background-color: white;position: relative;margin: 0 auto;}
+            .gnb_container {margin: 0 auto; width: 80vw;}
+            .gnb_home_link {position: relative; margin-right: 100px;}
+            .gnb_logo {position: relative; max-width: 50%; width: 100px;
+                display: inline-block;
+    vertical-align: middle;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;}
+            .gnb_content {position: relative; display: inline-block;}
+            .gnb_link {position: relative; font-size: 30px; margin-left: 10px; }
+            .gnb_r {position: absolute; right: 1vw; display: inline-block;}
+        </style>
+    </head>
+    <body>
+    <div id="gnb">
+        <div class="gnb_container">
+        <a href="https://galdar.kr/" class="gnb_home_link">
+            <img src="galdar_logo.png" class="gnb_logo" >
+        </a>
+        <div class="gnb_content">
+            <a href="https://galdar.kr/" class="gnb_link">HOME</a>
+            <a href="login.html" class="gnb_link">ABOUT</a>
+            <a href="join.html" class="gnb_link">LIST</a>
+        </div>
+        <div class="gnb_r">
+            <a href="login.html"><button>로그인</button></a>
+            <a href="join.html"><button>회원가입</button></a>
+        </div>
+        </div>
+    </div>
+        <div id="wrap">
+            <h1 class="top">
+                회원 가입
+            </h1>
+            <div class="join_info_warp">
+                <input type="text" name="id"placeholder="이메일" class="enter_keydown">
+                <input type="password" name="pw"placeholder="비밀번호" class="enter_keydown">
+                <input type="password" name="pw_confirm"placeholder="비밀번호 확인" class="enter_keydown">
+                <input type="text" name="name"placeholder="닉네임" class="enter_keydown">
+                <input type="text" name="hp" placeholder="연락처" class="enter_keydown">
+                <button type="text" class="btn_join">가입하기</button>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).on("keydown", ".enter_keydown",function(keynum){
+                if(keynum.keyCode ==13){
+                    $(".btn_join").click()
+                }
+            });
+            $(document).ready(function(){
+                $(".btn_join").click(function() {
+                var id = $('input[name="id"]').val().trim();
+                var pw = $('input[name="pw"]').val().trim();
+                var pw_confirm = $('input[name="pw_confirm"]').val().trim();
+                var name = $('input[name="name"]').val().trim();
+                var hp = $('input[name="hp"]').val().trim();
+
+                if(id=="") {
+                        alert("아이디를 입력하세요");                        
+                        $('input[name="id"]').focus();
+                        return false;
+                }
+                if(idRegExp.test(id) == false){
+                        alert("아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('input[name="id"]').focus();
+                        return false;
+                }
+                if(pw=="") {
+                        alert("비밀번호를 입력하세요");                        
+                        $('input[name="pw"]').focus();
+                        return false;
+                }
+                if(idRegExp.test(pw) == false){
+                        alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('input[name="pw"]').focus();
+                        return false;
+                }
+                if(pw_confirm=="") {
+                        alert("비밀번호 확인을 입력하세요");                        
+                        $('input[name="pw_confirm"]').focus();
+                        return false;
+                }
+                if(pw !=pw_confirm) {
+                    alert("비밀번호와 비밀번호확인이 일치하지 안습니다 비밀번호 확인을 일치시켜주세요.")
+                    $('input[name="pw_confirm"]').focus();
+                    return false;
+                }
+                if(name=="") {
+                        alert("이름을 입력하세요.");                        
+                        $('input[name="name"]').focus();
+                        return false;
+                }
+                if(nameRegExp.test(name) == false){
+                        alert("이름은 한글 이름 2~4자 이내 영문 이름 2~10자 이내로 작성해주셈")
+                        $('input[name="name"]').focus();
+                        return false;
+                }
+                if(hp=="") {
+                        alert("휴대전화를 입력하세요");                        
+                        $('input[name="hp"]').focus();
+                        return false;
+                }
+                if(hpRegExp.test(hp)== false) {
+                        alert("휴대전화는 숫자만 사용가능합니다.");                        
+                        $('input[name="hp"]').focus();
+                        return false;
+                }
+                if(id !== "" && pw !="" && name !== "" && dob !== "" && email !== "" && addr !== "" && hp !=="") {
+                        var data = {
+                            id: id
+                            ,pw: pw
+                            ,name: name
+                            ,dob: dob
+                            ,email: email
+                            ,addr: addr
+                            ,hp: hp
+                        };
+                        $.ajax({
+                            type: 'POST',
+                            url: '/member_info',
+                            dataType: 'json',
+                            data: data,
+                            //async: false, 동기 와 비동기 찾아보기
+                            success: function(result){ 
+                                console.log(result)
+                                if(result.recordset[0].result == 1) {
+                                    alert("회원가입요");
+                                    return false;
+                                }
+                            },error: function(jqXHR,textStatus,errorThrown) {
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
