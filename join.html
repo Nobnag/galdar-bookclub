@@ -3,6 +3,8 @@
     <head>
         <title> galdar_join</title>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/gnb.css" />
+        <script src="js/gnb.js"></script>
         <style>
             a {text-decoration: none;}
             #wrap {margin: 0 auto;width:50vw;}
@@ -13,37 +15,10 @@
             input {width: 50vw; height: 30px; margin: 10px 0 10px 0; display: block;}
             .btn_join {display: block; margin: 0 auto;width: 45vw;height: 30px;}
 
-            #gnb {background-color: white;position: relative;margin: 0 auto;}
-            .gnb_container {margin: 0 auto; width: 80vw;}
-            .gnb_home_link {position: relative; margin-right: 100px;}
-            .gnb_logo {position: relative; max-width: 50%; width: 100px;
-                display: inline-block;
-    vertical-align: middle;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;}
-            .gnb_content {position: relative; display: inline-block;}
-            .gnb_link {position: relative; font-size: 30px; margin-left: 10px; }
-            .gnb_r {position: absolute; right: 1vw; display: inline-block;}
+            
         </style>
     </head>
     <body>
-    <div id="gnb">
-        <div class="gnb_container">
-        <a href="https://galdar.kr/" class="gnb_home_link">
-            <img src="galdar_logo.png" class="gnb_logo" >
-        </a>
-        <div class="gnb_content">
-            <a href="https://galdar.kr/" class="gnb_link">HOME</a>
-            <a href="login.html" class="gnb_link">ABOUT</a>
-            <a href="join.html" class="gnb_link">LIST</a>
-        </div>
-        <div class="gnb_r">
-            <a href="login.html"><button>로그인</button></a>
-            <a href="join.html"><button>회원가입</button></a>
-        </div>
-        </div>
-    </div>
         <div id="wrap">
             <h1 class="top">
                 회원 가입
