@@ -48,8 +48,8 @@
                         $('input[name="Email"]').focus();
                         return false;
                 }
-                if(EailmRegExp.test(Email) == false){
-                        alert("아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                if(EmailRegExp.test(Email) == false){
+                        alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
                         $('input[name="Email"]').focus();
                         return false;
                 }
@@ -102,6 +102,7 @@
                             // ,PremiumMemberYn: 0
                             // ,AdminYn:0
                         };
+                        //ajax는 데이터를 주고받기 위한 도구로 생각
                         $.ajax({
                             type: 'POST',
                             url: '/member',

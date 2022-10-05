@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var {sql, poolPromise} = require('./server');
 // var path = require('path');
-
+// app ~~xxxxx ~~~ 이거 한 객채를 api로 칭하는거 같음
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
@@ -35,6 +35,16 @@ app.get('/', function(req,res) {
     res.sendFile(__dirname + "/join.html")
     //res.sendFile(path.resolve('../join.html'));
 })
+app.get('/login',function(req,res) {
+    res.sendFile(__dirname + "/login.html")
+})
+app.get('/intro',function(req,res) {
+    res.sendFile(__dirname + "/intro.html")
+})
+app.get('/galdarBook_list',function(req,res) {
+    res.sendFile(__dirname + "/galdarBook_list.html")
+})
+app.get()
 
 app.listen(3000, function() {
     console.log('3000 실행');
