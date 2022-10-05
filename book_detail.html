@@ -9,6 +9,83 @@
     <link rel="stylesheet" type="text/css" href="css/footer.css" />
     <script src="js/gnb.js"></script>
     <script src="js/footer.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            // 2. 한줄평
+            // 2-1. 글쓰기 버튼 클릭
+            $('.btn_write').click(function(){
+            // 2-2. 창 전환
+                $('.sr_container').css('display','none');
+                $('.sr_container2').css('display','block');
+            });
+            // 2-3. 등록버튼 클릭
+            $('.btn_regist').click(function(){
+            // 2-4. 이전에 작성한 적 있으면 불가입니다.
+                // if()
+            // 2-5. 값 가져오기
+                var sr_content = $('.sr_ipt').val().trim();
+            // 2-6. 미입력시 안내
+                if(sr_content == ""){
+                    alert('한줄평을 입력하세요.');
+                    return false;
+                }
+            // 2-7. API 전송
+                else {
+                    console.log(sr_content);
+                }
+            });
+
+            // 수정버튼 클릭
+            $('.btn_update').click(function(){
+                // 이전에 작성한 글이 있다면, 
+                // if()
+                alert("이미 한줄평을 작성하였습니다.");
+            });
+
+            // 취소버튼 클릭
+            $('.btn_cancel').click(function(){
+            // 2-2. 창 전환
+                $('.sr_container2').css('display','none');
+                $('.sr_container').css('display','block');
+            });
+
+
+            // 3. 줄글 서평
+            // 3-1. 글쓰기 버튼 클릭
+            $('.btn_write2').click(function(){
+            // 3-2. 창 전환
+                $('.mr_container').css('display','none');
+                $('.mr_container2').css('display','block');
+            });
+            // 3-3. 등록버튼 클릭
+            $('.btn_regist2').click(function(){
+            // 3-4. 이전에 작성한 적 있으면 추가 작성 불가.
+            // if()
+            // 3-5. 값 가져오기
+                var mr_title = $('.ipt_mr_title').val();
+                var mr_content = $('.ipt_mr_content').val();
+            // 3-6. 미입력시 안내
+                if(mr_title == '' || mr_content == ''){
+                    alert("제목과 서평을 모두 입력해주세요.")
+                }
+            // 3-7. API 전송
+            });
+            //
+
+            // 4. 댓글
+            $('.btn_reg').click(function(){
+                var reply_name = $('input[name="name"]').val().trim();
+                var reply_pw = $('input[name="pw"]').val().trim();
+                var reply_content = $('.ipt_reply_content').val().trim();
+
+                if(reply_name == "" || reply_pw == "" || reply_content == ""){
+                    alert('이름과 비밀번호, 내용을 모두 입력하세요.');
+                }
+                
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -41,45 +118,77 @@
         <!-- 한줄평 슬라이드-->
         <div class="wrapper sr_wrapper">
             <h4>회원들의 한줄평</h4>
-            <div class="sr_box">
-                <button class="btn btn_left"><</button>
-                <p>한줄평 입니다.</p>
-                <button class="btn btn_right">></button>
+            
+            <div class="sr_container">
+                <div class="sr_box">
+                    <button class="btn btn_left"><</button>
+                    <p>한줄평 입니다.</p>
+                    <button class="btn btn_right">></button>
+                </div>
+
+                <button class="button btn_write">글쓰기</button>
+                <button class="button btn_update">내 한줄평 수정</button>
             </div>
-            <button class="btn btn_write">글쓰기</button>
+            
+            <div class="sr_container2">
+                <div class="sr_box2">
+                    <input type="text" class="ipt sr_ipt" placeholder="한줄평을 입력하세요. 하나의 한줄평만 작성할 수 있습니다.">
+                </div>
+                <button class="button btn_cancel">취소</button>
+                <button class="button btn_regist">등록</button>
+            </div>
         </div>
 
         <!-- 서평 보드 -->
         <div class="wrapper mr_wrapper">
             <h4>회원들의 서평 모음</h4>
-            <div class="mr_board">
-                <!-- 테이블 -->
-                <table>
-                    <tr>
-                        <th class="th th_no">no.</th>
-                        <th class="th th_title">title.</th>
-                        <th class="th th_name">name.</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
-                <div class="paging">
-                    <a href="#" class="btn_left"><</a>
-                    <ol>
-                        <a href="#"><li>1</li></a>
-                        <a href="#"><li>2</li></a>
-                        <a href="#"><li>3</li></a>
-                        <a href="#"><li>4</li></a>
-                        <a href="#"><li>5</li></a>
-                    </ol>
-                    <a href="" class="btn_right">></a>
+            
+            <div class="mr_container">
+                <div class="mr_board">
+                    <!-- 테이블 -->
+                    <table>
+                        <tr>
+                            <th class="th th_no">no.</th>
+                            <th class="th th_title">title.</th>
+                            <th class="th th_name">name.</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <!-- 페이징 -->
+                    <div class="paging">
+                        <a href="#" class="btn_left"><</a>
+                        <ol>
+                            <a href="#"><li>1</li></a>
+                            <a href="#"><li>2</li></a>
+                            <a href="#"><li>3</li></a>
+                            <a href="#"><li>4</li></a>
+                            <a href="#"><li>5</li></a>
+                        </ol>
+                        <a href="" class="btn_right">></a>
+                    </div>
+                </div>
+                <div class="mr_btn">
+                    <button class="button btn_write2">글쓰기</button>
                 </div>
             </div>
-            <button class="btn btn_write">글쓰기</button>
-            <!-- 페이징 -->
+
+            <div class="mr_container2">
+                <div class="mr_board">
+                    <h4>나의 서평</h4>
+                    <input type="text" placeholder="제목" class="ipt ipt_mr_title">
+                    <textarea name="maintext" class="ipt_mr_content" placeholder="* 서평을 입력해주세요(400~500자).&#13;&#10;* 책 한 권 당 서평은 한 번만 작성할 수 있습니다." rows="10"></textarea>
+                </div>
+                <div class="mr_btn">
+                    <button class="button btn_regist2">등록</button>
+                </div>
+            </div>
+
+
+
         </div>
 
         <!-- 북토크 대화록 -->
@@ -165,7 +274,7 @@
                             <input type="password" name="pw" placeholder="비밀번호">
                         </div>
                     </div>
-                    <textarea name="textarea" id="" rows="3" placeholder="내용을 입력하세요."></textarea>
+                    <textarea name="textarea" class="ipt_reply_content" rows="3" placeholder="내용을 입력하세요."></textarea>
                     <button class="btn btn_reg">등록</button>
                 </div>
             </div>
