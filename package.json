@@ -1,0 +1,28 @@
+{
+  "name": "galdar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nobnag/galdar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nobnag/galdar/issues"
+  },
+  "homepage": "https://github.com/Nobnag/galdar#readme",
+  "dependencies": {
+    "body": "^5.1.0",
+    "body-parser": "^1.20.0",
+    "cooki": "^0.2.0",
+    "cookie": "^0.5.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.1",
+    "mssql": "^9.0.1"
+  }
+}

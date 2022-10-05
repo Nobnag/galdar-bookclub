@@ -11,3 +11,5 @@ $(document).ready(function(){
     html += '</div>'
     $("body").append(html);
 });
+
+//세션발급
