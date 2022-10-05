@@ -78,7 +78,7 @@
                     <a href="" class="btn_right">></a>
                 </div>
             </div>
-            <button>글쓰기</button>
+            <button class="btn btn_write">글쓰기</button>
             <!-- 페이징 -->
         </div>
 
@@ -91,8 +91,84 @@
         </div>
 
         <!-- 댓글 -->
-        <div class="wrapper">
+        <div class="wrapper reply_wrapper">
             <h4>댓글</h4>
+            
+            <div class="box reply_list_box">
+                <!-- 댓글 리스트 -->
+                <div class="reply_list">
+                    <div class="reply reply_writer">
+                        <span>{ReplyWriter}</span>
+                    </div>
+                    <div class="reply reply_content">
+                        <span>{ReplyContent}</span>
+                        <span>{Writedatetime}</span>
+                    </div>
+                </div>
+                <div class="reply_list">
+                    <div class="reply reply_writer">
+                        <span>{ReplyWriter}</span>
+                    </div>
+                    <div class="reply reply_content">
+                        <span>{ReplyContent}</span>
+                        <span>{Writedatetime}</span>
+                    </div>
+                </div>
+                <div class="reply_list">
+                    <div class="reply reply_writer">
+                        <span>{ReplyWriter}</span>
+                    </div>
+                    <div class="reply reply_content">
+                        <span>{ReplyContent}</span>
+                        <span>{Writedatetime}</span>
+                    </div>
+                </div>
+                <div class="reply_list">
+                    <div class="reply reply_writer">
+                        <span>{ReplyWriter}</span>
+                    </div>
+                    <div class="reply reply_content">
+                        <span>{ReplyContent}</span>
+                        <span>{Writedatetime}</span>
+                    </div>
+                </div>
+                <div class="reply_list">
+                    <div class="reply reply_writer">
+                        <span>{ReplyWriter}</span>
+                    </div>
+                    <div class="reply reply_content">
+                        <span>{ReplyContent}</span>
+                        <span>{Writedatetime}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 페이징 -->
+            <div class="paging">
+                <a href="#" class="btn_left"><</a>
+                <ol>
+                    <a href="#"><li>1</li></a>
+                    <a href="#"><li>2</li></a>
+                    <a href="#"><li>3</li></a>
+                    <a href="#"><li>4</li></a>
+                    <a href="#"><li>5</li></a>
+                </ol>
+                <a href="" class="btn_right">></a>
+            </div>
+            <!-- 댓글 작성창 -->
+            <div class="box reply_box">
+                <div class="box reply_write_box">    
+                    <div class="box reply_input_box">
+                        <div class="ipt ipt_reply_name">
+                            <input type="text" name="name" placeholder="작성자 명">
+                        </div>
+                        <div class="ipt ipt_reply_pw">
+                            <input type="password" name="pw" placeholder="비밀번호">
+                        </div>
+                    </div>
+                    <textarea name="textarea" id="" rows="3" placeholder="내용을 입력하세요."></textarea>
+                    <button class="btn btn_reg">등록</button>
+                </div>
+            </div>
         </div>
 
     </div>

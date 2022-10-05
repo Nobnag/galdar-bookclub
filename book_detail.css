@@ -74,7 +74,7 @@ h4 {
 
 
 .sr_wrapper {
-    height: 150px;
+    height: 180px;
 }
 
 .sr_box {
@@ -105,11 +105,20 @@ h4 {
 
 .btn_write {
     display: block;
+    /* float: right; */
+    width: 120px;
+    height: 30px;
     float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
 }
 
 .mr_wrapper {
-    height: 600px;
+    height: 620px;
     position: relative;
     /* text-align: center; */
 }
@@ -154,29 +163,123 @@ h4 {
     display: inline-block;
 }
 
-.mr_wrapper ol {
+/* .mr_wrapper  */ol {
     padding: 0;
     list-style-type: none;
     display: inline-block;
 }
 
-.mr_wrapper ol li {
+/* .mr_wrapper  */ol li {
     display: inline-block;
     margin: 5px;
 }
 
-.mr_wrapper .paging {
+/* .mr_wrapper  */.paging {
     text-align: center;
 }
-
+/* 
 .mr_wrapper button {
     display: block;
     float: right;
 }
-
+ */
 .bt_wrapper .bt_box {
     width: 90%;
     margin: 0 auto;
     height: 330px;
     background: #ededed
+}
+
+.reply_wrapper {
+    height: 600px;
+}
+
+.reply_wrapper textarea {
+    display: block;
+    margin-bottom: 12px;
+    resize: none;
+    float: right;
+    padding: 5px 10px;
+    width: 80%;
+}
+
+.reply_list_box {
+    background: #ededed;
+    width: 90%;
+    margin: 15px auto;
+    height: 200px;
+    
+}
+
+.reply_list {
+    background: #b9b9b9;
+}
+
+.reply_list .reply {
+    display: inline-block;
+    padding: 8px;
+    margin-bottom: 4px;
+}
+
+.reply_writer {
+    width: 15%;
+    border: 1px solid;
+}
+
+.reply_content {
+    width: 80%;
+    border: 1px solid;
+}
+
+.reply_content span:last-child {
+    float: right;
+    font-size: 12px;
+    color: #5a5a5a;
+    line-height: 16px
+}
+
+
+
+
+
+
+
+.reply_box {
+    background: #ededed;
+    width: 90%;
+    margin: 0 auto;
+    height: 120px;
+}
+
+.reply_write_box {
+    padding: 15px;
+}
+
+.reply_box .ipt {
+    display: block;
+}
+
+.reply_box .ipt_reply_pw {
+    margin-top: 10px;
+}
+
+.reply_box .ipt input {
+    width: 110px;
+    padding: 0 5px;
+    height: 20px;
+}
+
+.reply_input_box {
+    float: left;
+    height: 55px;
+    margin-bottom: 15px;
+}
+
+.btn_reg {
+    width: 120px;
+    color: white;
+    background-color: #666;
+    border: 0;
+    height: 24px;
+    float: right;
 }
