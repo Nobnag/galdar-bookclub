@@ -23,34 +23,38 @@ h4 {
 .wrapper {
     width: 100%;
     min-width: 600px;
-    height: 400px;
+    /* height: 400px; */
     background: #cacaca;
     margin: 25px 0;
 }
 
 .info_wrapper {
     position: relative;
+    height: auto;
+    padding-bottom: 50px;
 }
 
+.container_book_contents {
+    width: auto;
+    height: auto;
+    padding: 15px;
+}
+
+
 .book_img {
-    background-color: #eee;
-    width: 250px;
-    height: calc(250px * 1.14142);
-    display: inline-block;
-    position: absolute;
-    top: 50px;
-    left: 50px;
+    background: #eee;
+    width: 300px;
+    height: calc(300px * 1.14142);
+    float: left;
+    margin: 0 20px;
 }
 
 .book_info {
-    background-color: #ddd;
-    /* width: 330px; */
-    width: 54.5%;
-    height: 265px;
-    position: absolute;
-    top: 50px;
-    left: 350px;
-    padding: 10px;
+    display: inline-block;
+    background: #ddd;
+    width: 490px;
+    height: calc(300px * 1.14142);
+    margin-left: 20px;
 }
 
 .book_info ul {
@@ -61,16 +65,45 @@ h4 {
 
 .book_info h2 {
     margin : 0 0 12px;
+    padding-left: 10px;
 }
 
 .book_info li {
     margin-bottom: 12px;
+    padding-left: 10px;
+}
+
+.book_info li p {
+    display: inline-block;
+    width: 140px;
+    margin: 0;
 }
 
 .book_info li span {
-    display: none;
+    /* display: none; */
     margin: 0;
 }
+
+.btn_update_info {
+    width: auto;
+    height: auto;
+}
+
+.btn_update_info button {
+    /* display: block; */
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    cursor: pointer;
+}
+
+
+
+
 
 
 .sr_wrapper {
@@ -147,35 +180,32 @@ h4 {
 
 .btn_update {
     display: block;
-    /* float: right; */
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 5%;
+    margin-right: 2%;
     margin-top: 12px;
     cursor: pointer;
 }
 
 .btn_regist {
     display: block;
-    /* float: right; */
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 5%;
+    margin-right: 2%;
     margin-top: 12px;
     cursor: pointer;
 }
 
 .btn_cancel {
     display: block;
-    /* float: right; */
     width: 120px;
     height: 30px;
     float: right;
@@ -192,6 +222,7 @@ h4 {
     height: auto;
     position: relative;
     /* text-align: center; */
+    padding-bottom: 60px;
 }
 
 .mr_container {
@@ -261,24 +292,7 @@ h4 {
 /* .mr_wrapper  */.paging {
     text-align: center;
 }
-/* 
-.mr_wrapper button {
-    display: block;
-    float: right;
-}
- */
-.bt_wrapper .bt_box {
-    width: 90%;
-    margin: 0 auto;
-    height: 330px;
-    background: #ededed;
-}
 
-.mr_btn {
-    width: 100%;
-    height: 50px;
-    background: #cacaca;
-}
 
 .btn_write2 {
     display: block;
@@ -297,7 +311,8 @@ h4 {
     text-align: left;
 }
 
-.btn_regist2 {
+
+.btn_cancel2 {
     display: block;
     width: 120px;
     height: 30px;
@@ -306,6 +321,20 @@ h4 {
     color: #fff;
     border: none;
     margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+
+.btn_regist2 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
     margin-top: 12px;
     cursor: pointer;
 }
@@ -327,9 +356,17 @@ h4 {
 }
 
 
+.bt_wrapper {
+    height: auto;
+    padding-bottom: 40px;
+}
 
-
-
+.bt_wrapper .bt_box {
+    width: 90%;
+    margin: 0 auto;
+    height: 300px;
+    background: #ededed;
+}
 
 
 
@@ -378,12 +415,24 @@ h4 {
     border: 1px solid;
 }
 
-.reply_content span:last-child {
+.reply_content .reply_datetime {
     float: right;
     font-size: 12px;
     color: #5a5a5a;
     line-height: 16px
 }
+
+.reply_content .reply_datetime button {
+    width: 12px;
+    height: 12px;
+    border: 0;
+    background: #8d8d8d;
+    font-size: 8px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
 
 
 
@@ -424,7 +473,7 @@ h4 {
 .btn_reg {
     width: 120px;
     color: white;
-    background-color: #666;
+    background: #666;
     border: 0;
     height: 24px;
     float: right;

@@ -12,6 +12,13 @@
     <script>
         $(document).ready(function(){
 
+            // 1. 도서 정보 수정
+            // 1-1.
+            $('.btn_update_info').click(function(){
+                location.href='/registration_galdar.html'
+            });
+
+
             // 2. 한줄평
             // 2-1. 글쓰기 버튼 클릭
             $('.btn_write').click(function(){
@@ -46,8 +53,13 @@
             // 취소버튼 클릭
             $('.btn_cancel').click(function(){
             // 2-2. 창 전환
-                $('.sr_container2').css('display','none');
-                $('.sr_container').css('display','block');
+                if(confirm("작성된 글은 보관되지 않습니다. 취소하시겠습니까?")){
+                    $('.sr_container2').css('display','none');
+                    $('.sr_container').css('display','block');
+                }
+                else {
+                    return false;
+                }
             });
 
 
@@ -73,6 +85,20 @@
             });
             //
 
+
+            // 취소버튼 클릭
+            $('.btn_cancel2').click(function(){
+            // 2-2. 창 전환
+                if(confirm("작성된 글은 보관되지 않습니다. 취소하시겠습니까?")){
+                    $('.mr_container2').css('display','none');
+                    $('.mr_container').css('display','block');
+                }
+                else {
+                    return false;
+                }
+            });
+            
+
             // 4. 댓글
             $('.btn_reg').click(function(){
                 var reply_name = $('input[name="name"]').val().trim();
@@ -93,25 +119,38 @@
         <!-- 도서 정보 -->
         <div class="wrapper info_wrapper">
             <h4>도서 정보</h4>
-            <div class="book_img">{img}</div>
-            <div class="book_info">
-                <ul>
-                    <li class="book_category">{category}</li>
-                    <h2 class="book_title">{title}</h2>
-                    <li class="book_desc">{desc}</li>
-                    <li class="book_author">저자
-                        <span>{author}</span>
-                    </li>
-                    <li class="book_translator">옮긴이
-                        <span>{translator}</span>
-                    </li>
-                    <li class="book_publisher">출판사
-                        <span>{publisher}</span>
-                    </li>
-                    <li class="book_publishDate">출간일
-                        <span>{publishDate}</span>
-                    </li>
-                </ul>
+            <div class="container_book_contents">
+                <div class="book_img">{img}</div>
+                <div class="book_info">
+                    <ul>
+                        <li class="book_category">{category}</li>
+                        <h2 class="book_title">{title}</h2>
+                        <li class="book_desc">{desc}</li>
+                        <li class="book_author">
+                            <p>저자</p>
+                            <span>{author}</span>
+                        </li>
+                        <li class="book_translator">
+                            <p>옮긴이</p>
+                            <span>{translator}</span>
+                        </li>
+                        <li class="book_publisher">
+                            <p>출판사</p>
+                            <span>{publisher}</span>
+                        </li>
+                        <li class="book_publishDate">
+                            <p>출간일</p>
+                            <span>{publishDate}</span>
+                        </li>
+                        <li class="book_btDate">
+                            <p>북토크 진행일자</p>
+                            <span>{btDate}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="btn_update_info">
+                <button>정보 수정</button>
             </div>
         </div>
 
@@ -141,7 +180,7 @@
 
         <!-- 서평 보드 -->
         <div class="wrapper mr_wrapper">
-            <h4>회원들의 서평 모음</h4>
+            <h4>회원들의 서평</h4>
             
             <div class="mr_container">
                 <div class="mr_board">
@@ -183,6 +222,7 @@
                     <textarea name="maintext" class="ipt_mr_content" placeholder="* 서평을 입력해주세요(400~500자).&#13;&#10;* 책 한 권 당 서평은 한 번만 작성할 수 있습니다." rows="10"></textarea>
                 </div>
                 <div class="mr_btn">
+                    <button class="button btn_cancel2">취소</button>
                     <button class="button btn_regist2">등록</button>
                 </div>
             </div>
@@ -211,7 +251,10 @@
                     </div>
                     <div class="reply reply_content">
                         <span>{ReplyContent}</span>
-                        <span>{Writedatetime}</span>
+                        <div class="reply_datetime">
+                            <span>{Writedatetime}</span>
+                            <button>X</button>
+                        </div>
                     </div>
                 </div>
                 <div class="reply_list">
@@ -220,7 +263,10 @@
                     </div>
                     <div class="reply reply_content">
                         <span>{ReplyContent}</span>
-                        <span>{Writedatetime}</span>
+                        <div class="reply_datetime">
+                            <span>{Writedatetime}</span>
+                            <button>X</button>
+                        </div>
                     </div>
                 </div>
                 <div class="reply_list">
@@ -229,7 +275,10 @@
                     </div>
                     <div class="reply reply_content">
                         <span>{ReplyContent}</span>
-                        <span>{Writedatetime}</span>
+                        <div class="reply_datetime">
+                            <span>{Writedatetime}</span>
+                            <button>X</button>
+                        </div>
                     </div>
                 </div>
                 <div class="reply_list">
@@ -238,7 +287,10 @@
                     </div>
                     <div class="reply reply_content">
                         <span>{ReplyContent}</span>
-                        <span>{Writedatetime}</span>
+                        <div class="reply_datetime">
+                            <span>{Writedatetime}</span>
+                            <button>X</button>
+                        </div>
                     </div>
                 </div>
                 <div class="reply_list">
@@ -247,7 +299,10 @@
                     </div>
                     <div class="reply reply_content">
                         <span>{ReplyContent}</span>
-                        <span>{Writedatetime}</span>
+                        <div class="reply_datetime">
+                            <span>{Writedatetime}</span>
+                            <button>X</button>
+                        </div>
                     </div>
                 </div>
             </div>
