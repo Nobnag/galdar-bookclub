@@ -132,6 +132,21 @@ h4 {
     justify-content: space-between;
 }
 
+
+.sr_box ul {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.sr_box li {
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
 .sr_box .btn {
     background: transparent;
     font-size: 24px;
@@ -358,7 +373,7 @@ h4 {
 
 .bt_wrapper {
     height: auto;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
 }
 
 .bt_wrapper .bt_box {
@@ -367,6 +382,26 @@ h4 {
     height: 300px;
     background: #ededed;
 }
+
+
+
+.btn_regist3 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+
+
+
+
 
 
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>도서 상세 페이지</title>
     <link rel="stylesheet" type="text/css" href="css/gnb.css" />
     <link rel="stylesheet" href="book_detail.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css" />
@@ -12,10 +12,11 @@
     <script>
         $(document).ready(function(){
 
+            
             // 1. 도서 정보 수정
             // 1-1.
             $('.btn_update_info').click(function(){
-                location.href='/registration_galdar.html'
+                location.href='./registration_galdar.html'
             });
 
 
@@ -36,10 +37,15 @@
                 if(sr_content == ""){
                     alert('한줄평을 입력하세요.');
                     return false;
-                }
-            // 2-7. API 전송
-                else {
-                    console.log(sr_content);
+                } else {
+            // 2-7. append
+                    $('.slider').append("<li><p>"+sr_content+"</p></li>");
+            // 2-8. 메세지
+                    alert('한줄평이 등록되었습니다.');
+                    // 2-8. 다시 창 전환
+                    $('.sr_container2').css('display','none');
+                    $('.sr_container').css('display','block');
+                    return true;
                 }
             });
 
@@ -47,7 +53,7 @@
             $('.btn_update').click(function(){
                 // 이전에 작성한 글이 있다면, 
                 // if()
-                alert("이미 한줄평을 작성하였습니다.");
+                // alert("이미 한줄평을 작성하였습니다.");
             });
 
             // 취소버튼 클릭
@@ -83,7 +89,7 @@
                 }
             // 3-7. API 전송
             });
-            //
+            
 
 
             // 취소버튼 클릭
@@ -107,6 +113,8 @@
 
                 if(reply_name == "" || reply_pw == "" || reply_content == ""){
                     alert('이름과 비밀번호, 내용을 모두 입력하세요.');
+                } else {
+
                 }
                 
             });
@@ -161,7 +169,17 @@
             <div class="sr_container">
                 <div class="sr_box">
                     <button class="btn btn_left"><</button>
-                    <p>한줄평 입니다.</p>
+                    <ul class="slider">
+                        <li>
+                            <p>좋은 책이었습니다.</p>
+                        </li>
+                        <li>
+                            <p>멋진 책이었습니다.</p>
+                        </li>
+                        <li>
+                            <p>또 읽고 싶습니다.</p>
+                        </li>
+                    </ul>
                     <button class="btn btn_right">></button>
                 </div>
 
@@ -237,6 +255,7 @@
             <div class="box bt_box">
                 
             </div>
+            <button class="btn_regist3">등록</button>
         </div>
 
         <!-- 댓글 -->
@@ -336,5 +355,64 @@
         </div>
 
     </div>
+    <script>
+        $(function(){
+            // 변수 정의.
+            var $slider = $('.slider');
+            var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},10);
+
+            // startSlide();
+
+            var theInterval;
+
+            function startSlide(){
+                theInterval = setInterval(NextSlide, 100000);
+            };
+
+            function stopSlide(){
+                clearInterval(theInterval);
+            }
+
+
+            // '<' 버튼 누를 때 실행할 함수.
+            function PrevSlide(){
+                // 타이머 초기화
+                stopSlide();
+                startSlide();
+
+                var $lastSlide = $slider.find('li').last().prependTo($slider);
+                var $secondSlide = $slider.find('li').eq(1).stop(true).animate({'opacity':0},10);
+                var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},10);
+            }
+
+            // '>' 버튼 누를 때 실행할 함수.
+            function NextSlide(){
+                // 타이머 초기화
+                stopSlide();
+                startSlide();
+
+                $firstSlide = $slider.find('li').first().appendTo($slider);
+                var $lastSlide = $slider.find('li').last().stop(true).animate({'opacity':0},10);
+                var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},10);
+            }
+            
+            // '<' 버튼 누를 때.
+            $('.btn_left').on('click',function(){
+                PrevSlide();
+            });
+
+            // '>' 버튼 누를 때.
+            $('.btn_right').on('click',function(){
+                NextSlide();
+            });
+
+            $('.slider').hover(function(){
+                stopSlide();
+            }, function(){
+                startSlide();
+            });
+
+        });
+    </script>
 </body>
 </html>
