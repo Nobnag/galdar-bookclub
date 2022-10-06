@@ -23,34 +23,38 @@ h4 {
 .wrapper {
     width: 100%;
     min-width: 600px;
-    height: 400px;
+    /* height: 400px; */
     background: #cacaca;
     margin: 25px 0;
 }
 
 .info_wrapper {
     position: relative;
+    height: auto;
+    padding-bottom: 50px;
 }
 
+.container_book_contents {
+    width: auto;
+    height: auto;
+    padding: 15px;
+}
+
+
 .book_img {
-    background-color: #eee;
-    width: 250px;
-    height: calc(250px * 1.14142);
-    display: inline-block;
-    position: absolute;
-    top: 50px;
-    left: 50px;
+    background: #eee;
+    width: 300px;
+    height: calc(300px * 1.14142);
+    float: left;
+    margin: 0 20px;
 }
 
 .book_info {
-    background-color: #ddd;
-    /* width: 330px; */
-    width: 54.5%;
-    height: 265px;
-    position: absolute;
-    top: 50px;
-    left: 350px;
-    padding: 10px;
+    display: inline-block;
+    background: #ddd;
+    width: 490px;
+    height: calc(300px * 1.14142);
+    margin-left: 20px;
 }
 
 .book_info ul {
@@ -61,20 +65,60 @@ h4 {
 
 .book_info h2 {
     margin : 0 0 12px;
+    padding-left: 10px;
 }
 
 .book_info li {
     margin-bottom: 12px;
+    padding-left: 10px;
+}
+
+.book_info li p {
+    display: inline-block;
+    width: 140px;
+    margin: 0;
 }
 
 .book_info li span {
-    display: none;
+    /* display: none; */
     margin: 0;
 }
+
+.btn_update_info {
+    width: auto;
+    height: auto;
+}
+
+.btn_update_info button {
+    /* display: block; */
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    cursor: pointer;
+}
+
+
+
+
 
 
 .sr_wrapper {
     height: 180px;
+}
+
+.sr_container {
+    width: auto;
+    height: auto;
+}
+
+.sr_container2 {
+    display: none;
+    width: auto;
+    height: auto;
 }
 
 .sr_box {
@@ -103,6 +147,23 @@ h4 {
     display: inline-block;
 }
 
+
+.sr_box2 {
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    background: #bbb;
+    text-align: center;
+    line-height: 80px;
+}
+
+.sr_box2 .sr_ipt {
+    width: 500px;
+    height: 40px;
+    padding: 0 10px;
+}
+
+
 .btn_write {
     display: block;
     /* float: right; */
@@ -117,16 +178,70 @@ h4 {
     cursor: pointer;
 }
 
+.btn_update {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.btn_regist {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.btn_cancel {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
 .mr_wrapper {
-    height: 620px;
+    /* height: 620px; */
+    height: auto;
     position: relative;
     /* text-align: center; */
+    padding-bottom: 60px;
+}
+
+.mr_container {
+    /* display: none; */
+    width: auto;
+    height: auto;
+}
+
+.mr_container2 {
+    display: none;
+    width: auto;
+    height: auto;
 }
 
 .mr_wrapper .mr_board {
     /* width: 650px; */
     width: 90%;
-    height: 500px;
+    /* height: 500px; */
+    height: auto;
     margin: 0 auto;
     padding: 10px 0 ;
     background: #eaeaea;
@@ -177,21 +292,90 @@ h4 {
 /* .mr_wrapper  */.paging {
     text-align: center;
 }
-/* 
-.mr_wrapper button {
+
+
+.btn_write2 {
     display: block;
+    width: 120px;
+    height: 30px;
     float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
 }
- */
+
+.mr_container2 h4 {
+    text-align: left;
+}
+
+
+.btn_cancel2 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+
+.btn_regist2 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+
+
+.mr_container2 input {
+    height: 20px;
+    width: 80%;   
+    margin-bottom: 12px;
+    padding: 5px 10px;
+}
+
+.mr_container2 textarea {
+    display: inline-block;
+    resize: none;
+    padding: 5px 10px;
+    width: 80%;
+}
+
+
+.bt_wrapper {
+    height: auto;
+    padding-bottom: 40px;
+}
+
 .bt_wrapper .bt_box {
     width: 90%;
     margin: 0 auto;
-    height: 330px;
-    background: #ededed
+    height: 300px;
+    background: #ededed;
 }
 
+
+
+
+
+
 .reply_wrapper {
-    height: 600px;
+    height: auto;
+    padding-bottom: 20px;
 }
 
 .reply_wrapper textarea {
@@ -231,11 +415,22 @@ h4 {
     border: 1px solid;
 }
 
-.reply_content span:last-child {
+.reply_content .reply_datetime {
     float: right;
     font-size: 12px;
     color: #5a5a5a;
     line-height: 16px
+}
+
+.reply_content .reply_datetime button {
+    width: 12px;
+    height: 12px;
+    border: 0;
+    background: #8d8d8d;
+    font-size: 8px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
 }
 
 
@@ -278,8 +473,9 @@ h4 {
 .btn_reg {
     width: 120px;
     color: white;
-    background-color: #666;
+    background: #666;
     border: 0;
     height: 24px;
     float: right;
+    cursor: pointer;
 }
