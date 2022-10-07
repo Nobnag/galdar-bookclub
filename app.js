@@ -45,27 +45,63 @@ app.post('/member', async(req,res) => {
 });
 
 app.post('/login_process', async(req,res) => {
-        try {
-            const pool = await poolPromise;
-            let result = await pool.request()
-                .input('vi_Email', sql.NVarChar, req.body.Email)
-                .input('vi_Pw', sql.NVarChar, req.body.Pw)
-                .execute('[sp_login]');
-                
-            if(result.recordsets.length > 0){
-                req.session.Email = result.recordset[0].Email;
-                req.session.MemberIdx = result.recordset[0].MemberIdx;
-                res.json({"result":"true"});
-            }
-            else{
-                res.json({"result":"false"});
-            }
-        } catch (err) {
-            res.status(300);
-            res.send(err);
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_Email', sql.NVarChar, req.body.Email)
+            .input('vi_Pw', sql.NVarChar, req.body.Pw)
+            .execute('[sp_login]');
+            
+        if(result.recordset.length > 0){
+            req.session.Email = result.recordset[0].Email;
+            req.session.Nickname = result.recordset[0].Nickname;
+            req.session.PremiumMemberYn = result.recordset[0].PremiumMemberYn;
+            req.session.AdminYn = result.recordset[0].AdminYn;
+            res.json({"result":"true"});
         }
-    });
-    
+        else{
+            res.json({"result":"false"});
+        }
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
+//API - 로그인 정보를 가져온다.
+app.get('/api/getLoginInfo', function(req,res) {
+    try {
+        if(typeof(req.session.Email) == "undefined" ){
+            res.status(401);
+            res.json({"result":"false"});
+        }
+        else{
+            res.json({
+                Email: req.session.Email,
+                Nickname: req.session.Nickname,
+                PremiumMemberYn: req.session.PremiumMemberYn,
+                AdminYn: req.session.AdminYn,
+            });
+        }
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
+//API - 로그아웃 한다.
+app.get('/api/logout', function(req,res) {
+    try {
+        req.session.destroy();  // 세션 삭제
+        res.clearCookie('sid'); // 세션 쿠키 삭제
+        
+        res.send({result: "true"});
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 app.get('/', function(req,res) {
     res.sendFile(__dirname + "/join.html")
     //res.sendFile(path.resolve('../join.html'));
