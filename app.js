@@ -48,11 +48,11 @@ app.post('/login_process', async(req,res) => {
         try {
             const pool = await poolPromise;
             let result = await pool.request()
-                .input('Email', sql.NVarChar, req.body.Email)
-                .input('Pw', sql.NVarChar, req.body.Pw)
-                .query('SELECT MemberIdx, Email FROM Member WHERE Email = @Email AND Pw = @Pw');
-            
-            if(result.recordset.length > 0){
+                .input('vi_Email', sql.NVarChar, req.body.Email)
+                .input('vi_Pw', sql.NVarChar, req.body.Pw)
+                .execute('[sp_login]');
+                
+            if(result.recordsets.length > 0){
                 req.session.Email = result.recordset[0].Email;
                 req.session.MemberIdx = result.recordset[0].MemberIdx;
                 res.json({"result":"true"});
@@ -66,43 +66,6 @@ app.post('/login_process', async(req,res) => {
         }
     });
     
-
-// app.post('/login_process',function(req,res) {
-//     const Email = req.query.Email;
-//     const Pw = req.query.Pw;
-//     console.log("Email: "+Email+", Pw: "+Pw);
-
-//     pool.postConnection()
-//     .then(conn => {
-    
-//       conn.query("SELECT MemberIdx, Email FROM Member WHERE Email = '"+Email+"' AND Pw = '"+pw+"'")
-//         .then((result) => {
-//             if(result.length > 0){
-//                 req.session.Email = Email;
-//                 req.session.MemberIdx = result[0].MemberIdx;
-//             }
-//             else{
-//             }
-
-//           console.log(res); 
-//           conn.end();
-          
-//           if(typeof(req.session.Email) == "undefined"){
-//             res.json({"result":"false"});
-//           }
-//           else{
-//             res.json({"result":"true"});
-//           }
-//         })
-//         .catch(err => {
-//           console.log(err); 
-//           conn.end();
-//         })
-        
-//     }).catch(err => {
-//     });
-// });
-
 app.get('/', function(req,res) {
     res.sendFile(__dirname + "/join.html")
     //res.sendFile(path.resolve('../join.html'));

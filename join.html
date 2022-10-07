@@ -18,14 +18,15 @@
                 회원 가입
             </h1>
             <div class="join_info_warp">
-                <input type="text" name="Email"placeholder="이메일" class="enter_keydown">
+                <div class="Email_warp">
+                <input type="text" name="Email"placeholder="이메일" class="ipt_Email enter_keydown">
+                <button type="text" class="btn_Duplicate">중복확인</button>
+                </div>
                 <input type="password" name="Pw"placeholder="비밀번호" class="enter_keydown">
                 <input type="password" name="Pw_confirm"placeholder="비밀번호 확인" class="enter_keydown">
                 <input type="text" name="Nickname"placeholder="닉네임" class="enter_keydown">
                 <input type="text" name="Contact"placeholder="연락처" class="enter_keydown">
-                <button type="text" class="btn_join">
-                    가입하기
-                </button>
+                <button type="text" class="btn_join">가입하기</button>
             </div>
         </div>
         
@@ -35,6 +36,16 @@
                     $(".btn_join").click()
                 }
             });
+
+            // $(document).on("click", ".btn_Duplicate",function(){
+            //     if(Email==""){
+            //             alert("이메일을 입력하세요");                        
+            //             $('input[name="Email"]').focus();
+            //             return false;
+            //     }
+            //     else {}
+            // });
+
             $(document).ready(function(){
                 $(".btn_join").click(function() {
                 var Email = $('input[name="Email"]').val().trim();

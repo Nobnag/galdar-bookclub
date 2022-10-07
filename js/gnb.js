@@ -39,6 +39,7 @@ function getLoginObj(){
         loginYn: 'N',
         memberNm: ''
     };
+
     //API 호출 (로그인 상태 확인)
 
     //로그인 여부 값을 리턴한다.
