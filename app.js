@@ -107,6 +107,20 @@ app.post('/mr_create', async function(req, res){
     }
 });
 
+//API - 도서 상세 정보를 가져온다.
+app.get('/api/getBookDetail', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.query.book_idx)
+            .execute('[sp_book_detail_select_byUser]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
 app.listen(3000, function() {
     console.log('3000 실행');
 });

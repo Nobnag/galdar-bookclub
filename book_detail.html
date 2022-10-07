@@ -10,8 +10,126 @@
     <script src="js/gnb.js"></script>
     <script src="js/footer.js"></script>
     <script>
-        $(document).ready(function(){
+        // url 에서 parameter 추출
+        var getParam = function(sname) {
+            var params = location.search.substr(location.search.indexOf("?") + 1);
+            var sval = "";
+            params = params.split("&");
 
+            for (var i = 0; i < params.length; i++) {
+                temp = params[i].split("=");
+                if ([temp[0]] == sname) { sval = temp[1]; }
+            }
+
+            return sval;
+        }
+
+        $(document).ready(function(){
+            // 0. 도서 상세 정보 조회
+            var params = {
+                book_idx: getParam('book_idx')
+            };
+
+            $.ajax({
+                url: 'http://localhost:3000/api/getBookDetail',
+                data: params,
+                type: 'get',
+                datatype: 'json',
+                // async: false,
+                success: function(result){
+                    if(result.recordset.length == 0){
+                        alert("유효한 페이지가 아닙니다.");
+                        return false;
+                    }
+
+                    /*
+                        {
+                            "BookTitle": "10",
+                            "BookAuthor": "1",
+                            "BookPublisher": "1",
+                            "BookTranslator": "1",
+                            "BookPubDate": "1900-01-02 00:00:00",
+                            "BookBtDate": "1900-01-02 00:00:00",
+                            "BookRegDatetime": "1900-01-02 00:00:00",
+                            "BookCategory": "1",
+                            "BookRegWriter": "1",
+                            "BookDesc": "1",
+                            "BookUpdateDatetime": "1900-01-02T00:00:00.000Z",
+                            "BookUpdateUser": "1",
+                            "BookViewCount": 1,
+                            "BookLikeCount": 1
+                        }
+                    */
+                    var data = result.recordset[0];
+                    /* 첫번째 방법 */
+                    var html = $(".container_book_contents").html();
+                    html = html.replace(/{img}/gi, "")
+                                .replace(/{category}/gi, data.BookCategory)
+                                .replace(/{title}/gi, data.BookTitle)
+                                .replace(/{desc}/gi, data.BookDesc)
+                                .replace(/{author}/gi, data.BookAuthor)
+                                .replace(/{translator}/gi, data.BookTranslator)
+                                .replace(/{publisher}/gi, data.BookPublisher)
+                                .replace(/{publishDate}/gi, data.BookPubDate)
+                                .replace(/{btDate}/gi, data.BookBtDate);
+                    $(".container_book_contents").html(html);
+                    
+                    /*
+                    for(var i = 0; i < result.recordset.length; i ++){
+                        var row = result.recordset[i];
+
+                        //row.BookCategory
+                        //row.BookTitle
+                    }
+                    */
+                   /*두번째 방법
+                   $(".container_book_contents .book_img img").attr("src", "");
+                   $(".container_book_contents .book_info .book_category").html(data.BookCategory);
+                   $(".container_book_contents .book_info .book_title").html(data.BookTitle);
+                   $(".container_book_contents .book_info .book_desc").html(data.BookDesc);
+                   $(".container_book_contents .book_info .book_author span").html(data.BookAuthor);
+                   $(".container_book_contents .book_info .book_translator span").html(data.BookTranslator);
+                   $(".container_book_contents .book_info .book_publisher span").html(data.BookPublisher);
+                   $(".container_book_contents .book_info .book_publishDate span").html(data.BookPubDate);
+                   $(".container_book_contents .book_info .book_btDate span").html(data.BookBtDate);
+                   */
+
+
+                    /*
+                    console.log(result);
+                    alert("작성이 완료되었습니다.");
+                    location.href="/book_detail"
+                    */
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    // alert("an error occured");
+                }
+            });
+
+            // 0-1. 도서 제목
+
+            var data = {
+                book_title: book_title
+            };
+            $.ajax({
+                url: '/book_detail',
+                data: data,
+                type: 'get',
+                datatype: 'json',
+                // async: false,
+                success: function(result){
+                    console.log(result);
+                    alert("작성이 완료되었습니다.");
+                    location.href="/book_detail"
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    // alert("an error occured");
+                }
+            });
+
+            
             
             // 1. 도서 정보 수정
             // 1-1.
@@ -93,7 +211,7 @@
                     var data = {
                         mr_writer: mr_writer
                         ,mr_title: mr_title
-                        , mr_content: mr_content
+                        ,mr_content: mr_content
                     };
                     $.ajax({
                         url: '/mr_create',
@@ -112,8 +230,6 @@
                         }
                     });
                 }
-
-
             });
             
 
@@ -154,7 +270,9 @@
         <div class="wrapper info_wrapper">
             <h4>도서 정보</h4>
             <div class="container_book_contents">
-                <div class="book_img">{img}</div>
+                <div class="book_img">
+                    <img src="{img}">
+                </div>
                 <div class="book_info">
                     <ul>
                         <li class="book_category">{category}</li>
