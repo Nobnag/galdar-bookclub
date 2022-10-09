@@ -2,7 +2,8 @@ var sql = require("mssql");
 var config = {
   user:'anjgmn',
   password: 'qhdks!',
-  server: '192.168.0.15',
+  // server: '192.168.0.15',
+  server: '172.30.1.27',
   database: 'projectGBC',
   port:1433,
   //stream: true,

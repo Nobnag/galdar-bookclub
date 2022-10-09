@@ -157,6 +157,23 @@ app.get('/api/getBookDetail', async function(req, res){
     }
 });
 
+
+// API - 작성한 한줄평을 DB에 보낸다.
+app.post('/api/submitSR', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.body.book_idx)
+            .input('vi_SRWriter', req.body.sr_writer)
+            .input('vi_SRContent', req.body.sr_content)
+            .execute('[sp_sr_create_byUser]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
 app.listen(3000, function() {
     console.log('3000 실행');
 });

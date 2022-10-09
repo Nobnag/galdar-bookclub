@@ -47,7 +47,14 @@ h4 {
     height: calc(300px * 1.14142);
     float: left;
     margin: 0 20px;
+    text-align: center;
 }
+
+.book_img img {
+    width: auto;
+    height: 100%;
+}
+
 
 .book_info {
     display: inline-block;
@@ -66,6 +73,10 @@ h4 {
 .book_info h2 {
     margin : 0 0 12px;
     padding-left: 10px;
+}
+
+.book_info .book_idx {
+    display: none;
 }
 
 .book_info li {
@@ -138,12 +149,14 @@ h4 {
     margin: 0;
     padding: 0;
     list-style-type: none;
+    width: 100%;
 }
 
 .sr_box li {
     opacity: 0;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
 
@@ -155,13 +168,22 @@ h4 {
     cursor: pointer;
 }
 
-.sr_box p {
+.sr_box strong {
     padding: 0;
     margin: 0;
     font-size: 24px;
-    display: inline-block;
+    display: block;
 }
 
+.sr_box p {
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    display: inline-block;
+    position: absolute;
+    top: 30%;
+    right: 15%;
+}
 
 .sr_box2 {
     width: 90%;
@@ -432,6 +454,8 @@ h4 {
 
 .reply_list {
     background: #b9b9b9;
+    display: flex;
+    justify-content:space-evenly;
 }
 
 .reply_list .reply {
@@ -482,27 +506,34 @@ h4 {
 }
 
 .reply_write_box {
-    padding: 15px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
-.reply_box .ipt {
-    display: block;
-}
 
 .reply_box .ipt_reply_pw {
-    margin-top: 10px;
-}
-
-.reply_box .ipt input {
-    width: 110px;
-    padding: 0 5px;
-    height: 20px;
+    margin-top: 12.5px;
 }
 
 .reply_input_box {
-    float: left;
+    width: 16%;
     height: 55px;
-    margin-bottom: 15px;
+}
+
+.reply_input_box input {
+    width: 100%;
+}
+
+.reply_textarea_box {
+    width: 80%;
+}
+
+.reply_textarea_box textarea {
+    width: 100%;
+    padding: 5px 0 5px 10px;
+    margin: 0;
 }
 
 .btn_reg {
