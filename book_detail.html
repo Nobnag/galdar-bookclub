@@ -31,7 +31,8 @@
             };
 
             $.ajax({
-                url: 'http://localhost:3000/api/getBookDetail',
+                // url: 'http://localhost:3000/api/getBookDetail',
+                url: '/api/getBookDetail',
                 data: params,
                 type: 'get',
                 datatype: 'json',
@@ -42,36 +43,21 @@
                         return false;
                     }
 
-                    /*
-                        {
-                            "BookTitle": "10",
-                            "BookAuthor": "1",
-                            "BookPublisher": "1",
-                            "BookTranslator": "1",
-                            "BookPubDate": "1900-01-02 00:00:00",
-                            "BookBtDate": "1900-01-02 00:00:00",
-                            "BookRegDatetime": "1900-01-02 00:00:00",
-                            "BookCategory": "1",
-                            "BookRegWriter": "1",
-                            "BookDesc": "1",
-                            "BookUpdateDatetime": "1900-01-02T00:00:00.000Z",
-                            "BookUpdateUser": "1",
-                            "BookViewCount": 1,
-                            "BookLikeCount": 1
-                        }
-                    */
                     var data = result.recordset[0];
                     /* 첫번째 방법 */
                     var html = $(".container_book_contents").html();
-                    html = html.replace(/{img}/gi, "")
-                                .replace(/{category}/gi, data.BookCategory)
-                                .replace(/{title}/gi, data.BookTitle)
-                                .replace(/{desc}/gi, data.BookDesc)
-                                .replace(/{author}/gi, data.BookAuthor)
-                                .replace(/{translator}/gi, data.BookTranslator)
-                                .replace(/{publisher}/gi, data.BookPublisher)
-                                .replace(/{publishDate}/gi, data.BookPubDate)
-                                .replace(/{btDate}/gi, data.BookBtDate);
+
+                    html = html.replace(/{img}/gi, data.BookImg)
+                                .replace(/{idx}/gi,data.BookIdx)
+                                .replace(/{category}/gi,data.BookCategory)
+                                .replace(/{title}/gi,data.BookTitle)
+                                .replace(/{desc}/gi,data.BookDesc)
+                                .replace(/{author}/gi,data.BookAuthor)
+                                .replace(/{translator}/gi,data.BookTranslator)
+                                .replace(/{publisher}/gi,data.BookPublisher)
+                                .replace(/{publishDate}/gi,data.BookPubDate)
+                                .replace(/{btDate}/gi,data.BookBtDate);
+
                     $(".container_book_contents").html(html);
                     
                     /*
@@ -106,37 +92,13 @@
                     // alert("an error occured");
                 }
             });
-
-            // 0-1. 도서 제목
-
-            var data = {
-                book_title: book_title
-            };
-            $.ajax({
-                url: '/book_detail',
-                data: data,
-                type: 'get',
-                datatype: 'json',
-                // async: false,
-                success: function(result){
-                    console.log(result);
-                    alert("작성이 완료되었습니다.");
-                    location.href="/book_detail"
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(errorThrown);
-                    // alert("an error occured");
-                }
-            });
-
-            
+        
             
             // 1. 도서 정보 수정
             // 1-1.
             $('.btn_update_info').click(function(){
                 location.href='./registration_galdar.html'
             });
-
 
             // 2. 한줄평
             // 2-1. 글쓰기 버튼 클릭
@@ -150,22 +112,49 @@
             // 2-4. 이전에 작성한 적 있으면 불가입니다.
                 // if()
             // 2-5. 값 가져오기
-                var sr_content = $('.sr_ipt').val().trim();
+                var book_idx = $('.book_info ul .book_idx span').html();
+                var sr_writer = '랜덤닉네임'
+                var sr_content = $('.sr_ipt').val();
             // 2-6. 미입력시 안내
                 if(sr_content == ""){
                     alert('한줄평을 입력하세요.');
                     return false;
-                } else {
-            // 2-7. append
-                    $('.slider').append("<li><p>"+sr_content+"</p></li>");
-            // 2-8. 메세지
-                    alert('한줄평이 등록되었습니다.');
-                    // 2-8. 다시 창 전환
-                    $('.sr_container2').css('display','none');
-                    $('.sr_container').css('display','block');
-                    return true;
+                } 
+                
+            // 2-7. API 전송
+            if(sr_content !== ""){
+                    var params2 = {
+                        book_idx: book_idx
+                        ,sr_writer: '랜덤 닉네임'
+                        ,sr_content: sr_content
+                    };
+                    $.ajax({
+                        url: '/api/submitSR'
+                        ,data: params2
+                        ,type: 'post' 
+                        ,datatype: 'json'
+                        ,success: function(result){
+                            if(result.recordset.length > 0){
+                            alert('한줄평이 등록되었습니다.');
+                            location.href=('/book_detail?book_idx='+book_idx)
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            console.log(errorThrown);
+                        }
+                    });
                 }
+
+            // 2-7. append
+                $('.slider').append("<li><strong>"+sr_content+"</strong><p><em>"+sr_writer+"</em></p></li>");
+
+            // 2-8. 메세지
+                // 2-8. 다시 창 전환
+                $('.sr_container2').css('display','none');
+                $('.sr_container').css('display','block');
+                return true;
             });
+            // });
 
             // 수정버튼 클릭
             $('.btn_update').click(function(){
@@ -178,6 +167,7 @@
             $('.btn_cancel').click(function(){
             // 2-2. 창 전환
                 if(confirm("작성된 글은 보관되지 않습니다. 취소하시겠습니까?")){
+                    $('.sr_ipt').val('');
                     $('.sr_container2').css('display','none');
                     $('.sr_container').css('display','block');
                 }
@@ -205,6 +195,7 @@
             // 3-6. 미입력시 안내
                 if(mr_title == '' || mr_content == ''){
                     alert("제목과 서평을 모두 입력해주세요.")
+                    return false;
                 } 
             // 3-7. API 전송
                 if(mr_title !== "" && mr_writer !== "" && mr_content !== ""){
@@ -278,6 +269,10 @@
                         <li class="book_category">{category}</li>
                         <h2 class="book_title">{title}</h2>
                         <li class="book_desc">{desc}</li>
+                        <li class="book_idx">
+                            <p>도서번호</p>
+                            <span>{idx}</span>
+                        </li>
                         <li class="book_author">
                             <p>저자</p>
                             <span>{author}</span>
@@ -315,13 +310,16 @@
                     <button class="btn btn_left"><</button>
                     <ul class="slider">
                         <li>
-                            <p>좋은 책이었습니다.</p>
+                            <strong>좋은 책이었습니다.</strong>
+                            <p><em>{작성자 닉네임}</em></p>
                         </li>
                         <li>
-                            <p>멋진 책이었습니다.</p>
+                            <strong>멋진 책이었습니다.</strong>
+                            <p><em>{작성자 닉네임}</em></p>
                         </li>
                         <li>
-                            <p>또 읽고 싶습니다.</p>
+                            <strong>또 읽고 싶습니다.</strong>
+                            <p><em>{작성자 닉네임}</em></p>
                         </li>
                     </ul>
                     <button class="btn btn_right">></button>
@@ -354,9 +352,9 @@
                             <th class="th th_name">name.</th>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>1</td>
+                            <td><a href="">2</a></td>
+                            <td>3</td>
                         </tr>
                     </table>
                     <!-- 페이징 -->
@@ -493,14 +491,17 @@
                             <input type="password" name="pw" placeholder="비밀번호">
                         </div>
                     </div>
-                    <textarea name="textarea" class="ipt_reply_content" rows="3" placeholder="내용을 입력하세요."></textarea>
-                    <button class="btn btn_reg">등록</button>
+                    <div class="box reply_textarea_box">
+                        <textarea name="textarea" class="ipt_reply_content" rows="3" placeholder="내용을 입력하세요."></textarea>
+                    </div>
                 </div>
+                <button class="btn btn_reg">등록</button>
             </div>
         </div>
 
     </div>
     <script>
+        // 한줄평 슬라이드 구현하기.
         $(function(){
             // 변수 정의.
             var $slider = $('.slider');
