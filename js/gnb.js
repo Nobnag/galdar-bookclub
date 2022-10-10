@@ -1,7 +1,5 @@
 
 $(document).ready(function(){    
-
-
     var html = '<div id="gnb">';
     html += '<div class="gnb_container">'
     html += '<a href="/" class="gnb_home_link">';
@@ -54,7 +52,7 @@ function getLoginObj(){
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:3000/api/getLoginInfo',
+        url: '/api/getLoginInfo',
         dataType: 'json',
         async: false,
         success: function(result){
@@ -75,7 +73,7 @@ function getLoginObj(){
 function logout(){
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:3000/api/logout',
+        url: '/api/logout',
         dataType: 'json',
         async: false,
         success: function(result){

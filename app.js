@@ -44,6 +44,27 @@ app.post('/member', async(req,res) => {
     }
 });
 
+//API - 회원Email중복확인을 한다.
+app.post('/api/Duplicate', async (req,res) => {
+    try {
+        const pool = poolPromise;
+        let result = pool.request()
+            .input('Email', sql.NVarChar, req.body.Email)
+            .query('SELECT Email FROM Member WHERE Email= '+Email);
+            
+        if(result[0]==0){
+            req.Email = result.recordset[0].Email;
+            res.json({"result":"false"});
+        }
+        else{
+            res.json({"result":"true"});
+        }
+    }catch (err) {
+            res.status(500);
+            res.send(err);
+        }
+});
+
 app.post('/login_process', async(req,res) => {
     try {
         const pool = await poolPromise;
@@ -88,6 +109,7 @@ app.get('/api/getLoginInfo', function(req,res) {
         res.send(err);
     }
 });
+
 
 //API - 로그아웃 한다.
 app.get('/api/logout', function(req,res) {

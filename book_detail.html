@@ -63,15 +63,15 @@
                     var data = result.recordset[0];
                     /* 첫번째 방법 */
                     var html = $(".container_book_contents").html();
-                    html = html.replace(/{img}/gi, "")
-                                .replace(/{category}/gi, data.BookCategory)
-                                .replace(/{title}/gi, data.BookTitle)
-                                .replace(/{desc}/gi, data.BookDesc)
-                                .replace(/{author}/gi, data.BookAuthor)
-                                .replace(/{translator}/gi, data.BookTranslator)
-                                .replace(/{publisher}/gi, data.BookPublisher)
-                                .replace(/{publishDate}/gi, data.BookPubDate)
-                                .replace(/{btDate}/gi, data.BookBtDate);
+                    html = html.replace(/{img}/gi, "")
+                                .replace(/{category}/gi, data.BookCategory)
+                                .replace(/{title}/gi, data.BookTitle)
+                                .replace(/{desc}/gi, data.BookDesc)
+                                .replace(/{author}/gi, data.BookAuthor)
+                                .replace(/{translator}/gi, data.BookTranslator)
+                                .replace(/{publisher}/gi, data.BookPublisher)
+                                .replace(/{publishDate}/gi, data.BookPubDate)
+                                .replace(/{btDate}/gi, data.BookBtDate);
                     $(".container_book_contents").html(html);
                     
                     /*

@@ -31,6 +31,44 @@
         </div>
         
         <script type="text/javascript">
+             $(document).ready(function(){
+                $(".btn_Duplicate").click(function(){
+                var Email = $('input[name="Email"]').val().trim();
+                if(Email=="") {
+                        alert("이메일을 입력하세요");                        
+                        $('input[name="Email"]').focus();
+                        return false;
+                }
+                if(EmailRegExp.test(Email) == false){
+                        alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('input[name="Email"]').focus();
+                        return false;
+                }
+                
+                $.ajax({
+                    type: 'post',
+                    url: '/api/Duplicate',
+                    dataType: 'json',
+                    async: false,
+                    data: {
+                        Email:Email
+                    },
+                    success: function(result){
+                        if(true){
+                            alert('가능!')
+                        return false
+                        }
+                        if(false){
+                            alert('중복이유!')
+                            return false
+                        }
+                    },
+                    error: function(jqXHR,textStatus,errorThrown) {
+                    }
+                });
+            
+            });
+        });
             $(document).on("keydown", ".enter_keydown",function(keynum){
                 if(keynum.keyCode ==13){
                     $(".btn_join").click()
