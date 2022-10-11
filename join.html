@@ -54,11 +54,11 @@
                         Email:Email
                     },
                     success: function(result){
-                        if(result == "false"){
+                        if(result.result == "false"){
                             alert('중복이유!')
                             return false
                         }
-                        if(result == "true"){
+                        if(result.result == "true"){
                             alert('가능!')
                         return false
                         }

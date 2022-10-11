@@ -1,10 +1,10 @@
 var sql = require("mssql");
 var config = {
-  user:'anjgmn',
-  password: 'qhdks!',
-  // server: '192.168.0.15',
-  server: '172.30.1.27',
-  database: 'projectGBC',
+  user:'male315_gbcdb',
+  password: 'projectGBC',
+  server: 'sql16ssd-013.localnet.kr',
+  // server: '127.0.0.1',
+  database: 'male315_gbcdb',
   port:1433,
   //stream: true,
   trustServerCertificate: true

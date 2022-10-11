@@ -52,7 +52,7 @@ app.post('/api/Duplicate', async (req,res) => {
         const pool = await poolPromise;
         let result = await pool.request()
             .input('Email', sql.NVarChar, req.body.Email)
-            .query('SELECT Email FROM Member WHERE Email= '+'Email');
+            .query('SELECT Email FROM Member WHERE Email=@Email');
             
         if(result.recordset.length > 0){
             res.json({"result":"false"});
