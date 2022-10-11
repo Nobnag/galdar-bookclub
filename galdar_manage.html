@@ -113,7 +113,7 @@
                 </ol>
                 <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
                 <div class="list_write">
-                    <button class="list_write_button" onclick="location.href='file:///Users/doohwankim/Desktop/gardar_project/%E1%84%8C%E1%85%B5%E1%86%AB%E1%84%92%E1%85%A2%E1%86%BC%E1%84%8C%E1%85%AE%E1%86%BC%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF/galdar_reg_galdar.html'">글쓰기</button>
+                    <button class="list_write_button">글쓰기</button>
                 </div>
             </div>
         </div>
@@ -138,6 +138,9 @@
                 $(book_list + ":lt(" + book_total_cnt + ")").addClass("active");
             }
 
+            $('.list_write_button').click(function(){
+                location.href='/galdar_reg.html';
+            });
         </script>
     </body>
 </html>

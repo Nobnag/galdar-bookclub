@@ -7,7 +7,7 @@ $(document).ready(function(){
     html += '<div class="gnb_content">';
     html += '<a href="/" class="gnb_link">HOME</a>';
     html += '<a href="intro" class="gnb_link">ABOUT</a>';
-    html += '<a href="galdar_list" class="gnb_link">LIST</a>';
+    html += '<a href="/galdar_list" class="gnb_link">LIST</a>';
     html += '</div>';
     html += '<div class="gnb_right">';
     var loginObj = getLoginObj();

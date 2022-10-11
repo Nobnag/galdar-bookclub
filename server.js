@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({extended : true}));
 
 app.use("/js", express.static(__dirname + "/js"));
 app.use("/css", express.static(__dirname + "/css"));
+app.use("/img", express.static(__dirname + "/img"));
+
 
 app.use(session({
     secret: '12345',
@@ -206,10 +208,45 @@ app.post('/api/submitSR', async function(req, res){
     }
 });
 
-app.get('/list', function(req, res){
+
+// 두환
+// 1. 도서 리스트(홈) 이동
+app.get('/galdar_list', function(req, res){
     res.sendFile(__dirname + '/galdar_list.html');
 });
+
+// 2. 도서 등록 페이지 이동
+app.get('/galdar_reg', function(req, res){
+    res.sendFile(__dirname + '/galdar_reg.html');
+});
+
+
+// API - 등록 페이지에서 입력한 정보들을 DB로 전송한다.
+app.post('/api/createBook', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookTitle', req.body.BookTitle)
+            .input('vi_BookAuthor', req.body.BookAuthor)
+            .input('vi_BookPublisher', req.body.BookPublisher)
+            .input('vi_BookTranslator', req.body.BookTranslator)
+            .input('vi_BookPubDate', req.body.BookPubDate)
+            .input('vi_BookBtDate', req.body.BookBtDate)
+            .input('vi_BookCategory', req.body.BookCategory)
+            .input('vi_BookRegWriter', req.body.BookRegWriter)
+            .input('vi_BookDesc', req.body.BookDesc)
+            .execute('[sp_book_register_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
 // 따옴표 안에는 http://projecgbc.herokuapp.com 이후에 올 주소를 넣으면 됨.
+
+
+
 
 
 
