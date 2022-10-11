@@ -217,7 +217,7 @@ app.get('/galdar_list', function(req, res){
 
 //도서글 업데이트(관리자) 이동
 app.get('/galdar_manage',function(req, res){
-    res.sendFile(__dirname + 'galdar_manage.html');
+    res.sendFile(__dirname + '/galdar_manage.html');
 });
 
 // 2. 도서 등록 페이지 이동
