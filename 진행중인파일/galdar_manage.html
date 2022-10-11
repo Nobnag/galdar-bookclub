@@ -22,6 +22,7 @@
             }
 
             h3{
+                margin-left: 10px;
                 padding: 31px;
                 font-size: 44px; 
                 width: 93%; height: 50px;
@@ -31,7 +32,7 @@
 
             li{
                 float: left;
-                width: 255px; height: 319px;
+                width: 255px; height: 295px;
                 margin: 35px 28px;
             }
 
@@ -64,10 +65,10 @@
             .btn-wrap {
                 text-align: center;
             }
-            .js-load {
+            .list_load {
                 display: none;
             }
-            .js-load.active {
+            .list_load.active {
                 display: block;
             }
             .button_decorate{
@@ -78,30 +79,36 @@
                 color: white;
                 cursor:pointer;
             }
-            .list_write{
-                float: right;
-                margin-right: 100px;
+            .list_write_button{
+                margin-left: 120px;
                 width: 78px;
-                height: 30px;
-                
+                height: 30px;     
+            }
+            .list_write{
+                margin-left: 75%;
+            }
+            img{
+                width: 100%;
+                height: 100%;
+                border-radius: 5px;
             }
         </style>
     </head>
 
     <body>
-        <h3>GBC 멤버들의 서평 모음집</h3>
+        <h3>GBC 선정도서</h3>
         <div class="book_list">
-            <div id="js-load">
+            <div id="list_load">
                 <ol>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>  <!-- 삽화나 다이어그램, 사진 등과 같이 문서의 주요 흐름과는 독립적인 콘텐츠를 정의할 때 사용 -->
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
                                 <figcaption>제목: 코스모스 일시:10월5일</figcaption>
-                            </figure>
+                            </figure> 
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -109,7 +116,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -117,7 +124,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -125,7 +132,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -133,7 +140,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>  
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -141,7 +148,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -149,7 +156,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -157,7 +164,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -165,7 +172,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -173,7 +180,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -181,7 +188,7 @@
                             </figure>
                         </a>
                     </li>
-                    <li class="js-load">
+                    <li class="list_load">
                         <a href="https://www.naver.com/">
                             <figure>
                                 <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
@@ -190,34 +197,32 @@
                         </a>
                     </li>
                 </ol>
+                <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
+                <div class="list_write">
+                    <button class="list_write_button" onclick="location.href='file:///Users/doohwankim/Desktop/gardar_project/%E1%84%8C%E1%85%B5%E1%86%AB%E1%84%92%E1%85%A2%E1%86%BC%E1%84%8C%E1%85%AE%E1%86%BC%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF/galdar_reg_galdar.html'">글쓰기</button>
+                </div>
             </div>
         </div>
-        <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
-        
-        <a href="file:///Users/doohwankim/Downloads/registration_galdar.html">
-            <button class="list_write" >글쓰기</button>
-        </a>
         <script>
-            $(window).on('load', function () {
-            load('#js-load', '3');
-            $("#js-btn-wrap .button").on("click", function () {
-                load('#js-load', '3', '#js-btn-wrap');
-            })
+            $(window).on('load', function () {    //처음에 6개의 리스트를 로드한다.
+                load('#list_load', '6');    
+                $("#js-btn-wrap .button_decorate").on("click", function () {  //더보기 클릭시에 6개를 로드한다.  
+                    load('#list_load', '6', '#js-btn-wrap');
+                })
             });
             
             function load(id, cnt, btn) {
-                var book_list = id + " .js-load:not(.active)";
+                var book_list = id + " .list_load:not(.active)";
                 var book_length = $(book_list).length;
                 var book_total_cnt;
                 if (cnt < book_length) {
                     book_total_cnt = cnt;
                 } else {
                     book_total_cnt = book_length;
-                    $('.button').hide()
+                    $('.button_decorate').hide()
                 }
                 $(book_list + ":lt(" + book_total_cnt + ")").addClass("active");
             }
-
         </script>
     </body>
 </html>
