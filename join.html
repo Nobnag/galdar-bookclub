@@ -44,7 +44,8 @@
                         $('input[name="Email"]').focus();
                         return false;
                 }
-                
+                //ajax는 데이터를 주고받기 위한 도구로 생각
+                // 중복검사 api연결
                 $.ajax({
                     type: 'post',
                     url: '/api/Duplicate',
@@ -55,11 +56,12 @@
                     },
                     success: function(result){
                         if(result.result == "false"){
-                            alert('중복이유!')
+                            alert('중복이유! 다른거 쓰세유!')
+                            $('input[name="Email"]').focus();
                             return false
                         }
                         if(result.result == "true"){
-                            alert('가능!')
+                            alert('가능!!!!!!!!!')
                         return false
                         }
                     },
@@ -69,6 +71,7 @@
             
             });
         });
+        //인풋박스에서 엔터키를 키다운했을때 회원가입 버튼 클릭한다
             $(document).on("keydown", ".enter_keydown",function(keynum){
                 if(keynum.keyCode ==13){
                     $(".btn_join").click()
@@ -84,6 +87,7 @@
             //     else {}
             // });
 
+            //회원가입 버튼을 눌럿을때
             $(document).ready(function(){
                 $(".btn_join").click(function() {
                 var Email = $('input[name="Email"]').val().trim();
@@ -142,8 +146,27 @@
                         $('input[name="Contact"]').focus();
                         return false;
                 }
-                if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "") {
-                        var data = {
+
+                //email중복검사를 실시
+                $.ajax({
+                    type: 'post',
+                    url: '/api/Duplicate',
+                    dataType: 'json',
+                    async: false,
+                    data: {
+                        Email:Email
+                    },
+                    success: function(result){
+                        if(result.result == "false"){
+                            alert('중복검사 하라했재')
+                            $('input[name="Email"]').focus();
+                            return false
+                        }
+
+                        if(result.result == "true"){
+
+                            if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "") {
+                            var data = {
                             Email: Email
                             ,Pw: Pw
                             ,Nickname: Nickname
@@ -151,7 +174,7 @@
                             // ,PremiumMemberYn: 0
                             // ,AdminYn:0
                         };
-                        //ajax는 데이터를 주고받기 위한 도구로 생각
+                        //email중복검사 해서 true값이 올때
                         $.ajax({
                             type: 'POST',
                             url: 'https://projecgbc.herokuapp.com/member',
@@ -159,13 +182,21 @@
                             data: data,
                             //async: false, 동기 와 비동기 찾아보기
                             success: function(result){ 
-                                    alert("회원가입요");
+                                    alert("회원가입 완료 로그인하도록.");
                                     location.href = "/login"
                                     return false;
                             },error: function(jqXHR,textStatus,errorThrown) {
                             }
                         });
+                        }
+                        return false
+                        }
+                    },
+                    error: function(jqXHR,textStatus,errorThrown) {
                     }
+                });
+
+                
                 });
             });
         </script>
