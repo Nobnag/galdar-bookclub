@@ -29,7 +29,7 @@
                 <input class="text" type="text" name="BookTitle" placeholder="도서 제목을 입력하세요."><br><br>
                 <!-- 확인필요 -->
                 <b class="name">도서설명</b>
-                <input class="text" type="text" name="book_inform" placeholder="도서 설명을 입력하세요."><br><br>
+                <input class="text" type="text" name="BookDesc" placeholder="도서 설명을 입력하세요."><br><br>
 
                 <b class="name">도서저자</b>
                 <input class="text" type="text" name="BookAuhtor" placeholder="도서 저자를 입력하세요."><br><br>
@@ -71,7 +71,7 @@
             $(document).on("click",".content_write",function(){
                 var BookCategoly = $('input[name="BookCategoly"]').val().trim();
                 var BookTitle = $('input[name="BookTitle"]').val().trim();
-                var book_inform = $('input[name="book_inform"]').val().trim();
+                var BookDesc = $('input[name="BookDesc"]').val().trim();
                 var BookAuhtor = $('input[name="BookAuhtor"]').val().trim();
                 var BookTranslator = $('input[name="BookTranslator"]').val().trim();
                 var BookPublisher = $('input[name="BookPublisher"]').val().trim();
@@ -88,7 +88,7 @@
                     alert("도서제목을 입력해주세요");
                     return false;
                 }
-                if(book_inform == ""){
+                if(BookDesc == ""){
                     alert("도서설명을 입력해주세요");
                     return false;
                 }
