@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/gnb.css" />
+        <link rel="stylesheet" href="css/galdar_list.css">
+        <link rel="stylesheet" type="text/css" href="css/footer.css" />
+        <script src="js/gnb.js"></script>
+        <script src="js/footer.js"></script>
+        <title>도서목록조회</title>
+    </head>
+
+    <body>
+        <div class="book_list">
+            <h3>GBC 선정도서 </h3>
+            <div id="list_load">
+                <ol>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>  <!-- 삽화나 다이어그램, 사진 등과 같이 문서의 주요 흐름과는 독립적인 콘텐츠를 정의할 때 사용 -->
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목: 코스모스 일시:10월5일</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>  
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="list_load">
+                        <a herf="naver.com">
+                            <figure>
+                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미a지">
+                                <figcaption>제목:코스모스</figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                </ol>
+                <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
+            </div>
+        </div>
+   
+        <script>
+            // $(window).on('load', function () {
+            //     load('#list_load', '6');
+            //     $("#js-btn-wrap .button_decorate").on("click", function () {
+            //         load('#list_load', '6', '#js-btn-wrap');
+            //     })
+            // });
+            
+            function load(id, cnt, btn) {
+                var book_list = id + " .list_load:not(.active)";
+                var book_length = $(book_list).length;
+                var book_total_cnt;
+                if (cnt < book_length) {
+                    book_total_cnt = cnt;
+                } else {
+                    book_total_cnt = book_length;
+                    $('.button_decorate').hide()
+                }
+                $(book_list + ":lt(" + book_total_cnt + ")").addClass("active");
+            }
+
+            $(window).on('load', function () {
+                load('#list_load', '6');
+                $("#js-btn-wrap .button_decorate").on("click", function () {
+                    load('#list_load', '6', '#js-btn-wrap');
+                })
+            });
+
+        </script>
+    </body>
+</html>
+
