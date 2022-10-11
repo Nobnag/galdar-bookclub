@@ -46,7 +46,6 @@
                     var data = result.recordset[0];
                     /* 첫번째 방법 */
                     var html = $(".container_book_contents").html();
-
                     html = html.replace(/{img}/gi, data.BookImg)
                                 .replace(/{idx}/gi,data.BookIdx)
                                 .replace(/{category}/gi,data.BookCategory)
@@ -57,7 +56,6 @@
                                 .replace(/{publisher}/gi,data.BookPublisher)
                                 .replace(/{publishDate}/gi,data.BookPubDate)
                                 .replace(/{btDate}/gi,data.BookBtDate);
-
                     $(".container_book_contents").html(html);
                     
                     /*
@@ -92,7 +90,39 @@
                     // alert("an error occured");
                 }
             });
-        
+            
+            $.ajax({
+                url: '/api/getSR',
+                data: params,
+                type: 'get',
+                datatype: 'json',
+                // async: false,
+                success: function(result){
+                    if(result.recordset.length == 0){
+                        alert("유효한 페이지가 아닙니다.");
+                        return false;
+                    }
+                    var data = result.recordset[0];
+                    /* 첫번째 방법 */
+                    var html = $(".container_book_contents").html();
+                    html = html.replace(/{img}/gi, data.BookImg)
+                                .replace(/{idx}/gi,data.BookIdx)
+                                .replace(/{category}/gi,data.BookCategory)
+                                .replace(/{title}/gi,data.BookTitle)
+                                .replace(/{desc}/gi,data.BookDesc)
+                                .replace(/{author}/gi,data.BookAuthor)
+                                .replace(/{translator}/gi,data.BookTranslator)
+                                .replace(/{publisher}/gi,data.BookPublisher)
+                                .replace(/{publishDate}/gi,data.BookPubDate)
+                                .replace(/{btDate}/gi,data.BookBtDate);
+                    $(".container_book_contents").html(html);
+                    
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    // alert("an error occured");
+                }
+            });
             
             // 1. 도서 정보 수정
             // 1-1.
@@ -123,14 +153,14 @@
                 
             // 2-7. API 전송
             if(sr_content !== ""){
-                    var params2 = {
+                    var params = {
                         book_idx: book_idx
                         ,sr_writer: '랜덤 닉네임'
                         ,sr_content: sr_content
                     };
                     $.ajax({
                         url: '/api/submitSR'
-                        ,data: params2
+                        ,data: params
                         ,type: 'post' 
                         ,datatype: 'json'
                         ,success: function(result){
@@ -352,9 +382,9 @@
                             <th class="th th_name">name.</th>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td><a href="">2</a></td>
-                            <td>3</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </table>
                     <!-- 페이징 -->

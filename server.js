@@ -136,9 +136,9 @@ app.get('/login',function(req,res) {
 app.get('/intro',function(req,res) {
     res.sendFile(__dirname + "/intro.html")
 });
-app.get('/galdarBook_list',function(req,res) {
-    res.sendFile(__dirname + "/galdarBook_list.html")
-});
+// app.get('/galdarBook_list',function(req,res) {
+//     res.sendFile(__dirname + "/galdarBook_list.html")
+// });
 
 BigInt.prototype.toJSON = function() { return this.toString(); };
 
@@ -205,6 +205,15 @@ app.post('/api/submitSR', async function(req, res){
         res.send(err)
     }
 });
+
+app.get('/list', function(req, res){
+    res.sendFile(__dirname + '/galdar_list.html');
+});
+// 따옴표 안에는 http://projecgbc.herokuapp.com 이후에 올 주소를 넣으면 됨.
+
+
+
+
 
 app.listen(port, function() {
     console.log('3000 실행');
