@@ -2,8 +2,10 @@ var sql = require("mssql");
 var config = {
   user:'male315_gbcdb',
   password: 'projectGBC',
+  // server: '192.168.0.15',
+  // server: '121.129.5.215',
+  // server: '172.30.1.27',
   server: 'sql16ssd-013.localnet.kr',
-  // server: '127.0.0.1',
   database: 'male315_gbcdb',
   port:1433,
   //stream: true,
