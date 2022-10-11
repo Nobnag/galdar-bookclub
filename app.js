@@ -177,6 +177,18 @@ app.get('/api/getBookDetail', async function(req, res){
     }
 });
 
+app.get('/api/getSR', async function(req,res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.body.book_idx)
+            .execute('[sp_book_sr_select_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
 
 // API - 작성한 한줄평을 DB에 보낸다.
 app.post('/api/submitSR', async function(req, res){
