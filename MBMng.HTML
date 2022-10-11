@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>galdar_MemberMnagement</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/gnb.css" />
+        <script src="js/gnb.js"></script>
+        <script type="text/javascript" src="js/validation.js"></script>
+        <style>
+            html {
+                width: 100%; height: 100%;
+                }
+            table {
+                border:1px;
+                width:100%;
+                height:100PX;
+                margin: 0 auto;
+            }
+        </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>
+            회원정보
+        </h1>
+        <table>
+            <tr>
+                <th scope="col">회원번호</td>
+                <th scope="col">회원이름</td>
+                <th scope="col">이메일</td>
+                <th scope="col">비밀번호</td>
+                <th scope="col">닉네임</td>
+                <th scope="col">가입일</td>
+                <th scope="col">유료가입현황</td>
+                <th scope="col">관리자권한</td>
+            </tr>
+            <tr>
+                <td>{MemberIdx}</td>
+                <td>{Email}</td>
+                <td>{Pw}</td>
+                <td>{Nickname}</td>
+                <td>{Contact}</td>
+                <td>{JoinDatetime}</td>
+                <td>{PremiumMemberYn}</td>
+                <td>{AdminYn}</td>
+            </tr>
+          </table>
+    <script>
+        
+    </script>
+</body>
+</html>

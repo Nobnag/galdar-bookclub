@@ -54,13 +54,13 @@
                         Email:Email
                     },
                     success: function(result){
-                        if(true){
-                            alert('가능!')
-                        return false
-                        }
-                        if(false){
+                        if(result == "false"){
                             alert('중복이유!')
                             return false
+                        }
+                        if(result == "true"){
+                            alert('가능!')
+                        return false
                         }
                     },
                     error: function(jqXHR,textStatus,errorThrown) {
@@ -154,7 +154,7 @@
                         //ajax는 데이터를 주고받기 위한 도구로 생각
                         $.ajax({
                             type: 'POST',
-                            url: '/member',
+                            url: 'https://projecgbc.herokuapp.com/member',
                             dataType: 'json',
                             data: data,
                             //async: false, 동기 와 비동기 찾아보기

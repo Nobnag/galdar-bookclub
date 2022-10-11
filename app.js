@@ -1,5 +1,6 @@
 var express = require('express')
 var app = express()
+const port = process.env.PORT || 3000;
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 // 쿠키
@@ -47,13 +48,13 @@ app.post('/member', async(req,res) => {
 //API - 회원Email중복확인을 한다.
 app.post('/api/Duplicate', async (req,res) => {
     try {
-        const pool = poolPromise;
-        let result = pool.request()
+        //post사용시 비동기 await를 넣어줘야하나봄 아직 이해못함 ㅠㅠ
+        const pool = await poolPromise;
+        let result = await pool.request()
             .input('Email', sql.NVarChar, req.body.Email)
-            .query('SELECT Email FROM Member WHERE Email= '+Email);
+            .query('SELECT Email FROM Member WHERE Email= '+'Email');
             
-        if(result[0]==0){
-            req.Email = result.recordset[0].Email;
+        if(result.recordset.length > 0){
             res.json({"result":"false"});
         }
         else{
@@ -196,6 +197,6 @@ app.post('/api/submitSR', async function(req, res){
     }
 });
 
-app.listen(3000, function() {
+app.listen(port, function() {
     console.log('3000 실행');
 });

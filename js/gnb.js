@@ -9,7 +9,6 @@ $(document).ready(function(){
     html += '<a href="intro" class="gnb_link">ABOUT</a>';
     html += '<a href="galdarBook_list" class="gnb_link">LIST</a>';
     html += '</div>';
-
     html += '<div class="gnb_right">';
     var loginObj = getLoginObj();
     if(typeof(loginObj) != "undefined"){
@@ -21,7 +20,7 @@ $(document).ready(function(){
         else if(loginObj.AdminYn == "0"){
             html += '<p class="gnb_btn_login">'+loginObj.Nickname+'님 안녕하세요'+'</p>'
             html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button>로그아웃</button></a>'
-            html += '<a class="gnb_btn_login" href="/"><button>회원가입</button></a>'
+            // html += '<a class="gnb_btn_login" href="/"><button>내정보</button></a>'
         }
     }
     else{
@@ -49,7 +48,6 @@ $(document).ready(function(){
 */
 function getLoginObj(){
     var loginObj = undefined;
-
     $.ajax({
         type: 'GET',
         url: '/api/getLoginInfo',
