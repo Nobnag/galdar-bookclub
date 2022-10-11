@@ -130,9 +130,6 @@ app.get('/', function(req,res) {
     //res.sendFile(path.resolve('../join.html'));
 });
 
-app.get('/',function(req,res) {
-    res.sendFile(__dirname + "/join.html")
-});
 app.get('/login',function(req,res) {
     res.sendFile(__dirname + "/login.html")
 });
