@@ -128,13 +128,17 @@ app.get('/api/logout', function(req,res) {
 });
 
 app.get('/', function(req,res) {
+    res.sendFile(__dirname + "/galdar_list.html")
+});
+
+app.get('/join',function(req,res) {
     res.sendFile(__dirname + "/join.html")
-    //res.sendFile(path.resolve('../join.html'));
 });
 
 app.get('/login',function(req,res) {
     res.sendFile(__dirname + "/login.html")
 });
+
 app.get('/intro',function(req,res) {
     res.sendFile(__dirname + "/intro.html")
 });
@@ -145,27 +149,18 @@ app.get('/intro',function(req,res) {
 BigInt.prototype.toJSON = function() { return this.toString(); };
 
 
+
+
+
+
 // 정민
 app.get('/book_detail',function(req,res){
     res.sendFile(__dirname + '/book_detail.html');
 });
 
-app.post('/mr_create', async function(req, res){
-    try {
-        const pool = await poolPromise;
-        let result = await pool.request()
-            .input('vi_MRTitle', req.body.mr_title)
-            .input('vi_MRWriter', req.body.mr_writer)
-            .input('vi_MRContent', req.body.mr_content)
-            .execute('[sp_mr_create_byUser]')
-        res.json(result);
-    } catch(err) {
-        res.status(500);
-        res.send(err)
-    }
-});
 
-//API - 도서 상세 정보를 가져온다.
+
+// PI - 도서 상세 정보를 가져온다.
 app.get('/api/getBookDetail', async function(req, res){
     try {
         const pool = await poolPromise;
@@ -179,12 +174,13 @@ app.get('/api/getBookDetail', async function(req, res){
     }
 });
 
+// API - DB에서 한줄평을 불러온다.
 app.get('/api/getSR', async function(req,res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
             .input('vi_BookIdx', req.body.book_idx)
-            .execute('[sp_book_sr_select_byAdmin]')
+            .execute('[sp_sr_select_byAdmin]')
         res.json(result);
     } catch(err) {
         res.status(500);
@@ -207,6 +203,38 @@ app.post('/api/submitSR', async function(req, res){
         res.send(err)
     }
 });
+
+// API - 작성한 서평을 DB에 보낸다.
+app.post('/api/submitMR', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.body.book_idx)
+            .input('vi_MRTitle', req.body.mr_title)
+            .input('vi_MRWriter', req.body.mr_writer)
+            .input('vi_MRContent', req.body.mr_content)
+            .execute('[sp_mr_create_byUser]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
+// API - DB에서 서평을 불러온다.
+app.get('/api/getMR', async function(req,res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.query.book_idx)
+            .execute('[sp_mr_select_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 
 
 // 두환

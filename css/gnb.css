@@ -1,44 +1,79 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;    
+}
+a {
+    text-decoration: none;
+    color: black;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+}
+
 #gnb {
     background-color: white;
     width: 100%;
     margin: 0 auto;
     height: 100px;
 }
+
 .gnb_container {
     margin: 0 auto;
     width: 80vw;
+    height: 100%;
 }
+
 .gnb_home_link {
     position: relative;
     margin-right: 100px;
 }
+
 .gnb_logo {
     position: relative;
     max-width: 50%;
-    width: 100px;
+    height: 80%;
+    margin-top: 20px;
     display: inline-block;
     vertical-align: middle;
     word-wrap: break-word;
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
 .gnb_content {
     position: absolute;
     display: inline-block;
     right: 15vw;
     margin-top: 50px;
-    }
+}
+
 .gnb_link {
     position: relative;
     font-size: 30px;
-    margin-left: 10px;
-    }
+    margin-left: 30px;
+}
+
 .gnb_right {
     position: absolute;
-    right: 1vw;
+    right: 2vw;
+    top: 10px;
     display: inline-block;
-    }
-.gnb_btn_login{
+}
+
+.button {
+    border: none;
+    background: #fff;
+    cursor: pointer;
+}
+
+.button:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.gnb_btn_login {
     margin-right: 10px;
 }
-p {display: inline-block;}
+
+p {
+    display: inline-block;
+}

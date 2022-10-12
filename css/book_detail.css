@@ -292,19 +292,19 @@ h4 {
     border: 1px solid;
 }
 
-.mr_wrapper .th_no {
+.mr_wrapper .th_name {
     border: 1px solid;
     width: 15%;
 }
 
 .mr_wrapper .th_title {
     border: 1px solid;
-    width: 70%;
+    width: 65%;
 }
 
-.mr_wrapper .th_name {
+.mr_wrapper .th_date {
     border: 1px solid;
-    width: 15%;
+    width: 20%;
 }
 
 .mr_wrapper td {

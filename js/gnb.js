@@ -14,18 +14,18 @@ $(document).ready(function(){
     if(typeof(loginObj) != "undefined"){
         if(loginObj.AdminYn == "1"){
             html += '<p class="gnb_btn_login">'+'관리자'+loginObj.Nickname+'님 안녕하세요'+'</p>'
-            html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button>로그아웃</button></a>'
-            html += '<a class="gnb_btn_login" href="/mamber_"><button>회원관리</button></a>'
+            html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button class="button">로그아웃</button></a>'
+            html += '<a class="gnb_btn_login" href="/member_"><button class="button">회원관리</button></a>'
         }
         else if(loginObj.AdminYn == "0"){
             html += '<p class="gnb_btn_login">'+loginObj.Nickname+'님 안녕하세요'+'</p>'
-            html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button>로그아웃</button></a>'
-            // html += '<a class="gnb_btn_login" href="/"><button>내정보</button></a>'
+            html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button class="button">로그아웃</button></a>'
+            // html += '<a class="gnb_btn_login" href="/"><button class="button">내정보</button></a>'
         }
     }
     else{
-        html += '<a class="gnb_btn_login" href="/login"><button>로그인</button></a>'
-        html += '<a class="gnb_btn_login" href="/"><button>회원가입</button></a>'
+        html += '<a class="gnb_btn_login" href="/login"><button class="button">로그인</button></a>'
+        html += '<a class="gnb_btn_login" href="/join"><button class="button">회원가입</button></a>'
     }
     html += '</div>'
     html += '</div>'
