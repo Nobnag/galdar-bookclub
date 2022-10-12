@@ -179,7 +179,7 @@ app.get('/api/getSR', async function(req,res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
-            .input('vi_BookIdx', req.body.book_idx)
+            .input('vi_BookIdx', req.query.book_idx)
             .execute('[sp_sr_select_byAdmin]')
         res.json(result);
     } catch(err) {

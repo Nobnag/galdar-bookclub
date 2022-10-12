@@ -95,16 +95,27 @@
             });
             
         // 0-2. 한줄평 조회
-            // 0-2-1. 변수 저장
-            
-            // 0-2-2. ajax 호출
+            $.ajax({
+                url: '/api/getSR',
+                data: params,
+                type: 'get',
+                datatype: 'json',
+                // async: false,
+                success: function(result){
+                    // var data = result.recordset[0];
+                    for(var i = 0; i < result.recordset.length; i ++){
+                        var row = result.recordset[i];
+                        var html = $('#sr_template').html().replace("{content}",row.SRContent).replace("{name}",row.SRWriter);
+                        $('.sr_box .slider').append(html)
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    // alert("an error occured");
+                }
+            });
             
         // 0-3. 줄글 서평 조회
-            // 0-3-1. 변수 저장
-            /* var params = {
-                book_idx: getParam('book_idx')
-            }; */
-            // 0-3-2. ajax 호출
             $.ajax({
                 url: '/api/getMR',
                 data: params,
@@ -116,7 +127,6 @@
                     for(var i = 0; i < result.recordset.length; i ++){
                         var row = result.recordset[i];
                         var html = $('#tbody_template').html().replace("{name}",row.MRWriter).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
-                        console.log(html);
                         $('.mr_board table').append(html)
                     }
                 },
@@ -287,7 +297,66 @@
                 }
                 
             });
+            // 한줄평 슬라이드 구현하기.
+            // 변수 정의.
+            var $slider = $('.slider');
+            var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},100);
+            startSlide();
+
+            
+            // '<' 버튼 누를 때 실행할 함수.
+            function PrevSlide(){
+                // 타이머 초기화
+                stopSlide();
+                startSlide();
+
+                var $lastSlide = $slider.find('li').last().prependTo($slider);
+                var $secondSlide = $slider.find('li').eq(1).stop(true).animate({'opacity':0},100);
+                var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},100);
+            }
+
+            // '>' 버튼 누를 때 실행할 함수.
+            function NextSlide(){
+                // 타이머 초기화
+                stopSlide();
+                startSlide();
+
+                $firstSlide = $slider.find('li').first().appendTo($slider);
+                var $lastSlide = $slider.find('li').last().stop(true).animate({'opacity':0},100);
+                var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},100);
+            }
+            
+            // '<' 버튼 누를 때.
+            $('.btn_left').on('click',function(){
+                PrevSlide();
+            });
+
+            // '>' 버튼 누를 때.
+            $('.btn_right').on('click',function(){
+                NextSlide();
+            });
+
+            startSlide();
+            
+            var theInterval;
+            
+            function startSlide(){
+                theInterval = setInterval(NextSlide, 3000);
+                var $firstSlide = $slider.find('li').first().stop(true).animate ({'opacity':1},100);
+
+            };
+            
+            function stopSlide(){
+                clearInterval(theInterval);
+            }
+
+            $('.slider').hover(function(){
+                stopSlide();
+            }, function(){
+                startSlide();
+            });
         });
+
     </script>
 
 </head>
@@ -333,30 +402,24 @@
                 </div>
             </div>
             <div class="btn_update_info">
-                <button>정보 수정</button>
+                <button class="button">정보 수정</button>
             </div>
         </div>
 
         <!-- 한줄평 슬라이드-->
         <div class="wrapper sr_wrapper">
             <h4>회원들의 한줄평</h4>
-            
+            <div id="sr_template" style="display:none;">
+                <li>
+                    <strong>{content}</strong>
+                    <em>{name}</em>
+                </li>
+            </div>
             <div class="sr_container">
                 <div class="sr_box">
                     <button class="btn btn_left"><</button>
                     <ul class="slider">
-                        <li>
-                            <strong>좋은 책이었습니다.</strong>
-                            <p><em>{작성자 닉네임}</em></p>
-                        </li>
-                        <li>
-                            <strong>멋진 책이었습니다.</strong>
-                            <p><em>{작성자 닉네임}</em></p>
-                        </li>
-                        <li>
-                            <strong>또 읽고 싶습니다.</strong>
-                            <p><em>{작성자 닉네임}</em></p>
-                        </li>
+                        
                     </ul>
                     <button class="btn btn_right">></button>
                 </div>
@@ -413,6 +476,7 @@
                 </div>
                 <div class="mr_btn">
                     <button class="button btn_write2">글쓰기</button>
+                    <button class="button btn_update2">내 서평 수정</button>
                 </div>
             </div>
 
@@ -439,7 +503,7 @@
             <div class="box bt_box">
                 
             </div>
-            <button class="btn_regist3">등록</button>
+            <button class="button btn_regist3">등록</button>
         </div>
 
         <!-- 댓글 -->
@@ -536,70 +600,13 @@
                         <textarea name="textarea" class="ipt_reply_content" rows="3" placeholder="내용을 입력하세요."></textarea>
                     </div>
                 </div>
-                <button class="btn btn_reg">등록</button>
+                <button class="button btn_reg">등록</button>
             </div>
         </div>
 
     </div>
     <script>
-        // 한줄평 슬라이드 구현하기.
-        $(function(){
-            // 변수 정의.
-            var $slider = $('.slider');
-            var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},10);
-
-            // startSlide();
-
-            var theInterval;
-
-            function startSlide(){
-                theInterval = setInterval(NextSlide, 100000);
-            };
-
-            function stopSlide(){
-                clearInterval(theInterval);
-            }
-
-
-            // '<' 버튼 누를 때 실행할 함수.
-            function PrevSlide(){
-                // 타이머 초기화
-                stopSlide();
-                startSlide();
-
-                var $lastSlide = $slider.find('li').last().prependTo($slider);
-                var $secondSlide = $slider.find('li').eq(1).stop(true).animate({'opacity':0},10);
-                var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},10);
-            }
-
-            // '>' 버튼 누를 때 실행할 함수.
-            function NextSlide(){
-                // 타이머 초기화
-                stopSlide();
-                startSlide();
-
-                $firstSlide = $slider.find('li').first().appendTo($slider);
-                var $lastSlide = $slider.find('li').last().stop(true).animate({'opacity':0},10);
-                var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},10);
-            }
-            
-            // '<' 버튼 누를 때.
-            $('.btn_left').on('click',function(){
-                PrevSlide();
-            });
-
-            // '>' 버튼 누를 때.
-            $('.btn_right').on('click',function(){
-                NextSlide();
-            });
-
-            $('.slider').hover(function(){
-                stopSlide();
-            }, function(){
-                startSlide();
-            });
-
-        });
+        
     </script>
 </body>
 </html>
