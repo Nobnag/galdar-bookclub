@@ -15,6 +15,28 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
+/**
+ * Multer 미들웨어는 파일 업로드를 위해 사용되는 multipart/form-data에서 사용된다.
+ * 다른 폼으로 데이터를 전송하면 적용이 안된다.
+ * Header의 명시해서 보내주는게 좋다.
+ */
+ const path = require('path');
+ const multer  = require('multer');
+ const upload = multer({ 
+    /*
+    dest: __dirname+'/uploads/', // 이미지 업로드 경로
+    */
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, 'uploads/');
+        },
+        filename: function (req, file, cb) {
+          cb(null, new Date().valueOf() + path.extname(file.originalname));
+        }
+    }),
+});
+
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/js", express.static(__dirname + "/js"));
 app.use("/css", express.static(__dirname + "/css"));
 app.use("/img", express.static(__dirname + "/img"));
@@ -288,8 +310,11 @@ app.get('/galdar_reg', function(req, res){
 
 
 // API - 등록 페이지에서 입력한 정보들을 DB로 전송한다.
-app.post('/api/createBook', async function(req, res){
+app.post('/api/createBook', upload.single('bookImg'), async function(req, res){
     try {
+        const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = req.file
+        const { name } = req.body;
+
         const pool = await poolPromise;
         let result = await pool.request()
             .input('vi_BookTitle', req.body.BookTitle)
@@ -301,6 +326,7 @@ app.post('/api/createBook', async function(req, res){
             .input('vi_BookCategory', req.body.BookCategory)
             .input('vi_BookRegWriter', req.body.BookRegWriter)
             .input('vi_BookDesc', req.body.BookDesc)
+            .input('vi_BookImg', filename)
             .execute('[sp_book_register_byAdmin]')
         res.json(result);
     } catch(err) {

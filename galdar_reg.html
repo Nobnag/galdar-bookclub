@@ -35,6 +35,7 @@
                     var BookPubDate = $('input[name="BookPubDate"]').val().trim();
                     var BookBtDate = $('input[name="BookBtDate"]').val().trim();
                     var BookRegWriter = $('input[name="BookRegWriter"]').val().trim();
+                    var BookImg = $("#upload_file").val().trim();
                     // var upload_file = $('input[name="upload_file"]').val();
 
                     if(BookCategory == ""){
@@ -73,6 +74,11 @@
                         alert("작성자명을 입력해주세요");
                         return false;
                     }
+                    if(BookImg == ""){
+                        alert("책 이미지를 선택해주세요");
+                        return false;
+                    }
+
                     /* var fileCheck = document.getElementById("upload_file").value;
                         if(!fileCheck){
                             alert("파일을 첨부해 주세요");
@@ -80,7 +86,7 @@
                         }
                     */
                     if(BookTitle !== "" && BookAuthor !== "" && BookPublisher !== "" && BookPubDate!== "" && BookBtDate !== "" && BookCategory !== "" && BookRegWriter !== "" && BookDesc !== ""){
-                        var params = {
+                        /*var params = {
                             BookTitle: BookTitle,
                             BookAuthor: BookAuthor,
                             BookPublisher: BookPublisher,
@@ -89,14 +95,19 @@
                             BookBtDate: BookBtDate,
                             BookCategory: BookCategory,
                             BookRegWriter: BookRegWriter,
-                            BookDesc: BookDesc
+                            BookDesc: BookDesc,
+                            BookImg: $('#upload_file')[0].files
                         };
+                        */
+                       var data = new FormData($("#create_book_form")[0])
 
                         $.ajax({
                             url: '/api/createBook'
-                            ,data: params
+                            ,data: data
+                            ,contentType: false
+                            ,processData: false
+                            ,cache: false
                             ,type: 'post' 
-                            ,datatype: 'json'
                             ,success: function(result){
                                 if(result.recordset.length > 0){
                                 alert('도서가 등록되었습니다.');
@@ -110,7 +121,7 @@
                     }
                         /* else {
                             var result = confirm("게시글을 등록하시겠습니까?" );
-                            if(result == 0) return false;
+                            if(result == 0) return false;8
                             else alert("등록되었습니다.");
                             location.href = "./galdar_list.html"; 
                         }   */  
@@ -121,46 +132,49 @@
     </head>
     <body>
         <div class="reg_wrapper">
-            <div class="image_update">
-                <input type="image" class="real-upload">
-                <div class="file_upload_botton">
-                    <!-- <p>이미지는 --- --- 로 등록하세요</p> -->
-                    <input type="text" id="file_route" disabled="disabled" value="파일 선택">
-                    <label for="upload_file">이미지 업로드</label>
-                    <input type="file" id="upload_file" class="upload_file" accept="image/*" required=true 
-                    style="position:absolute; clip:rect(0, 0, 0, 0);">
+            <form id="create_book_form" enctype="multipart/form-data" onsubmit="return false">
+                <div class="image_update">
+                    <input type="image" class="real-upload">
+                    <div class="file_upload_botton">
+                        <!-- <p>이미지는 --- --- 로 등록하세요</p> -->
+                        <input type="text" id="file_route" disabled="disabled" value="파일 선택">
+                        <label for="upload_file">이미지 업로드</label>
+                        <input type="file" name="bookImg" id="upload_file" class="upload_file" accept="image/*" required=true 
+                        style="position:absolute; clip:rect(0, 0, 0, 0);">
+                    </div>
                 </div>
-            </div>
-
-            <div class="input_content">
-                <b class="name">도서분야</b>
-                <input class="text" type="text" name="BookCategory" placeholder="도서 분야를 입력하세요."><br><br>
-
-                <b class="name">도서제목</b>
-                <input class="text" type="text" name="BookTitle" placeholder="도서 제목을 입력하세요."><br><br>
-                <!-- 확인필요 -->
-                <b class="name">도서설명</b>
-                <input class="text" type="text" name="BookDesc" placeholder="도서 설명을 입력하세요."><br><br>
-
-                <b class="name">도서저자</b>
-                <input class="text" type="text" name="BookAuthor" placeholder="도서 저자를 입력하세요."><br><br>
-
-                <b class="name">도서옮긴이</b>
-                <input class="text" type="text" name="BookTranslator" placeholder="도서 옮긴이를 입력하세요."><br><br>
-
-                <b class="name">도서출판사</b>
-                <input class="text" type="text" name="BookPublisher" placeholder="도서 출판사를 입력하세요."><br><br>
-
-                <b class="name">도서출판일자</b>
-                <input class="text" type="text" name="BookPubDate" placeholder="도서 출판일자를 입력하세요."><br><br>
-
-                <b class="name">북토크일자</b>
-                <input class="text" type="text" name="BookBtDate" placeholder="북토크 일자를 입력하세요."><br><br>
-
-                <b class="name">작성자</b>
-                <input class="text" type="text" name="BookRegWriter"><br><br>
-                <button class="content_write">글쓰기</button>
-            </div>
+    
+                <div class="input_content">
+                    <b class="name">도서분야</b>
+                    <input class="text" type="text" name="BookCategory" placeholder="도서 분야를 입력하세요."><br><br>
+    
+                    <b class="name">도서제목</b>
+                    <input class="text" type="text" name="BookTitle" placeholder="도서 제목을 입력하세요."><br><br>
+                    <!-- 확인필요 -->
+                    <b class="name">도서설명</b>
+                    <input class="text" type="text" name="BookDesc" placeholder="도서 설명을 입력하세요."><br><br>
+    
+                    <b class="name">도서저자</b>
+                    <input class="text" type="text" name="BookAuthor" placeholder="도서 저자를 입력하세요."><br><br>
+    
+                    <b class="name">도서옮긴이</b>
+                    <input class="text" type="text" name="BookTranslator" placeholder="도서 옮긴이를 입력하세요."><br><br>
+    
+                    <b class="name">도서출판사</b>
+                    <input class="text" type="text" name="BookPublisher" placeholder="도서 출판사를 입력하세요."><br><br>
+    
+                    <b class="name">도서출판일자</b>
+                    <input class="text" type="date" name="BookPubDate" placeholder="도서 출판일자를 입력하세요."><br><br>
+    
+                    <b class="name">북토크일자</b>
+                    <input class="text" type="date" name="BookBtDate" placeholder="북토크 일자를 입력하세요."><br><br>
+    
+                    <b class="name">작성자</b>
+                    <input class="text" type="text" name="BookRegWriter"><br><br>
+                    <button class="content_write">글쓰기</button>
+                </div>
+            </form>
+            
         </div>
 
         
