@@ -9,7 +9,7 @@
         <style>
             #wrapper {
                 word-break: break-word;
-                width:80%;
+                width:86%;
                 margin: 0 auto;
             }
             table {
@@ -22,25 +22,27 @@
                 border: 1px solid #444444;
             }
             th{
-                background-color: #737373;
+                background-color: #a49f9f;
             }
             td{
-
+                padding: 2px 4px;
             }
             ol{
+            background-color: #a49f9f;
                 margin: 10px 0 0 0;
                 padding-left: 20px;
+            }
+            ul {
+                padding:0;
             }
             h1, h2{
                 margin: 10px 0 0 0;
             }
             .simple_review{
-                display: inline-block;
                 float: left;
                 width: 48%;
             }
             .review{
-                display: inline-block;
                 float: right;
                 width: 48%;
 
@@ -74,9 +76,18 @@
                 <td>{PremiumMemberYn}</td>
                 <td>{AdminYn}</td>
             </tr>
+                <td>{MemberIdx}</td>
+                <td>{Email}</td>
+                <td>{Pw}</td>
+                <td>{Nickname}</td>
+                <td>{Contact}</td>
+                <td>{JoinDatetime}</td>
+                <td>{PremiumMemberYn}</td>
+                <td>{AdminYn}</td>
             <tr>
             </tr>
           </table>
+          <button>상세보기</button>
         </div>
         <h1>{Email}</h1>
     <div class="member_use_contents">
@@ -84,13 +95,22 @@
             <h2>작성한 한줄평</h2>
             <ol>
                 <li>
-                    {simple_review}0
+                    {title}0
+                    <ul>
+                        {simple_review}0
+                    </ul>
                 </li>
                 <li>
-                    {simple_review}1
+                    {title}1
+                    <ul>
+                        {simple_review}1
+                    </ul>
                 </li>
                 <li>
-                    {simple_review}2
+                    {title}2
+                    <ul>
+                        {simple_review}2
+                    </ul>
                 </li>
             </ol>
         </div>
@@ -98,13 +118,22 @@
             <h2>작성한 줄글서평</h2>
             <ol>
                 <li>
-                    {review}0
+                    {title}0
+                    <ul>
+                        {review}0
+                    </ul>
                 </li>
                 <li>
-                    {review}1
+                    {title}1
+                    <ul>
+                        {review}1
+                    </ul>
                 </li>
                 <li>
-                    {review}2
+                    {title}2
+                    <ul>
+                        {review}2
+                    </ul>
                 </li>
             </ol>
         </div>
