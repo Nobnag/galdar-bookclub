@@ -160,7 +160,7 @@ app.get('/book_detail',function(req,res){
 
 
 
-// PI - 도서 상세 정보를 가져온다.
+// API - 도서 상세 정보를 가져온다.
 app.get('/api/getBookDetail', async function(req, res){
     try {
         const pool = await poolPromise;
@@ -174,21 +174,7 @@ app.get('/api/getBookDetail', async function(req, res){
     }
 });
 
-// API - DB에서 한줄평을 불러온다.
-app.get('/api/getSR', async function(req,res){
-    try {
-        const pool = await poolPromise;
-        let result = await pool.request()
-            .input('vi_BookIdx', req.query.book_idx)
-            .execute('[sp_sr_select_byAdmin]')
-        res.json(result);
-    } catch(err) {
-        res.status(500);
-        res.send(err);
-    }
-});
-
-// API - 작성한 한줄평을 DB에 보낸다.
+// API(한줄평 C) - 작성한 한줄평을 DB에 보낸다.
 app.post('/api/submitSR', async function(req, res){
     try {
         const pool = await poolPromise;
@@ -204,7 +190,22 @@ app.post('/api/submitSR', async function(req, res){
     }
 });
 
-// API - 작성한 서평을 DB에 보낸다.
+// API(한줄평 R) - DB에서 한줄평을 불러온다.
+app.get('/api/getSR', async function(req,res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.query.book_idx)
+            .execute('[sp_sr_select_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
+
+// API(줄글 서평 C) - 작성한 서평을 DB에 보낸다.
 app.post('/api/submitMR', async function(req, res){
     try {
         const pool = await poolPromise;
@@ -221,7 +222,7 @@ app.post('/api/submitMR', async function(req, res){
     }
 });
 
-// API - DB에서 서평을 불러온다.
+// API(줄글 서평 R) - DB에서 서평을 불러온다.
 app.get('/api/getMR', async function(req,res){
     try {
         const pool = await poolPromise;
@@ -234,6 +235,38 @@ app.get('/api/getMR', async function(req,res){
         res.send(err);
     }
 });
+
+// API(댓글 C) - 작성 댓글을 DB에 보낸다.
+app.post('/api/submitReply', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.body.book_idx)
+            .input('vi_ReplyWriter', req.body.reply_name)
+            .input('vi_ReplyContent', req.body.reply_content)
+            .input('vi_ReplyNonMemberPw', req.body.reply_pw)
+            .execute('[sp_reply_create_byUser]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
+// API(댓글 R) - DB에서 댓글을 불러온다.
+app.get('/api/getReply', async function(req,res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.query.book_idx)
+            .execute('[sp_reply_select_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 
 
 

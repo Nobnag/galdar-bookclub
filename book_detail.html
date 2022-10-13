@@ -27,12 +27,11 @@
         // 0. 메인 화면
         $(document).ready(function(){
         // 0-1. 도서 상세 정보 조회
-            // 0-1-1. 변수 저장
+        // 0-1-1. 변수 저장
             var params = {
                 book_idx: getParam('book_idx')
             };
-
-            // 0-1-2. ajax 호출
+        // 0-1-2. ajax 호출
             $.ajax({
                 // url: 'http://localhost:3000/api/getBookDetail',
                 url: '/api/getBookDetail',
@@ -137,11 +136,30 @@
             });
         // 0-4. 북토크 대화록 조회
         // 0-5. 댓글 조회
+            $.ajax({
+                url: '/api/getReply',
+                data: params,
+                type: 'get',
+                datatype: 'json',
+                // async: false,
+                success: function(result){
+                    for(var i = 0; i < result.recordset.length; i ++){
+                        var row = result.recordset[i];
+                        var html = $('#reply_template').html().replace("{ReplyWriter}",row.ReplyWriter).replace("{ReplyContent}",row.ReplyContent).replace("{Writedatetime}",row.ReplyWriteDatetime);
+                        $('.reply_list_box').append(html)
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    // alert("an error occured");
+                }
+            });
             
             // 1. 도서 정보 수정
             // 1-1.
+            var book_idx = getParam('book_idx')
             $('.btn_update_info').click(function(){
-                location.href='./registration_galdar.html'
+                location.href=('./galdar_reg?book_idx='+book_idx)
             });
 
             // 2. 한줄평
@@ -268,8 +286,6 @@
                     });
                 }
             });
-            
-
 
             // 취소버튼 클릭
             $('.btn_cancel2').click(function(){
@@ -286,22 +302,71 @@
 
             // 4. 댓글
             $('.btn_reg').click(function(){
+                var book_idx = $('.book_info ul .book_idx span').html();
                 var reply_name = $('input[name="name"]').val().trim();
                 var reply_pw = $('input[name="pw"]').val().trim();
                 var reply_content = $('.ipt_reply_content').val().trim();
 
                 if(reply_name == "" || reply_pw == "" || reply_content == ""){
                     alert('이름과 비밀번호, 내용을 모두 입력하세요.');
-                } else {
+                    return false;
+                } 
+                
+                if(reply_name !== "" && reply_pw !== "" && reply_content !== ""){
+                    var params = {
+                        book_idx: book_idx
+                        ,reply_name: reply_name
+                        ,reply_pw: reply_pw
+                        ,reply_content: reply_content
+                    };
+
+                    $.ajax({
+                        url: '/api/submitReply',
+                        data: params,
+                        type: 'post',
+                        datatype: 'json',
+                        // async: false,
+                        success: function(result){
+                            if(result.recordset[0].Result == 'Success'){
+                                alert("작성이 완료되었습니다.");
+                                location.href=('/book_detail?book_idx='+book_idx)
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            console.log(errorThrown);
+                            // alert("an error occured");
+                        }
+                    });
 
                 }
                 
             });
+
+            // 4-1. 삭제버튼
+            $('.btn_x').click(function(){
+                $(this).parent().css('display','none');
+                $(this).parent().next().css('display','block');
+            });
+
+
+
             // 한줄평 슬라이드 구현하기.
             // 변수 정의.
             var $slider = $('.slider');
             var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},100);
+            
             startSlide();
+            
+            var theInterval;
+            
+            function startSlide(){
+                theInterval = setInterval(NextSlide, 3000);
+                var $firstSlide = $slider.find('li').first().stop(true).animate ({'opacity':1},100);
+            };
+            
+            function stopSlide(){
+                clearInterval(theInterval);
+            }
 
             
             // '<' 버튼 누를 때 실행할 함수.
@@ -335,20 +400,6 @@
             $('.btn_right').on('click',function(){
                 NextSlide();
             });
-
-            startSlide();
-            
-            var theInterval;
-            
-            function startSlide(){
-                theInterval = setInterval(NextSlide, 3000);
-                var $firstSlide = $slider.find('li').first().stop(true).animate ({'opacity':1},100);
-
-            };
-            
-            function stopSlide(){
-                clearInterval(theInterval);
-            }
 
             $('.slider').hover(function(){
                 stopSlide();
@@ -509,10 +560,27 @@
         <!-- 댓글 -->
         <div class="wrapper reply_wrapper">
             <h4>댓글</h4>
-            
+            <div id="reply_template" style="display:none;">
+                <div class="reply_list">
+                    <div class="reply reply_writer">
+                        <span>{ReplyWriter}</span>
+                    </div>
+                    <div class="reply reply_content">
+                        <span>{ReplyContent}</span>
+                        <div class="reply_datetime">
+                            <span>{Writedatetime}</span>
+                            <button class="btn_x">X</button>
+                        </div>
+                        <div class="reply_datetime2">
+                            <input type="password" name="pw" placeholder="비밀번호를 입력하세요.">
+                            <button class="btn_delete3">삭제</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="box reply_list_box">
                 <!-- 댓글 리스트 -->
-                <div class="reply_list">
+                <!-- <div class="reply_list">
                     <div class="reply reply_writer">
                         <span>{ReplyWriter}</span>
                     </div>
@@ -522,66 +590,19 @@
                             <span>{Writedatetime}</span>
                             <button>X</button>
                         </div>
-                    </div>
-                </div>
-                <div class="reply_list">
-                    <div class="reply reply_writer">
-                        <span>{ReplyWriter}</span>
-                    </div>
-                    <div class="reply reply_content">
-                        <span>{ReplyContent}</span>
-                        <div class="reply_datetime">
-                            <span>{Writedatetime}</span>
-                            <button>X</button>
+                        <div class="reply_datetime2">
+                            <input type="password" name="pw" placeholder="비밀번호를 입력하세요.">
+                            <button class="btn_delete3">삭제</button>
                         </div>
                     </div>
-                </div>
-                <div class="reply_list">
-                    <div class="reply reply_writer">
-                        <span>{ReplyWriter}</span>
-                    </div>
-                    <div class="reply reply_content">
-                        <span>{ReplyContent}</span>
-                        <div class="reply_datetime">
-                            <span>{Writedatetime}</span>
-                            <button>X</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="reply_list">
-                    <div class="reply reply_writer">
-                        <span>{ReplyWriter}</span>
-                    </div>
-                    <div class="reply reply_content">
-                        <span>{ReplyContent}</span>
-                        <div class="reply_datetime">
-                            <span>{Writedatetime}</span>
-                            <button>X</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="reply_list">
-                    <div class="reply reply_writer">
-                        <span>{ReplyWriter}</span>
-                    </div>
-                    <div class="reply reply_content">
-                        <span>{ReplyContent}</span>
-                        <div class="reply_datetime">
-                            <span>{Writedatetime}</span>
-                            <button>X</button>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
+                
             </div>
             <!-- 페이징 -->
             <div class="paging">
                 <a href="#" class="btn_left"><</a>
                 <ol>
                     <a href="#"><li>1</li></a>
-                    <a href="#"><li>2</li></a>
-                    <a href="#"><li>3</li></a>
-                    <a href="#"><li>4</li></a>
-                    <a href="#"><li>5</li></a>
                 </ol>
                 <a href="" class="btn_right">></a>
             </div>
