@@ -258,6 +258,22 @@ app.get('/api/getMR', async function(req,res){
     }
 });
 
+// API(줄글서평 상세) - DB에서 서평 데이터를 불러온다.
+app.get('/api/getMRdetail', async function(req,res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MRIdx', req.body.mr_idx)
+            .execute('[sp_mr_detail_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
+
+
 // API(댓글 C) - 작성 댓글을 DB에 보낸다.
 app.post('/api/submitReply', async function(req, res){
     try {

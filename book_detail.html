@@ -24,6 +24,12 @@
             return sval;
         }
 
+        // 줄글 서평 ID생성
+        function getID(){
+                var mr_id = $('.td_no').val();
+                return mr_id;
+            }
+
         // 0. 메인 화면
         $(document).ready(function(){
         // 0-1. 도서 상세 정보 조회
@@ -59,37 +65,10 @@
                                 .replace(/{publishDate}/gi,data.BookPubDate)
                                 .replace(/{btDate}/gi,data.BookBtDate);
                     $(".container_book_contents").html(html);
-                    
-                    /*
-                    for(var i = 0; i < result.recordset.length; i ++){
-                        var row = result.recordset[i];
-
-                        //row.BookCategory
-                        //row.BookTitle
-                    }
-                    */
-                   /*두번째 방법
-                   $(".container_book_contents .book_img img").attr("src", "");
-                   $(".container_book_contents .book_info .book_category").html(data.BookCategory);
-                   $(".container_book_contents .book_info .book_title").html(data.BookTitle);
-                   $(".container_book_contents .book_info .book_desc").html(data.BookDesc);
-                   $(".container_book_contents .book_info .book_author span").html(data.BookAuthor);
-                   $(".container_book_contents .book_info .book_translator span").html(data.BookTranslator);
-                   $(".container_book_contents .book_info .book_publisher span").html(data.BookPublisher);
-                   $(".container_book_contents .book_info .book_publishDate span").html(data.BookPubDate);
-                   $(".container_book_contents .book_info .book_btDate span").html(data.BookBtDate);
-                   */
-
-
-                    /*
-                    console.log(result);
-                    alert("작성이 완료되었습니다.");
-                    location.href="/book_detail"
-                    */
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(errorThrown);
-                    // alert("an error occured");
+                    alert("an error occured");
                 }
             });
             
@@ -115,6 +94,7 @@
             });
             
         // 0-3. 줄글 서평 조회
+
             $.ajax({
                 url: '/api/getMR',
                 data: params,
@@ -125,8 +105,8 @@
                     // var data = result.recordset[0];
                     for(var i = 0; i < result.recordset.length; i ++){
                         var row = result.recordset[i];
-                        var html = $('#tbody_template').html().replace("{name}",row.MRWriter).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
-                        $('.mr_board table').append(html)
+                        var html = $('#tbody_template').html().replace("{no}",row.MRIdx).replace("{name}",row.MRWriter).replace("{mr_id}",getID()).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
+                        $('.mr_board table').append(html);
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown){
@@ -239,7 +219,7 @@
             });
 
 
-            // 3. 줄글 서평
+            // 3. 줄글 서평            
             // 3-1. 글쓰기 버튼 클릭
             $('.btn_write2').click(function(){
             // 3-2. 창 전환
@@ -298,7 +278,46 @@
                     return false;
                 }
             });
-            
+                       
+            // 상세 조회
+            $('.td_title span').click(function(){
+                
+                /* var selected_mr_id = $(this).attr("id");
+                $('.mr_container').html().replace('.mr_container3')
+                var params = {
+                    mr_writer: mr_writer
+                    ,mr_writeDatetime: mr_writeDatetime
+                    ,mr_title: mr_title
+                    ,mr_content: mr_content
+                } */
+                var mr_idx = $('.td_no').val();
+                var params2= {
+                    mr_idx: mr_idx
+                }
+
+                $.ajax({
+                    url: '/api/getMRdetail',
+                    data: params2,
+                    type: 'get',
+                    datatype: 'json',
+                    // async: false,
+                    success: function(result){
+                        // var data = result.recordset[0];
+                        $('.mr_container').css('display','none');
+                        $('.mr_container3').css('display','block');
+                        alert("상세보기");
+                        for(var i = 0; i < result.recordset.length; i ++){
+                            var row = result.recordset[i];
+                            var html = $('.mr_container3').html().replace("{mr_writer}",row.MRWriter).replace("{mr_title}",row.MRTitle).replace("{mr_content}",row.MRContent).replace("{mr_writeDatetime}",row.MRWriteDatetime);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                        // alert("an error occured");
+                    } 
+                });
+
+            });
 
             // 4. 댓글
             $('.btn_reg').click(function(){
@@ -409,7 +428,6 @@
         });
 
     </script>
-
 </head>
 <body>
     <div class="container">
@@ -498,15 +516,19 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="th th_name">name.</th>
-                                <th class="th th_title">title.</th>
-                                <th class="th th_date">date.</th>
+                                <th class="th th_no">no.</th>
+                                <th class="th th_name">작성자</th>
+                                <th class="th th_title">제목</th>
+                                <th class="th th_date">작성일자</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_template" style="display:none";>
                             <tr>
+                                <td class="td_no">{no}</td>
                                 <td>{name}</td>
-                                <td>{title}</td>
+                                <td class="td_title">
+                                    <span id="{id}">{title}</span>
+                                </td>
                                 <td>{date}</td>
                             </tr>
                         </tbody>
@@ -516,11 +538,7 @@
                     <div class="paging">
                         <a href="#" class="btn_left"><</a>
                         <ol>
-                            <a href="#"><li>1</li></a>
-                            <!-- <a href="#"><li>2</li></a>
-                            <a href="#"><li>3</li></a>
-                            <a href="#"><li>4</li></a>
-                            <a href="#"><li>5</li></a> -->
+                            <a href="#"><li>{page_no}</li></a>
                         </ol>
                         <a href="" class="btn_right">></a>
                     </div>
@@ -544,7 +562,18 @@
                 </div>
             </div>
 
-
+            <div class="mr_container3">
+                <div class="mr_board">
+                    <div class="detail detail_mr_writer">{mr_writer}</div>
+                    <div class="detail detail_mr_writeDatetime">{mr_writeDatetime}</div>
+                    <div class="detail detail_mr_title">{mr_title}</div>
+                    <div class="detail detail_mr_content">{mr_content}</div>
+                </div>
+                <div class="mr_btn">
+                    <button class="button btn_cancel2">취소</button>
+                    <button class="button btn_regist2">등록</button>
+                </div>
+            </div>
 
         </div>
 
@@ -602,7 +631,7 @@
             <div class="paging">
                 <a href="#" class="btn_left"><</a>
                 <ol>
-                    <a href="#"><li>1</li></a>
+                    <a href="#"><li>{page_no}</li></a>
                 </ol>
                 <a href="" class="btn_right">></a>
             </div>
@@ -624,10 +653,6 @@
                 <button class="button btn_reg">등록</button>
             </div>
         </div>
-
     </div>
-    <script>
-        
-    </script>
 </body>
 </html>

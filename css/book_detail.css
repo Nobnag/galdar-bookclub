@@ -39,7 +39,14 @@ h4 {
     height: auto;
     padding: 15px;
 }
-
+@media screen and (max-width: 1485px){
+    .container_book_contents {
+        width: 600px;
+        height: auto;
+        padding: 0;
+        margin: 20px auto;
+    }
+}
 
 .book_img {
     background: #eee;
@@ -50,18 +57,32 @@ h4 {
     text-align: center;
 }
 
+@media screen and (max-width: 1485px){
+    .book_img {
+        float: none;
+        margin: 0 auto;
+    }
+}
+
 .book_img img {
     width: auto;
     height: 100%;
 }
 
-
 .book_info {
     display: inline-block;
     background: #ddd;
-    width: 490px;
-    height: calc(300px * 1.14142);
+    width: 460px;
+    height: calc(270px * 1.14142);
     margin-left: 20px;
+    padding: 15px;
+}
+
+@media screen and (max-width: 1485px){
+    .book_info {
+        margin: 0 auto;
+        display: block;
+    }
 }
 
 .book_info ul {
@@ -296,6 +317,11 @@ h4 {
     border: 1px solid;
 }
 
+.mr_wrapper .th_no {
+    border: 1px solid;
+    /* display: none; */
+}
+
 .mr_wrapper .th_name {
     border: 1px solid;
     width: 15%;
@@ -313,6 +339,23 @@ h4 {
 
 .mr_wrapper td {
     border: 1px solid;
+}
+
+.mr_wrapper .td_no {
+    /* display: none; */
+}
+
+.mr_wrapper .td_title {
+    padding-left: 20px;
+    text-align: left;
+}
+
+.mr_wrapper .td_title span {
+    cursor: pointer;
+}
+
+.mr_wrapper .td_title span:hover {
+    text-decoration: underline;
 }
 
 .mr_wrapper a {
@@ -408,6 +451,31 @@ h4 {
     padding: 5px 10px;
     width: 80%;
 }
+
+.mr_container3 {
+    display: none;
+    width: auto;
+    height: auto;
+}
+
+.mr_container3 .detail {
+    border: 1px solid;
+    height: 20px;
+    width: 80%;   
+    margin-bottom: 12px;
+    padding: 5px 10px;
+    background: #a3a3a3;
+
+}
+
+.mr_container3 textarea {
+    display: inline-block;
+    resize: none;
+    padding: 5px 10px;
+    width: 80%;
+}
+
+
 
 
 .bt_wrapper {
