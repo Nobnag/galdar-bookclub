@@ -180,8 +180,6 @@ app.get('/book_detail',function(req,res){
     res.sendFile(__dirname + '/book_detail.html');
 });
 
-
-
 // API - 도서 상세 정보를 가져온다.
 app.get('/api/getBookDetail', async function(req, res){
     try {
@@ -273,6 +271,22 @@ app.get('/api/getMRdetail', async function(req,res){
 });
 
 
+// API(북토크 대화록 C) - 작성한 서평을 DB에 보낸다.
+app.post('/api/submitBT', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.body.book_idx)
+            .input('vi_BtRecordContent', req.body.bt_content)
+            .input('vi_BtRecordWriter', req.body.bt_writer)
+            .execute('[sp_btr_create_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
 
 // API(댓글 C) - 작성 댓글을 DB에 보낸다.
 app.post('/api/submitReply', async function(req, res){
@@ -352,12 +366,6 @@ app.post('/api/createBook', upload.single('bookImg'), async function(req, res){
 });
 
 // 따옴표 안에는 http://projecgbc.herokuapp.com 이후에 올 주소를 넣으면 됨.
-
-
-
-
-
-
 
 
 app.listen(port, function() {
