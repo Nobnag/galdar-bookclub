@@ -116,7 +116,30 @@
                 }
             });
         
-        // 0-4. 댓글 조회
+        // 0-4. 대화록 조회
+            $.ajax({
+                url: '/api/getBT'
+                ,data: params
+                ,type: 'get'
+                ,datatype: 'jason'
+                ,success: function(result){
+                    if(result.recordset.length == 0){
+                        var text = `등록된 대화록이 없습니다.<br>
+                        대화록은 오프라인 북토크 진행 이후 업로드됩니다.`;
+                        $('.bt_container .bt_desc').html(text)
+                    } else {
+                        console.log(result);
+                        var row = result.recordset[0].BtRecordContent;
+                        row = row.replace(/:/gi,':<br />');
+                        $('.bt_container .bt_desc').html(row);
+                    }
+                }
+                ,error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    alert("an error occured");
+                }
+            });
+            
         // 0-5. 댓글 조회
             $.ajax({
                 url: '/api/getReply',
@@ -637,7 +660,7 @@
         <div class="wrapper bt_wrapper">
             <h4>북토크 대화록</h4>
             <div class="bt_container">
-                <p>( 아직 등록된 대화록이 없습니다 )</p>
+                <span class="bt_desc">.</span>
                 <div class="bt_btn">
                     <button class="button btn_write3">글쓰기</button>
                 </div>

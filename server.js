@@ -271,7 +271,7 @@ app.get('/api/getMRdetail', async function(req,res){
 });
 
 
-// API(북토크 대화록 C) - 작성한 서평을 DB에 보낸다.
+// API(북토크 대화록 C) - 작성한 대화록을 DB에 보낸다.
 app.post('/api/submitBT', async function(req, res){
     try {
         const pool = await poolPromise;
@@ -284,6 +284,21 @@ app.post('/api/submitBT', async function(req, res){
     } catch(err) {
         res.status(500);
         res.send(err)
+    }
+});
+
+
+// API(북토크 대화록 R) - DB에서 대화록을 불러온다.
+app.get('/api/getBT', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.query.book_idx)
+            .execute('[sp_btr_select_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
     }
 });
 

@@ -495,7 +495,7 @@ h4 {
     width: 90%;
     height: 100%;
     margin: 0 auto;
-    line-height: 260px;
+    /* line-height: 260px; */
     background: #eaeaea;
     text-align: center;
 }
