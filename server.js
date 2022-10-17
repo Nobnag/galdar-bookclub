@@ -364,6 +364,19 @@ app.post('/api/createBook', upload.single('bookImg'), async function(req, res){
         res.send(err)
     }
 });
+// API(도서목록 R) - DB에서 도서목록 조회를 불러온다.
+app.get('/api/getBook', async function(req,res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.query.book_idx)
+            .execute('[sp_book_select_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
 
 // 따옴표 안에는 http://projecgbc.herokuapp.com 이후에 올 주소를 넣으면 됨.
 
