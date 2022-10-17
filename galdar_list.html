@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/gnb.css" />
         <link rel="stylesheet" href="css/galdar_list.css">
@@ -11,28 +12,23 @@
         <script>
 
             $(document).ready(function(){
-                // var praams = (
-                //     이미지:
-                //     BookTitle : 
-                //     BookBtDate:
-                //     )
-
-
-                // //도서목록 조회
-                // $.ajax({
-                //     url:".api/getBook",
-                //     data: params,
-                //     type: 'get',
-                //     datatype: 'json',
-                //     success: function(result){
-                //         for(var i = 0; i < result.recordset.lenght; i ++){
-                //             var row = result.recordset[i];
-                //             var html = $('.list_load').html().replace("{BookTitle}",row.BookTitle)
-                //             .replace("{BookBtDate}",row.BookBtDate);
-                //             $('.list_load_box').append(html)
-                //         }
-                //     }
-                // });
+                
+                //도서목록 조회
+                $.ajax({
+                    url: '/galdar_list',
+                    // data: params,
+                    type: 'post',
+                    datatype: 'json',
+                    success: function(result){
+                        console.log(result)
+                        for(var i = 0; i < result.recordset.length; i ++){
+                            var row = result.recordset[i];
+                            var html = $('.list_template').html().replace("{BookImg}",row.BookImg).replace("{BookIdx}",row.BookIdx).replace("{BookTitle}",row.BookTitle)
+                            .replace("{BookBtDate}",row.BookBtDate);
+                            $('.list_load_box').append(html)
+                        }
+                    }
+                });
 
 
                 //더보기
@@ -63,11 +59,11 @@
         <div class="book_list">
             <h3>GBC 선정도서 </h3>
             <div id="list_load">
-                <ol>
+                <div class="list_template" style="display:none;">
                     <li class="list_load">
-                        <a herf="naver.com">
+                        <a href='/book_detail?book_idx={BookIdx}'>
                              <figure> <!-- 삽화나 다이어그램, 사진 등과 같이 문서의 주요 흐름과는 독립적인 콘텐츠를 정의할 때 사용 -->
-                                <img src="/Users/doohwankim/Desktop/cosmos.png" alt="이미지">
+                                <img src="/uploads/{BookImg}" alt="이미지">
                                 <figcaption>
                                     <div class="book_title">
                                         <p>도서이름:</p>
@@ -81,82 +77,9 @@
                             </figure>
                         </a>
                     </li>
-                    <div class="list_load_box">
-
-                    </div>
+                </div>
+                <ol class="list_load_box"> 
                     <!-- <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>  
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
                         <a herf="naver.com">
                             <figure>
                                 <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
@@ -173,6 +96,7 @@
                         </a>
                     </li> -->
                 </ol>
+
                 <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
             </div>
         </div>

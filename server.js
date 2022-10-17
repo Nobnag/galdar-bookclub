@@ -338,6 +338,18 @@ app.get('/galdar_reg', function(req, res){
     res.sendFile(__dirname + '/galdar_reg.html');
 });
 
+app.post('/galdar_list', async function(req,res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()            
+            .query('SELECT BookIdx, BookTitle, BookImg, BookBtDate FROM BOOK');
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
 
 // API - 등록 페이지에서 입력한 정보들을 DB로 전송한다.
 app.post('/api/createBook', upload.single('bookImg'), async function(req, res){
