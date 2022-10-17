@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/gnb.css" />
         <link rel="stylesheet" href="css/galdar_reg.css">
@@ -9,21 +10,6 @@
         <script src="js/footer.js"></script>
         <title>도서등록페이지 </title>
         <script>
-            /* const reader = new FileReader();
-    
-            reader.onload = (readerEvent) => {     //onload 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생한다.
-                document.querySelector(".real-upload").setAttribute("src", readerEvent.target.result);
-            };
-    
-            document.querySelector("#upload_file").addEventListener("change", (changeEvent) => {
-    
-                const imgFile = changeEvent.target.files[0];
-                reader.readAsDataURL(imgFile);
-    
-                const fileName = document.getElementById("file_route");
-                fileName.value = imgFile.name;
-                //파일 이름을 띄워줌
-            }) */
             $(document).ready(function(){
                 $('.content_write').click(function(){
                     var BookCategory = $('input[name="BookCategory"]').val().trim();
@@ -126,6 +112,23 @@
                             location.href = "./galdar_list.html"; 
                         }   */  
                 });
+
+                //업로드이미지 미리보기
+                const reader = new FileReader();
+    
+                reader.onload = (readerEvent) => {     //onload 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생한다.
+                    document.querySelector(".real-upload").setAttribute("src", readerEvent.target.result);
+                };
+
+                document.querySelector("#upload_file").addEventListener("change", (changeEvent) => {
+
+                    const imgFile = changeEvent.target.files[0];
+                    reader.readAsDataURL(imgFile);
+
+                    const fileName = document.getElementById("file_route");
+                    fileName.value = imgFile.name;
+                    //파일 이름을 띄워줌
+                }) 
             });
         </script>
 
