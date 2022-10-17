@@ -149,6 +149,22 @@ app.get('/api/logout', function(req,res) {
     }
 });
 
+//회원관리페이지 회원정보 불러오기
+app.get('/api/getmember_info', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MemberIdx', req.query.book_idx)
+            .query('SELECT MemberIdx,Email,Pw,Nickname,Contact,JoinDatetime,PremiumMemberYn,AdminYn FROM Member WHERE MemberIdx = 34')
+            // .execute('')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
+
 app.get('/', function(req,res) {
     res.sendFile(__dirname + "/galdar_list.html")
 });
@@ -167,6 +183,10 @@ app.get('/intro',function(req,res) {
 // app.get('/galdarBook_list',function(req,res) {
 //     res.sendFile(__dirname + "/galdarBook_list.html")
 // });
+//회원관리페이지
+app.get('/MBMng',function(req,res) {
+    res.sendFile(__dirname + "/MBMng.html")
+});
 
 BigInt.prototype.toJSON = function() { return this.toString(); };
 
