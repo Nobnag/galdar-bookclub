@@ -9,6 +9,24 @@
     <link rel="stylesheet" type="text/css" href="css/footer.css" />
     <script src="js/gnb.js"></script>
     <script src="js/footer.js"></script>
+    <script type="text/javascript" src="js/flaviusmatis-simplePagination.js-da97104/jquery.simplePagination.js"></script>
+    <link type="text/css" rel="stylesheet" href="js/flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
+    <style>
+        /* (s) pagination 스타일 수정 */
+        .light-theme a, .light-theme span {
+            float:none;
+            display: inline-block;
+        }
+        .simple-pagination li {
+            float: none;
+            display: inline-block;
+        }
+        .simple-pagination ul {
+            padding: 20px 0;
+        }
+        /* (e) pagination 스타일 수정 */
+    </style>
+
     <script>
         // url 에서 parameter 추출
         var getParam = function(sname) {
@@ -26,11 +44,53 @@
 
         // 줄글 서평 ID생성
         function getID(){
-                var mr_id = 0
-                
-                $('.td_no').val();
-                return mr_id;
-            }
+            var mr_id = 0
+            mr_id = 'mr_id' + $('.td_span_no').html();
+            return mr_id;
+        }
+
+        //서평 글 조회
+        var mrPageNo = 1;
+        function getMR(){
+            var params = {
+                book_idx: getParam('book_idx'),
+                page_no: mrPageNo,
+                page_size: 5
+            };
+            
+            $.ajax({
+                url: '/api/getMR',
+                data: params,
+                type: 'get',
+                datatype: 'json',
+                // async: false,
+                success: function(result){
+                    // var data = result.recordset[0];
+                    if(result.recordset.length > 0 && $(".pagination_mr").html().trim() == ""){
+                         $(".pagination_mr").pagination({
+                            items: result.recordset[0].totalCnt,
+                            itemsOnPage: params.page_size,
+                            cssStyle: 'light-theme',
+                            onPageClick:function(pageNumber, event){
+                                mrPageNo = pageNumber;
+                                getMR();
+                            }
+                        });
+                    }
+
+                    var html = "";
+                    for(var i = 0; i < result.recordset.length; i ++){
+                        var row = result.recordset[i];
+                        html += $('#tbody_template').html().replace("{no}",row.MRIdx).replace("{name}",row.MRWriter).replace("{id}",getID()).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
+                    }
+                    $('.mr_board table tbody').html(html);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    // alert("an error occured");
+                }
+            });
+        }
 
         // 0. 메인 화면
         $(document).ready(function(){
@@ -86,7 +146,8 @@
                     for(var i = 0; i < result.recordset.length; i ++){
                         var row = result.recordset[i];
                         var html = $('#sr_template').html().replace("{content}",row.SRContent).replace("{name}",row.SRWriter);
-                        $('.sr_box .slider').append(html)
+                        $('.sr_box .slider').append(html);
+                        $('.sr_box .slider li:first-child').css({"opacity":"1"});
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown){
@@ -96,25 +157,8 @@
             });
             
         // 0-3. 줄글 서평 조회
-            $.ajax({
-                url: '/api/getMR',
-                data: params,
-                type: 'get',
-                datatype: 'json',
-                // async: false,
-                success: function(result){
-                    // var data = result.recordset[0];
-                    for(var i = 0; i < result.recordset.length; i ++){
-                        var row = result.recordset[i];
-                        var html = $('#tbody_template').html().replace("{no}",row.MRIdx).replace("{name}",row.MRWriter).replace("{mr_id}",getID()).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
-                        $('.mr_board table').append(html);
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(errorThrown);
-                    // alert("an error occured");
-                }
-            });
+        getMR();
+           
         
         // 0-4. 대화록 조회
             $.ajax({
@@ -295,7 +339,7 @@
 
             // 취소버튼 클릭
             $('.btn_cancel2').click(function(){
-            // 2-2. 창 전환
+            // 창 전환
                 if(confirm("작성된 글은 보관되지 않습니다. 취소하시겠습니까?")){
                     $('.mr_container2').css('display','none');
                     $('.mr_container').css('display','block');
@@ -306,7 +350,7 @@
             });
                        
             // 상세 조회
-            $('#').click(function(){
+            $('#mr_id').click(function(){
                 
                 /* var selected_mr_id = $(this).attr("id");
                 $('.mr_container').html().replace('.mr_container3')
@@ -316,7 +360,7 @@
                     ,mr_title: mr_title
                     ,mr_content: mr_content
                 } */
-                var mr_idx = $('.td_no').val();
+                var mr_idx = $('.td_span_no').text();
                 var params2= {
                     mr_idx: mr_idx
                 }
@@ -329,13 +373,12 @@
                     // async: false,
                     success: function(result){
                         // var data = result.recordset[0];
-                        $('.mr_container').css('display','none');
-                        $('.mr_container3').css('display','block');
-                        alert("상세보기");
-                        for(var i = 0; i < result.recordset.length; i ++){
-                            var row = result.recordset[i];
+                       /*  $('.mr_container').css('display','none');
+                        $('.mr_container3').css('display','block'); */
+                        // for(var i = 0; i < result.recordset.length; i ++){
+                            var row = result.recordset[0];
                             var html = $('.mr_container3').html().replace("{mr_writer}",row.MRWriter).replace("{mr_title}",row.MRTitle).replace("{mr_content}",row.MRContent).replace("{mr_writeDatetime}",row.MRWriteDatetime);
-                        }
+                        // }
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         console.log(errorThrown);
@@ -352,8 +395,8 @@
                 $('.bt_container2').css('display','block');
             });
             
-            $('.btn_regist3').click(function(){
             // 4-1. 등록 버튼 클릭
+            $('.btn_regist3').click(function(){
                 var book_idx = $('.book_info ul .book_idx span').html();
                 var bt_content = $('.ipt_bt_content').val();
                 var bt_writer = $('.ipt_bt_writer').val();
@@ -377,7 +420,7 @@
                         datatype: 'json',
                         // async: false,
                         success: function(result){
-                            console.log(result);
+                            // console.log(result);
                             alert("작성이 완료되었습니다.");
                             location.href=('/book_detail?book_idx='+book_idx)
                         },
@@ -453,14 +496,14 @@
             // 변수 정의.
             var $slider = $('.slider');
             var $firstSlide = $slider.find('li').first().stop(true).animate({'opacity':1},100);
-            
+
             startSlide();
             
             var theInterval;
             
             function startSlide(){
                 theInterval = setInterval(NextSlide, 3000);
-                var $firstSlide = $slider.find('li').first().stop(true).animate ({'opacity':1},100);
+                // var $firstSlide = $slider.find('li').first().stop(true).animate ({'opacity':1},100);
             };
             
             function stopSlide(){
@@ -506,7 +549,6 @@
                 startSlide();
             });
         });
-
     </script>
 </head>
 <body>
@@ -593,6 +635,19 @@
             <div class="mr_container">
                 <div class="mr_board">
                     <!-- 테이블 -->
+                    <template id="tbody_template" style="display:none";>
+                        <tr>
+                            <td>
+                                <span class="td_span_no">{no}</span>
+                            </td>
+                            <td>{name}</td>
+                            <td class="td_title">
+                                <span id="{id}">{title}</span>
+                            </td>
+                            <td>{date}</td>
+                        </tr>
+                    </template>
+
                     <table>
                         <thead>
                             <tr>
@@ -602,19 +657,13 @@
                                 <th class="th th_date">작성일자</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_template" style="display:none";>
-                            <tr>
-                                <td class="td_no">{no}</td>
-                                <td>{name}</td>
-                                <td class="td_title">
-                                    <span id="{id}">{title}</span>
-                                </td>
-                                <td>{date}</td>
-                            </tr>
+                        <tbody>
                         </tbody>
-    
                     </table>
                     <!-- 페이징 -->
+                    <div class="pagination pagination_mr">
+                    </div>
+
                     <div class="paging">
                         <a href="#" class="btn_left"><</a>
                         <ol>
