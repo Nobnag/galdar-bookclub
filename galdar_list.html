@@ -10,10 +10,63 @@
         <script src="js/footer.js"></script>
         <title>도서목록조회</title>
         <script>
+            var StartBookIdx = undefined;
+            var ListCnt = 6;
+            // console.log("a")
+            function moreList(){
+                // debugger;
+                var addListHtml="";
+                //console.log("startNum",startNum);
 
+                $.ajax({
+                    url:'/galdar_list',
+                    type:"post",
+                    datatype:"json",
+                    data:{
+                        "StartBookIdx":StartBookIdx,
+                        "ListCnt":ListCnt, 
+                    },
+                    success:function(data){
+                        console.log(data);
+                        if(data.recordset.length < ListCnt ){
+                            $(".button_decorate").remove();
+                        }else{
+                            var addListHtml="";
+                            if(data.recordset.length>0){
+                                for(var i=0;i<data.recordset.length;i++){
+                                    addListHtml += $(".list_template").html();
+                                    //var idx = Number(startNum)+Number(i)+1;
+                                    // addListHtml+=""????????????
+                                }
+                                $('.list_load_box').append(addListHtml);
+
+                                StartBookIdx = data.recordset[data.recordset.length - 1].BookIdx - 1;
+
+                                //더보기 버튼을 오픈 상태로 둘지 체크한다.
+                                $.ajax({
+                                    url:'/galdar_list',
+                                    type:"post",
+                                    datatype:"json",
+                                    data:{
+                                        "StartBookIdx":StartBookIdx,
+                                        "ListCnt":ListCnt, 
+                                    },
+                                    success:function(data){
+                                        if(data.recordset.length == 0){
+                                            $(".button_decorate").remove();
+                                        }
+                                    }
+                                });
+                                
+                            }
+                        }
+                    }
+                })
+            }
             $(document).ready(function(){
-                
+        
                 //도서목록 조회
+                /*
                 $.ajax({
                     url: '/galdar_list',
                     // data: params,
@@ -29,28 +82,46 @@
                         }
                     }
                 });
+                */
+                
+                // 더보기
 
+                // $(window).on('load', function () {
+                //     load('#list_load', '3');
+                //     $("#js-btn-wrap .button_decorate").on("click", function () {
+                //         load('#list_load', '3', '#js-btn-wrap');
+                //     })
+                // }); 
+
+                // function load(id, cnt, btn) {
+                //     debugger;
+                //     var bookList = id + " .list_load:not(.active)";
+                //     var book_length = $(".list_template").length;
+                //     var book_total_cnt;
+                //     if (cnt < book_length) {
+                //         book_total_cnt = cnt;
+                //     } else {
+                //         book_total_cnt = book_length;
+                //         $('.button_decorate').hide()
+                //     }
+                //     $(bookList + ":lt(" + book_total_cnt + ")").addClass("active");
+                // }
+
+
+                // $(window).on('load', function () {
+                //     load('#list_load', '3');
+                //     $("#js-btn-wrap .button_decorate").on("click", function () {
+                //         load('#list_load', '3', '#js-btn-wrap');
+                //     })
+                // }); 
 
                 //더보기
-                function load(id, cnt, btn) {
-                    var book_list = id + " .list_load:not(.active)";
-                    var book_length = $(book_list).length;
-                    var book_total_cnt;
-                    if (cnt < book_length) {
-                        book_total_cnt = cnt;
-                    } else {
-                        book_total_cnt = book_length;
-                        $('.button_decorate').hide()
-                    }
-                    $(book_list + ":lt(" + book_total_cnt + ")").addClass("active");
-                }
-                $(window).on('load', function () {
-                    load('#list_load', '6');
-                    $("#js-btn-wrap .button_decorate").on("click", function () {
-                        load('#list_load', '6', '#js-btn-wrap');
-                    })
-                });
+                moreList();
+                $("#js-btn-wrap .button_decorate").on("click", function () {
+                    moreList();
+                })
             });
+
 
         </script>
     </head>
@@ -63,7 +134,7 @@
                     <li class="list_load">
                         <a href='/book_detail?book_idx={BookIdx}'>
                              <figure> <!-- 삽화나 다이어그램, 사진 등과 같이 문서의 주요 흐름과는 독립적인 콘텐츠를 정의할 때 사용 -->
-                                <img src="/uploads/{BookImg}" alt="이미지">
+                                <img class="Book_img" src="/uploads/{BookImg}" alt="이미지">
                                 <figcaption>
                                     <div class="book_title">
                                         <p>도서이름:</p>
@@ -96,10 +167,10 @@
                         </a>
                     </li> -->
                 </ol>
-
-                <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
             </div>
         </div>
+        <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
     </body>
 </html>
+
 

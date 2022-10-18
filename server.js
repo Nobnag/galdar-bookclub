@@ -355,8 +355,6 @@ app.get('/api/getReply', async function(req,res){
 });
 
 
-
-
 // 두환
 // 1. 도서 리스트(홈) 이동
 app.get('/galdar_list', function(req, res){
@@ -373,11 +371,22 @@ app.get('/galdar_reg', function(req, res){
     res.sendFile(__dirname + '/galdar_reg.html');
 });
 
+// API(도서목록 R) - DB에서 도서목록 조회를 불러온다.
+// req.body.StartBookIdx - 시작할 책 IDX
+// req.body.ListCnt - 1회당 조회할 갯수
 app.post('/galdar_list', async function(req,res){
     try {
+        let query = "";
+        if(typeof(req.body.StartBookIdx) == "undefined"){
+            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg, BookBtDate FROM BOOK ORDER BY BookIdx DESC';
+        }
+        else{
+            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg, BookBtDate FROM BOOK WHERE BookIdx <= '+req.body.StartBookIdx+' ORDER BY BookIdx DESC';
+        }
+
         const pool = await poolPromise;
         let result = await pool.request()            
-            .query('SELECT BookIdx, BookTitle, BookImg, BookBtDate FROM BOOK');
+            .query(query);
         res.json(result);
     } catch(err) {
         res.status(500);
@@ -412,18 +421,20 @@ app.post('/api/createBook', upload.single('bookImg'), async function(req, res){
     }
 });
 // API(도서목록 R) - DB에서 도서목록 조회를 불러온다.
-app.get('/api/getBook', async function(req,res){
-    try {
-        const pool = await poolPromise;
-        let result = await pool.request()
-            .input('vi_BookIdx', req.query.book_idx)
-            .execute('[sp_book_select_byAdmin]')
-        res.json(result);
-    } catch(err) {
-        res.status(500);
-        res.send(err);
-    }
-});
+// app.get('/api/getBook', async function(req,res){
+//     try {
+//         const pool = await poolPromise;
+//         let result = await pool.request()
+//             .input('vi_BookIdx', req.query.book_idx)
+//             .execute('[sp_book_select_byAdmin]')
+//         res.json(result);
+//     } catch(err) {
+//         res.status(500);
+//         res.send(err);
+//     }
+// });
+
+
 
 // 따옴표 안에는 http://projecgbc.herokuapp.com 이후에 올 주소를 넣으면 됨.
 
