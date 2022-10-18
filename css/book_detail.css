@@ -88,7 +88,7 @@ h4 {
 
 .book_info ul {
     list-style-type: none;
-    padding: 0;
+    padding: 15px 0 0 0;
     margin: 0;
 }
 
@@ -363,19 +363,20 @@ h4 {
     display: inline-block;
 }
 
-/* .mr_wrapper  */ol {
+.mr_wrapper ol {
     padding: 0;
     list-style-type: none;
     display: inline-block;
 }
 
-/* .mr_wrapper  */ol li {
+.mr_wrapper ol li {
     display: inline-block;
     margin: 5px;
 }
 
-/* .mr_wrapper  */.paging {
+.mr_wrapper .paging {
     text-align: center;
+    display: none;
 }
 
 

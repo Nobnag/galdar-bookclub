@@ -248,6 +248,8 @@ app.get('/api/getMR', async function(req,res){
         const pool = await poolPromise;
         let result = await pool.request()
             .input('vi_BookIdx', req.query.book_idx)
+            .input('vi_pageNo', req.query.page_no)
+            .input('vi_pageSize', req.query.page_size)
             .execute('[sp_mr_select_byAdmin]')
         res.json(result);
     } catch(err) {
