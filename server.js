@@ -90,6 +90,7 @@ app.post('/api/Duplicate', async (req,res) => {
         }
 });
 
+//로그인 한다.
 app.post('/login_process', async(req,res) => {
     try {
         const pool = await poolPromise;
@@ -163,6 +164,36 @@ app.get('/api/getmember_info', async function(req, res){
         res.send(err)
     }
 });
+
+//회원관리 페이지에서 해당 라인을 클릭시 불러온다.
+app.get('/api/getNickname', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('MemberIdx', req.query.MemberIdx)
+            // .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
+            .execute('[sp_select_member_RP]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
+//회원이 작성한 sr과 bookidx를 가져온다.
+// app.get('/api/get_Nickname_SR', async function(req, res){
+//     try {
+//         const pool = await poolPromise;
+//         let result = await pool.request()
+//             .input('MemberIdx', req.query.MemberIdx)
+//             .query('SELECT BookIdx,SRContent FROM SR WHERE MemberIdx = @MemberIdx')
+//             // .execute('[sp_member_RP]')
+//         res.json(result);
+//     } catch(err) {
+//         res.status(500);
+//         res.send(err)
+//     }
+// });
 
 
 app.get('/', function(req,res) {

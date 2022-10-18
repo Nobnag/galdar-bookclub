@@ -34,11 +34,11 @@ p {
 h1, h2{
     margin: 10px 0 0 0;
 }
-.simple_review{
+.SRContent{
     float: left;
     width: 48%;
 }
-.review{
+.ReplyContent{
     float: right;
     width: 48%;
 }

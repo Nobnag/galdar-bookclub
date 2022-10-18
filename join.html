@@ -163,9 +163,7 @@
                             $('input[name="Email"]').focus();
                             return false
                         }
-
                         if(result.result == "true"){
-
                             if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "") {
                             var data = {
                             Email: Email
@@ -196,8 +194,6 @@
                     error: function(jqXHR,textStatus,errorThrown) {
                     }
                 });
-
-                
                 });
             });
         </script>
