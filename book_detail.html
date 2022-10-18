@@ -130,7 +130,8 @@
                     } else {
                         console.log(result);
                         var row = result.recordset[0].BtRecordContent;
-                        row = row.replace(/:/gi,':<br />');
+                        row = row.replace(/[a-z]:/gi,'<br />:<br />');
+                        row = row.replace(/\./gi,'.<br />');
                         $('.bt_container .bt_desc').html(row);
                     }
                 }
@@ -663,6 +664,7 @@
                 <span class="bt_desc">.</span>
                 <div class="bt_btn">
                     <button class="button btn_write3">글쓰기</button>
+                    <button class="button btn_update3">수정하기</button>
                 </div>
             </div>
             <div class="bt_container2">
