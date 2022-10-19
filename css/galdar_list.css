@@ -54,6 +54,7 @@ figcaption{
     opacity: 0; 
     transition: 0.3s;
     font-family: 'Nanum Myeongjo', serif;
+    border-radius: 5px;
 }
 
 a:hover figcaption, .gallery a:focus figcaption{
@@ -62,9 +63,14 @@ a:hover figcaption, .gallery a:focus figcaption{
 .btn-wrap {
     text-align: center;
 }
-.list_load {
+/* .list_load {
+    display: none;
+} */
+#list_load_contain{
     display: none;
 }
+
+
 .list_load.active {
     /* display: inline-block; */
     display: block;
@@ -82,8 +88,14 @@ a:hover figcaption, .gallery a:focus figcaption{
     display: inline-block;
 }
 
-img{
-    /* width: 100%; */
+.Book_img{
+    width: 100%;
     height: 100%;
     border-radius: 5px;
+}
+.book_btDate{
+    height:25px;
+}
+.book_title{
+    height:25px;
 }

@@ -34,15 +34,16 @@
                             var addListHtml="";
                             if(data.recordset.length>0){
                                 for(var i=0;i<data.recordset.length;i++){
-                                    addListHtml += $(".list_template").html();
-                                    //var idx = Number(startNum)+Number(i)+1;
-                                    // addListHtml+=""????????????
+
+                                    var row = data.recordset[i];
+                                    addListHtml += $(".list_template").html().replace("{BookImg}",row.BookImg).replace("{BookIdx}",
+                                    row.BookIdx).replace("{BookTitle}",row.BookTitle).replace("{BookBtDate}",row.BookBtDate);
                                 }
                                 $('.list_load_box').append(addListHtml);
 
                                 StartBookIdx = data.recordset[data.recordset.length - 1].BookIdx - 1;
 
-                                //더보기 버튼을 오픈 상태로 둘지 체크한다.
+                                // 더보기 버튼을 오픈 상태로 둘지 체크한다.
                                 $.ajax({
                                     url:'/galdar_list',
                                     type:"post",
@@ -57,7 +58,6 @@
                                         }
                                     }
                                 });
-                                
                             }
                         }
                     }
@@ -66,23 +66,23 @@
             $(document).ready(function(){
         
                 //도서목록 조회
-                /*
-                $.ajax({
-                    url: '/galdar_list',
-                    // data: params,
-                    type: 'post',
-                    datatype: 'json',
-                    success: function(result){
-                        console.log(result)
-                        for(var i = 0; i < result.recordset.length; i ++){
-                            var row = result.recordset[i];
-                            var html = $('.list_template').html().replace("{BookImg}",row.BookImg).replace("{BookIdx}",row.BookIdx).replace("{BookTitle}",row.BookTitle)
-                            .replace("{BookBtDate}",row.BookBtDate);
-                            $('.list_load_box').append(html)
-                        }
-                    }
-                });
-                */
+                
+                // $.ajax({
+                //     url: '/galdar_list',
+                //     // data: params,
+                //     type: 'post',
+                //     datatype: 'json',
+                //     success: function(result){
+                //         console.log(result)
+                //         for(var i = 0; i < result.recordset.length; i ++){
+                //             var row = result.recordset[i];
+                //             var html = $('.list_template').html().replace("{BookImg}",row.BookImg).replace("{BookIdx}",row.BookIdx).replace("{BookTitle}",row.BookTitle)
+                //             .replace("{BookBtDate}",row.BookBtDate);
+                //             $('.list_load_box').append(html)
+                //         }
+                //     }
+                // });
+                
                 
                 // 더보기
 
