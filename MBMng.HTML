@@ -77,29 +77,28 @@
     <div class="member_use_contents">
         <div class="SRContent">
             <h2>작성한 한줄평</h2>
-            <ul>
+            <ul class="SR">
             </ul>
         </div>
-        <!-- <div class="MRContent">
+        <div class="MRContent">
             <h2>작성한 줄글서평</h2>
-            <ul>
+            <ul class="MR">
             </ul>
-        </div> -->
+        </div>
     </div>
     </template>
 <!-- 넣을 템플릿 -->
-    <template id="template_rp">
-                    <li>
-                        {BookTitle}
-                        <p>{SRContent}</p>
-                    </li>
-            <!-- 
-                    <li>
-                    {BookTitle}
-                    <p>{MRContent}</p>
-                </li>
-            -->
-        </div>
+    <template id="template_SR">
+        <li>
+            {SRBookTitle}
+            <p>{SRContent}</p>
+        </li>
+    </template>
+    <template id="template_MR">
+        <li>
+            {MRBookTitle}
+            <p>{MRContent}</p>
+        </li>
     </template>
 
     <script>
@@ -120,12 +119,20 @@
                         var html = $("#template_Nickname").html()
                         .replace("{Nickname}",nt.Nickname)
                         $('#rp_wrapper').html(html);
-                        for(var i = 0; i < result.recordset.length; i ++) {
-                            var srtp = result.recordset[i]
-                            var html = $("#template_rp").html()
+                        for(var i = 0; i < result.recordsets[1].length; i ++) {
+                            var srtp = result.recordsets[1][i];
+                            var html = $("#template_SR").html()
+                            .replace("{SRBookTitle}",srtp.SRBookTitle)
                             .replace("{SRContent}",srtp.SRContent)
-                            .replace("{BookTitle}",srtp.BookTitle)
-                            $('#rp_wrapper ul').append(html);
+                            $('#rp_wrapper .SRContent .SR').append(html);
+                        };
+
+                        for(var i = 0; i < result.recordsets[2].length; i ++) {
+                            var srtp = result.recordsets[2][i];
+                            var html = $("#template_MR").html()
+                            .replace("{MRBookTitle}",srtp.MRBookTitle)
+                            .replace("{MRContent}",srtp.MRContent)
+                            $('#rp_wrapper .MRContent .MR').append(html);
                         };
                 },
             });
