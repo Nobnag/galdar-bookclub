@@ -374,7 +374,7 @@ h4 {
     margin: 5px;
 }
 
-.mr_wrapper .paging {
+.paging {
     text-align: center;
     display: none;
 }
@@ -609,8 +609,7 @@ h4 {
     background: #ededed;
     width: 90%;
     margin: 15px auto;
-    height: 200px;
-    
+    height: auto;
 }
 
 .reply_list {
@@ -682,8 +681,11 @@ h4 {
     cursor: pointer;
 }
 
-
-
+.pagination_reply {
+    display: inline-block;
+    margin: 20px 0;
+    text-align: center;
+}
 
 .reply_box {
     background: #ededed;
@@ -698,7 +700,6 @@ h4 {
     justify-content: space-between;
     margin-bottom: 15px;
 }
-
 
 .reply_box .ipt_reply_pw {
     margin-top: 12.5px;
