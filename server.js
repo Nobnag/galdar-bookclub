@@ -156,7 +156,7 @@ app.get('/api/getmember_info', async function(req, res){
         const pool = await poolPromise;
         let result = await pool.request()
             .input('vi_MemberIdx', req.query.book_idx)
-            .query('SELECT MemberIdx,Email,Pw,Nickname,Contact,JoinDatetime,PremiumMemberYn,AdminYn FROM Member WHERE MemberIdx = 34')
+            .query('SELECT MemberIdx,Email,Pw,Nickname,Contact,JoinDatetime,PremiumMemberYn,AdminYn FROM Member WHERE MemberIdx = MemberIdx')
             // .execute('')
         res.json(result);
     } catch(err) {

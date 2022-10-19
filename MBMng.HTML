@@ -72,29 +72,34 @@
         <!-- 템플릿 넣을자리 -->
     </div>
 <!-- 넣을 템플릿 -->
-    <template id="template_rp">
+    <template id="template_Nickname">
     <h1>{Nickname}</h1>
     <div class="member_use_contents">
         <div class="SRContent">
             <h2>작성한 한줄평</h2>
             <ul>
-                <p class="SRContent_p">{SRContent}</p>
-                <!-- <li>
-                    {BookTitle}
-                    
-                </li> -->
             </ul>
         </div>
-        <!-- <div class="ReplyContent">
+        <!-- <div class="MRContent">
             <h2>작성한 줄글서평</h2>
             <ul>
-                <li>
-                    {BookTitle}
-                    <p>{ReplyContent}</p>
-                </li>
             </ul>
         </div> -->
     </div>
+    </template>
+<!-- 넣을 템플릿 -->
+    <template id="template_rp">
+                    <li>
+                        {BookTitle}
+                        <p>{SRContent}</p>
+                    </li>
+            <!-- 
+                    <li>
+                    {BookTitle}
+                    <p>{MRContent}</p>
+                </li>
+            -->
+        </div>
     </template>
 
     <script>
@@ -111,27 +116,17 @@
                     MemberIdx:MemberIdx
                 },
                 success: function(result){
-                        var tp = result.recordset[0]
-                        var rp = result.recordset[0].MemberIdx
-                        var html = $("#template_rp").html()
-                        .replace("{Nickname}",tp.Nickname)
-                            // $.ajax({
-                            //     url: '/api/get_Nickname_SR',
-                            //     type: 'get',
-                            //     datatype: 'json',
-                            //     data : {
-                            //         MemberIdx:rp
-                            //     },
-                            //     success: function(result){
-                            //         for(var i = 0; i < result.recordset.length; i ++) {
-                            //             var sr= result.recordset[i];
-                            //             var html = $(".SRContent_p").html()
-                            //             .replace("{SRContent}",sr.SRContent)
-                            //             $('#rp_wrapper').append(html);
-                            //         }
-                            //     },
-                            // });
+                        var nt = result.recordset[0]
+                        var html = $("#template_Nickname").html()
+                        .replace("{Nickname}",nt.Nickname)
                         $('#rp_wrapper').html(html);
+                        for(var i = 0; i < result.recordset.length; i ++) {
+                            var srtp = result.recordset[i]
+                            var html = $("#template_rp").html()
+                            .replace("{SRContent}",srtp.SRContent)
+                            .replace("{BookTitle}",srtp.BookTitle)
+                            $('#rp_wrapper ul').append(html);
+                        };
                 },
             });
         });
