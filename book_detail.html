@@ -49,7 +49,7 @@
             return mr_id;
         }
 
-        //서평 글 조회
+        // 줄글 서평 글 조회 함수 선언
         var mrPageNo = 1;
         function getMR(){
             var params = {
@@ -84,6 +84,47 @@
                         html += $('#tbody_template').html().replace("{no}",row.MRIdx).replace("{name}",row.MRWriter).replace("{id}",getID()).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
                     }
                     $('.mr_board table tbody').html(html);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    // alert("an error occured");
+                }
+            });
+        }
+
+        // 댓글 조회 함수 선언
+        var replyPageNo = 1;
+        function getReply(){
+            var params = {
+                book_idx: getParam('book_idx'),
+                page_no: replyPageNo,
+                page_size: 5
+            }
+
+            $.ajax({
+                url: '/api/getReply',
+                data: params,
+                type: 'get',
+                datatype: 'json',
+                // async: false,
+                success: function(result){
+                    if(result.recordset.length > 0 && $(".pagination_reply").html().trim() == ""){
+                        $('.pagination_reply').pagination({
+                            items: result.recordset[0].totalCnt,
+                            itemsOnPage: params.page_size,
+                            cssStyle: 'light-theme',
+                            onPageClick: function(pageNumber, event){
+                                replyPageNo = pageNumber;
+                                getReply();
+                            }
+                        });
+                    }
+                    var html = "";
+                    for(var i = 0; i < result.recordset.length; i ++){
+                        var row = result.recordset[i];
+                        html += $('#reply_template').html().replace("{ReplyWriter}",row.ReplyWriter).replace("{ReplyContent}",row.ReplyContent).replace("{Writedatetime}",row.ReplyWriteDatetime);
+                    }
+                    $('.reply_list_box').html(html)
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(errorThrown);
@@ -157,7 +198,7 @@
             });
             
         // 0-3. 줄글 서평 조회
-        getMR();
+            getMR();
            
         
         // 0-4. 대화록 조회
@@ -186,24 +227,7 @@
             });
             
         // 0-5. 댓글 조회
-            $.ajax({
-                url: '/api/getReply',
-                data: params,
-                type: 'get',
-                datatype: 'json',
-                // async: false,
-                success: function(result){
-                    for(var i = 0; i < result.recordset.length; i ++){
-                        var row = result.recordset[i];
-                        var html = $('#reply_template').html().replace("{ReplyWriter}",row.ReplyWriter).replace("{ReplyContent}",row.ReplyContent).replace("{Writedatetime}",row.ReplyWriteDatetime);
-                        $('.reply_list_box').append(html)
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(errorThrown);
-                    // alert("an error occured");
-                }
-            });
+            getReply();
             
             // 1. 도서 정보 수정
             // 1-1.
@@ -448,9 +472,9 @@
             $('.btn_reg').click(function(){
                 var book_idx = $('.book_info ul .book_idx span').html();
                 var reply_name = $('input[name="name"]').val().trim();
-                var reply_pw = $('input[name="pw"]').val().trim();
+                var reply_pw = $('input[name="password"]').val().trim();
                 var reply_content = $('.ipt_reply_content').val().trim();
-
+                debugger;    
                 if(reply_name == "" || reply_pw == "" || reply_content == ""){
                     alert('이름과 비밀번호, 내용을 모두 입력하세요.');
                     return false;
@@ -664,13 +688,13 @@
                     <div class="pagination pagination_mr">
                     </div>
 
-                    <div class="paging">
+                    <!-- <div class="paging">
                         <a href="#" class="btn_left"><</a>
                         <ol>
                             <a href="#"><li>{page_no}</li></a>
                         </ol>
                         <a href="" class="btn_right">></a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="mr_btn">
                     <button class="button btn_write2">글쓰기</button>
@@ -770,13 +794,17 @@
                 
             </div>
             <!-- 페이징 -->
-            <div class="paging">
+            <div class="pagination pagination_reply">
+            </div>
+
+            <!-- 페이징 -->
+            <!-- <div class="paging">
                 <a href="#" class="btn_left"><</a>
                 <ol>
                     <a href="#"><li>{page_no}</li></a>
                 </ol>
                 <a href="" class="btn_right">></a>
-            </div>
+            </div> -->
             <!-- 댓글 작성창 -->
             <div class="box reply_box">
                 <div class="box reply_write_box">    
@@ -785,7 +813,7 @@
                             <input type="text" name="name" placeholder="작성자 명">
                         </div>
                         <div class="ipt ipt_reply_pw">
-                            <input type="password" name="pw" placeholder="비밀번호">
+                            <input type="password" name="password" placeholder="비밀번호">
                         </div>
                     </div>
                     <div class="box reply_textarea_box">
