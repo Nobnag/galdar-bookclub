@@ -50,7 +50,7 @@ app.use(session({
 }));
 
 app.use(cors());
-
+//회원가입한다.
 app.post('/member', async(req,res) => {
     try {
         const pool = await poolPromise;
@@ -155,9 +155,10 @@ app.get('/api/getmember_info', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
-            .input('vi_MemberIdx', req.query.book_idx)
-            .query('SELECT MemberIdx,Email,Pw,Nickname,Contact,JoinDatetime,PremiumMemberYn,AdminYn FROM Member WHERE MemberIdx = MemberIdx')
-            // .execute('')
+            // .input('vi_MemberIdx', req.query.MemberIdx)
+            .query('SELECT MemberIdx,Email,Pw,Nickname,Contact,Convert(nvarchar(16),JoinDatetime,121) as JoinDatetime,PremiumMemberYn,AdminYn FROM Member WHERE MemberIdx = MemberIdx')
+            //프로시저로 하면안됨. 질문하기
+            // .execute('[sp_getmember_info]')
         res.json(result);
     } catch(err) {
         res.status(500);
@@ -170,7 +171,7 @@ app.get('/api/getNickname', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
-            .input('MemberIdx', req.query.MemberIdx)
+            .input('vi_MemberIdx', req.query.MemberIdx)
             // .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
             .execute('[sp_select_member_RP]')
         res.json(result);
@@ -179,22 +180,6 @@ app.get('/api/getNickname', async function(req, res){
         res.send(err)
     }
 });
-
-//회원이 작성한 sr과 bookidx를 가져온다.
-// app.get('/api/get_Nickname_SR', async function(req, res){
-//     try {
-//         const pool = await poolPromise;
-//         let result = await pool.request()
-//             .input('MemberIdx', req.query.MemberIdx)
-//             .query('SELECT BookIdx,SRContent FROM SR WHERE MemberIdx = @MemberIdx')
-//             // .execute('[sp_member_RP]')
-//         res.json(result);
-//     } catch(err) {
-//         res.status(500);
-//         res.send(err)
-//     }
-// });
-
 
 app.get('/', function(req,res) {
     res.sendFile(__dirname + "/galdar_list.html")

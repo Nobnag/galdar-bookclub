@@ -21,7 +21,7 @@
 <!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
             <template id="template_member_info_row">
                 <tr data-memberidx="{MemberIdx}">
-                    <td class="data_MemberIdx">{MemberIdx}</td>
+                    <td>{MemberIdx}</td>
                     <td>{Email}</td>
                     <td>{Pw}</td>
                     <td>{Nickname}</td>
@@ -102,63 +102,7 @@
     </template>
 
     <script>
-        //테이블의 특정 인원을 클릭했을때 특정인원의 
-        //닉네임과 작성한 한줄글 한줄평을 추가한다 html형식으로
-        $(document).on("click",".mamber_info tbody tr",function(){
-            var MemberIdx = $(this).data("memberidx");
-            //해당 줄의 닉네임을 가저온다
-            $.ajax({
-                url: '/api/getNickname',
-                type: 'get',
-                datatype: 'json',
-                data : {
-                    MemberIdx:MemberIdx
-                },
-                success: function(result){
-                        var nt = result.recordset[0]
-                        var html = $("#template_Nickname").html()
-                        .replace("{Nickname}",nt.Nickname)
-                        $('#rp_wrapper').html(html);
-                        for(var i = 0; i < result.recordsets[1].length; i ++) {
-                            var srtp = result.recordsets[1][i];
-                            var html = $("#template_SR").html()
-                            .replace("{SRBookTitle}",srtp.SRBookTitle)
-                            .replace("{SRContent}",srtp.SRContent)
-                            $('#rp_wrapper .SRContent .SR').append(html);
-                        };
-
-                        for(var i = 0; i < result.recordsets[2].length; i ++) {
-                            var srtp = result.recordsets[2][i];
-                            var html = $("#template_MR").html()
-                            .replace("{MRBookTitle}",srtp.MRBookTitle)
-                            .replace("{MRContent}",srtp.MRContent)
-                            $('#rp_wrapper .MRContent .MR').append(html);
-                        };
-                },
-            });
-        });
-        //해당회원이 작성한 리뷰와 책IDX를 가저오는 함수
-        // function getSR() {
-        //     $.ajax({
-        //         url: '/api/get_Nickname_SR',
-        //         type: 'get',
-        //         datatype: 'json',
-        //         data : {
-        //             MemberIdx:rp
-        //         },
-        //         success: function(result){
-        //             for(var i = 0; i < result.recordset.length; i ++) {
-        //                 var sr= result.recordset[i];
-        //                 var html = $(".SRContent").html()
-        //                 .replace("{SRContent}",sr.SRContent)
-        //                 $('#rp_wrapper').html(html);
-        //             }
-        //         },
-        //     });
-        // }
-
-//맴버 정보를 불러온다.
-
+        //맴버 정보를 불러온다.
         $(document).ready(function(){
             $.ajax({
                 url: '/api/getmember_info',
@@ -188,6 +132,45 @@
                     alert("an error occured");
                 }
             });
+        });
+        //테이블의 특정 인원을 클릭했을때 특정인원의 
+        //닉네임과 작성한 한줄글 한줄평을 추가한다 html형식으로
+        $(document).on("click",".mamber_info tbody tr",function(){
+            var MemberIdx = $(this).data("memberidx");
+            //해당 줄의 닉네임을 가저온다
+            $.ajax({
+                url: '/api/getNickname',
+                type: 'get',
+                datatype: 'json',
+                data : {
+                    MemberIdx:MemberIdx
+                },
+                success: function(result){
+                        var nt = result.recordset[0]
+                        //작성자의 닉네임을 불러온다
+                        var html = $("#template_Nickname").html()
+                        .replace("{Nickname}",nt.Nickname)
+                        $('#rp_wrapper').html(html);
+                        //작성한 한줄평을 불러온다
+                        for(var i = 0; i < result.recordsets[1].length; i ++) {
+                            var srtp = result.recordsets[1][i];
+                            var html = $("#template_SR").html()
+                            .replace("{SRBookTitle}",srtp.SRBookTitle)
+                            .replace("{SRContent}",srtp.SRContent)
+                            $('#rp_wrapper .SRContent .SR').append(html);
+                        };
+                        //작성한 서평을 불러온다
+                        for(var i = 0; i < result.recordsets[2].length; i ++) {
+                            var srtp = result.recordsets[2][i];
+                            var html = $("#template_MR").html()
+                            .replace("{MRBookTitle}",srtp.MRBookTitle)
+                            .replace("{MRContent}",srtp.MRContent)
+                            $('#rp_wrapper .MRContent .MR').append(html);
+                        };
+                },
+            });
+            //해당 라인을 클릭했을때 해당 라인을 input타입으로 변환 수정할수있게
+            
         });
     </script>
 </body>
