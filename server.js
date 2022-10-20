@@ -374,6 +374,21 @@ app.get('/api/getReply', async function(req,res){
     }
 });
 
+app.post('/api/deleteReply', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_ReplyIdx', req.body.reply_idx)
+            .input('vi_ReplyWriter', req.body.reply_writer)
+            .input('vi_ReplyNonMemberPw', req.body.reply_pw)
+            .execute('[sp_reply_delete_byUser]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 
 // 두환
 // 1. 도서 리스트(홈) 이동
