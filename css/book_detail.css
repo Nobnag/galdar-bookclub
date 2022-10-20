@@ -73,7 +73,7 @@ h4 {
 .book_info {
     display: inline-block;
     background: #ddd;
-    width: 432px;
+    width: 510px;
     height: calc(300px * 1.14142);
     /* margin-left: 20px; */
     /* padding: 15px; */
@@ -502,9 +502,16 @@ h4 {
     text-align: left;
 }
 
+.bt_writer {
+    display:none;
+}
+
 .bt_desc {
     display: block;
     padding: 15px;
+    white-space: pre-wrap;
+    height: 300px;
+    overflow-y: scroll;
 }
 
 .bt_container2 {
@@ -518,7 +525,7 @@ h4 {
 
 .bt_container2 input {
     height: 20px;
-    width: 80%;   
+    width: 90%;   
     margin-bottom: 12px;
     padding: 5px 10px;
 }
@@ -527,7 +534,8 @@ h4 {
     display: inline-block;
     resize: none;
     padding: 5px 10px;
-    width: 80%;
+    width: 90%;
+    height: 300px;
 }
 
 .btn_update3 {
@@ -569,7 +577,7 @@ h4 {
     cursor: pointer;
 }
 
-.btn_cancel3 {
+.btn_cancel4 {
     display: block;
     width: 120px;
     height: 30px;
@@ -582,10 +590,68 @@ h4 {
     cursor: pointer;
 }
 
+.bt_container3 {
+    display: none;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    background: #eaeaea;
+    text-align: center;
+}
 
+.bt_container3 input {
+    height: 20px;
+    width: 90%;   
+    margin-bottom: 12px;
+    padding: 5px 10px;
+}
 
+.bt_container3 textarea {
+    display: inline-block;
+    resize: none;
+    padding: 5px 10px;
+    width: 90%;
+    height: 300px;
+}
 
+.btn_update4 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
 
+.btn_delete4 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.btn_cancel6 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    /* margin-right: 2%; */
+    margin-top: 12px;
+    cursor: pointer;
+}
 
 
 

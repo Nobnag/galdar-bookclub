@@ -340,6 +340,21 @@ app.get('/api/getBT', async function(req, res){
     }
 });
 
+// API(북토크 대화록 D) - DB에서 대화록을 삭제한다.
+app.post('/api/deleteBT', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.body.book_idx)
+            .input('vi_BtRecordWriter', req.body.bt_writer)
+            .execute('[sp_btr_delete_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 
 // API(댓글 C) - 작성 댓글을 DB에 보낸다.
 app.post('/api/submitReply', async function(req, res){
@@ -374,6 +389,7 @@ app.get('/api/getReply', async function(req,res){
     }
 });
 
+// API(댓글 D) - 댓글을 DB에서 삭제한다.
 app.post('/api/deleteReply', async function(req, res){
     try {
         const pool = await poolPromise;
