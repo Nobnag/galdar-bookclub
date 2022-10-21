@@ -422,6 +422,7 @@ app.get('/galdar_reg', function(req, res){
     res.sendFile(__dirname + '/galdar_reg.html');
 });
 
+//더보기
 // API(도서목록 R) - DB에서 도서목록 조회를 불러온다.
 // req.body.StartBookIdx - 시작할 책 IDX
 // req.body.ListCnt - 1회당 조회할 갯수
@@ -471,24 +472,28 @@ app.post('/api/createBook', upload.single('bookImg'), async function(req, res){
         res.send(err)
     }
 });
-// API(도서목록 R) - DB에서 도서목록 조회를 불러온다.
-// app.get('/api/getBook', async function(req,res){
-//     try {
-//         const pool = await poolPromise;
-//         let result = await pool.request()
-//             .input('vi_BookIdx', req.query.book_idx)
-//             .execute('[sp_book_select_byAdmin]')
-//         res.json(result);
-//     } catch(err) {
-//         res.status(500);
-//         res.send(err);
-//     }
-// });
 
-
+//관리자 글쓰기버튼
+//DB에서 관리자정보 로그인 API를 가져온다.
+app.get('/api/getLoginAdmin', function(req,res) {
+    try {
+        if(typeof(req.session.Email) == "undefined" ){
+            res.status(401);
+            res.json({"result":"false"});
+        }
+        else{
+            res.json({
+                Email: req.session.Email,
+                AdminYn: req.session.AdminYn,
+            });
+        }
+    } catch (err) {
+        res.status(500);
+        res.send(err);
+    }
+});
 
 // 따옴표 안에는 http://projecgbc.herokuapp.com 이후에 올 주소를 넣으면 됨.
-
 
 app.listen(port, function() {
     console.log('3000 실행');

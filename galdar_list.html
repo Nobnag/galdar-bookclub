@@ -8,16 +8,15 @@
         <link rel="stylesheet" type="text/css" href="css/footer.css" />
         <script src="js/gnb.js"></script>
         <script src="js/footer.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>도서목록조회</title>
         <script>
+
+            // 더보기
             var StartBookIdx = undefined;
             var ListCnt = 6;
-            // console.log("a")
             function moreList(){
-                // debugger;
                 var addListHtml="";
-                //console.log("startNum",startNum);
-
                 $.ajax({
                     url:'/galdar_list',
                     type:"post",
@@ -64,68 +63,48 @@
                 })
             }
             $(document).ready(function(){
-        
-                //도서목록 조회
-                
-                // $.ajax({
-                //     url: '/galdar_list',
-                //     // data: params,
-                //     type: 'post',
-                //     datatype: 'json',
-                //     success: function(result){
-                //         console.log(result)
-                //         for(var i = 0; i < result.recordset.length; i ++){
-                //             var row = result.recordset[i];
-                //             var html = $('.list_template').html().replace("{BookImg}",row.BookImg).replace("{BookIdx}",row.BookIdx).replace("{BookTitle}",row.BookTitle)
-                //             .replace("{BookBtDate}",row.BookBtDate);
-                //             $('.list_load_box').append(html)
-                //         }
-                //     }
-                // });
-                
-                
-                // 더보기
+                //관리자로그인 글쓰기 버튼
+                var html ='';
+                var list_write= getLoginObj();
+                if(typeof(list_write) != "undefined"){
+                    if(list_write.AdminYn == "1"){
+                        html += '<button class="list_write_button">글쓰기</button>'
+                    }
+                    else if(list_write.AdminYn == "0"){
+                    }
+                }
+                else{
+                }
+                $(".btn-wrap").append(html);
 
-                // $(window).on('load', function () {
-                //     load('#list_load', '3');
-                //     $("#js-btn-wrap .button_decorate").on("click", function () {
-                //         load('#list_load', '3', '#js-btn-wrap');
-                //     })
-                // }); 
+                $(".list_write_button").click(function(){
+                    $(location).attr("href", "/galdar_reg")
+                })
 
-                // function load(id, cnt, btn) {
-                //     debugger;
-                //     var bookList = id + " .list_load:not(.active)";
-                //     var book_length = $(".list_template").length;
-                //     var book_total_cnt;
-                //     if (cnt < book_length) {
-                //         book_total_cnt = cnt;
-                //     } else {
-                //         book_total_cnt = book_length;
-                //         $('.button_decorate').hide()
-                //     }
-                //     $(bookList + ":lt(" + book_total_cnt + ")").addClass("active");
-                // }
+                // 맨위로 버튼
+                $(window).scroll(function() {
+                    // top button controll
+                    if ($(this).scrollTop() > 500) {
+                        $('#topButton').fadeIn();
+                    } else {
+                        $('#topButton').fadeOut();
+                    }
+                });
 
-
-                // $(window).on('load', function () {
-                //     load('#list_load', '3');
-                //     $("#js-btn-wrap .button_decorate").on("click", function () {
-                //         load('#list_load', '3', '#js-btn-wrap');
-                //     })
-                // }); 
+                $("#topButtonImg").click(function() {
+                    $('html, body').animate({scrollTop:0}, '300');
+                });
+	
 
                 //더보기
                 moreList();
                 $("#js-btn-wrap .button_decorate").on("click", function () {
                     moreList();
-                })
-            });
-
-
+                });
+            })
+            
         </script>
     </head>
-
     <body>
         <div class="book_list">
             <h3>GBC 선정도서 </h3>
@@ -150,25 +129,10 @@
                     </li>
                 </div>
                 <ol class="list_load_box"> 
-                    <!-- <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="list_load">
-                        <a herf="naver.com">
-                            <figure>
-                                <img src="\Users\dooki\Desktop\gardar_project\cosmos.png" alt="이미지">
-                                <figcaption>제목:코스모스</figcaption>
-                            </figure>
-                        </a>
-                    </li> -->
                 </ol>
+                <!-- <div id="topButton" style="cursor: pointer"><img src="img/img_top.jpg" id="topButtonImg"></div> -->
             </div>
-        </div>
+        </div> 
         <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
     </body>
 </html>
