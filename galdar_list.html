@@ -8,7 +8,8 @@
         <link rel="stylesheet" type="text/css" href="css/footer.css" />
         <script src="js/gnb.js"></script>
         <script src="js/footer.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+        
         <title>도서목록조회</title>
         <script>
 
@@ -81,20 +82,18 @@
                     $(location).attr("href", "/galdar_reg")
                 })
 
-                // 맨위로 버튼
-                $(window).scroll(function() {
-                    // top button controll
-                    if ($(this).scrollTop() > 500) {
-                        $('#topButton').fadeIn();
+                //맨위로 버튼
+                $( window ).scroll( function() {
+                    if ( $( this ).scrollTop() > 200 ) {
+                        $( '.jcm-top' ).fadeIn();
                     } else {
-                        $('#topButton').fadeOut();
+                        $( '.jcm-top' ).fadeOut();
                     }
-                });
-
-                $("#topButtonImg").click(function() {
-                    $('html, body').animate({scrollTop:0}, '300');
-                });
-	
+                    } );
+                    $( '.jcm-top' ).click( function() {
+                    $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+                    return false;
+                    } );
 
                 //더보기
                 moreList();
@@ -130,11 +129,14 @@
                 </div>
                 <ol class="list_load_box"> 
                 </ol>
-                <!-- <div id="topButton" style="cursor: pointer"><img src="img/img_top.jpg" id="topButtonImg"></div> -->
             </div>
         </div> 
         <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
+        <!-- <a href="#" class="jcm-top"><img src="img/img_top.jpg" style="margin-bottom: 24px;width: 25px;"></a> -->
+        <a href="#" class="jcm-top"><i class="icon icon-arrow-up"></i>⬆︎</a>
+
     </body>
+    
 </html>
 
 
