@@ -154,6 +154,12 @@ h4 {
     height: auto;
 }
 
+.sr_container3 {
+    display: none;
+    width: auto;
+    height: auto;
+}
+
 .sr_box {
     width: 90%;
     height: 80px;
@@ -221,12 +227,26 @@ h4 {
     line-height: 80px;
 }
 
+.sr_box3 {
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    background: #bbb;
+    text-align: center;
+    line-height: 80px;
+}
+
 .sr_box2 .sr_ipt {
     width: 500px;
     height: 40px;
     padding: 0 10px;
 }
 
+.sr_box3 .sr_ipt2 {
+    width: 500px;
+    height: 40px;
+    padding: 0 10px;
+}
 
 .btn_write {
     display: block;
@@ -280,6 +300,34 @@ h4 {
     margin-top: 12px;
     cursor: pointer;
 }
+
+.btn_regist4 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.btn_cancel7 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+
 
 .mr_wrapper {
     /* height: 620px; */

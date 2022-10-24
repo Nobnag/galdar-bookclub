@@ -72,7 +72,7 @@ app.post('/member', async(req,res) => {
 //API - 회원Email중복확인을 한다.
 app.post('/api/Duplicate', async (req,res) => {
     try {
-        //post사용시 비동기 await를 넣어줘야하나봄
+        //post사용시 비동기 await를 넣어줘야하나봄 아직 이해못함 ㅠㅠ
         const pool = await poolPromise;
         let result = await pool.request()
             .input('Email', sql.NVarChar, req.body.Email)
@@ -183,19 +183,13 @@ app.get('/api/getNickname', async function(req, res){
 
 
 //회원관리 페이지에서 회원의 정보를 인풋박스에 있는걸로 업데이트 한다.
-app.post('/api/MemberUpdate', async function(req, res){
+app.get('/api/MemberUpdate', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
-            .input('vi_MemberIdx', req.body.MemberIdx)
-            .input('vi_Email', req.body.Email)
-            .input('vi_Pw', req.body.Pw)
-            .input('vi_Nickname', req.body.Nickname)
-            .input('vi_Contact', req.body.Contact)
-            .input('vi_PremiumMemberYn', req.body.PremiumMemberYn)
-            .input('vi_AdminYn', req.body.AdminYn)
-            // .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
-            .execute('[sp_member_update]')
+            .input('vi_MemberIdx', req.query.MemberIdx)
+            .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
+            // .execute('[sp_member_update]')
         res.json(result);
     } catch(err) {
         res.status(500);
@@ -239,7 +233,7 @@ app.get('/book_detail',function(req,res){
     res.sendFile(__dirname + '/book_detail.html');
 });
 
-// API - 도서 상세 정보를 가져온다.
+// API - 도서 상세 정보를 가져온다. 
 app.get('/api/getBookDetail', async function(req, res){
     try {
         const pool = await poolPromise;
@@ -269,6 +263,20 @@ app.post('/api/submitSR', async function(req, res){
     }
 });
 
+// API(한줄평 수정시 내용 R)
+app.get('/api/getSRContent', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        const result = await pool.request()
+            .input('vi_SRWriter', req.query.sr_writer)
+            .query('select SRContent from SR where SRWriter = @vi_SRWriter')
+        res.json(result);           
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 // API(한줄평 R) - DB에서 한줄평을 불러온다.
 app.get('/api/getSR', async function(req,res){
     try {
@@ -282,6 +290,23 @@ app.get('/api/getSR', async function(req,res){
         res.send(err);
     }
 });
+
+// API(한줄평 U) - 수정한 한줄평을 DB로 보낸다.
+app.post('/api/updateSR', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            // .input('vi_SRIdx', req.query.sr_idx)
+            .input('vi_SRContent', req.body.sr_updated)
+            .input('vi_SRWriter', req.body.sr_writer)
+            .execute('[sp_sr_update_byUser]')
+        res.json(result)
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 
 // API(줄글 서평 C) - 작성한 서평을 DB에 보낸다.
 app.post('/api/submitMR', async function(req, res){

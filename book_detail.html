@@ -57,7 +57,7 @@
                     // var data = result.recordset[0];
                     for(var i = 0; i < result.recordset.length; i ++){
                         var row = result.recordset[i];
-                        var html = $('#sr_template').html().replace("{content}",row.SRContent).replace("{name}",row.SRWriter);
+                        var html = $('#sr_template').html().replace("{content}",'\"\&nbsp\&nbsp\&nbsp'+row.SRContent+'\&nbsp\&nbsp\&nbsp\"').replace("{name}","by  "+row.SRWriter).replace("{sr_idx}",row.SRIdx);
                         $('.sr_box .slider').append(html);
                         $('.sr_box .slider li:first-child').css({"opacity":"1"});
                     }
@@ -410,17 +410,73 @@
 
         // 2-3. 수정버튼 클릭
             $('.btn_update').click(function(){
+                // $('.sr_container').css('display','none');
+                // $('.sr_container3').css('display','block');
+                var sr_writer = loginObj.Nickname;
+                // console.log(sr_writer);
+                $.ajax({
+                    url: '/api/getSRContent'
+                    ,data: {
+                        sr_writer: sr_writer
+                    }
+                    ,type: 'get'
+                    ,datatype: 'json'
+                    ,success: function(result){
+                        if(result.recordset[0] == undefined){
+                            alert("작성한 한줄평이 없습니다.");
+                            return false;
+                        }
+                        $('.sr_container').css('display','none');
+                        $('.sr_container3').css('display','block');
+                        var value = result.recordset[0].SRContent;
+                        $('.sr_container3 .sr_ipt2').val(value);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                    }
+                });
+                
                 // 이전에 작성한 글이 있다면, 
                 // if()
                 // alert("이미 한줄평을 작성하였습니다.");
             });
+        // 2-3-1. 수정 - 등록클릭
+            $('.btn_regist4').click(function(){
+                // sr_idx = $('.sr_container .sr_idx').html();
+                var sr_updated = $('.sr_container3 .sr_ipt2').val();
+                var sr_writer = loginObj.Nickname;
+                
+                var params = {
+                    // sr_idx: sr_idx
+                    sr_updated: sr_updated
+                    ,sr_writer: sr_writer
+                }
+                
+                $.ajax({
+                    url: '/api/updateSR'
+                    ,data: params
+                    ,type: 'post'
+                    ,datatype: 'json'
+                    ,success: function(result){
+                        if(result.recordset[0].Result == "Success"){
+                            alert("수정이 완료되었습니다.");
+                        }
+                        location.reload();
+                    }
+                   ,error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                    }
+                });
 
+            });
+        
         // 2-4. 취소버튼 클릭
             $('.btn_cancel').click(function(){
         // 2-4-1. 창 전환
                 if(confirm("작성된 글은 보관되지 않습니다. 취소하시겠습니까?")){
                     $('.sr_ipt').val('');
                     $('.sr_container2').css('display','none');
+                    $('.sr_container3').css('display','none');
                     $('.sr_container').css('display','block');
                 }
                 else {
@@ -874,6 +930,7 @@
                 <li>
                     <strong>{content}</strong>
                     <em>{name}</em>
+                    <span class="sr_idx" style="display:none;">{sr_idx}</span>
                 </li>
             </div>
             <div class="sr_container">
@@ -895,6 +952,14 @@
                 </div>
                 <button class="button btn_cancel">취소</button>
                 <button class="button btn_regist">등록</button>
+            </div>
+
+            <div class="sr_container3">
+                <div class="sr_box3">
+                    <input type="text" class="ipt sr_ipt2">
+                </div>
+                <button class="button btn_cancel">취소</button>
+                <button class="button btn_regist4">등록</button>
             </div>
         </div>
 
