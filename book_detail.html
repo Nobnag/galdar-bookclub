@@ -42,12 +42,34 @@
             return sval;
         }
 
-        /* // 줄글 서평 ID생성
-        function getID(){
-            var mr_id = 0
-            mr_id = 'mr_id' + $('.td_span_no').html();
-            return mr_id;
-        } */
+        // 한줄평 조회 함수 선언
+        function getSR(){
+            var params = {
+                book_idx: getParam('book_idx')
+            };
+            $.ajax({
+                url: '/api/getSR',
+                data: params,
+                type: 'get',
+                datatype: 'json',
+                // async: false,
+                success: function(result){
+                    // var data = result.recordset[0];
+                    for(var i = 0; i < result.recordset.length; i ++){
+                        var row = result.recordset[i];
+                        var html = $('#sr_template').html().replace("{content}",row.SRContent).replace("{name}",row.SRWriter);
+                        $('.sr_box .slider').append(html);
+                        $('.sr_box .slider li:first-child').css({"opacity":"1"});
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    // alert("an error occured");
+                }
+            });
+        //  글쓰기 / 수정 버튼
+            
+        }
 
         // 줄글 서평 글 조회 함수 선언
         var mrPageNo = 1;
@@ -92,11 +114,12 @@
                     // alert("an error occured");
                 }
             });
+
+            
         }
-        
+
         // 북토크 대화록 조회 함수 선언
         function getBT(){
-            
             var params = {
                 book_idx: getParam('book_idx')
             };
@@ -127,8 +150,9 @@
                     alert("an error occured");
                 }
             });
+            
         }
-                
+ 
         // 댓글 삭제 함수
         function clickReplyX(){
             $('.btn_x').click(function(){
@@ -245,6 +269,38 @@
 
         // 0. 메인 화면
         $(document).ready(function(){
+            var loginObj = getLoginObj();
+
+            if(typeof(loginObj) != "undefined"){
+                $('.btn_write').show();
+                $('.btn_update').show();
+                $('.btn_write2').show();
+                $('.btn_update2').show();
+                $('input[name="re_password"]').hide();
+                $('input[name="re_name"]').val(loginObj.Nickname);
+                $('.ipt_mr_writer').val(loginObj.Nickname);
+            } else {
+                $('.btn_write').hide();
+                $('.btn_update').hide();
+                $('.btn_write2').hide();
+                $('.btn_update2').hide();
+                $('input[name="re_password"]').show();
+                $('input[name="re_name"]').removeAttr("readonly");
+            }
+            if(typeof(loginObj) != "undefined"){
+                if(typeof(loginObj.AdminYn) == "1"){
+                    // $('.btn_updateBook').show();
+                    $('.btn_write3').show();
+                } else {
+                    // $('.btn_updateBook').hide();
+                    $('.btn_write3').hide();
+                }
+            } else {
+                // $('.btn_updateBook').hide();
+                $('.btn_write3').hide();
+            }
+
+
         // 0-1. 도서 상세 정보 조회
         // 0-1-1. 변수 저장
             var params = {
@@ -286,26 +342,7 @@
             });
             
         // 0-2. 한줄평 조회
-            $.ajax({
-                url: '/api/getSR',
-                data: params,
-                type: 'get',
-                datatype: 'json',
-                // async: false,
-                success: function(result){
-                    // var data = result.recordset[0];
-                    for(var i = 0; i < result.recordset.length; i ++){
-                        var row = result.recordset[i];
-                        var html = $('#sr_template').html().replace("{content}",row.SRContent).replace("{name}",row.SRWriter);
-                        $('.sr_box .slider').append(html);
-                        $('.sr_box .slider li:first-child').css({"opacity":"1"});
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(errorThrown);
-                    // alert("an error occured");
-                }
-            });
+            getSR();
             
         // 0-3. 줄글 서평 조회
             getMR();
@@ -335,7 +372,7 @@
             // if()
         // 2-2-2. 값 가져오기
                 var book_idx = $('.book_info ul .book_idx span').html();
-                var sr_writer = '랜덤닉네임'
+                var sr_writer = loginObj.Nickname;
                 var sr_content = $('.sr_ipt').val();
         // 2-2-3. 미입력시 안내
                 if(sr_content == ""){
@@ -455,7 +492,35 @@
         // 3-4. 상세 조회
             $('tbody .title_span').click(function(){
                 var value = $(this).data("attr");
-                console.log(value);
+                // console.log(mr_idx);
+                $('.mr_container').hide()
+                $('.mr_container3').show();
+                $('.mr_container3 .detail_mr_idx').html(value);
+                var mr_idx = $('.mr_container3 .detail_mr_idx').html()
+                
+                var params2= {
+                    mr_idx: mr_idx
+                }
+                $.ajax({
+                    url: '/api/getMRdetail',
+                    data: params2,
+                    type: 'get',
+                    datatype: 'json',
+                    // async: false,
+                    success: function(result){
+                        // var data = result.recordset[0];
+                        // $('.mr_container').css('display','none');
+                        // $('.mr_container3').css('display','block');
+                        // for(var i = 0; i < result.recordset.length; i ++){
+                            var row = result.recordset[0];
+                            var html = $('.mr_container3').html().replace("{mr_writer}",row.MRWriter).replace("{mr_title}",row.MRTitle).replace("{mr_content}",row.MRContent).replace("{mr_writeDatetime}",row.MRWriteDatetime);
+                        // }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                        alert("an error occured");
+                    } 
+                });
             });
        /*  $('.td_title span').click(function(){
             var mr_idx = $(this).parent().data("attr");
@@ -489,6 +554,15 @@
             }); */
         // });
 
+            $('.btn_cancel3').click(function(){
+                // if(confirm("")){
+                    $('.mr_container3').css('display','none');
+                    $('.mr_container').css('display','block');
+                // }
+                // else {
+                    // return false;
+                // }
+            });
 
         // 4. 북토크 대화록
         // 4-1. 작성하기 클릭
@@ -789,7 +863,7 @@
                 </div>
             </div>
             <div class="btn_update_info">
-                <button class="button">정보 수정</button>
+                <button class="button btn_updateBook">정보 수정</button>
             </div>
         </div>
 
@@ -872,7 +946,7 @@
             <div class="mr_container2">
                 <div class="mr_board">
                     <h4>나의 서평</h4>
-                    <input type="text" placeholder="작성자" class="ipt ipt_mr_writer">
+                    <input type="text" placeholder="작성자" class="ipt ipt_mr_writer" readonly>
                     <input type="text" placeholder="제목" class="ipt ipt_mr_title">
                     <textarea name="maintext" class="ipt_mr_content" placeholder="* 서평을 입력해주세요(400~500자).&#13;&#10;* 책 한 권 당 서평은 한 번만 작성할 수 있습니다." rows="10"></textarea>
                 </div>
@@ -884,14 +958,14 @@
 
             <div class="mr_container3">
                 <div class="mr_board">
+                    <div class="detail detail_mr_idx">{mr_idx}</div>
                     <div class="detail detail_mr_writer">{mr_writer}</div>
                     <div class="detail detail_mr_writeDatetime">{mr_writeDatetime}</div>
                     <div class="detail detail_mr_title">{mr_title}</div>
                     <div class="detail detail_mr_content">{mr_content}</div>
                 </div>
                 <div class="mr_btn">
-                    <button class="button btn_cancel2">취소</button>
-                    <button class="button btn_regist2">등록</button>
+                    <button class="button btn_cancel3">목록</button>
                 </div>
             </div>
 
@@ -965,10 +1039,10 @@
                 <div class="box reply_write_box">    
                     <div class="box reply_input_box">
                         <div class="ipt ipt_reply_name">
-                            <input type="text" name="name" placeholder="작성자 명(20자 제한)">
+                            <input type="text" name="re_name" placeholder="작성자 명(20자 제한)" readonly>
                         </div>
                         <div class="ipt ipt_reply_pw">
-                            <input type="password" name="password" placeholder="비밀번호">
+                            <input type="password" name="re_password" placeholder="비밀번호">
                         </div>
                     </div>
                     <div class="box reply_textarea_box">

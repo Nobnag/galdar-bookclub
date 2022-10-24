@@ -477,7 +477,18 @@ h4 {
     width: 80%;
 }
 
-
+.btn_cancel3 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
+}
 
 
 .bt_wrapper {
