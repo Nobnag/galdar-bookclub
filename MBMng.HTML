@@ -18,21 +18,7 @@
             <h1>
                 회원정보
             </h1>
-<!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
-            <template id="template_member_info_row">
-                <tr data-memberidx="{MemberIdx}">
-                    <td>{MemberIdx}</td>
-                    <td>{Email}</td>
-                    <td>{Pw}</td>
-                    <td>{Nickname}</td>
-                    <td>{Contact}</td>
-                    <td>{JoinDatetime}</td>
-                    <td>{PremiumMemberYn}</td>
-                    <td>{AdminYn}</td>
-                </tr>
-            </template>
-            <!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
-            <table class="mamber_info">
+            <table class="table_mamber_info">
                 <thead>
                     <tr>
                         <th>회원번호</th>
@@ -48,7 +34,7 @@
                 <tbody>
                     <!-- 템플릿넣을자리 -->
                     <!-- 노가 하던 방식 
-                        <tbody class="mamber_info" style="display:none">
+                        <tbody class="table_mamber_info" style="display:none">
                         <tr>
                             <td>{MemberIdx}</td>
                             <td>{Email}</td>
@@ -62,6 +48,20 @@
                         </tbody> -->
                 </tbody>
             </table>
+            <!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
+            <template id="template_member_info_row">
+                <tr data-memberidx="{MemberIdx}" id="member_info_tr">
+                    <td>{MemberIdx}</td>
+                    <td>{Email}</td>
+                    <td>{Pw}</td>
+                    <td>{Nickname}</td>
+                    <td>{Contact}</td>
+                    <td>{JoinDatetime}</td>
+                    <td>{PremiumMemberYn}</td>
+                    <td>{AdminYn}</td>
+                </tr>
+            </template>
+            <!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
         <div class="btn_container">
             <button  class="btn_member_update">회원정보수정</button>
             <button class="btn_member_delete">회원탈퇴</button>
@@ -112,30 +112,30 @@
                 success: function(result){
                     for(var i = 0; i < result.recordset.length; i ++){
                         var row = result.recordset[i];
-                        // var html = $('.mamber_info').html()
+                        // var html = $('.table_mamber_info').html()
                         // .replace("{MemberIdx}",row.MemberIdx)
                         var html = $("#template_member_info_row").html()
                         //모든 {MemberIdx}를 바꾼다는 뜻 ie까지 연동
                             .replace(/{MemberIdx}/gi, row.MemberIdx)
-                            .replace("{Email}",row.Email)
-                            .replace("{Pw}",row.Pw)
-                            .replace("{Nickname}",row.Nickname)
-                            .replace("{Contact}",row.Contact)
-                            .replace("{JoinDatetime}",row.JoinDatetime)
-                            .replace("{PremiumMemberYn}",row.PremiumMemberYn)
-                            .replace("{AdminYn}",row.AdminYn);
+                            .replace(/{Email}/gi,row.Email)
+                            .replace(/{Pw}/gi,row.Pw)
+                            .replace(/{Nickname}/gi,row.Nickname)
+                            .replace(/{Contact}/gi,row.Contact)
+                            .replace(/{JoinDatetime}/gi,row.JoinDatetime)
+                            .replace(/{PremiumMemberYn}/gi,row.PremiumMemberYn)
+                            .replace(/{AdminYn}/gi,row.AdminYn);
                         $('.info_table table tbody').append(html);
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(errorThrown);
-                    alert("an error occured");
+                    alert("error");
                 }
             });
         });
-        //테이블의 특정 인원을 클릭했을때 특정인원의 
-        //닉네임과 작성한 한줄글 한줄평을 추가한다 html형식으로
-        $(document).on("click",".mamber_info tbody tr",function(){
+        //테이블의 특정 tr을 클릭했을때 특정인원 닉네임,한줄평,서평 불러오기
+        // var flag = 0;//플러깅하기위한 값
+        $(document).on("click",".table_mamber_info tbody tr",function(){
             var MemberIdx = $(this).data("memberidx");
             //해당 줄의 닉네임을 가저온다
             $.ajax({
@@ -166,12 +166,95 @@
                             .replace("{MRBookTitle}",srtp.MRBookTitle)
                             .replace("{MRContent}",srtp.MRContent)
                             $('#rp_wrapper .MRContent .MR').append(html);
-                        };
+                        };  
                 },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    alert("error");
+                }
             });
-            //해당 라인을 클릭했을때 해당 라인을 input타입으로 변환 수정할수있게
-            
         });
+        //해당tr 를 더블클릭해 각컬럼을 인풋박스로 만듬
+        $(document).on("dblclick",".table_mamber_info tbody tr",function(){
+            //플래깅 한다. 방법1*****
+            //선택자를 만들때 사용하는 방법으로 매소드 밖에다가 플러그를 설정.
+            //if문 사용해서 인풋박스 반복바꿈현상 멈추기
+            var count = $(this).find("td").length
+            //테이블 선택자를 사용해 각 로우를 인풋박스로 바꿔준다.
+                for(var i = 1; i < count;i ++){
+                    if(i == 5){
+                    }
+                    else{
+                    var tt = $(this).find("td:eq("+i+")").text()
+                    $(this).find("td:eq("+i+")").replaceWith(
+                    '<td><input type="text"></td>'
+                    );
+                    $(this).find('td:eq('+i+') input').val(tt);
+                    }
+                };
+                return false;
+        });
+        //회원관리 페이지에서 해당 라인을 클릭시 불러온다.
+app.get('/api/MemberUpdate', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MemberIdx', req.query.MemberIdx)
+            .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
+            // .execute('[sp_member_update]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+        $(document).on("click",".btn_member_update",function(){
+            var trclick = $('.table_mamber_info tbody tr')
+            var Email = $('.table_mamber_info tbody tr td:eq('+1+') input').val()
+            // var Pw = $('.table_mamber_info tbody '+trclick+' td:eq('+2+') input').val()
+            // var Nickname = $('.table_mamber_info tbody '+trclick+' td:eq('+3+') input').val()
+            // var Contact = $('.table_mamber_info tbody '+trclick+' td:eq('+4+') input').val()
+            // var PremiumMemberYn = $('.table_mamber_info tbody '+trclick+' td:eq('+6+') input').val()
+            // var AdminYn = $('.table_mamber_info tbody '+trclick+' td:eq('+7+') input').val()
+            alert(Email)
+            // if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "" && PremiumMemberYn !== ""&& Contact !== ""){
+            // $.ajax({
+            //     url: '/api/MemberUpdate',
+            //     type: 'get',
+            //     datatype: 'json',
+            //     data : {
+            //         MemberIdx:MemberIdx
+            //     },
+            //     success: function(result){
+                        
+            //     },
+            //     error: function(jqXHR, textStatus, errorThrown){
+            //         console.log(errorThrown);
+            //         alert("error");
+            //     }
+            // });
+            // }
+        });
+        // ****var flag = 0;***
+        // $(".table_mamber_info tbody").on("click", "tr", function(){
+            // //플래깅 한다. 방법1*****
+            // // 선택자를 만들때 사용하는 방법으로 매소드 밖에다가 플러그를
+            // if(flag == 0) {
+            //     flag = 1;
+            //     console.log(flag)
+            //     return false;
+            // } else {
+            //     flag = 0;
+            //     console.log(flag)
+            //     return false;
+            // }*****
+            // //플래깅 한다. 방법2
+            // if($(this)[0].className == "on"){
+            //     $(this).removeClass("on");
+            // }
+            // else {
+            //     $(this).addClass("on");
+            // }
     </script>
 </body>
 </html>

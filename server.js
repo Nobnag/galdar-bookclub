@@ -181,6 +181,22 @@ app.get('/api/getNickname', async function(req, res){
     }
 });
 
+
+//회원관리 페이지에서 회원의 정보를 인풋박스에 있는걸로 업데이트 한다.
+app.get('/api/MemberUpdate', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MemberIdx', req.query.MemberIdx)
+            .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
+            // .execute('[sp_member_update]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
 app.get('/', function(req,res) {
     res.sendFile(__dirname + "/galdar_list.html")
 });
