@@ -212,6 +212,7 @@ BigInt.prototype.toJSON = function() { return this.toString(); };
 
 
 // 정민
+
 app.get('/book_detail',function(req,res){
     res.sendFile(__dirname + '/book_detail.html');
 });
@@ -260,7 +261,6 @@ app.get('/api/getSR', async function(req,res){
     }
 });
 
-
 // API(줄글 서평 C) - 작성한 서평을 DB에 보낸다.
 app.post('/api/submitMR', async function(req, res){
     try {
@@ -308,7 +308,6 @@ app.get('/api/getMRdetail', async function(req,res){
     }
 });
 
-
 // API(북토크 대화록 C) - 작성한 대화록을 DB에 보낸다.
 app.post('/api/submitBT', async function(req, res){
     try {
@@ -325,7 +324,6 @@ app.post('/api/submitBT', async function(req, res){
     }
 });
 
-
 // API(북토크 대화록 R) - DB에서 대화록을 불러온다.
 app.get('/api/getBT', async function(req, res){
     try {
@@ -339,6 +337,23 @@ app.get('/api/getBT', async function(req, res){
         res.send(err);
     }
 });
+
+// API(북토크 대화록 U) - DB의 데이터를 수정한다.
+app.post('/api/updateBT', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.body.book_idx)
+            .input('vi_BtRecordWriter', req.body.bt_writer)
+            .input('vi_BtRecordContent', req.body.bt_updated)
+            .execute('[sp_btr_update_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 
 // API(북토크 대화록 D) - DB에서 대화록을 삭제한다.
 app.post('/api/deleteBT', async function(req, res){
@@ -354,7 +369,6 @@ app.post('/api/deleteBT', async function(req, res){
         res.send(err);
     }
 });
-
 
 // API(댓글 C) - 작성 댓글을 DB에 보낸다.
 app.post('/api/submitReply', async function(req, res){
