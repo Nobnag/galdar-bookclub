@@ -72,7 +72,7 @@ app.post('/member', async(req,res) => {
 //API - 회원Email중복확인을 한다.
 app.post('/api/Duplicate', async (req,res) => {
     try {
-        //post사용시 비동기 await를 넣어줘야하나봄 아직 이해못함 ㅠㅠ
+        //post사용시 비동기 await를 넣어줘야하나봄
         const pool = await poolPromise;
         let result = await pool.request()
             .input('Email', sql.NVarChar, req.body.Email)
@@ -183,13 +183,19 @@ app.get('/api/getNickname', async function(req, res){
 
 
 //회원관리 페이지에서 회원의 정보를 인풋박스에 있는걸로 업데이트 한다.
-app.get('/api/MemberUpdate', async function(req, res){
+app.post('/api/MemberUpdate', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
-            .input('vi_MemberIdx', req.query.MemberIdx)
-            .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
-            // .execute('[sp_member_update]')
+            .input('vi_MemberIdx', req.body.MemberIdx)
+            .input('vi_Email', req.body.Email)
+            .input('vi_Pw', req.body.Pw)
+            .input('vi_Nickname', req.body.Nickname)
+            .input('vi_Contact', req.body.Contact)
+            .input('vi_PremiumMemberYn', req.body.PremiumMemberYn)
+            .input('vi_AdminYn', req.body.AdminYn)
+            // .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
+            .execute('[sp_member_update]')
         res.json(result);
     } catch(err) {
         res.status(500);

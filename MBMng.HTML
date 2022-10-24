@@ -194,46 +194,43 @@
                 };
                 return false;
         });
-        //회원관리 페이지에서 해당 라인을 클릭시 불러온다.
-app.get('/api/MemberUpdate', async function(req, res){
-    try {
-        const pool = await poolPromise;
-        let result = await pool.request()
-            .input('vi_MemberIdx', req.query.MemberIdx)
-            .query('SELECT MemberIdx,Nickname FROM Member WHERE MemberIdx = @MemberIdx')
-            // .execute('[sp_member_update]')
-        res.json(result);
-    } catch(err) {
-        res.status(500);
-        res.send(err)
-    }
-});
+
         $(document).on("click",".btn_member_update",function(){
-            var trclick = $('.table_mamber_info tbody tr')
-            var Email = $('.table_mamber_info tbody tr td:eq('+1+') input').val()
-            // var Pw = $('.table_mamber_info tbody '+trclick+' td:eq('+2+') input').val()
-            // var Nickname = $('.table_mamber_info tbody '+trclick+' td:eq('+3+') input').val()
-            // var Contact = $('.table_mamber_info tbody '+trclick+' td:eq('+4+') input').val()
-            // var PremiumMemberYn = $('.table_mamber_info tbody '+trclick+' td:eq('+6+') input').val()
-            // var AdminYn = $('.table_mamber_info tbody '+trclick+' td:eq('+7+') input').val()
-            alert(Email)
-            // if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "" && PremiumMemberYn !== ""&& Contact !== ""){
-            // $.ajax({
-            //     url: '/api/MemberUpdate',
-            //     type: 'get',
-            //     datatype: 'json',
-            //     data : {
-            //         MemberIdx:MemberIdx
-            //     },
-            //     success: function(result){
-                        
-            //     },
-            //     error: function(jqXHR, textStatus, errorThrown){
-            //         console.log(errorThrown);
-            //         alert("error");
-            //     }
-            // });
-            // }
+            var count = $('.table_mamber_info tbody tr').length
+            for(var i = 0; i < count;i ++){
+                var MemberIdx = $('.table_mamber_info tbody tr:eq('+i+') td:eq(0)').text();
+                var Email = $('.table_mamber_info tbody tr:eq('+i+') td:eq(1) input').val();
+                var Pw = $('.table_mamber_info tbody tr:eq('+i+') td:eq(2) input').val();
+                var Nickname = $('.table_mamber_info tbody tr:eq('+i+') td:eq(3) input').val();
+                var Contact = $('.table_mamber_info tbody tr:eq('+i+') td:eq(4) input').val();
+                var PremiumMemberYn = $('.table_mamber_info tbody tr:eq('+i+') td:eq(6) input').val();
+                var AdminYn = $('.table_mamber_info tbody tr:eq('+i+') td:eq(7) input').val();
+                if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "" && PremiumMemberYn !== ""&& AdminYn !== ""){
+                    var data = {
+                        MemberIdx:MemberIdx
+                        ,Email: Email
+                        ,Pw: Pw
+                        ,Nickname: Nickname
+                        ,Contact: Contact
+                        ,PremiumMemberYn:PremiumMemberYn
+                        ,AdminYn,AdminYn
+                    }
+                    $.ajax({
+                        url: '/api/MemberUpdate',
+                        type: 'post',
+                        datatype: 'json',
+                        data : data,
+                        success: function(result){
+                            location.href = "/mbmng"
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            console.log(errorThrown);
+                            // alert("error");
+                        }
+                    });
+                }
+            }
+            alert("회원 정보 수정이 완료되었습니다.")
         });
         // ****var flag = 0;***
         // $(".table_mamber_info tbody").on("click", "tr", function(){
