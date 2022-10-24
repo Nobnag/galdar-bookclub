@@ -130,7 +130,7 @@ a.jcm-top {
     color: #ffffff;
     text-align: center;
     width: 45px;
-    height: 45px;
+    height: 41px;
     font-size: 40px;
     /* background-color: rgba(50,50,50,0.5); */
     background-color:#323232; opacity:0.5; filter:alpha(opacity=50); /*ie8 호환을 위한코드 위와 동일한 것임 호환필요없으면 한줄로 rgba적으면됨*/

@@ -8,7 +8,6 @@
         <link rel="stylesheet" type="text/css" href="css/footer.css" />
         <script src="js/gnb.js"></script>
         <script src="js/footer.js"></script>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
         
         <title>도서목록조회</title>
         <script>
@@ -28,9 +27,9 @@
                     },
                     success:function(data){
                         console.log(data);
-                        if(data.recordset.length < ListCnt ){
-                            $(".button_decorate").remove();
-                        }else{
+                        // if(data.recordset.length < ListCnt ){
+                        //     $(".button_decorate").remove();
+                        // }else{
                             var addListHtml="";
                             if(data.recordset.length>0){
                                 for(var i=0;i<data.recordset.length;i++){
@@ -60,10 +59,11 @@
                                 });
                             }
                         }
-                    }
+                    // }
                 })
             }
             $(document).ready(function(){
+
                 //관리자로그인 글쓰기 버튼
                 var html ='';
                 var list_write= getLoginObj();
@@ -100,6 +100,8 @@
                 $("#js-btn-wrap .button_decorate").on("click", function () {
                     moreList();
                 });
+
+                
             })
             
         </script>
@@ -134,9 +136,7 @@
         <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
         <!-- <a href="#" class="jcm-top"><img src="img/img_top.jpg" style="margin-bottom: 24px;width: 25px;"></a> -->
         <a href="#" class="jcm-top"><i class="icon icon-arrow-up"></i>⬆︎</a>
-
-    </body>
-    
+    </body>  
 </html>
 
 

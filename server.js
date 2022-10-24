@@ -444,10 +444,10 @@ app.post('/galdar_list', async function(req,res){
     try {
         let query = "";
         if(typeof(req.body.StartBookIdx) == "undefined"){
-            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg, BookBtDate FROM BOOK ORDER BY BookIdx DESC';
+            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg, CONVERT(CHAR(10), BookBtDate, 23) as BookBtDate FROM BOOK ORDER BY BookIdx DESC';
         }
         else{
-            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg, BookBtDate FROM BOOK WHERE BookIdx <= '+req.body.StartBookIdx+' ORDER BY BookIdx DESC';
+            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg, CONVERT(CHAR(10), BookBtDate, 23) as BookBtDate FROM BOOK WHERE BookIdx <= '+req.body.StartBookIdx+' ORDER BY BookIdx DESC';
         }
 
         const pool = await poolPromise;
