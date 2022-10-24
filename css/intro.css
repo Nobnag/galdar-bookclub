@@ -1,0 +1,73 @@
+body {
+    font-family: sans-serif;
+}
+
+#wrap {
+    font-size: 16px;
+    word-break: break-word;
+    margin: 0 auto;
+    width: 60%;
+    min-width: 600px;
+}
+
+.container {
+    padding: 20% 3%;
+}
+/* 
+details {
+    display: block;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: .5em .5em 0;
+    margin: 25px 0;
+    font-size: 16px;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    padding: .5em;
+    border-radius: 5px;
+    background-color: rgb(255, 203, 144);
+}
+
+details[open] {
+    padding: .5em;
+}
+
+details[open] summary  {
+    margin-bottom: .5em;
+    background-color: rgb(255, 203, 144);
+    border-bottom: 1px solid;
+    padding: .5em;
+} */
+
+details {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: .5em .5em 0;
+    margin-bottom: 1em;
+}
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+    cursor: pointer;
+}
+details[open] {
+    padding: .5em;
+}
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+    background-color: #fff0c0;
+    border-radius: 10px 10px 0 0;
+}
+/* summary::marker {
+    content: "→"
+}
+
+details[open] summary::marker {
+    content: "↓"
+} */
