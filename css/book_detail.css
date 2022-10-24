@@ -682,29 +682,39 @@ h4 {
     background: #b9b9b9;
     display: flex;
     justify-content:space-evenly;
+    font-size: 12px;
+    line-height: 12px;
 }
 
 .reply_list .reply {
     display: inline-block;
-    padding: 8px;
+    padding: 5px;
     margin-bottom: 4px;
 }
 
 .reply_writer {
     width: 15%;
-    border: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    line-height: 22px;
 }
 
 .reply_content {
     width: 80%;
-    border: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    line-height: 20px;
+}
+
+.reply_content span {
+    vertical-align: middle;
+    display: inline;
 }
 
 .reply_content .reply_datetime {
     float: right;
-    font-size: 12px;
+    font-size: 10px;
     color: #5a5a5a;
-    line-height: 16px
 }
 
 .reply_content .reply_datetime span {
@@ -712,8 +722,8 @@ h4 {
 }
 
 .reply_content .reply_datetime .btn_x {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border: 0;
     background: #8d8d8d;
     font-size: 8px;
