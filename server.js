@@ -222,8 +222,12 @@ app.get('/intro',function(req,res) {
 //     res.sendFile(__dirname + "/galdarBook_list.html")
 // });
 //회원관리페이지
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+  }
+  
 app.get('/MBMng',function(req,res) {
-    res.sendFile(__dirname + "/MBMng.html")
+    res.sendFile(__dirname + "client/build","/MBMng.html")
 });
 
 BigInt.prototype.toJSON = function() { return this.toString(); };
