@@ -48,7 +48,7 @@
                         </tbody> -->
                 </tbody>
             </table>
-            <!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
+            <!-- (s)멘토님이 알려주신방식 템플릿 테크 사용 -->
             <template id="template_member_info_row">
                 <tr data-memberidx="{MemberIdx}" id="member_info_tr">
                     <td class="td_memberIdx">{MemberIdx}</td>
@@ -61,7 +61,7 @@
                     <td class="td_adminYn">{AdminYn}</td>
                 </tr>
             </template>
-            <!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
+            <!-- (e)멘토님이 알려주신방식 템플릿 테크 사용 -->
         <div class="btn_container">
             <button  class="btn_member_update">회원정보수정</button>
             <button class="btn_member_delete">회원탈퇴</button>
@@ -73,7 +73,7 @@
     </div>
 <!-- 넣을 템플릿 -->
     <template id="template_Nickname">
-    <h1>{Nickname}</h1>
+    <h1 data-memberidx="{MemberIdx}">{Nickname}</h1>
     <div class="member_use_contents">
         <div class="SRContent">
             <h2>작성한 한줄평</h2>
@@ -133,11 +133,11 @@
                 }
             });
         });
-        //테이블의 특정 tr을 클릭했을때 특정인원 닉네임,한줄평,서평 불러오기
         // var flag = 0;//플러깅하기위한 값
+        //테이블의 특정 tr을 클릭했을때 특정인원 닉네임,한줄평,서평 불러오기
         $(document).on("click",".table_mamber_info tbody tr",function(){
-            var MemberIdx = $(this).data("memberidx");
-            // document.MemberIdx.style.background = 'red'
+            // $(this).
+            var MemberIdx = $(this).data("memberidx");background = 'red'
             //해당 줄의 닉네임을 가저온다
             $.ajax({
                 url: '/api/getNickname',
@@ -150,6 +150,7 @@
                         var nt = result.recordset[0]
                         //작성자의 닉네임을 불러온다
                         var html = $("#template_Nickname").html()
+                        .replace(/{MemberIdx}/gi, nt.MemberIdx)
                         .replace("{Nickname}",nt.Nickname)
                         $('#rp_wrapper').html(html);
                         //작성한 한줄평을 불러온다
@@ -201,7 +202,7 @@
                 };
                 return false;
         });
-
+        //회원 정보 수정하기 버튼을 클릭했을때 각인풋박스에있는걸 불러와서 수정한다.
         $(document).on("click",".btn_member_update",function(){
             //input 박스가 있는지 체크해서, input박스가 있을 때만 실행한다.
             if($('.table_mamber_info tbody tr input').length == 0){
@@ -404,26 +405,52 @@
             */
             alert("회원 정보 수정이 완료되었습니다.")
         });
-        // ****var flag = 0;***
-        // $(".table_mamber_info tbody").on("click", "tr", function(){
-            // //플래깅 한다. 방법1*****
-            // // 선택자를 만들때 사용하는 방법으로 매소드 밖에다가 플러그를
-            // if(flag == 0) {
-            //     flag = 1;
-            //     console.log(flag)
-            //     return false;
-            // } else {
-            //     flag = 0;
-            //     console.log(flag)
-            //     return false;
-            // }*****
-            // //플래깅 한다. 방법2
-            // if($(this)[0].className == "on"){
-            //     $(this).removeClass("on");
-            // }
-            // else {
-            //     $(this).addClass("on");
-            // }
+        /* ****var flag = 0;***
+        $(".table_mamber_info tbody").on("click", "tr", function(){
+            //플래깅 한다. 방법1*****
+            // 선택자를 만들때 사용하는 방법으로 매소드 밖에다가 플러그를
+            if(flag == 0) {
+                flag = 1;
+                console.log(flag)
+                return false;
+            } else {
+                flag = 0;
+                console.log(flag)
+                return false;
+            }*****
+            //플래깅 한다. 방법2
+            if($(this)[0].className == "on"){
+                $(this).removeClass("on");
+            }
+            else {
+                $(this).addClass("on");
+            }*/
+        //회원탈퇴 버튼을 눌럿을때 선택되어있는 h1의 MemberIdx값의 회원을 삭제한다.
+        $(document).on("click",".btn_member_delete",function(){
+            var MemberIdx = $("#rp_wrapper h1").data("memberidx");
+            if(MemberIdx==undefined){
+                alert("삭제할 회원을 선택해주세요.")
+                return false;
+            }
+            else{
+                $.ajax({
+                        url: '/api/Memberdelete',
+                        type: 'post',
+                        datatype: 'json',
+                        data : {
+                            MemberIdx:MemberIdx
+                        },
+                        success: function(result){
+                            alert("회원정보가 삭제되었습니다.")
+                            location.href = "/MBMng"
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            console.log(errorThrown);
+                            alert("error");
+                        }
+                    });
+            }
+        });
     </script>
 </body>
 </html>

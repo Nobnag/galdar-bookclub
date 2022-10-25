@@ -205,6 +205,20 @@ app.post('/api/MemberUpdate', async function(req, res){
     }
 });
 
+//회원관리 페이지에서 회원의 정보를 삭제 한다.
+app.post('/api/Memberdelete', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MemberIdx', req.body.MemberIdx)
+            .execute('[sp_member_delete]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
 app.get('/', function(req,res) {
     res.sendFile(__dirname + "/galdar_list.html")
 });
