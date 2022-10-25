@@ -227,7 +227,7 @@ if (process.env.NODE_ENV === "production") {
   }
   
 app.get('/MBMng',function(req,res) {
-    res.sendFile(__dirname + "client/build","/MBMng.html")
+    res.sendFile(__dirname , "client/build","/MBMng.html")
 });
 
 BigInt.prototype.toJSON = function() { return this.toString(); };
