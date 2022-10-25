@@ -229,7 +229,7 @@
                 /* (s) 값을 가져온다. */
                 var MemberIdx = $(selectedRow).find('td.td_memberIdx').text();
                 var Email = $(selectedRow).find('td.td_email input').val();
-                var Pw = $(selectedRow).find('td.td_pw input').val();
+                // var Pw = $(selectedRow).find('td.td_pw input').val();
                 var Nickname = $(selectedRow).find('td.td_nickname input').val();
                 var Contact = $(selectedRow).find('td.td_contact input').val();
                 var PremiumMemberYn = $(selectedRow).find('td.td_premiumMemberYn input').val();
@@ -247,16 +247,11 @@
                         $(selectedRow).find('td.td_email input"]').focus();
                         return false;
                 }
-                if(Pw==""||Pw==undefined) {
-                        alert("비밀번호를 입력하세요");                        
-                        $(selectedRow).find('td.td_pw input').focus();
-                        return false;
-                }
-                if(idRegExp.test(Pw) == false){
-                        alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
-                        $(selectedRow).find('td.td_pw input').focus();
-                        return false;
-                }
+                // if(Pw==""||Pw==undefined) {
+                //         alert("비밀번호를 입력하세요");                        
+                //         $(selectedRow).find('td.td_pw input').focus();
+                //         return false;
+                // }
                 if(Nickname==""||Nickname==undefined) {
                         alert("닉네임을 입력하세요.");                        
                         $(selectedRow).find('td.td_nickname input').focus();
@@ -292,7 +287,7 @@
                 var data = {
                     MemberIdx:MemberIdx
                     ,Email: Email
-                    ,Pw: Pw
+                    // ,Pw: Pw
                     ,Nickname: Nickname
                     ,Contact: Contact
                     ,PremiumMemberYn:PremiumMemberYn
@@ -304,7 +299,7 @@
                     datatype: 'json',
                     data : data,
                     success: function(result){
-                        location.href = "/mbmng"
+                        location.href = "/MBMng"
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         console.log(errorThrown);
