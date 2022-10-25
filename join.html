@@ -62,7 +62,7 @@
                             return false
                         }
                         if(result.result == "true"){
-                            alert('가능!!!!!!!!!')
+                            alert('회원가입 가능한 이메일입니다. 회원가입을 진행해주세요.')
                         return false
                         }
                     },
@@ -173,6 +173,7 @@
                             // ,PremiumMemberYn: 0
                             // ,AdminYn:0
                         };
+                        //회원가입 버튼 클릭시 느려젔을때 여러번클릭해서 회원가입이 중복값으로 복수형태로 들어가게됨 클릭여러번 못하게 막거나 클릭했을때 버튼 비활성화 하는방법 여쭤보기
                         //email중복검사 해서 true값이 올때
                         $.ajax({
                             type: 'POST',

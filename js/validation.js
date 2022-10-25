@@ -5,3 +5,4 @@ var idRegExp = /^[a-zA-z0-9]{4,12}$/; //아이디 유효성검사
 var NicknameRegExp = /^[가-힣]{2,6}|[a-zA-Z]{2,10}|s[a-zA-Z]{2,10}$/; // "|"를 사용
 var ContactRegExp = /[0-9]/;
 var EmailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+var YnRegExp = /[0-1]/;

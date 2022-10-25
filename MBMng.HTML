@@ -51,14 +51,14 @@
             <!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
             <template id="template_member_info_row">
                 <tr data-memberidx="{MemberIdx}" id="member_info_tr">
-                    <td>{MemberIdx}</td>
-                    <td>{Email}</td>
-                    <td>{Pw}</td>
-                    <td>{Nickname}</td>
-                    <td>{Contact}</td>
-                    <td>{JoinDatetime}</td>
-                    <td>{PremiumMemberYn}</td>
-                    <td>{AdminYn}</td>
+                    <td class="td_memberIdx">{MemberIdx}</td>
+                    <td class="td_email">{Email}</td>
+                    <td class="td_pw">{Pw}</td>
+                    <td class="td_nickname">{Nickname}</td>
+                    <td class="td_contact">{Contact}</td>
+                    <td class="td_joinDatetime" >{JoinDatetime}</td>
+                    <td class="td_premiumMemberYn">{PremiumMemberYn}</td>
+                    <td class="td_adminYn">{AdminYn}</td>
                 </tr>
             </template>
             <!-- 멘토님이 알려주신방식 템플릿 테크 사용 -->
@@ -137,6 +137,7 @@
         // var flag = 0;//플러깅하기위한 값
         $(document).on("click",".table_mamber_info tbody tr",function(){
             var MemberIdx = $(this).data("memberidx");
+            // document.MemberIdx.style.background = 'red'
             //해당 줄의 닉네임을 가저온다
             $.ajax({
                 url: '/api/getNickname',
@@ -185,26 +186,201 @@
                     if(i == 5){
                     }
                     else{
-                    var tt = $(this).find("td:eq("+i+")").text()
+                        if($(this).find("td:eq("+i+") input").length == 0){
+                            var tt = $(this).find("td:eq("+i+")").text();
+                            $(this).find("td:eq("+i+")").html('<input type="text">');
+                            $(this).find('td:eq('+i+') input').val(tt);
+                        }
+                    /*
                     $(this).find("td:eq("+i+")").replaceWith(
                     '<td><input type="text"></td>'
                     );
                     $(this).find('td:eq('+i+') input').val(tt);
+                    */
                     }
                 };
                 return false;
         });
 
         $(document).on("click",".btn_member_update",function(){
-            var count = $('.table_mamber_info tbody tr').length
+            //input 박스가 있는지 체크해서, input박스가 있을 때만 실행한다.
+            if($('.table_mamber_info tbody tr input').length == 0){
+                alert("회원을 선택해 주세요.");
+                return false;
+            }
+
+            //선택한 줄을 가져온다.
+            var selectedRowList = [];
+            var count = $('.table_mamber_info tbody tr').length;
+            for(var i = 0; i < count; i ++){
+                //수정 대상인지 체크한다.
+                var inputCnt = $($('.table_mamber_info tbody tr')[i]).find("input").length;
+                if(inputCnt == 0){
+                    continue;
+                }
+
+                selectedRowList.push($('.table_mamber_info tbody tr')[i]);
+            }
+
+            //값을 가져와서 수정 처리한다.
+            for(var i = 0; i < selectedRowList.length; i ++){
+                var selectedRow = $(selectedRowList[i]);
+
+                /* (s) 값을 가져온다. */
+                var MemberIdx = $(selectedRow).find('td.td_memberIdx').text();
+                var Email = $(selectedRow).find('td.td_email input').val();
+                var Pw = $(selectedRow).find('td.td_pw input').val();
+                var Nickname = $(selectedRow).find('td.td_nickname input').val();
+                var Contact = $(selectedRow).find('td.td_contact input').val();
+                var PremiumMemberYn = $(selectedRow).find('td.td_premiumMemberYn input').val();
+                var AdminYn = $(selectedRow).find('td.td_adminYn input').val();
+                /* (e) 값을 가져온다. */
+
+                /* (s) validation 한다. */
+                if(Email==""||Email==undefined) {
+                        alert("이메일을 입력하세요");                        
+                        $(selectedRow).find('td.td_email input').focus();
+                        return false;
+                }
+                if(EmailRegExp.test(Email) == false){
+                        alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $(selectedRow).find('td.td_email input"]').focus();
+                        return false;
+                }
+                if(Pw==""||Pw==undefined) {
+                        alert("비밀번호를 입력하세요");                        
+                        $(selectedRow).find('td.td_pw input').focus();
+                        return false;
+                }
+                if(idRegExp.test(Pw) == false){
+                        alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $(selectedRow).find('td.td_pw input').focus();
+                        return false;
+                }
+                if(Nickname==""||Nickname==undefined) {
+                        alert("닉네임을 입력하세요.");                        
+                        $(selectedRow).find('td.td_nickname input').focus();
+                        return false;
+                }
+                if(NicknameRegExp.test(Nickname) == false){
+                        alert("닉네임은 한글 이름 2~6자 이내 영문 이름 2~10자 이내로 작성해주셈")
+                        $(selectedRow).find('td.td_nickname input').focus();
+                        return false;
+                }
+                if(Contact==""||Contact=="null") {
+                        alert("연락처를 입력하세요");                        
+                        $(selectedRow).find('td.td_contact input').focus();
+                        return false;
+                }
+                if(ContactRegExp.test(Contact)== false) {
+                        alert("연락처는 숫자만 사용가능합니다.");                        
+                        $(selectedRow).find('td.td_contact input').focus();
+                        return false;
+                }
+                if(YnRegExp.test(PremiumMemberYn)== false) {
+                        alert("0(일반)과 1(프리미엄)만 사용가능합니다.");                        
+                        $(selectedRow).find('td.td_premiumMemberYn input').focus();
+                        return false;
+                }if(YnRegExp.test(AdminYn)== false) {
+                        alert("0(일반)과 1(관리자)만 사용가능합니다.");                        
+                        $(selectedRow).find('td.td_adminYn input').focus();
+                        return false;
+                }
+                /* (e) validation 한다. */
+
+                /* (s) 회원 정보를 수정한다. */
+                var data = {
+                    MemberIdx:MemberIdx
+                    ,Email: Email
+                    ,Pw: Pw
+                    ,Nickname: Nickname
+                    ,Contact: Contact
+                    ,PremiumMemberYn:PremiumMemberYn
+                    ,AdminYn,AdminYn
+                }
+                $.ajax({
+                    url: '/api/MemberUpdate',
+                    type: 'post',
+                    datatype: 'json',
+                    data : data,
+                    success: function(result){
+                        location.href = "/mbmng"
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                        // alert("error");
+                    }
+                });
+                /* (e) 회원 정보를 수정한다. */
+            }
+          
+            /*
+            var count = $('.table_mamber_info tbody tr').length;
             for(var i = 0; i < count;i ++){
-                var MemberIdx = $('.table_mamber_info tbody tr:eq('+i+') td:eq(0)').text();
-                var Email = $('.table_mamber_info tbody tr:eq('+i+') td:eq(1) input').val();
-                var Pw = $('.table_mamber_info tbody tr:eq('+i+') td:eq(2) input').val();
-                var Nickname = $('.table_mamber_info tbody tr:eq('+i+') td:eq(3) input').val();
-                var Contact = $('.table_mamber_info tbody tr:eq('+i+') td:eq(4) input').val();
-                var PremiumMemberYn = $('.table_mamber_info tbody tr:eq('+i+') td:eq(6) input').val();
-                var AdminYn = $('.table_mamber_info tbody tr:eq('+i+') td:eq(7) input').val();
+                var MemberIdx = $('.table_mamber_info tbody tr:eq('+i+') td.td_memberIdx').text();
+                var ipt_check = $('.table_mamber_info tbody tr:eq('+i+') td.td_email input').val();
+                if(ipt_check == undefined){
+                    continue;
+                }
+                else{
+                    var Email = $('.table_mamber_info tbody tr:eq('+i+') td.td_email input').val();
+                    var Pw = $('.table_mamber_info tbody tr:eq('+i+') td.td_pw input').val();
+                    var Nickname = $('.table_mamber_info tbody tr:eq('+i+') td.td_nickname input').val();
+                    var Contact = $('.table_mamber_info tbody tr:eq('+i+') td.td_contact input').val();
+                    var PremiumMemberYn = $('.table_mamber_info tbody tr:eq('+i+') td.td_premiumMemberYn input').val();
+                    var AdminYn = $('.table_mamber_info tbody tr:eq('+i+') td.td_adminYn input').val();
+                }
+                
+                if(Email==""||Email==undefined) {
+                        alert("이메일을 입력하세요");                        
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_email input').focus();
+                        return false;
+                }
+                if(EmailRegExp.test(Email) == false){
+                        alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_email input"]').focus();
+                        return false;
+                }
+                if(Pw==""||Pw==undefined) {
+                        alert("비밀번호를 입력하세요");                        
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_pw input').focus();
+                        return false;
+                }
+                if(idRegExp.test(Pw) == false){
+                        alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_pw input').focus();
+                        return false;
+                }
+                if(Nickname==""||Nickname==undefined) {
+                        alert("닉네임을 입력하세요.");                        
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_nickname input').focus();
+                        return false;
+                }
+                if(NicknameRegExp.test(Nickname) == false){
+                        alert("닉네임은 한글 이름 2~6자 이내 영문 이름 2~10자 이내로 작성해주셈")
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_nickname input').focus();
+                        return false;
+                }
+                if(Contact==""||Contact=="null") {
+                        alert("연락처를 입력하세요");                        
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_contact input').focus();
+                        return false;
+                }
+                if(ContactRegExp.test(Contact)== false) {
+                        alert("연락처는 숫자만 사용가능합니다.");                        
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_contact input').focus();
+                        return false;
+                }
+                if(YnRegExp.test(PremiumMemberYn)== false) {
+                        alert("0(일반)과 1(프리미엄)만 사용가능합니다.");                        
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_premiumMemberYn input').focus();
+                        return false;
+                }if(YnRegExp.test(AdminYn)== false) {
+                        alert("0(일반)과 1(관리자)만 사용가능합니다.");                        
+                        $('.table_mamber_info tbody tr:eq('+i+') td.td_adminYn input').focus();
+                        return false;
+                }
+                
                 if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "" && PremiumMemberYn !== ""&& AdminYn !== ""){
                     var data = {
                         MemberIdx:MemberIdx
@@ -230,6 +406,7 @@
                     });
                 }
             }
+            */
             alert("회원 정보 수정이 완료되었습니다.")
         });
         // ****var flag = 0;***
