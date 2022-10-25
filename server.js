@@ -222,7 +222,7 @@ app.get('/intro',function(req,res) {
 //     res.sendFile(__dirname + "/galdarBook_list.html")
 // });
 //회원관리페이지
-app.post('/MBMng',function(req,res) {
+app.get('/MBMng',function(req,res) {
     res.sendFile(__dirname + "/MBMng.html")
 });
 
