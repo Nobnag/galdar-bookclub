@@ -104,6 +104,7 @@ app.post('/login_process', async(req,res) => {
             req.session.Nickname = result.recordset[0].Nickname;
             req.session.PremiumMemberYn = result.recordset[0].PremiumMemberYn;
             req.session.AdminYn = result.recordset[0].AdminYn;
+            req.session.Pw = result.recordset[0].Pw;
             res.json({"result":"true"});
         }
         else{
@@ -128,6 +129,7 @@ app.get('/api/getLoginInfo', function(req,res) {
                 Nickname: req.session.Nickname,
                 PremiumMemberYn: req.session.PremiumMemberYn,
                 AdminYn: req.session.AdminYn,
+                Pw: req.session.Pw
             });
         }
     } catch (err) {

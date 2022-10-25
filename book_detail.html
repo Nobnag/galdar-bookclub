@@ -277,19 +277,21 @@
                 $('.btn_update').show();
                 $('.btn_write2').show();
                 $('.btn_update2').show();
-                $('input[name="re_password"]').hide();
+                // $('input[name="re_password"]').hide();
                 $('input[name="re_name"]').val(loginObj.Nickname);
+                $('input[name="re_password"]').val(loginObj.Pw);
                 $('.ipt_mr_writer').val(loginObj.Nickname);
+                $('.ipt_bt_writer').val(loginObj.Nickname);
             } else {
                 $('.btn_write').hide();
                 $('.btn_update').hide();
                 $('.btn_write2').hide();
                 $('.btn_update2').hide();
-                $('input[name="re_password"]').show();
+                // $('input[name="re_password"]').show();
                 $('input[name="re_name"]').removeAttr("readonly");
             }
             if(typeof(loginObj) != "undefined"){
-                if(typeof(loginObj.AdminYn) == "1"){
+                if(loginObj.AdminYn == "1"){
                     // $('.btn_updateBook').show();
                     $('.btn_write3').show();
                 } else {
@@ -768,9 +770,9 @@
         // 5. 댓글 작성
             $('.btn_reg').click(function(){
                 var book_idx = $('.book_info ul .book_idx span').html();
-                var reply_name = $('input[name="name"]').val().trim();
-                var reply_pw = $('input[name="password"]').val().trim();
-                var reply_content = $('.ipt_reply_content').val().trim();
+                var reply_name = $('input[name="name"]').val();
+                var reply_pw = $('input[name="password"]').val();
+                var reply_content = $('.ipt_reply_content').val();
                 if(reply_name == "" || reply_pw == "" || reply_content == ""){
                     alert('이름과 비밀번호, 내용을 모두 입력하세요.');
                     return false;
@@ -875,7 +877,7 @@
             <h4>도서 정보</h4>
             <div class="container_book_contents">
                 <div class="book_img">
-                    <img src="{img}">
+                    <img src="/uploads/{img}">
                 </div>
                 <div class="book_info">
                     <ul>
@@ -1055,7 +1057,7 @@
             </div>
             <div class="bt_container2">
                 <div>
-                    <input type="text" placeholder="작성자" class="ipt ipt_bt_writer">
+                    <input type="text" placeholder="작성자" class="ipt ipt_bt_writer" readonly>
                     <textarea name="maintext" class="ipt_bt_content" placeholder="* 북토크 대화록을 붙여 넣어주세요." rows="10"></textarea>
                 </div>
                 <div class="bt_btn">
@@ -1113,7 +1115,7 @@
                             <input type="text" name="re_name" placeholder="작성자 명(20자 제한)" readonly>
                         </div>
                         <div class="ipt ipt_reply_pw">
-                            <input type="password" name="re_password" placeholder="비밀번호">
+                            <input type="password" name="re_password" placeholder="비밀번호" readonly>
                         </div>
                     </div>
                     <div class="box reply_textarea_box">
