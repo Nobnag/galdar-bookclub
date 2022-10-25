@@ -301,6 +301,19 @@ h4 {
     cursor: pointer;
 }
 
+.btn_delete5 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
 .btn_regist4 {
     display: block;
     width: 120px;
@@ -366,33 +379,23 @@ h4 {
     border: 1px solid;
 }
 
-.mr_wrapper .th_no {
-    border: 1px solid;
-    /* display: none; */
+.mr_wrapper .th, td {
+    border: 1px solid black;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .mr_wrapper .th_name {
-    border: 1px solid;
     width: 15%;
 }
 
 .mr_wrapper .th_title {
-    border: 1px solid;
     width: 65%;
 }
 
 .mr_wrapper .th_date {
-    border: 1px solid;
     width: 20%;
 }
-
-.mr_wrapper td {
-    border: 1px solid;
-}
-
-/* .mr_wrapper .td_no {
-    display: none;
-} */
 
 .mr_wrapper .td_title {
     padding-left: 20px;
@@ -402,11 +405,9 @@ h4 {
 .mr_wrapper .td_title span {
     cursor: pointer;
 }
-
 .mr_wrapper .td_title span:hover {
     text-decoration: underline;
 }
-
 .mr_wrapper a {
     display: inline-block;
 }
@@ -510,12 +511,59 @@ h4 {
 
 .mr_container3 .detail {
     border: 1px solid;
-    height: 20px;
-    width: 80%;   
-    margin-bottom: 12px;
-    padding: 5px 10px;
-    background: #a3a3a3;
+    height: auto;
+    width: 90%;   
+    margin: 0 auto 5px auto;
+    /* padding: 5px; */
+    background: #f2f2f2;
+    text-align: left;
+    font-size: 14px;
+}
 
+.cn12, .cn3 {
+    display: inline-block;
+    width: 45%;
+    min-width: 240px;
+}
+
+.cn {
+    display: inline-block;
+    width: 6vw;
+    min-width: 75px;
+    height: 24px;
+    background: #eaeaea;
+    padding: 5px 10px;
+    line-height: 24px;
+}
+
+.cn_user, .cn_dt {
+    display: inline-block;
+    width: 10vw;
+    min-width: 120px;
+    height: 24px;
+    padding: 5px 10px;
+    line-height: 24px;
+}
+
+
+.cn_ttl {
+    display: inline-block;
+    width: 75%;
+    height: 24px;
+    padding: 5px 10px;
+    line-height: 24px;
+}
+
+
+.mr_container3 .detail_mr_content {
+    height: auto;
+    min-height: 250px;
+}
+
+.cn_ct {
+    padding: 15px 10px;
+    min-height: 300px;
+    white-space: pre-wrap;
 }
 
 .mr_container3 textarea {

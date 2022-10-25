@@ -5,9 +5,9 @@ $(document).ready(function(){
     html += '<a href="/" class="gnb_home_link">';
     html += '<img src="https://storage.googleapis.com/cr-resource/image/27cf9b9af0f70922d4875dd55b58aa80/galdar/ba7fe1f4c0472f401cd86f6cfacbdca2.png" class="gnb_logo" ></a>';
     html += '<div class="gnb_content">';
-    html += '<a href="/" class="gnb_link">HOME</a>';
-    html += '<a href="intro" class="gnb_link">ABOUT</a>';
-    html += '<a href="/galdar_list" class="gnb_link">LIST</a>';
+    html += '<a href="/" class="gnb_link">홈</a>';
+    html += '<a href="intro" class="gnb_link">소개</a>';
+    html += '<a href="/galdar_list" class="gnb_link">선정도서</a>';
     html += '</div>';
     html += '<div class="gnb_right">';
     var loginObj = getLoginObj();

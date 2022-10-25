@@ -108,6 +108,7 @@
                         html += $('#tbody_template').html().replace("{no}",row.MRIdx).replace("{name}",row.MRWriter).replace("{data-attr}",row.MRIdx).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
                     }
                     $('.mr_board table tbody').html(html);
+
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(errorThrown);
@@ -405,7 +406,6 @@
 
         // 2-2-5. append
                 $('.slider').append("<li><strong>"+sr_content+"</strong><p><em>"+sr_writer+"</em></p></li>");
-
             });
 
         // 2-3. 수정버튼 클릭
@@ -442,7 +442,6 @@
             });
         // 2-3-1. 수정 - 등록클릭
             $('.btn_regist4').click(function(){
-                // sr_idx = $('.sr_container .sr_idx').html();
                 var sr_updated = $('.sr_container3 .sr_ipt2').val();
                 var sr_writer = loginObj.Nickname;
                 
@@ -470,6 +469,32 @@
 
             });
         
+        // 2-3-2. 수정 - 한줄평 삭제 클릭
+            $('.btn_delete5').click(function(){
+                var sr_content = $('.sr_container3 .sr_ipt2').val();
+                var sr_writer = loginObj.Nickname;
+                
+                var params = {
+                    sr_content: sr_content
+                    ,sr_writer: sr_writer
+                }
+                
+                $.ajax({
+                    url: '/api/deleteSR'
+                    ,data: params
+                    ,type: 'post'
+                    ,datatype: 'json'
+                    ,success: function(result){
+                        if(result.recordset[0].Result == "Success"){
+                            alert('삭제되었습니다.');
+                            location.reload();
+                        }
+                    }
+                    ,error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                    }
+                });
+            });
         // 2-4. 취소버튼 클릭
             $('.btn_cancel').click(function(){
         // 2-4-1. 창 전환
@@ -546,7 +571,7 @@
             });
                        
         // 3-4. 상세 조회
-            $('tbody .title_span').click(function(){
+            $(document).on('click', 'tbody .title_span', function(){
                 var value = $(this).data("attr");
                 // console.log(mr_idx);
                 $('.mr_container').hide()
@@ -570,6 +595,7 @@
                         // for(var i = 0; i < result.recordset.length; i ++){
                             var row = result.recordset[0];
                             var html = $('.mr_container3').html().replace("{mr_writer}",row.MRWriter).replace("{mr_title}",row.MRTitle).replace("{mr_content}",row.MRContent).replace("{mr_writeDatetime}",row.MRWriteDatetime);
+                            $('.mr_container3').html(html);
                         // }
                     },
                     error: function(jqXHR, textStatus, errorThrown){
@@ -578,46 +604,11 @@
                     } 
                 });
             });
-       /*  $('.td_title span').click(function(){
-            var mr_idx = $(this).parent().data("attr");
-            console.log(mr_idx);
-            $(this).parent().parent().parent().parent().parent().parent().parent().css('display','none');
-            $(this).parent().parent().parent().parent().parent().parent().parent().next().next().css('display','block');    */             
-
-            /* var params2= {
-                mr_idx: mr_idx
-            }
-
-            $.ajax({
-                url: '/api/getMRdetail',
-                data: params2,
-                type: 'get',
-                datatype: 'json',
-                // async: false,
-                success: function(result){
-                    // var data = result.recordset[0];
-                    // $('.mr_container').css('display','none');
-                    // $('.mr_container3').css('display','block');
-                    // for(var i = 0; i < result.recordset.length; i ++){
-                        var row = result.recordset[0];
-                        var html = $('.mr_container3').html().replace("{mr_writer}",row.MRWriter).replace("{mr_title}",row.MRTitle).replace("{mr_content}",row.MRContent).replace("{mr_writeDatetime}",row.MRWriteDatetime);
-                    // }
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(errorThrown);
-                    alert("an error occured");
-                } 
-            }); */
-        // });
-
-            $('.btn_cancel3').click(function(){
-                // if(confirm("")){
-                    $('.mr_container3').css('display','none');
-                    $('.mr_container').css('display','block');
-                // }
-                // else {
-                    // return false;
-                // }
+        // 3-4-1. 상세 조회 - 목록으로 돌아가기
+            $(document).on('click', '.btn_cancel3', function(){
+                // $('.mr_container3').css('display','none');
+                // $('.mr_container').css('display','block');
+                location.reload();
             });
 
         // 4. 북토크 대화록
@@ -960,6 +951,7 @@
                 </div>
                 <button class="button btn_cancel">취소</button>
                 <button class="button btn_regist4">등록</button>
+                <button class="button btn_delete5">한줄평 삭제</button>
             </div>
         </div>
 
@@ -971,7 +963,7 @@
                     <!-- 테이블 -->
                     <template id="tbody_template" style="display:none";>
                         <tr>
-                            <td>
+                            <td style="display:none;">
                                 <span class="td_span_no">{no}</span>
                             </td>
                             <td>
@@ -989,7 +981,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="th th_no">no.</th>
+                                <th class="th th_no" style="display:none;">no.</th>
                                 <th class="th th_name">작성자</th>
                                 <th class="th th_title">제목</th>
                                 <th class="th th_date">작성일자</th>
@@ -1023,11 +1015,25 @@
 
             <div class="mr_container3">
                 <div class="mr_board">
-                    <div class="detail detail_mr_idx">{mr_idx}</div>
-                    <div class="detail detail_mr_writer">{mr_writer}</div>
-                    <div class="detail detail_mr_writeDatetime">{mr_writeDatetime}</div>
-                    <div class="detail detail_mr_title">{mr_title}</div>
-                    <div class="detail detail_mr_content">{mr_content}</div>
+                    <div class="detail detail_mr_idx" style="display:none;">{mr_idx}</div>
+                    <div class="detail detail_mr_writer">
+                        <div class="cn12">
+                            <span class="cn cn_w">작성자</span>
+                            <span class="cn_user">{mr_writer}</span>
+                        </div>
+                        <div class="cn3">
+                            <span class="cn cn_d">작성일자</span>
+                            <span class="cn_dt">{mr_writeDatetime}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="detail detail_mr_writeDatetime"></div> -->
+                    <div class="detail detail_mrtitle">
+                        <span class="cn cn_t">제목</span>
+                        <span class="cn_ttl">{mr_title}</span>
+                    </div>
+                    <div class="detail detail_mr_content">
+                        <div class="cn_ct">{mr_content}</div>
+                    </div>
                 </div>
                 <div class="mr_btn">
                     <button class="button btn_cancel3">목록</button>

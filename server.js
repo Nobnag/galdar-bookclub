@@ -307,6 +307,20 @@ app.post('/api/updateSR', async function(req, res){
     }
 });
 
+// API(한줄평 D) - 한줄평을 DB에서 삭제한다.
+app.post('/api/deleteSR', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_SRContent', req.body.sr_content)
+            .input('vi_SRWriter', req.body.sr_writer)
+            .execute('[sp_sr_delete_byUser]')
+        res.json(result)
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
 
 // API(줄글 서평 C) - 작성한 서평을 DB에 보낸다.
 app.post('/api/submitMR', async function(req, res){
@@ -346,7 +360,7 @@ app.get('/api/getMRdetail', async function(req,res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
-            .input('vi_MRIdx', req.body.mr_idx)
+            .input('vi_MRIdx', req.query.mr_idx)
             .execute('[sp_mr_detail_byAdmin]')
         res.json(result);
     } catch(err) {
