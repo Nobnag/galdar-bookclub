@@ -158,9 +158,10 @@ app.get('/api/getmember_info', async function(req, res){
         const pool = await poolPromise;
         let result = await pool.request()
             // .input('vi_MemberIdx', req.query.MemberIdx)
-            .query('SELECT MemberIdx,Email,Pw,Nickname,Contact,Convert(nvarchar(16),JoinDatetime,121) as JoinDatetime,PremiumMemberYn,AdminYn FROM Member WHERE MemberIdx = MemberIdx')
-            //프로시저로 하면안됨. 질문하기
-            // .execute('[sp_getmember_info]')
+            .input('vi_pageNo', req.query.page_no)
+            .input('vi_pageSize', req.query.page_size)
+            // .query('SELECT MemberIdx,Email,Pw,Nickname,Contact,Convert(nvarchar(16),JoinDatetime,121) as JoinDatetime,PremiumMemberYn,AdminYn FROM Member WHERE MemberIdx = MemberIdx')
+            .execute('[sp_getmember_info]')
         res.json(result);
     } catch(err) {
         res.status(500);

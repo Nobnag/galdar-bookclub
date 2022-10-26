@@ -9,6 +9,8 @@
     <script type="text/javascript" src="js/validation.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/MBMng.css" />
+    <script type="text/javascript" src="js/flaviusmatis-simplePagination.js-da97104/jquery.simplePagination.js"></script>
+    <link type="text/css" rel="stylesheet" href="js/flaviusmatis-simplePagination.js-da97104/simplePagination.css"/>
     <style>
     </style>
 </head>
@@ -48,73 +50,95 @@
                         </tbody> -->
                 </tbody>
             </table>
-            <!-- (s)멘토님이 알려주신방식 템플릿 테크 사용 -->
-            <template id="template_member_info_row">
-                <tr data-memberidx="{MemberIdx}" id="member_info_tr">
-                    <td class="td_memberIdx">{MemberIdx}</td>
-                    <td class="td_email">{Email}</td>
-                    <td class="td_pw">{Pw}</td>
-                    <td class="td_nickname">{Nickname}</td>
-                    <td class="td_contact">{Contact}</td>
-                    <td class="td_joinDatetime" >{JoinDatetime}</td>
-                    <td class="td_premiumMemberYn">{PremiumMemberYn}</td>
-                    <td class="td_adminYn">{AdminYn}</td>
-                </tr>
-            </template>
-            <!-- (e)멘토님이 알려주신방식 템플릿 테크 사용 -->
+            <!-- (s)페이지네이션 -->
+            <div class="pagination pagination_member">
+            </div>  
+            <!-- (e)페이지네이션 -->
+            
         <div class="btn_container">
             <button  class="btn_member_update">회원정보수정</button>
             <button class="btn_member_delete">회원탈퇴</button>
         </div>        
     </div>
-
     <div id="rp_wrapper">
         <!-- 템플릿 넣을자리 -->
     </div>
+<!-- (s)멘토님이 알려주신방식 템플릿 테크 사용 -->
+<template id="template_member_info_row">
+    <tr data-memberidx="{MemberIdx}" id="member_info_tr">
+        <td class="td_memberIdx">{MemberIdx}</td>
+        <td class="td_email">{Email}</td>
+        <td class="td_pw">{Pw}</td>
+        <td class="td_nickname">{Nickname}</td>
+        <td class="td_contact">{Contact}</td>
+        <td class="td_joinDatetime" >{JoinDatetime}</td>
+        <td class="td_premiumMemberYn">{PremiumMemberYn}</td>
+        <td class="td_adminYn">{AdminYn}</td>
+    </tr>
+</template>
+<!-- (e)멘토님이 알려주신방식 템플릿 테크 사용 -->
 <!-- 넣을 템플릿 -->
     <template id="template_Nickname">
     <h1 data-memberidx="{MemberIdx}">{Nickname}</h1>
     <div class="member_use_contents">
         <div class="SRContent">
             <h2>작성한 한줄평</h2>
-            <ul class="SR">
-            </ul>
+            <div class="SR">
+            </div>
         </div>
         <div class="MRContent">
             <h2>작성한 줄글서평</h2>
-            <ul class="MR">
-            </ul>
+            <div class="MR">
+            </div>
         </div>
     </div>
     </template>
 <!-- 넣을 템플릿 -->
     <template id="template_SR">
-        <li>
-            {SRBookTitle}
-            <p>{SRContent}</p>
-        </li>
+        <details>
+            <summary>{SRBookTitle}</summary>
+                <p>{SRContent}</p>
+        </details>
     </template>
     <template id="template_MR">
-        <li>
-            {MRBookTitle}
-            <p>{MRContent}</p>
-        </li>
+        <details>
+            <summary>{MRBookTitle}</summary>
+                <p>{MRContent}</p>
+        </details>
     </template>
 
     <script>
-        //맴버 정보를 불러온다.
-        $(document).ready(function(){
+        var mrPageNo = 1;
+        //맴버 정보를 불러오는 함수선. 반복해야해서 함수화시킴
+        function getmember_info(){
+            var params = {
+                page_no: mrPageNo,
+                page_size: 5
+            };
             $.ajax({
                 url: '/api/getmember_info',
                 type: 'get',
                 datatype: 'json',
+                data:params ,
                 // async: false,
                 success: function(result){
+                    if(result.recordset.length > 0 && $(".pagination_member").html().trim() == ""){
+                         $(".pagination_member").pagination({
+                            items: result.recordset[0].totalCnt,
+                            itemsOnPage: params.page_size,
+                            cssStyle: 'light-theme',
+                            prevText: '<',
+                            nextText: '>',
+                            onPageClick:function(pageNumber, event){
+                                mrPageNo = pageNumber;
+                                getmember_info();
+                            }
+                        });
+                    }
+                    var html = "";
                     for(var i = 0; i < result.recordset.length; i ++){
                         var row = result.recordset[i];
-                        // var html = $('.table_mamber_info').html()
-                        // .replace("{MemberIdx}",row.MemberIdx)
-                        var html = $("#template_member_info_row").html()
+                            html += $("#template_member_info_row").html()
                         //모든 {MemberIdx}를 바꾼다는 뜻 ie까지 연동
                             .replace(/{MemberIdx}/gi, row.MemberIdx)
                             .replace(/{Email}/gi,row.Email)
@@ -124,7 +148,7 @@
                             .replace(/{JoinDatetime}/gi,row.JoinDatetime)
                             .replace(/{PremiumMemberYn}/gi,row.PremiumMemberYn)
                             .replace(/{AdminYn}/gi,row.AdminYn);
-                        $('.info_table table tbody').append(html);
+                        $('.info_table table tbody').html(html);
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown){
@@ -132,11 +156,16 @@
                     alert("error");
                 }
             });
+        }
+        // 맴버 정보를 불러온다.
+        $(document).ready(function(){
+            getmember_info();
         });
+
         // var flag = 0;//플러깅하기위한 값
         //테이블의 특정 tr을 클릭했을때 특정인원 닉네임,한줄평,서평 불러오기
         $(document).on("click",".table_mamber_info tbody tr",function(){
-            // $(this).
+            // $(this).style.backgroundColor =  ("rgb(163, 204, 163)")
             var MemberIdx = $(this).data("memberidx");background = 'red'
             //해당 줄의 닉네임을 가저온다
             $.ajax({
