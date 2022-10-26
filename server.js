@@ -391,6 +391,38 @@ app.get('/api/getMRdetail', async function(req,res){
     }
 });
 
+// API(줄글서평 수정) - DB의 서평 데이터를 수정한다.
+app.post('/api/updateMR', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MRIdx', req.body.mr_idx)
+            .input('vi_MRWriter', req.body.mr_writer)
+            .input('vi_MRTitle', req.body.mr_title)
+            .input('vi_MRContent', req.body.mr_content)
+            .execute('[sp_mr_update_byUser]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
+// API(줄글서평 삭제) - DB의 서평 데이터를 삭제한다.
+app.post('/api/deleteMR', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MRIdx', req.body.mr_idx)
+            .input('vi_MRWriter', req.body.mr_writer)
+            .execute('[sp_mr_delete_byUser]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 // API(북토크 대화록 C) - 작성한 대화록을 DB에 보낸다.
 app.post('/api/submitBT', async function(req, res){
     try {

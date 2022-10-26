@@ -399,12 +399,20 @@ h4 {
 
 .mr_wrapper .td_title {
     padding-left: 20px;
+    padding-right: 20px;
     text-align: left;
 }
 
 .mr_wrapper .td_title span {
+    display: inline-block;
+    min-width: 300px;
+    width: 30vw;
     cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
+
 .mr_wrapper .td_title span:hover {
     text-decoration: underline;
 }
@@ -438,19 +446,6 @@ h4 {
     color: #fff;
     border: none;
     margin-right: 5%;
-    margin-top: 12px;
-    cursor: pointer;
-}
-
-.btn_update2 {
-    display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-right: 2%;
     margin-top: 12px;
     cursor: pointer;
 }
@@ -512,7 +507,7 @@ h4 {
 .mr_container3 .detail {
     border: 1px solid;
     height: auto;
-    width: 90%;   
+    width: 100%;   
     margin: 0 auto 5px auto;
     /* padding: 5px; */
     background: #f2f2f2;
@@ -564,6 +559,7 @@ h4 {
     padding: 15px 10px;
     min-height: 300px;
     white-space: pre-wrap;
+    line-height: 200%;
 }
 
 .mr_container3 textarea {
@@ -585,6 +581,89 @@ h4 {
     margin-top: 12px;
     cursor: pointer;
 }
+
+.btn_update2 {
+    display: none;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.btn_delete6 {
+    display: none;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.mr_container4 {
+    display: none;
+    width: auto;
+    height: auto;
+}
+
+.mr_container4 h4 {
+    text-align: left;
+}
+
+/* 
+.btn_cancel2 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 5%;
+    margin-top: 12px;
+    cursor: pointer;
+} */
+
+
+.btn_update5 {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #8a8a8a;
+    color: #fff;
+    border: none;
+    margin-right: 2%;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+
+
+.mr_container4 input {
+    height: 20px;
+    width: 80%;   
+    margin-bottom: 12px;
+    padding: 5px 10px;
+}
+
+.mr_container4 textarea {
+    display: inline-block;
+    resize: none;
+    padding: 5px 10px;
+    width: 80%;
+}
+
+
+
 
 
 .bt_wrapper {
@@ -815,6 +894,7 @@ h4 {
 
 .reply_content span {
     vertical-align: middle;
+    white-space: pre-wrap;
     display: inline;
 }
 

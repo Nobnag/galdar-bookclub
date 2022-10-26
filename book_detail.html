@@ -276,7 +276,7 @@
                 $('.btn_write').show();
                 $('.btn_update').show();
                 $('.btn_write2').show();
-                $('.btn_update2').show();
+                // $('.btn_update2').show();
                 // $('input[name="re_password"]').hide();
                 $('input[name="re_name"]').val(loginObj.Nickname);
                 $('input[name="re_password"]').val(loginObj.Pw);
@@ -286,9 +286,10 @@
                 $('.btn_write').hide();
                 $('.btn_update').hide();
                 $('.btn_write2').hide();
-                $('.btn_update2').hide();
+                // $('.btn_update2').hide();
                 // $('input[name="re_password"]').show();
                 $('input[name="re_name"]').removeAttr("readonly");
+                $('input[name="re_password"]').removeAttr("readonly");
             }
             if(typeof(loginObj) != "undefined"){
                 if(loginObj.AdminYn == "1"){
@@ -564,8 +565,11 @@
             $('.btn_cancel2').click(function(){
         // 3-3-1. 창 전환
                 if(confirm("작성된 글은 보관되지 않습니다. 취소하시겠습니까?")){
+                    location.reload();
+                    /* $('.mr_container2 .ipt_mr_title, .ipt_mr_content').val('');
                     $('.mr_container2').css('display','none');
-                    $('.mr_container').css('display','block');
+                    $('.mr_container4').hide();
+                    $('.mr_container').css('display','block'); */
                 }
                 else {
                     return false;
@@ -598,6 +602,10 @@
                             var row = result.recordset[0];
                             var html = $('.mr_container3').html().replace("{mr_writer}",row.MRWriter).replace("{mr_title}",row.MRTitle).replace("{mr_content}",row.MRContent).replace("{mr_writeDatetime}",row.MRWriteDatetime);
                             $('.mr_container3').html(html);
+                            if(loginObj.Nickname == row.MRWriter){
+                                $('.btn_update2').show();
+                                $('.btn_delete6').show();
+                            }
                         // }
                     },
                     error: function(jqXHR, textStatus, errorThrown){
@@ -612,6 +620,74 @@
                 // $('.mr_container').css('display','block');
                 location.reload();
             });
+
+        // 3-4-2. 상세 조회 - 수정 클릭
+            $(document).on('click', '.btn_update2', function(){
+                var mr_idx = $('.mr_container3 .detail_mr_idx').html();
+                var mr_writer = $('.mr_container3 .cn_user').html();
+                var mr_title = $('.mr_container3 .cn_ttl').html();
+                var mr_content = $('.mr_container3 .cn_ct').html();
+                $('.mr_container3').css('display','none');
+                $('.mr_container4').css('display','block');
+                $('.mr_container4 .detail_mr_idx').html(mr_idx)
+                // $('.mr_container4 .ipt_mr_writer').val(mr_writer);
+                $('.mr_container4 .ipt_mr_title').val(mr_title);
+                $('.mr_container4 .ipt_mr_content').html(mr_content);
+                
+                $('.btn_update5').click(function(){
+                    var mr_idx = $('.mr_container4 .detail_mr_idx').html();
+                    var mr_writer = $('.mr_container4 .ipt_mr_writer').val();
+                    var mr_title = $('.mr_container4 .ipt_mr_title').val();
+                    var mr_content = $('.mr_container4 .ipt_mr_content').val();
+                    var params = {
+                        mr_idx: mr_idx
+                        ,mr_writer: mr_writer
+                        ,mr_content: mr_content
+                        ,mr_title: mr_title
+                    }
+                    $.ajax({
+                        url: '/api/updateMR'
+                        ,data: params
+                        ,type: 'post'
+                        ,datatype: 'json'
+                        ,success: function(result){
+                            if(result.recordset[0].Result == 'Success'){
+                                alert('수정이 완료되었습니다.');
+                                location.reload();
+                            }
+                        }
+                        ,error: function(jqXHR, textStatus, errorThrown){
+                            console.log(errorThrown);
+                        }
+                    });
+                })
+            });
+
+        // 3-4-3. 상세 조회 - 삭제 클릭 
+            $(document).on('click', '.btn_delete6', function(){
+                var mr_idx = $('.mr_container3 .detail_mr_idx').html();
+                var mr_writer = $('.mr_container3 .cn_user').html();
+                var params= {
+                    mr_idx: mr_idx
+                    ,mr_writer: mr_writer
+                }
+                $.ajax({
+                    url: '/api/deleteMR'
+                    ,data: params
+                    ,type: 'post'
+                    ,datatype: 'json'
+                    ,success: function(result){
+                        if(result.recordset[0].Result == "Success"){
+                            alert("삭제가 완료되었습니다.");
+                            location.reload();
+                        }
+                    }
+                    ,error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                    }
+                });
+            });
+
 
         // 4. 북토크 대화록
         // 4-1. 작성하기 클릭
@@ -770,8 +846,8 @@
         // 5. 댓글 작성
             $('.btn_reg').click(function(){
                 var book_idx = $('.book_info ul .book_idx span').html();
-                var reply_name = $('input[name="name"]').val();
-                var reply_pw = $('input[name="password"]').val();
+                var reply_name = $('input[name="re_name"]').val();
+                var reply_pw = $('input[name="re_password"]').val();
                 var reply_content = $('.ipt_reply_content').val();
                 if(reply_name == "" || reply_pw == "" || reply_content == ""){
                     alert('이름과 비밀번호, 내용을 모두 입력하세요.');
@@ -998,7 +1074,7 @@
                 </div>
                 <div class="mr_btn">
                     <button class="button btn_write2">글쓰기</button>
-                    <button class="button btn_update2">내 서평 수정</button>
+                    <!-- <button class="button btn_update2">내 서평 수정</button> -->
                 </div>
             </div>
 
@@ -1039,6 +1115,21 @@
                 </div>
                 <div class="mr_btn">
                     <button class="button btn_cancel3">목록</button>
+                    <button class="button btn_update2">수정</button>
+                    <button class="button btn_delete6">삭제</button>
+                </div>
+            </div>
+            <div class="mr_container4">
+                <div class="mr_board">
+                    <h4>나의 서평</h4>
+                    <div class="detail detail_mr_idx" style="display:none;"></div>
+                    <input type="text" placeholder="작성자" class="ipt ipt_mr_writer" readonly>
+                    <input type="text" placeholder="제목" class="ipt ipt_mr_title">
+                    <textarea name="maintext" class="ipt_mr_content" placeholder="* 서평을 입력해주세요(400~500자).&#13;&#10;* 책 한 권 당 서평은 한 번만 작성할 수 있습니다." rows="10"></textarea>
+                </div>
+                <div class="mr_btn">
+                    <button class="button btn_cancel2">취소</button>
+                    <button class="button btn_update5">수정</button>
                 </div>
             </div>
 
