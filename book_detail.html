@@ -300,7 +300,7 @@
                     $('.btn_write3').hide();
                 }
             } else {
-                // $('.btn_updateBook').hide();
+                // $('.btn_updateBook/api/submitSR').hide();
                 $('.btn_write3').hide();
             }
 
@@ -375,6 +375,7 @@
         // 2-2-1. 이전에 작성한 적 있으면 불가입니다.
             // if()
         // 2-2-2. 값 가져오기
+                var member_idx = loginObj.MemberIdx;
                 var book_idx = $('.book_info ul .book_idx span').html();
                 var sr_writer = loginObj.Nickname;
                 var sr_content = $('.sr_ipt').val();
@@ -386,7 +387,8 @@
         // 2-2-4. API 전송
                 if(sr_content !== ""){
                     var params = {
-                        book_idx: book_idx
+                        member_idx: member_idx
+                        ,book_idx: book_idx
                         ,sr_writer: sr_writer
                         ,sr_content: sr_content
                     };
@@ -396,7 +398,16 @@
                         ,type: 'post' 
                         ,datatype: 'json'
                         ,success: function(result){
+                            if(result.recordset[0].Result == 'Fail'){
+                                alert('이미 한줄평을 작성하셨습니다.');
+                                $('.sr_ipt').val('');
+                                $('.sr_container2').css('display','none');
+                                // $('.sr_container3').css('display','none');
+                                $('.sr_container').css('display','block');
+                                return false;
+                            }
                             if(result.recordset.length > 0){
+                                $('.slider').append("<li><strong>"+sr_content+"</strong><p><em>"+sr_writer+"</em></p></li>");
                                 alert('한줄평이 등록되었습니다.');
                                 location.reload();
                             }
@@ -408,19 +419,20 @@
                 }
 
         // 2-2-5. append
-                $('.slider').append("<li><strong>"+sr_content+"</strong><p><em>"+sr_writer+"</em></p></li>");
             });
 
         // 2-3. 수정버튼 클릭
             $('.btn_update').click(function(){
                 // $('.sr_container').css('display','none');
                 // $('.sr_container3').css('display','block');
+                var book_idx = $('.book_info ul .book_idx span').html();
                 var sr_writer = loginObj.Nickname;
                 // console.log(sr_writer);
                 $.ajax({
                     url: '/api/getSRContent'
                     ,data: {
-                        sr_writer: sr_writer
+                        book_idx: book_idx
+                        ,sr_writer: sr_writer
                     }
                     ,type: 'get'
                     ,datatype: 'json'
@@ -516,6 +528,9 @@
         // 3. 줄글 서평            
         // 3-1. 글쓰기 버튼 클릭
             $('.btn_write2').click(function(){
+                /* if(){
+                    alert('이미 서평을 작성하셨습니다.');
+                } */
         // 3-1-1. 창 전환
                 $('.mr_container').css('display','none');
                 $('.mr_container2').css('display','block');
@@ -525,11 +540,18 @@
         // 3-2-1. 이전에 작성한 적 있으면 추가 작성 불가.
             // if()
         // 3-5. 값 가져오기
+                var member_idx = loginObj.MemberIdx;
                 var book_idx = $('.book_info ul .book_idx span').html();
                 var mr_writer = $('.ipt_mr_writer').val();
                 var mr_title = $('.ipt_mr_title').val();
                 var mr_content = $('.ipt_mr_content').val();
         // 3-2-2. 미입력시 안내
+                if(mr_title.length > 50){
+                    alert("제목은 50자 미만으로 입력해주세요.");
+                    $('.ipt_mr_title').focus();
+                    return false;
+                }
+
                 if(mr_title == '' || mr_content == ''){
                     alert("제목과 서평을 모두 입력해주세요.")
                     return false;
@@ -537,7 +559,8 @@
         // 3-2-3. API 전송
                 if(mr_title !== "" && mr_writer !== "" && mr_content !== ""){
                     var data = {
-                        book_idx: book_idx
+                        member_idx: member_idx
+                        ,book_idx: book_idx
                         ,mr_writer: mr_writer
                         ,mr_title: mr_title
                         ,mr_content: mr_content

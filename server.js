@@ -277,6 +277,7 @@ app.post('/api/submitSR', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
+            .input('vi_MemberIdx', req.body.member_idx)
             .input('vi_BookIdx', req.body.book_idx)
             .input('vi_SRWriter', req.body.sr_writer)
             .input('vi_SRContent', req.body.sr_content)
@@ -293,8 +294,9 @@ app.get('/api/getSRContent', async function(req, res){
     try {
         const pool = await poolPromise;
         const result = await pool.request()
+            .input('vi_BookIdx', req.query.book_idx)
             .input('vi_SRWriter', req.query.sr_writer)
-            .query('select SRContent from SR where SRWriter = @vi_SRWriter')
+            .query('select SRContent from SR where SRWriter = @vi_SRWriter and BookIdx = @vi_BookIdx')
         res.json(result);           
     } catch(err) {
         res.status(500);
@@ -352,6 +354,7 @@ app.post('/api/submitMR', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
+            .input('vi_MemberIdx', req.body.member_idx)
             .input('vi_BookIdx', req.body.book_idx)
             .input('vi_MRTitle', req.body.mr_title)
             .input('vi_MRWriter', req.body.mr_writer)
