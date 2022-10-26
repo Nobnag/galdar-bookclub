@@ -30,6 +30,7 @@
         </div>
     </div>
     <script>
+        //소셜로그인 할건지 안할건지 안할거면 버튼 지우기.
         $(document).ready(function(){
             var loginObj = getLoginObj();
             if(typeof(loginObj) !== "undefined"){
@@ -66,7 +67,6 @@
                     data: data,
                     success: function(result){ 
                         if(result.result == "true"){
-                            alert("로그인 드가자");
                             location.href = "/galdar_list"
                         }
                         else{

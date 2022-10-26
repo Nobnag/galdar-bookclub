@@ -100,6 +100,7 @@ app.post('/login_process', async(req,res) => {
             .execute('[sp_login]');
             
         if(result.recordset.length > 0){
+            req.session.MemberIdx = result.recordset[0].MemberIdx;
             req.session.Email = result.recordset[0].Email;
             req.session.Nickname = result.recordset[0].Nickname;
             req.session.PremiumMemberYn = result.recordset[0].PremiumMemberYn;
@@ -125,6 +126,7 @@ app.get('/api/getLoginInfo', function(req,res) {
         }
         else{
             res.json({
+                MemberIdx: req.session.MemberIdx,
                 Email: req.session.Email,
                 Nickname: req.session.Nickname,
                 PremiumMemberYn: req.session.PremiumMemberYn,

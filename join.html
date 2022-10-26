@@ -57,7 +57,7 @@
                     },
                     success: function(result){
                         if(result.result == "false"){
-                            alert('중복이유! 다른거 쓰세유!')
+                            alert('중복된 이메일입니다. 다른 이메일을 사용해주세요')
                             $('input[name="Email"]').focus();
                             return false
                         }
@@ -87,7 +87,7 @@
             //     }
             //     else {}
             // });
-
+//회원가입 했을때 바로 로그인까지 되게하는 로직 추가 하면 좋을듯
             //회원가입 버튼을 눌럿을때
             $(document).ready(function(){
                 $(".btn_join").click(function() {
@@ -159,7 +159,7 @@
                     },
                     success: function(result){
                         if(result.result == "false"){
-                            alert('중복검사 하라했재')
+                            alert('중복된 이메일입니다. 다른 이메일을 사용해주세요.')
                             $('input[name="Email"]').focus();
                             return false
                         }
@@ -182,7 +182,7 @@
                             data: data,
                             //async: false, 동기 와 비동기 찾아보기
                             success: function(result){ 
-                                    alert("회원가입 완료 로그인하도록.");
+                                    alert("회원가입 되었습니다.");
                                     location.href = "/login"
                                     return false;
                             },error: function(jqXHR,textStatus,errorThrown) {

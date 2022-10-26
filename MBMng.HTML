@@ -160,6 +160,15 @@
         // 맴버 정보를 불러온다.
         $(document).ready(function(){
             getmember_info();
+            var loginObj = getLoginObj();
+            if(typeof(loginObj) == "undefined"){
+                alert("잘못된 접근입니다.")
+                location.href = "/"
+            }
+            else if (loginObj.AdminYn == "0"){
+                    alert("잘못된 접근입니다.")
+                    location.href = "/"
+            }
         });
 
         // var flag = 0;//플러깅하기위한 값
