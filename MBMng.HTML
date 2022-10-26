@@ -248,18 +248,16 @@
                 if(inputCnt == 0){
                     continue;
                 }
-
                 selectedRowList.push($('.table_mamber_info tbody tr')[i]);
             }
 
             //값을 가져와서 수정 처리한다.
             for(var i = 0; i < selectedRowList.length; i ++){
                 var selectedRow = $(selectedRowList[i]);
-
                 /* (s) 값을 가져온다. */
                 var MemberIdx = $(selectedRow).find('td.td_memberIdx').text();
                 var Email = $(selectedRow).find('td.td_email input').val();
-                // var Pw = $(selectedRow).find('td.td_pw input').val();
+                var Pw = $(selectedRow).find('td.td_pw input').val();
                 var Nickname = $(selectedRow).find('td.td_nickname input').val();
                 var Contact = $(selectedRow).find('td.td_contact input').val();
                 var PremiumMemberYn = $(selectedRow).find('td.td_premiumMemberYn input').val();
@@ -277,11 +275,11 @@
                         $(selectedRow).find('td.td_email input"]').focus();
                         return false;
                 }
-                // if(Pw==""||Pw==undefined) {
-                //         alert("비밀번호를 입력하세요");                        
-                //         $(selectedRow).find('td.td_pw input').focus();
-                //         return false;
-                // }
+                if(Pw==""||Pw==undefined) {
+                        alert("비밀번호를 입력하세요");                        
+                        $(selectedRow).find('td.td_pw input').focus();
+                        return false;
+                }
                 if(Nickname==""||Nickname==undefined) {
                         alert("닉네임을 입력하세요.");                        
                         $(selectedRow).find('td.td_nickname input').focus();
@@ -317,7 +315,7 @@
                 var data = {
                     MemberIdx:MemberIdx
                     ,Email: Email
-                    // ,Pw: Pw
+                    ,Pw: Pw
                     ,Nickname: Nickname
                     ,Contact: Contact
                     ,PremiumMemberYn:PremiumMemberYn

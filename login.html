@@ -30,6 +30,12 @@
         </div>
     </div>
     <script>
+        $(document).ready(function(){
+            var loginObj = getLoginObj();
+            if(typeof(loginObj) !== "undefined"){
+                location.href = "/"
+            }
+        });
         $(document).on("click",".main_btn_login",function(){
             var Email = $('input[name="Email"]').val().trim();
             var Pw = $('input[name="Pw"]').val().trim();

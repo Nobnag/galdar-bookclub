@@ -192,7 +192,7 @@ app.post('/api/MemberUpdate', async function(req, res){
         let result = await pool.request()
             .input('vi_MemberIdx', req.body.MemberIdx)
             .input('vi_Email', req.body.Email)
-            // .input('vi_Pw', req.body.Pw)
+            .input('vi_Pw', req.body.Pw)
             .input('vi_Nickname', req.body.Nickname)
             .input('vi_Contact', req.body.Contact)
             .input('vi_PremiumMemberYn', req.body.PremiumMemberYn)
