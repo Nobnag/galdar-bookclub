@@ -2,14 +2,18 @@
 
 *{ padding: 0;margin: 0;}
 
-li{ list-style: none; }
+li{
+    list-style: none; 
+    /* width: 220px; */
+    /* margin 35px, 45px; */
+}
 
 .book_list
     {
     /* width: 60%;
     min-width: 600px;
     margin: 0 auto; */
-    width: 940px; margin: 0 auto;
+    width: 1006px; margin: 50px auto;
     overflow: hidden;
     }
     /* width: 940px; margin: 0 auto;
@@ -17,7 +21,7 @@ li{ list-style: none; }
 
 
 h3{
-    margin-left: 10px;
+    /* margin-left: 10px; */
     padding: 31px;
     font-size: 44px; 
     width: 93%; height: 50px;
@@ -28,8 +32,8 @@ h3{
 
 li{
     float: left;
-    width: 255px; height: 295px;
-    margin: 35px 28px;
+    width: 235px; height: 299px;
+    margin: 42px 50px;
 }
 
 a{
@@ -50,7 +54,7 @@ figcaption{
     position: absolute; 
     top: 0; left: 0;
     color: #fff; text-align: center;
-    line-height: 200px;
+    line-height: 25px;
     opacity: 0; 
     transition: 0.3s;
     font-family: 'Nanum Myeongjo', serif;
@@ -95,10 +99,16 @@ a:hover figcaption, .gallery a:focus figcaption{
     border-radius: 5px;
 }
 .book_btDate{
-    height:25px;
+    margin-top: 15px;
+    display: block;
+    height:auto;
 }
 .book_title{
-    height:25px;
+    height:auto;
+    display: block;
+    margin-top: 90px;
+    /* display: block; */
+    /* word-wrap:break-word; */
 }
 #topButtonImg{
     margin-right: 25px;
@@ -137,3 +147,18 @@ a.jcm-top {
     z-index: 999;
     display: none;
 }
+/* span{
+    display: inline-block;
+} */
+/* pre{
+    display: block;
+    word-wrap:break-word; */
+
+    /* white-space: normal; */
+    /* white-space: pre-wrap;  */
+    /* display: table-cell;
+    vertical-align: middle; */
+
+   /* font-size: 17px;
+    
+} */
