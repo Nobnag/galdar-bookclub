@@ -55,11 +55,16 @@
                 // async: false,
                 success: function(result){
                     // var data = result.recordset[0];
-                    for(var i = 0; i < result.recordset.length; i ++){
-                        var row = result.recordset[i];
+                    if(result.recordset.length == 0){
+                        var html = "아직 작성된 한줄평이 없습니다.";
+                        $('.sr_container ul').html(html);
+                    } else {
+                        for(var i = 0; i < result.recordset.length; i ++){
+                            var row = result.recordset[i];
                         var html = $('#sr_template').html().replace("{content}",'\"\&nbsp\&nbsp\&nbsp'+row.SRContent+'\&nbsp\&nbsp\&nbsp\"').replace("{name}","by  "+row.SRWriter).replace("{sr_idx}",row.SRIdx);
                         $('.sr_box .slider').append(html);
                         $('.sr_box .slider li:first-child').css({"opacity":"1"});
+                        }
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown){
@@ -102,13 +107,18 @@
                         });
                     }
 
-                    var html = "";
-                    for(var i = 0; i < result.recordset.length; i ++){
-                        var row = result.recordset[i];
-                        html += $('#tbody_template').html().replace("{no}",row.MRIdx).replace("{name}",row.MRWriter).replace("{data-attr}",row.MRIdx).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
+                    if(result.recordset.length == 0){
+                        var html = "아직 작성된 게시물이 없습니다.";
+                        $('.mr_board table').html(html);
+                    } else {
+                        var html = "";
+                        for(var i = 0; i < result.recordset.length; i ++){
+                            var row = result.recordset[i];
+                            html += $('#tbody_template').html().replace("{no}",row.MRIdx).replace("{name}",row.MRWriter).replace("{data-attr}",row.MRIdx).replace("{title}",row.MRTitle).replace("{date}",row.MRWriteDatetime);
+                        }
+                        $('.mr_board table tbody').html(html);
                     }
-                    $('.mr_board table tbody').html(html);
-
+                    
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(errorThrown);
@@ -156,9 +166,14 @@
  
         // 댓글 삭제 함수
         function clickReplyX(){
+            var loginObj = getLoginObj();
             $('.btn_x').click(function(){
                 $(this).parent().css('display','none');
                 $(this).parent().next().css('display','block');
+                var reply_writer = $(this).parent().parent().prev().prev().find('span').html();
+                if(loginObj.Nickname == reply_writer){
+                    $(this).parent().next().find('input').val(loginObj.Pw);
+                }
             });
         }
         
@@ -250,10 +265,14 @@
                             }
                         });
                     }
-                    var html = "";
-                    for(var i = 0; i < result.recordset.length; i ++){
+                    if(result.recordset.length == 0){
+                        var html = `<span>아직 작성된 댓글이 없습니다.</span>`;
+                    } else {
+                        var html = "";
+                        for(var i = 0; i < result.recordset.length; i ++){
                         var row = result.recordset[i];
                         html += $('#reply_template').html().replace("{ReplyWriter}",row.ReplyWriter).replace("{ReplyContent}",row.ReplyContent).replace("{Writedatetime}",row.ReplyWriteDatetime).replace("{data-attr}",row.ReplyIdx);
+                        }
                     }
                     $('.reply_list_box').html(html);
                     clickReplyX();
@@ -417,8 +436,6 @@
                         }
                     });
                 }
-
-        // 2-2-5. append
             });
 
         // 2-3. 수정버튼 클릭
@@ -572,9 +589,15 @@
                         datatype: 'json',
                         // async: false,
                         success: function(result){
-                            console.log(result);
-                            alert("작성이 완료되었습니다.");
-                            location.href=('/book_detail?book_idx='+book_idx)
+                            // console.log(result);
+                            if(result.recordset[0].Result == 'Fail'){
+                                alert('이미 서평을 작성하셨습니다.');
+                                return false;
+                            }
+                            if(result.recordset.length > 0){
+                                alert("작성이 완료되었습니다.");
+                                location.reload();
+                            }
                         },
                         error: function(jqXHR, textStatus, errorThrown){
                             console.log(errorThrown);
@@ -868,6 +891,11 @@
 
         // 5. 댓글 작성
             $('.btn_reg').click(function(){
+                /* if(typeof(loginObj) != 'undefined'){
+                    var member_idx = loginObj.MemberIdx;
+                } else {
+                    var member_idx = 0;
+                } */
                 var book_idx = $('.book_info ul .book_idx span').html();
                 var reply_name = $('input[name="re_name"]').val();
                 var reply_pw = $('input[name="re_password"]').val();
@@ -879,6 +907,7 @@
                 
                 if(reply_name !== "" && reply_pw !== "" && reply_content !== ""){
                     var params = {
+                        // member_idx: member_idx
                         book_idx: book_idx
                         ,reply_name: reply_name
                         ,reply_content: reply_content
@@ -1202,6 +1231,8 @@
                     </div>
                     <div class="reply reply_content">
                         <span>{ReplyContent}</span>
+                    </div>
+                    <div class="reply_datetime_container">
                         <div class="reply_datetime">
                             <span>{Writedatetime}</span>
                             <button class="btn_x">X</button>
@@ -1214,7 +1245,8 @@
                     </div>
                 </div>
             </div>
-            <div class="box reply_list_box">                
+            <div class="box reply_list_box">     
+                <!-- <span>아직 작성된 댓글이 없습니다.</span> -->
             </div>
 
             <!-- 페이징 -->

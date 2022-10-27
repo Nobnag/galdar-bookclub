@@ -862,6 +862,7 @@ h4 {
     width: 90%;
     margin: 15px auto;
     height: auto;
+    text-align: center;
 }
 
 .reply_list {
@@ -870,23 +871,24 @@ h4 {
     justify-content:space-evenly;
     font-size: 12px;
     line-height: 12px;
+    text-align: justify;
 }
 
 .reply_list .reply {
     display: inline-block;
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
     margin-bottom: 4px;
 }
 
 .reply_writer {
-    width: 15%;
+    width: 10%;
     border-top: 1px solid;
     border-bottom: 1px solid;
     line-height: 22px;
 }
 
 .reply_content {
-    width: 80%;
+    width: 74%;
     border-top: 1px solid;
     border-bottom: 1px solid;
     line-height: 20px;
@@ -898,17 +900,26 @@ h4 {
     display: inline;
 }
 
-.reply_content .reply_datetime {
-    float: right;
+.reply_datetime_container .reply_datetime {
+    /* float: right; */
+    display: inline-block;
     font-size: 10px;
     color: #5a5a5a;
 }
 
-.reply_content .reply_datetime span {
-    vertical-align: middle;
+.reply_datetime_container {
+    width: 16%;
+    min-width: 120px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    line-height: 20px;
+    margin-bottom: 4px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.reply_content .reply_datetime .btn_x {
+.reply_datetime_container .reply_datetime .btn_x {
     width: 10px;
     height: 10px;
     border: 0;
