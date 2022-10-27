@@ -46,7 +46,7 @@ h1, h2{
     float: right;
     margin-top: 10px;
 }
-input{
+table input{
     box-sizing: border-box;
     width: 100%;
 };
