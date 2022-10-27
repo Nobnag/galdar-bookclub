@@ -142,7 +142,7 @@
                 ,datatype: 'jason'
                 ,success: function(result){
                     if(result.recordset.length == 0){
-                        var text =`<br />대화록은 오프라인 북토크 진행 이후 업로드됩니다.`;
+                        var text =`<br /><br /><br /><br /><br /><br /><br /><p>대화록은 오프라인 북토크 진행 이후 업로드됩니다.</p>`;
                         $('.btn_update3').hide();
                         $('.bt_container .bt_desc').html(text)
                     } else {
@@ -239,7 +239,7 @@
             var params = {
                 book_idx: getParam('book_idx'),
                 page_no: replyPageNo,
-                page_size: 10
+                page_size: 3
             }
 
             $.ajax({
@@ -296,7 +296,7 @@
                 $('.btn_update').show();
                 $('.btn_write2').show();
                 // $('.btn_update2').show();
-                // $('input[name="re_password"]').hide();
+                $('input[name="re_password"]').hide();
                 $('input[name="re_name"]').val(loginObj.Nickname);
                 $('input[name="re_password"]').val(loginObj.Pw);
                 $('.ipt_mr_writer').val(loginObj.Nickname);
@@ -305,8 +305,8 @@
                 $('.btn_write').hide();
                 $('.btn_update').hide();
                 $('.btn_write2').hide();
-                // $('.btn_update2').hide();
-                // $('input[name="re_password"]').show();
+                $('.btn_update3').hide();
+                $('input[name="re_password"]').show();
                 $('input[name="re_name"]').removeAttr("readonly");
                 $('input[name="re_password"]').removeAttr("readonly");
             }
@@ -357,6 +357,9 @@
                                 .replace(/{publishDate}/gi,data.BookPubDate)
                                 .replace(/{btDate}/gi,data.BookBtDate);
                     $(".container_book_contents").html(html);
+                    if($('.book_translator span').html() == ""){
+                        $('.book_translator').hide();
+                    }
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(errorThrown);
@@ -563,8 +566,8 @@
                 var mr_title = $('.ipt_mr_title').val();
                 var mr_content = $('.ipt_mr_content').val();
         // 3-2-2. 미입력시 안내
-                if(mr_title.length > 50){
-                    alert("제목은 50자 미만으로 입력해주세요.");
+                if(mr_title.length > 30){
+                    alert("제목은 30자 미만으로 입력해주세요.");
                     $('.ipt_mr_title').focus();
                     return false;
                 }
@@ -868,7 +871,7 @@
                             alert('대화록이 삭제되었습니다.');
                             $('.bt_container3').css("display","none");
                             $('.bt_container').css("display","block");
-                            var text =`<br />대화록은 오프라인 북토크 진행 이후 업로드됩니다.`;
+                            var text =`<br /><br /><br /><br /><br /><br /><br /><p>대화록은 오프라인 북토크 진행 이후 업로드됩니다.</p>`;
                             $('.bt_container .bt_desc').html(text)
                         }
                     }
@@ -1132,9 +1135,9 @@
 
             <div class="mr_container2">
                 <div class="mr_board">
-                    <h4>나의 서평</h4>
+                    <h5>나의 서평</h5>
                     <input type="text" placeholder="작성자" class="ipt ipt_mr_writer" readonly>
-                    <input type="text" placeholder="제목" class="ipt ipt_mr_title">
+                    <input type="text" placeholder="제목 (글자 수 제한 30자)" class="ipt ipt_mr_title">
                     <textarea name="maintext" class="ipt_mr_content" placeholder="* 서평을 입력해주세요(400~500자).&#13;&#10;* 책 한 권 당 서평은 한 번만 작성할 수 있습니다." rows="10"></textarea>
                 </div>
                 <div class="mr_btn">
@@ -1204,8 +1207,8 @@
                     <textarea name="maintext" class="ipt_bt_content" placeholder="* 북토크 대화록을 붙여 넣어주세요." rows="10"></textarea>
                 </div>
                 <div class="bt_btn">
-                    <button class="button btn_regist3">등록</button>
                     <button class="button btn_cancel4">취소</button>
+                    <button class="button btn_regist3">등록</button>
                 </div>
             </div>
             <div class="bt_container3">

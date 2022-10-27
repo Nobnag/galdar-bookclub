@@ -69,13 +69,13 @@ a {
     display: inline-block;
 }
 
-.button {
+.gnb_button {
     border: none;
     background: #fff;
     cursor: pointer;
 }
 
-.button:hover {
+.gnb_button:hover {
     font-weight: bold;
     text-decoration: underline;
 }

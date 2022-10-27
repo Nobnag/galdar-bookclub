@@ -23,21 +23,22 @@ h4 {
 .wrapper {
     width: 100%;
     min-width: 600px;
-    /* height: 400px; */
-    background: #cacaca;
+    /* background: #cacaca; */
+    border-bottom: 1px solid #ccc;
     margin: 25px 0;
 }
 
 .info_wrapper {
     position: relative;
     height: auto;
-    padding-bottom: 50px;
+    padding-bottom: 60px;
+    /* background: #cacaca; */
 }
 
 .container_book_contents {
     width: auto;
     height: auto;
-    padding: 15px;
+    /* padding: 15px 15px 0 15px; */
 }
 
 @media screen and (max-width: 1355px){
@@ -45,12 +46,13 @@ h4 {
         width: 600px;
         height: auto;
         padding: 0;
-        margin: 20px auto;
+        margin: 0 auto;
+        margin-top: 20px;
     }
 }
 
 .book_img {
-    background: #eee;
+    /* background: #eee; */
     width: 300px;
     height: calc(300px * 1.14142);
     float: left;
@@ -72,8 +74,8 @@ h4 {
 
 .book_info {
     display: inline-block;
-    background: #ddd;
-    width: 510px;
+    background: #ededed;
+    width: 445px;
     height: calc(300px * 1.14142);
     /* margin-left: 20px; */
     /* padding: 15px; */
@@ -83,6 +85,8 @@ h4 {
     .book_info {
         margin: 0 auto;
         display: block;
+        min-width: 540px;
+        width: 53vw;
     }
 }
 
@@ -122,16 +126,16 @@ h4 {
     height: auto;
 }
 
-.btn_update_info button {
+.btn_update_info .btn_updateBook {
     /* display: block; */
-    width: 120px;
+    /* width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
-    border: none;
+    border: none; */
     margin-right: 5%;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 
@@ -164,11 +168,12 @@ h4 {
     width: 90%;
     height: 80px;
     margin: 0 auto;
-    background: #bbb;
+    background: #ededed;
     text-align: center;
     line-height: 80px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    border-radius: 5px;
 }
 
 
@@ -177,7 +182,7 @@ h4 {
     margin: 0;
     padding: 0;
     list-style-type: none;
-    width: 100%;
+    width: 90%;
     position: relative;
 }
 
@@ -222,122 +227,137 @@ h4 {
     width: 90%;
     height: 80px;
     margin: 0 auto;
-    background: #bbb;
+    background: #ededed;
     text-align: center;
     line-height: 80px;
+    border-radius: 5px;
 }
 
 .sr_box3 {
     width: 90%;
     height: 80px;
     margin: 0 auto;
-    background: #bbb;
+    background: #ededed;
     text-align: center;
     line-height: 80px;
+    border-radius: 5px;
 }
 
 .sr_box2 .sr_ipt {
     width: 500px;
     height: 40px;
     padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #8d8d8d
+}
+
+.sr_box2 .sr_ipt:focus {
+    outline: 1.5px solid #ccc;
+    border-radius: 5px;
 }
 
 .sr_box3 .sr_ipt2 {
     width: 500px;
     height: 40px;
     padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #8d8d8d
+}
+
+.sr_box3 .sr_ipt2:focus {
+    outline: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .btn_write {
-    display: block;
-    /* float: right; */
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
-    border: none;
+    border: none; */
     margin-right: 5%;
-    margin-top: 12px;
-    cursor: pointer;
+    /* margin-top: 12px;
+    cursor: pointer; */
 }
 
 .btn_update {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 .btn_regist {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 .btn_cancel {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 5%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right:  5%;
 }
 
 .btn_delete5 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 .btn_regist4 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 .btn_cancel7 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 5%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 5%;
 }
 
 
@@ -363,26 +383,42 @@ h4 {
 }
 
 .mr_wrapper .mr_board {
-    /* width: 650px; */
     width: 90%;
-    /* height: 500px; */
     height: auto;
     margin: 0 auto;
-    background: #eaeaea;
+    /* background: #eaeaea; */
     /* display: inline-block; */
     text-align: center;
 }
 
+.mr_board h5 {
+    padding-left: 8.5%;
+    text-align: justify;
+    margin-bottom: 6px;
+}
+
 .mr_wrapper table {
+    background-color: #ededed;
+    color: #5a5a5a;
+    font-size: 14px;
     width: 100%;
     margin: 0 auto;
-    border: 1px solid;
+    border: 1px solid #ccc;
+}
+
+.mr_wrapper th {
+    border-bottom: 1px solid #ccc;
+    font-weight: normal;
 }
 
 .mr_wrapper .th, td {
-    border: 1px solid black;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    /* border: 1px solid black; */
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.mr_wrapper td:last-child {
+    font-size: 12px;
 }
 
 .mr_wrapper .th_name {
@@ -438,16 +474,16 @@ h4 {
 
 
 .btn_write2 {
-    display: block;
+   /*  display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 5%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 5%;
 }
 
 .mr_container2 h4 {
@@ -456,42 +492,49 @@ h4 {
 
 
 .btn_cancel2 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 5%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 5%;
 }
 
 
 .btn_regist2 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 
 
 .mr_container2 input {
+    border: 1px solid #ccc;
     height: 20px;
     width: 80%;   
     margin-bottom: 12px;
     padding: 5px 10px;
 }
 
+.mr_container2 input:focus, textarea:focus {
+    outline: 1px solid #aaa;
+}
+
+
 .mr_container2 textarea {
+    border: 1px solid #ccc;
     display: inline-block;
     resize: none;
     padding: 5px 10px;
@@ -505,12 +548,12 @@ h4 {
 }
 
 .mr_container3 .detail {
-    border: 1px solid;
+    border: 1px solid #ccc;
     height: auto;
     width: 100%;   
     margin: 0 auto 5px auto;
     /* padding: 5px; */
-    background: #f2f2f2;
+    /* background: #f2f2f2; */
     text-align: left;
     font-size: 14px;
 }
@@ -556,7 +599,7 @@ h4 {
 }
 
 .cn_ct {
-    padding: 15px 10px;
+    padding: 15px 25px;
     min-height: 300px;
     white-space: pre-wrap;
     line-height: 200%;
@@ -570,42 +613,42 @@ h4 {
 }
 
 .btn_cancel3 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 5%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 5%;
 }
 
 .btn_update2 {
-    display: none;
+    /* display: none;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 .btn_delete6 {
-    display: none;
+    /* display: none;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 .mr_container4 {
@@ -634,16 +677,16 @@ h4 {
 
 
 .btn_update5 {
-    display: block;
+   /*  display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 
@@ -684,7 +727,7 @@ h4 {
     height: 100%;
     margin: 0 auto;
     /* line-height: 260px; */
-    background: #eaeaea;
+    background: #ededed;
     text-align: left;
 }
 
@@ -698,6 +741,8 @@ h4 {
     white-space: pre-wrap;
     height: 300px;
     overflow-y: scroll;
+    font-size: 13px;
+    line-height: 175%;
 }
 
 .bt_container2 {
@@ -705,8 +750,9 @@ h4 {
     width: 90%;
     height: auto;
     margin: 0 auto;
-    background: #eaeaea;
+    background: #ededed;
     text-align: center;
+    padding: 20px 10px 55px 10px;
 }
 
 .bt_container2 input {
@@ -725,18 +771,18 @@ h4 {
 }
 
 .btn_update3 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
-
+/* 
 .btn_write3 {
     display: block;
     width: 120px;
@@ -745,14 +791,14 @@ h4 {
     background: #8a8a8a;
     color: #fff;
     border: none;
-    /* margin-right: %; */
     margin-top: 12px;
     cursor: pointer;
-}
+    margin-right: %;
+} */
 
 
 .btn_regist3 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
@@ -760,9 +806,10 @@ h4 {
     color: #fff;
     border: none;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
-
+/* 
 .btn_cancel4 {
     display: block;
     width: 120px;
@@ -771,11 +818,11 @@ h4 {
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
     cursor: pointer;
+    margin-right: 2%;
 }
-
+ */
 .bt_container3 {
     display: none;
     width: 90%;
@@ -783,6 +830,7 @@ h4 {
     margin: 0 auto;
     background: #eaeaea;
     text-align: center;
+    padding: 20px 10px 55px 10px;
 }
 
 .bt_container3 input {
@@ -801,31 +849,31 @@ h4 {
 }
 
 .btn_update4 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
 
 .btn_delete4 {
-    display: block;
+    /* display: block;
     width: 120px;
     height: 30px;
     float: right;
     background: #8a8a8a;
     color: #fff;
     border: none;
-    margin-right: 2%;
     margin-top: 12px;
-    cursor: pointer;
+    cursor: pointer; */
+    margin-right: 2%;
 }
-
+/* 
 .btn_cancel6 {
     display: block;
     width: 120px;
@@ -834,10 +882,10 @@ h4 {
     background: #8a8a8a;
     color: #fff;
     border: none;
-    /* margin-right: 2%; */
     margin-top: 12px;
     cursor: pointer;
-}
+    margin-right: 2%;
+} */
 
 
 
@@ -858,7 +906,7 @@ h4 {
 }
 
 .reply_list_box {
-    background: #ededed;
+    /* background: #ededed; */
     width: 90%;
     margin: 15px auto;
     height: auto;
@@ -866,10 +914,10 @@ h4 {
 }
 
 .reply_list {
-    background: #b9b9b9;
+    /* background: #b9b9b9; */
     display: flex;
     justify-content:space-evenly;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 12px;
     text-align: justify;
 }
@@ -881,16 +929,16 @@ h4 {
 }
 
 .reply_writer {
-    width: 10%;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    width: 18%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     line-height: 22px;
 }
 
 .reply_content {
-    width: 74%;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    width: 66%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     line-height: 20px;
 }
 
@@ -910,8 +958,8 @@ h4 {
 .reply_datetime_container {
     width: 16%;
     min-width: 120px;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     line-height: 20px;
     margin-bottom: 4px;
     padding: 5px 10px;
@@ -928,6 +976,7 @@ h4 {
     padding: 0;
     margin: 0;
     cursor: pointer;
+    border-radius: 2px;
 }
 
 .reply_datetime2 {
@@ -936,6 +985,7 @@ h4 {
     color: #5a5a5a;
     line-height: 16px;
     width: 120px;
+    text-align: right;
 }
 
 .reply_datetime2 input {
@@ -981,16 +1031,18 @@ h4 {
 
 .reply_box {
     background: #ededed;
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
-    height: 120px;
+    height: 125px;
 }
 
 .reply_write_box {
     padding-top: 15px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin: 0 auto;
+    width: 95%;
+    /* margin-bottom: 15px; */
 }
 
 .reply_box .ipt_reply_pw {
@@ -1017,11 +1069,25 @@ h4 {
 }
 
 .btn_reg {
+    margin-right: 2.5%;
+}
+
+
+
+.button {
+    display: block;
     width: 120px;
-    color: white;
-    background: #666;
-    border: 0;
-    height: 24px;
+    height: 30px;
     float: right;
+    background: #aaa;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    margin-top: 12px;
     cursor: pointer;
+}
+
+button:hover {
+    background: #666;
+    font-weight: 600;
 }
