@@ -154,12 +154,13 @@ app.get('/api/logout', function(req,res) {
     }
 });
 
-//회원관리페이지 회원정보 불러오기
+//회원관리페이지 회원정보 불러오기+페이징
 app.get('/api/getmember_info', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
             // .input('vi_MemberIdx', req.query.MemberIdx)
+            .input('v_search', req.query.search)
             .input('vi_pageNo', req.query.page_no)
             .input('vi_pageSize', req.query.page_size)
             // .query('SELECT MemberIdx,Email,Pw,Nickname,Contact,Convert(nvarchar(16),JoinDatetime,121) as JoinDatetime,PremiumMemberYn,AdminYn FROM Member WHERE MemberIdx = MemberIdx')
