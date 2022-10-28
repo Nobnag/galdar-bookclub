@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+
 body {
     padding: 0;
     margin: 0;
@@ -11,12 +13,12 @@ a {
 .container {
     width: 60%;
     min-width: 600px;
-    margin: 0 auto;
+    margin: 80px auto;
 }
 
 h4 {
-    padding-left: 20px;
-    border-left: 5px solid #666;
+    padding-left: 10px;
+    border-left: 4px solid #4F5945;
     margin: 0 0 20px;
 }
 
@@ -24,7 +26,7 @@ h4 {
     width: 100%;
     min-width: 600px;
     /* background: #cacaca; */
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #D8D9D7;
     margin: 25px 0;
 }
 
@@ -38,12 +40,12 @@ h4 {
 .container_book_contents {
     width: auto;
     height: auto;
-    /* padding: 15px 15px 0 15px; */
+    padding: 15px 5% 0 5%;
 }
 
-@media screen and (max-width: 1355px){
+@media screen and (max-width: 1400px){
     .container_book_contents {
-        width: 600px;
+        width: auto;
         height: auto;
         padding: 0;
         margin: 0 auto;
@@ -53,14 +55,14 @@ h4 {
 
 .book_img {
     /* background: #eee; */
-    width: 300px;
-    height: calc(300px * 1.14142);
+    width: 25%;
+    height: calc(250px * 1.14142);
     float: left;
-    margin: 0 20px;
+    margin: 0 5%;
     text-align: center;
 }
 
-@media screen and (max-width: 1355px){
+@media screen and (max-width: 1400px){
     .book_img {
         float: none;
         margin: 0 auto;
@@ -69,36 +71,68 @@ h4 {
 
 .book_img img {
     width: auto;
+    border-radius: 3px;
     height: 100%;
 }
 
+.book_info_wrapper {
+    min-width: 527px;
+    width: 64.5%;
+    border: 1px solid #ccc;
+    height: calc(250px * 1.14142);
+    display: inline-block;
+}
+
+@media screen and (max-width: 1400px){
+    .book_info_wrapper {
+        margin: 0 auto;
+        display: block;
+        min-width: 540px;
+        width: 53vw;
+        margin-top: 30px;
+        height: auto;
+    }
+}
 .book_info {
     display: inline-block;
-    background: #ededed;
-    width: 445px;
-    height: calc(300px * 1.14142);
+    /* background: #ededed; */
+    /* width: 573px; */
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #ccc; */
+    /* height: calc(250px * 1.14142); */
+    border-radius: 3px;
     /* margin-left: 20px; */
     /* padding: 15px; */
 }
-
-@media screen and (max-width: 1355px){
+/* 
+@media screen and (max-width: 1400px){
     .book_info {
         margin: 0 auto;
         display: block;
         min-width: 540px;
         width: 53vw;
+        margin-top: 30px;
+        height: auto;
     }
-}
+} */
 
 .book_info ul {
     list-style-type: none;
-    padding: 15px 0 0 0;
+    padding: 25px 0;
     margin: 0;
+    margin-left: 24px;
+}
+
+@media screen and (max-width: 1400px){
+    .book_info ul {
+        margin: 0 100px;
+    }
 }
 
 .book_info h2 {
-    margin : 0 0 12px;
     padding-left: 10px;
+    margin-bottom: 4px;
 }
 
 .book_info .book_idx {
@@ -106,9 +140,24 @@ h4 {
 }
 
 .book_info li {
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
     padding-left: 10px;
+    font-size: 12px;
 }
+
+.book_category {
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.book_desc {
+    margin-bottom: 30px;
+}
+
+.book_author, .book_translator, .book_publisher, .book_publishDate, .book_btDate {
+    margin-bottom: 8px;
+}
+
 
 .book_info li p {
     display: inline-block;
@@ -162,6 +211,11 @@ h4 {
     display: none;
     width: auto;
     height: auto;
+}
+
+.sr_container ul p {
+    font-size: 14px;
+    color: #5a5a5a;
 }
 
 .sr_box {
@@ -221,6 +275,7 @@ h4 {
     display: inline-block;
     border: 0;
     cursor: pointer;
+    color: #5a5a5a;
 }
 
 .sr_box2 {
@@ -386,9 +441,10 @@ h4 {
     width: 90%;
     height: auto;
     margin: 0 auto;
-    /* background: #eaeaea; */
+    background: #ededed;
     /* display: inline-block; */
     text-align: center;
+    padding: 10px 0;
 }
 
 .mr_board h5 {
@@ -403,7 +459,8 @@ h4 {
     font-size: 14px;
     width: 100%;
     margin: 0 auto;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
+    border-radius: 3px;
 }
 
 .mr_wrapper th {
@@ -447,6 +504,7 @@ h4 {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    vertical-align: middle;
 }
 
 .mr_wrapper .td_title span:hover {
@@ -528,7 +586,7 @@ h4 {
     padding: 5px 10px;
 }
 
-.mr_container2 input:focus, textarea:focus {
+/* .mr_container2  */input:focus, textarea:focus {
     outline: 1px solid #aaa;
 }
 
@@ -728,6 +786,7 @@ h4 {
     margin: 0 auto;
     /* line-height: 260px; */
     background: #ededed;
+    border-radius: 3px;
     text-align: left;
 }
 
@@ -743,6 +802,11 @@ h4 {
     overflow-y: scroll;
     font-size: 13px;
     line-height: 175%;
+    border-radius: 3px;
+}
+
+.bt_desc p {
+    color: #5a5a5a;
 }
 
 .bt_container2 {
@@ -908,9 +972,13 @@ h4 {
 .reply_list_box {
     /* background: #ededed; */
     width: 90%;
-    margin: 15px auto;
+    margin: 15px auto 0 auto;
     height: auto;
     text-align: center;
+}
+
+.reply_list_box p {
+    font-size: 14px;
 }
 
 .reply_list {
@@ -1033,6 +1101,7 @@ h4 {
     background: #ededed;
     width: 95%;
     margin: 0 auto;
+    border-radius: 3px;
     height: 125px;
 }
 
@@ -1079,7 +1148,7 @@ h4 {
     width: 120px;
     height: 30px;
     float: right;
-    background: #aaa;
+    background: #93A6BF;
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -1087,7 +1156,7 @@ h4 {
     cursor: pointer;
 }
 
-button:hover {
-    background: #666;
+.button:hover {
+    background: #5D84A6;
     font-weight: 600;
 }

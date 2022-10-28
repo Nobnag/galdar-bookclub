@@ -22,7 +22,7 @@
             display: inline-block;
         }
         .simple-pagination ul {
-            padding: 20px 0;
+            padding: 20px 0 0 0;
         }
         /* (e) pagination 스타일 수정 */
     </style>
@@ -56,7 +56,7 @@
                 success: function(result){
                     // var data = result.recordset[0];
                     if(result.recordset.length == 0){
-                        var html = "아직 작성된 한줄평이 없습니다.";
+                        var html = `<p>아직 작성된 한줄평이 없습니다.<p>`;
                         $('.sr_container ul').html(html);
                     } else {
                         for(var i = 0; i < result.recordset.length; i ++){
@@ -142,7 +142,7 @@
                 ,datatype: 'jason'
                 ,success: function(result){
                     if(result.recordset.length == 0){
-                        var text =`<br /><br /><br /><br /><br /><br /><br /><p>대화록은 오프라인 북토크 진행 이후 업로드됩니다.</p>`;
+                        var text =`<p>대화록은 오프라인 북토크 진행 이후 업로드됩니다.</p>`;
                         $('.btn_update3').hide();
                         $('.bt_container .bt_desc').html(text)
                     } else {
@@ -266,7 +266,7 @@
                         });
                     }
                     if(result.recordset.length == 0){
-                        var html = `<span>아직 작성된 댓글이 없습니다.</span>`;
+                        var html = `<p>아직 작성된 댓글이 없습니다.</p>`;
                     } else {
                         var html = "";
                         for(var i = 0; i < result.recordset.length; i ++){
@@ -312,14 +312,14 @@
             }
             if(typeof(loginObj) != "undefined"){
                 if(loginObj.AdminYn == "1"){
-                    // $('.btn_updateBook').show();
+                    $('.btn_updateBook').show();
                     $('.btn_write3').show();
                 } else {
-                    // $('.btn_updateBook').hide();
+                    $('.btn_updateBook').hide();
                     $('.btn_write3').hide();
                 }
             } else {
-                // $('.btn_updateBook/api/submitSR').hide();
+                $('.btn_updateBook').hide();
                 $('.btn_write3').hide();
             }
 
@@ -348,9 +348,9 @@
                     var html = $(".container_book_contents").html();
                     html = html.replace(/{img}/gi, data.BookImg)
                                 .replace(/{idx}/gi,data.BookIdx)
-                                .replace(/{category}/gi,data.BookCategory)
+                                .replace(/{category}/gi,"[\&nbsp\&nbsp\&nbsp"+data.BookCategory+"\&nbsp\&nbsp\&nbsp]")
                                 .replace(/{title}/gi,data.BookTitle)
-                                .replace(/{desc}/gi,data.BookDesc)
+                                .replace(/{desc}/gi,"\"\&nbsp\&nbsp\&nbsp"+data.BookDesc+"\&nbsp\&nbsp\&nbsp\"")
                                 .replace(/{author}/gi,data.BookAuthor)
                                 .replace(/{translator}/gi,data.BookTranslator)
                                 .replace(/{publisher}/gi,data.BookPublisher)
@@ -871,7 +871,7 @@
                             alert('대화록이 삭제되었습니다.');
                             $('.bt_container3').css("display","none");
                             $('.bt_container').css("display","block");
-                            var text =`<br /><br /><br /><br /><br /><br /><br /><p>대화록은 오프라인 북토크 진행 이후 업로드됩니다.</p>`;
+                            var text =`<p>대화록은 오프라인 북토크 진행 이후 업로드됩니다.</p>`;
                             $('.bt_container .bt_desc').html(text)
                         }
                     }
@@ -1010,11 +1010,12 @@
                 <div class="book_img">
                     <img src="/uploads/{img}">
                 </div>
-                <div class="book_info">
-                    <ul>
+                <div class="book_info_wrapper">
+                    <div class="book_info">
+                        <ul>
                         <li class="book_category">{category}</li>
                         <h2 class="book_title">{title}</h2>
-                        <li class="book_desc">{desc}</li>
+                        <li class="book_desc"><em>{desc}</em></li>
                         <li class="book_idx">
                             <p>도서번호</p>
                             <span>{idx}</span>
@@ -1039,7 +1040,8 @@
                             <p>북토크 진행일자</p>
                             <span>{btDate}</span>
                         </li>
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="btn_update_info">
