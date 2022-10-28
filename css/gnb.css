@@ -24,6 +24,8 @@ a {
     width: 100%;
     margin: 0 auto;
     height: 100px;
+    border-top: solid 1px gray;
+    border-bottom: solid 1px gray;
 }
 
 .gnb_container {
@@ -34,14 +36,12 @@ a {
 
 .gnb_home_link {
     position: relative;
-    margin-right: 100px;
 }
 
 .gnb_logo {
     position: relative;
     max-width: 50%;
-    height: 80%;
-    margin-top: 20px;
+    height: 100%;
     display: inline-block;
     vertical-align: middle;
     word-wrap: break-word;
@@ -52,21 +52,22 @@ a {
 .gnb_content {
     position: absolute;
     display: inline-block;
-    right: 15vw;
-    margin-top: 50px;
+    right: 10vw;
+    margin-top: 70px;
+    font-weight: bolder;
 }
 
 .gnb_link {
     position: relative;
-    font-size: 30px;
+    font-size: 15px;
     margin-left: 30px;
 }
 
 .gnb_right {
-    position: absolute;
-    right: 2vw;
+    position: relative;
     top: 10px;
     display: inline-block;
+    float: right;
 }
 
 .gnb_button {
