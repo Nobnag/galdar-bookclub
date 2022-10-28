@@ -61,6 +61,7 @@ a {
     position: relative;
     font-size: 15px;
     margin-left: 30px;
+    color: gray;
 }
 
 .gnb_right {
@@ -71,6 +72,8 @@ a {
 }
 
 .gnb_button {
+    font-size: 16px;
+    color: gray;
     border: none;
     background: #fff;
     cursor: pointer;

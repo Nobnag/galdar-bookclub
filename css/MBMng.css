@@ -16,10 +16,10 @@ th{
     background-color: #a49f9f;
 }
 tr{
-    background-color:rgb(181, 214, 146)
+    background-color: #eee;
 }
 td{
-    padding: 2px 4px;
+    padding: 12px 0;
 }
 .SR, .MR{
     list-style:none;
@@ -66,4 +66,11 @@ ul{
 .ipt_sreach{
     width: 400px;
     height: 20px;
+}
+.td_memberIdx, .td_premiumMemberYn, .td_adminYn{
+    text-align: center;
+    width: 40px;
+}
+.td_email, .td_pw,.td_nickname,.td_contact,.td_joinDatetime{
+    padding-left: 4px;
 }
