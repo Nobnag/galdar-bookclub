@@ -406,6 +406,11 @@
                     alert('한줄평을 입력하세요.');
                     return false;
                 }
+                if(sr_content.length > 25){
+                    alert("한줄평은 25자 미만으로 입력해주세요.");
+                    $('.sr_ipt').focus();
+                    return false;
+                }
         // 2-2-4. API 전송
                 if(sr_content !== ""){
                     var params = {
@@ -445,6 +450,16 @@
             $('.btn_update').click(function(){
                 // $('.sr_container').css('display','none');
                 // $('.sr_container3').css('display','block');
+                /* var sr_content = $('.sr_ipt').val();
+                if(sr_content == ""){
+                    alert('한줄평을 입력하세요.');
+                    return false;
+                } */
+                /* if(sr_content.length > 25){
+                    alert("한줄평은 25자 미만으로 입력해주세요.");
+                    $('.sr_ipt').focus();
+                    return false;
+                } */
                 var book_idx = $('.book_info ul .book_idx span').html();
                 var sr_writer = loginObj.Nickname;
                 // console.log(sr_writer);
@@ -479,7 +494,15 @@
             $('.btn_regist4').click(function(){
                 var sr_updated = $('.sr_container3 .sr_ipt2').val();
                 var sr_writer = loginObj.Nickname;
-                
+                if(sr_updated == ""){
+                    alert('한줄평을 입력하세요.');
+                    return false;
+                } 
+                if(sr_updated.length > 25){
+                    alert("한줄평은 25자 미만으로 입력해주세요.");
+                    $('.sr_ipt').focus();
+                    return false;
+                }
                 var params = {
                     // sr_idx: sr_idx
                     sr_updated: sr_updated
@@ -566,8 +589,8 @@
                 var mr_title = $('.ipt_mr_title').val();
                 var mr_content = $('.ipt_mr_content').val();
         // 3-2-2. 미입력시 안내
-                if(mr_title.length > 30){
-                    alert("제목은 30자 미만으로 입력해주세요.");
+                if(mr_title.length > 20){
+                    alert("제목은 20자 미만으로 입력해주세요.");
                     $('.ipt_mr_title').focus();
                     return false;
                 }
@@ -629,8 +652,9 @@
             $(document).on('click', 'tbody .title_span', function(){
                 var value = $(this).data("attr");
                 // console.log(mr_idx);
-                $('.mr_container').hide()
+                $('.mr_container').hide();
                 $('.mr_container3').show();
+                $('.mr_wrapper .mr_board').css('background-color','transparent');
                 $('.mr_container3 .detail_mr_idx').html(value);
                 var mr_idx = $('.mr_container3 .detail_mr_idx').html()
                 
@@ -770,7 +794,10 @@
                         datatype: 'json',
                         // async: false,
                         success: function(result){
-                            // console.log(result);
+                            if(result.recordset[0].Result == 'Fail'){
+                                alert('이미 서평을 작성하셨습니다.');
+                                return false;
+                            }
                             alert("작성이 완료되었습니다.");
                             location.href=('/book_detail?book_idx='+book_idx)
                         },
@@ -903,6 +930,11 @@
                 var reply_name = $('input[name="re_name"]').val();
                 var reply_pw = $('input[name="re_password"]').val();
                 var reply_content = $('.ipt_reply_content').val();
+                if(reply_content.length > 80){
+                    alert("댓글은 80자 미만으로 입력해주세요.");
+                    $('.ipt_reply_content').focus();
+                    return false;
+                }
                 if(reply_name == "" || reply_pw == "" || reply_content == ""){
                     alert('이름과 비밀번호, 내용을 모두 입력하세요.');
                     return false;
@@ -926,7 +958,7 @@
                         success: function(result){
                             if(result.recordset[0].Result == 'Success'){
                                 alert("작성이 완료되었습니다.");
-                                location.href=('/book_detail?book_idx='+book_idx)
+                                location.reload();
                             }
                         },
                         error: function(jqXHR, textStatus, errorThrown){

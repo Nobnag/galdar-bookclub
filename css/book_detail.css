@@ -146,6 +146,7 @@ h4 {
 }
 
 .book_category {
+    color: #5D84A6;
     font-size: 12px;
     margin-bottom: 15px;
 }
@@ -222,7 +223,8 @@ h4 {
     width: 90%;
     height: 80px;
     margin: 0 auto;
-    background: #ededed;
+    /* background: #ededed; */
+    border: 1px solid #ccc;
     text-align: center;
     line-height: 80px;
     display: flex;
@@ -258,6 +260,13 @@ h4 {
     display: block;
 }
 
+@media screen and (max-width: 1400px){
+    .slider strong {
+        font-size: 16px;
+    }
+}
+
+
 .slider em {
     padding: 0;
     margin: 0;
@@ -282,9 +291,10 @@ h4 {
     width: 90%;
     height: 80px;
     margin: 0 auto;
-    background: #ededed;
+    /* background: #ededed; */
     text-align: center;
     line-height: 80px;
+    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
@@ -292,8 +302,9 @@ h4 {
     width: 90%;
     height: 80px;
     margin: 0 auto;
-    background: #ededed;
+    /* background: #ededed; */
     text-align: center;
+    border: 1px solid #ccc;
     line-height: 80px;
     border-radius: 5px;
 }
@@ -441,8 +452,10 @@ h4 {
     width: 90%;
     height: auto;
     margin: 0 auto;
-    background: #ededed;
+    /* background: #ededed; */
     /* display: inline-block; */
+    border: 1px solid #ccc;
+    border-radius: 5px;
     text-align: center;
     padding: 10px 0;
 }
@@ -454,7 +467,7 @@ h4 {
 }
 
 .mr_wrapper table {
-    background-color: #ededed;
+    /* background-color: #ededed; */
     color: #5a5a5a;
     font-size: 14px;
     width: 100%;
@@ -608,7 +621,7 @@ h4 {
 .mr_container3 .detail {
     border: 1px solid #ccc;
     height: auto;
-    width: 100%;   
+    width: 99.5%;   
     margin: 0 auto 5px auto;
     /* padding: 5px; */
     /* background: #f2f2f2; */
@@ -993,20 +1006,20 @@ h4 {
 .reply_list .reply {
     display: inline-block;
     padding: 5px 5px 5px 10px;
-    margin-bottom: 4px;
+    /* margin-bottom: 4px; */
 }
 
 .reply_writer {
     width: 18%;
     border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
     line-height: 22px;
 }
 
 .reply_content {
     width: 66%;
     border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
     line-height: 20px;
 }
 
@@ -1027,9 +1040,9 @@ h4 {
     width: 16%;
     min-width: 120px;
     border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
     line-height: 20px;
-    margin-bottom: 4px;
+    /* margin-bottom: 4px; */
     padding: 5px 10px;
     display: flex;
     justify-content: flex-end;
@@ -1092,8 +1105,12 @@ h4 {
 }
 
 .pagination_reply {
-    display: inline-block;
-    margin: 20px 0;
+    /* display: inline-block; */
+    display: block;
+    width: 90%;
+    /* margin: 20px 0; */
+    margin: 20px auto;
+    border-top: 1px solid #ccc;
     text-align: center;
 }
 
