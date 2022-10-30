@@ -630,7 +630,61 @@ app.get('/api/getLoginAdmin', function(req,res) {
     }
 });
 
-// 따옴표 안에는 http://projecgbc.herokuapp.com 이후에 올 주소를 넣으면 됨.
+// API - 도서 정보를 가져온다. 
+app.get('/api/getBookData', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.query.book_idx)
+            .execute('[sp_book_detail_select_byUser]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
+// API - DB 도서리스트를 삭제한다.
+app.post('/api/deleteList', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', parseInt(req.body.book_idx))
+            .input('vi_BookUpdateUser', req.body.BookRegWriter)
+            .execute('[sp_book_delete_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+// API - DB 도서리스트를 수정한다.
+app.post('/api/updateBook', upload.single('bookImg'), async function(req, res){
+    try {
+        const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = req.file
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_BookIdx', req.body.book_idx)
+            .input('vi_BookTitle', req.body.BookTitle)
+            .input('vi_BookAuthor', req.body.BookAuthor)
+            .input('vi_BookPublisher', req.body.BookPublisher)
+            .input('vi_BookTranslator', req.body.BookTranslator)
+            .input('vi_BookPubDate', req.body.BookPubDate)
+            .input('vi_BookBtDate', req.body.BookBtDate)
+            .input('vi_BookCategory', req.body.BookCategory)
+            .input('vi_BookUpdateUser', req.body.BookRegWriter)
+            .input('vi_BookDesc', req.body.BookDesc)
+            .input('vi_BookImg', filename)
+            .execute('[sp_book_update_byAdmin]')
+        res.json(result);
+    } catch(err) {
+        console.log(err);
+        res.status(500);
+        res.send(err)
+    }
+});
+
+// 따옴표 안에는 https://projectgbc.herokuapp.com 이후에 올 주소를 넣으면 됨.
 
 app.listen(port, function() {
     console.log('3000 실행');

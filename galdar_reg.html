@@ -10,32 +10,140 @@
         <script src="js/footer.js"></script>
         <title>도서등록페이지 </title>
         <script>
+
             
             $(document).ready(function(){
 
-                //이미지업로드
-                // var form = new FormData();
-                // form.append("bookImg");
-        
-                // var settings = {
-                // "url": "https://api.imgur.com/3/image",
-                // "method": "POST",
-                // "timeout": 0,
-                // "headers": {
-                //     "Authorization": "Client-ID 8a31b073b14a6ab"
-                // },
-                // "processData": false,
-                // "mimeType": "multipart/form-data",
-                // "contentType": false,
-                // "data": form
-                // };
-           
-                // $.ajax(settings).done(function (response) {
-                // console.log(response);
-                // alert(response);
-                // });
-            
+
+                //업로드이미지 미리보기
+                const reader = new FileReader();
+    
+                reader.onload = (readerEvent) => {     //onload 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생한다.
+                    document.querySelector(".real-upload").setAttribute("src", readerEvent.target.result);
+                };
+
+                document.querySelector("#upload_file").addEventListener("change", (changeEvent) => {
+
+                    const imgFile = changeEvent.target.files[0];
+                    reader.readAsDataURL(imgFile);
+
+                    const fileName = document.getElementById("file_route");
+                    fileName.value = imgFile.name;
+                    //파일 이름을 띄워줌
+                }) 
+
+
+                // url 에서 parameter 추출
+                var getParam = function(sname) {
+                    var params = location.search.substr(location.search.indexOf("?") + 1);
+                    var sval = "";
+                    params = params.split("&");
+
+                    for (var i = 0; i < params.length; i++) {
+                        temp = params[i].split("=");
+                        if ([temp[0]] == sname) { sval = temp[1]; }
+                    }
+                    return sval;
+                }
                 
+                //도서정보를 가져온다.
+                var params = {
+                    book_idx: getParam('book_idx')
+                };
+                
+                $.ajax({
+                    url: '/api/getBookData',
+                    data: params,
+                    type: 'get',
+                    datatype: 'json',
+                    success: function(result){
+                        if(result.recordset.length == 0){
+                            $(".content_delete").hide();
+                            $(".content_correct").hide();
+                            return ture;
+                        }
+                        else{
+                            $(".content_write").hide();
+                        }
+                        var data = result.recordset[0];
+                        var tt = result.recordset[0].BookCategory
+                        var tt1 = result.recordset[0].BookTitle
+                        var tt2 = result.recordset[0].BookDesc
+                        var tt3 = result.recordset[0].BookAuthor
+                        var tt4 = result.recordset[0].BookTranslator
+                        var tt5 = result.recordset[0].BookPublisher
+                        var tt6 = result.recordset[0].BookPubDate
+                        var tt7 = result.recordset[0].BookBtDate
+                        var tt8 = result.recordset[0].BookRegWriter
+                        var tt9 = result.recordset[0].BookImg
+                   
+                        var html = $("#template_bookinfo").html();
+                        html = html
+                        $('.input_content input[name="BookCategory"]').val(tt);
+                        $('.input_content input[name="BookTitle"]').val(tt1);
+                        $('.input_content input[name="BookDesc"]').val(tt2);
+                        $('.input_content input[name="BookAuthor"]').val(tt3);
+                        $('.input_content input[name="BookTranslator"]').val(tt4);
+                        $('.input_content input[name="BookPublisher"]').val(tt5);
+                        $('.input_content input[name="BookPubDate"]').val(tt6);
+                        $('.input_content input[name="BookBtDate"]').val(tt7);
+                        $('.input_content input[name="BookRegWriter"]').val(tt8);
+                        // document.querySelector(".real-upload").setAttribute("src", '/uploads/'+tt9);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                        alert("an error occured");
+                    }
+                    
+                });
+
+       
+        // var form = new FormData();
+        // form.append("image", "https://avatars0.githubusercontent.com/u/9919?s=280&v=4");
+ 
+        // var settings = {
+        //   "url": "https://api.imgur.com/3/image",
+        //   "method": "POST",
+        //   "timeout": 0,
+        //   "headers": {
+        //     "Authorization": "Client-ID 8a31b073b14a6ab"
+        //   },
+        //   "processData": false,
+        //   "mimeType": "multipart/form-data",
+        //   "contentType": false,
+        //   "data": form
+        // };
+ 
+        // $("#upload").click(function() {
+        //     $.ajax(settings).done(function (response) {
+        //       console.log(response);
+        //       alert(response);
+        //     });
+        // });
+
+//----------------------------------------------------------------------------
+        
+
+        // function uploadImageTest() {
+        //     var bodyData = new FormData();
+        //     var imageFile = document.querySelector("#upload_file").files[0];
+        //     bodyData.append("image", imageFile);
+        //     fetch("https://api.imgur.com/3/image", {
+        //         method: "POST",
+        //         headers: {
+        //             Authorization: "Client-ID 8a31b073b14a6ab",
+        //             Accept: "application/json",
+        //         },
+        //         body: bodyData,
+        //     }).then(function(res){
+        //         return res.json();
+        //     }).then(function(json){
+        //         console.log(json);
+        //     });	
+        // }
+
+
+                //도서목록 등록
                 $('.content_write').click(function(){
                     
                     var BookCategory = $('input[name="BookCategory"]').val().trim();
@@ -137,27 +245,154 @@
                             else alert("등록되었습니다.");
                             location.href = "./galdar_list.html"; 
                         }   */  
-
                 });
 
-                //업로드이미지 미리보기
-                const reader = new FileReader();
-    
-                reader.onload = (readerEvent) => {     //onload 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생한다.
-                    document.querySelector(".real-upload").setAttribute("src", readerEvent.target.result);
-                };
+                //도서목록 삭제
+                $('.content_delete').click(function(){
 
-                document.querySelector("#upload_file").addEventListener("change", (changeEvent) => {
+                    var BookRegWriter = $('input[name="BookRegWriter"]').val();
+                    var params = {
+                        book_idx: getParam('book_idx')
+                        ,BookRegWriter: BookRegWriter
+                    }
+                    if(confirm("도서 글을 삭제하시겠습니까?") == false){
+                        return false;
+                    }
+                    else{
+                        $.ajax({
+                            url: '/api/deleteList',
+                            type: 'post',
+                            datatype: 'json',
+                            data : params,
+                            success: function(result){
+                                alert("글이 삭제되었습니다.")
+                                location.href = "/galdar_list"
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                console.log(errorThrown);
+                                alert("error");
+                            }
+                        });
+                    }
+                }); 
 
-                    const imgFile = changeEvent.target.files[0];
-                    reader.readAsDataURL(imgFile);
+                //도서목록 수정
+                    $('.content_correct').click(function(){
 
-                    const fileName = document.getElementById("file_route");
-                    fileName.value = imgFile.name;
-                    //파일 이름을 띄워줌
-                }) 
-                $(".content_write").hide();
-                $('.BookCategory').arrt("value","사랑해");
+                    var params = {
+                        book_idx: getParam('book_idx')
+                    }
+                    
+                    var BookCategory = $('input[name="BookCategory"]').val().trim();
+                    var BookTitle = $('input[name="BookTitle"]').val().trim();
+                    var BookDesc = $('input[name="BookDesc"]').val().trim();
+                    var BookAuthor = $('input[name="BookAuthor"]').val().trim();
+                    var BookTranslator = $('input[name="BookTranslator"]').val().trim();
+                    var BookPublisher = $('input[name="BookPublisher"]').val().trim();
+                    var BookPubDate = $('input[name="BookPubDate"]').val().trim();
+                    var BookBtDate = $('input[name="BookBtDate"]').val().trim();
+                    var BookRegWriter = $('input[name="BookRegWriter"]').val().trim();
+                    var BookImg = $("#upload_file").val().trim();
+                    // var upload_file = $('input[name="upload_file"]').val();
+
+                    /*var params = {
+                        book_idx: getParam('book_idx')
+                        ,BookCategory
+                        ,BookTitle
+                        ,BookDesc
+                        ,BookAuthor
+                        ,BookTranslator
+                        ,BookPublisher
+                        ,BookPubDate
+                        ,BookBtDate
+                        ,BookRegWriter
+                        ,BookImg
+                    }*/
+                    
+
+                    if(BookCategory == ""){
+                        alert("도서분야를 입력해주세요");
+                        return false;
+                    }
+                    if(BookTitle == ""){
+                        alert("도서제목을 입력해주세요");
+                        return false;
+                    }
+                    if(BookDesc == ""){
+                        alert("도서설명을 입력해주세요");
+                        return false;
+                    }
+                    if(BookAuthor == ""){
+                        alert("도서저자를 입력해주세요");
+                        return false;
+                    }
+                    /* if(BookTranslator == ""){
+                        alert("도서옮긴이를 입력해주세요");
+                        return false;
+                    } */
+                    if(BookPublisher == ""){
+                        alert("도서출판사를 입력해주세요");
+                        return false;
+                    }
+                    if(BookPubDate == ""){
+                        alert("도서출판일자를 입력해주세요");
+                        return false;
+                    }
+                    if(BookBtDate == ""){
+                        alert("북토크일자를 입력해주세요");
+                        return false;
+                    }
+                    if(BookRegWriter == ""){
+                        alert("작성자명을 입력해주세요");
+                        return false;
+                    }
+                    if(BookImg == ""){
+                        alert("책 이미지를 선택해주세요");
+                        return false;
+                    }
+
+                    /* var fileCheck = document.getElementById("upload_file").value;
+                        if(!fileCheck){
+                            alert("파일을 첨부해 주세요");
+                            return false;
+                        }
+                    */
+                    if(BookTitle !== "" && BookAuthor !== "" && BookPublisher !== "" && BookPubDate!== "" && BookBtDate !== "" && BookCategory !== "" && BookRegWriter !== "" && BookDesc !== ""){
+                        /*var params = {
+                            BookTitle: BookTitle,
+                            BookAuthor: BookAuthor,
+                            BookPublisher: BookPublisher,
+                            BookTranslator: BookTranslator,
+                            BookPubDate: BookPubDate,
+                            BookBtDate: BookBtDate,
+                            BookCategory: BookCategory,
+                            BookRegWriter: BookRegWriter,
+                            BookDesc: BookDesc,
+                            BookImg: $('#upload_file')[0].files
+                        };
+                        */
+                        var data = new FormData($("#create_book_form")[0])
+                        data.append('book_idx', getParam('book_idx'));
+
+                        $.ajax({
+                            url: '/api/updateBook'
+                            ,data: data
+                            ,type: 'post' 
+                            ,contentType: false
+                            ,processData: false
+                            ,cache: false
+                            ,success: function(result){
+                                if(result.recordset.length > 0){
+                                alert('도서가 수정되었습니다.');
+                                location.href=('/galdar_list');
+                                }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown){
+                                console.log(errorThrown);
+                            }
+                        });
+                    }
+                });
             });
         </script>
 
@@ -178,11 +413,11 @@
     
                 <div class="input_content">
                     <b class="name">도서분야</b>
-                    <input class="text" value= "1" type="text" name="BookCategory" placeholder="도서 분야를 입력하세요."><br><br>
+                    <input class="text" type="text" name="BookCategory" placeholder="도서 분야를 입력하세요."><br><br>
     
                     <b class="name">도서제목</b>
                     <input class="text" type="text" name="BookTitle" placeholder="도서 제목을 입력하세요."><br><br>
-                    <!-- 확인필요 -->
+                    
                     <b class="name">도서설명</b>
                     <input class="text" type="text" name="BookDesc" placeholder="도서 설명을 입력하세요."><br><br>
     
@@ -202,10 +437,23 @@
                     <input class="text" type="date" name="BookBtDate" placeholder="북토크 일자를 입력하세요."><br><br>
     
                     <b class="name">작성자</b>
-                    <input class="text" type="text" name="BookRegWriter"><br><br>
+                    <input class="text" class="BookRegWriter" type="text" name="BookRegWriter"><br><br>
                     <button class="content_write">글쓰기</button>
+                    <button class="content_delete">삭제</button>
+                    <button class="content_correct">수정</button>
                 </div>
             </form>
         </div>
+        <template id="template_bookinfo">
+            <span class="template_category">{category}</span>
+            <span class="template_title">{BookTitle}</span>
+            <span class="template_BookDesc">{BookDesc}</span>
+            <span class="template_BookAuthor">{BookAuthor}</span>
+            <span class="template_category">{BookTranslator}</span>
+            <span class="template_title">{BookPublisher}</span>
+            <span class="template_BookDesc">{BookPubDate}</span>
+            <span class="template_BookAuthor">{BookBtDate}</span>
+            <span class="template_BookAuthor">{BookRegWriter}</span>
+        </template>
     </body>
 </html>
