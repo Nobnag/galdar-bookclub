@@ -226,19 +226,21 @@ h4 {
     /* background: #ededed; */
     border: 1px solid #ccc;
     text-align: center;
-    line-height: 80px;
+    /* line-height: 80px; */
     display: flex;
     justify-content: space-around;
     border-radius: 5px;
+    align-items: center;
 }
 
 
 .slider {
-    overflow: hidden;
+    /* overflow: hidden; */
     margin: 0;
     padding: 0;
     list-style-type: none;
     width: 90%;
+    /* line-height: 80px; */
     position: relative;
 }
 
@@ -247,17 +249,23 @@ h4 {
     margin: 0;
     padding: 0;
     width: 100%;
-    position: absolute;
+    display: inline-block;
+    /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%); */
 }
 
 .slider strong {
     padding: 0;
     margin: 0;
     font-size: 24px;
-    display: block;
+    width: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 @media screen and (max-width: 1400px){
@@ -271,20 +279,30 @@ h4 {
     padding: 0;
     margin: 0;
     font-size: 12px;
-    line-height: 12px;
+    /* line-height: 12px; */
     display: inline-block;
     position: absolute;
-    bottom: 10%;
+    bottom: -5%;
     right: 15%;
 }
 
 .sr_box .btn {
-    background: transparent;
+    /* background: transparent; */
     font-size: 24px;
     display: inline-block;
-    border: 0;
+    /* border: 0; */
     cursor: pointer;
-    color: #5a5a5a;
+    width: 12px;
+    height: 14px;
+    background-size: 100%;
+}
+
+.btn_left {
+    background: url(left.svg) no-repeat;
+}
+
+.btn_right {
+    background: url(right.svg) no-repeat;
 }
 
 .sr_box2 {
