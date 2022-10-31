@@ -47,6 +47,7 @@
                 }
                 
                 //도서정보를 가져온다.
+                
                 var params = {
                     book_idx: getParam('book_idx')
                 };
@@ -60,7 +61,7 @@
                         if(result.recordset.length == 0){
                             $(".content_delete").hide();
                             $(".content_correct").hide();
-                            return ture;
+                            return true;
                         }
                         else{
                             $(".content_write").hide();
@@ -88,7 +89,9 @@
                         $('.input_content input[name="BookPubDate"]').val(tt6);
                         $('.input_content input[name="BookBtDate"]').val(tt7);
                         $('.input_content input[name="BookRegWriter"]').val(tt8);
-                        // document.querySelector(".real-upload").setAttribute("src", '/uploads/'+tt9);
+                        $('.image_update input[class="real-upload"]').val(tt9);
+                        // $('.image_update input[id="file_route"]').val(tt10);
+                        document.querySelector(".real-upload").setAttribute("src", '/uploads/'+tt9);
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         console.log(errorThrown);
@@ -219,6 +222,29 @@
                             BookImg: $('#upload_file')[0].files
                         };
                         */
+                       //imgur 
+                        var bodyData = new FormData();
+                        var imageFile = $('#upload_file')[0].files[0];
+                        bodyData.append("image", imageFile);
+                        var settings = {
+                            "url": "https://api.imgur.com/3/image",
+                            "method": "POST",
+                            "timeout": 0,
+                            "headers": {
+                                "Authorization": "Client-ID 8a31b073b14a6ab"
+                            },
+                            "processData": false,
+                            "mimeType": "multipart/form-data",
+                            "contentType": false,
+                            "data": bodyData,
+                            "async":false
+                        };
+                        $.ajax(settings).done(function (response) {
+                        console.log(response);
+                        alert(response);
+                        });
+
+
                        var data = new FormData($("#create_book_form")[0])
 
                         $.ajax({
@@ -239,12 +265,6 @@
                             }
                         });
                     }
-                        /* else {
-                            var result = confirm("게시글을 등록하시겠습니까?" );
-                            if(result == 0) return false;8
-                            else alert("등록되었습니다.");
-                            location.href = "./galdar_list.html"; 
-                        }   */  
                 });
 
                 //도서목록 삭제
@@ -445,6 +465,7 @@
             </form>
         </div>
         <template id="template_bookinfo">
+            <span class="template_bookImg">{bookImg}</span>
             <span class="template_category">{category}</span>
             <span class="template_title">{BookTitle}</span>
             <span class="template_BookDesc">{BookDesc}</span>
