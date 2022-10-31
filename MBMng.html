@@ -112,12 +112,13 @@
     </template>
 
     <script>
-        var mrPageNo = 1;
+        var memberPageNo = 1;
+        //검색 후의 페이징
         function getmember_sreach(){
             var search = $('.ipt_sreach').val();
             var data = {
                 search: search,
-                page_no: mrPageNo,
+                page_no: memberPageNo,
                 page_size: 5
             };
             $.ajax({
@@ -127,18 +128,19 @@
                 data:data ,
                 // async: false,
                 success: function(result){
-                    if(result.recordset.length > 0 && $(".pagination_member").html().trim() == ""){
+                    if(result.recordset.length > 0 && $(".pagination_member").html().trim() !== ""){
                          $(".pagination_member").pagination({
-                            items: result.recordset[0].totalCnt,
+                            items: result.recordset[0].recordsFiltered,
                             itemsOnPage: data.page_size,
                             cssStyle: 'light-theme',
                             prevText: '<',
                             nextText: '>',
                             onPageClick:function(pageNumber, event){
-                                mrPageNo = pageNumber;
-                                getmember_info();
+                                memberPageNo = pageNumber;
+                                getmember_sreach();
                             }
                         });
+                        $('.pagination_member').html(html)
                     }
                     var html = "";
                     for(var i = 0; i < result.recordset.length; i ++){
@@ -162,11 +164,11 @@
                 }
             });
         }
-        //맴버 정보를 불러오는 함수선. 반복해야해서 함수화시킴
+        //맴버 정보를 불러오는 함수선언. 반복해야해서 함수화시킴
         function getmember_info(){
             var data = {
                 search: '',
-                page_no: mrPageNo,
+                page_no: memberPageNo,
                 page_size: 5
             };
             $.ajax({
@@ -183,8 +185,9 @@
                             cssStyle: 'light-theme',
                             prevText: '<',
                             nextText: '>',
+
                             onPageClick:function(pageNumber, event){
-                                mrPageNo = pageNumber;
+                                memberPageNo = pageNumber;
                                 getmember_info();
                             }
                         });
