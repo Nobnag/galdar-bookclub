@@ -497,11 +497,11 @@ app.post('/api/submitReply', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
-            // .input('vi_MemberIdx', req.body.member_idx)
+            .input('vi_MemberIdx', req.body.member_idx)
             .input('vi_BookIdx', req.body.book_idx)
             .input('vi_ReplyWriter', req.body.reply_name)
             .input('vi_ReplyContent', req.body.reply_content)
-            .input('vi_ReplyNonMemberPw', req.body.reply_pw)
+            // .input('vi_ReplyNonMemberPw', req.body.reply_pw)
             .execute('[sp_reply_create_byUser]')
         res.json(result);
     } catch(err) {
@@ -531,9 +531,10 @@ app.post('/api/deleteReply', async function(req, res){
     try {
         const pool = await poolPromise;
         let result = await pool.request()
+            .input('vi_MemberIdx', req.body.member_idx)
             .input('vi_ReplyIdx', req.body.reply_idx)
             .input('vi_ReplyWriter', req.body.reply_writer)
-            .input('vi_ReplyNonMemberPw', req.body.reply_pw)
+            // .input('vi_ReplyNonMemberPw', req.body.reply_pw)
             .execute('[sp_reply_delete_byUser]')
         res.json(result);
     } catch(err) {

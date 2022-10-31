@@ -108,7 +108,7 @@
                     }
 
                     if(result.recordset.length == 0){
-                        var html = "아직 작성된 게시물이 없습니다.";
+                        var html = `<p>아직 작성된 게시물이 없습니다.</p>`;
                         $('.mr_board table').html(html);
                     } else {
                         var html = "";
@@ -165,7 +165,7 @@
         }
  
         // 댓글 삭제 함수
-        function clickReplyX(){
+        /* function clickReplyX(){
             var loginObj = getLoginObj();
             $('.btn_x').click(function(){
                 $(this).parent().css('display','none');
@@ -175,29 +175,28 @@
                     $(this).parent().next().find('input').val(loginObj.Pw);
                 }
             });
-        }
+        } */
         
         // 댓글 삭제 확인 함수
-        function doReplyX(){
-            $('.btn_delete3').click(function(){
+        function clickReplyX(){
+            var loginObj = getLoginObj();
+            $('.btn_x').click(function(){
+                var member_idx = loginObj.MemberIdx;
                 var reply_idx = $(this).data("attr");
                 var reply_writer = $(this).parent().parent().parent().find("span").html();
-                var reply_pw = $(this).prev().val().trim();
+                /* var reply_pw = $(this).prev().val().trim();
                 var thisRow = $(this).parent().parent().parent("div");
-                var thisIpt = $(this).prev();
+                var thisIpt = $(this).prev(); */
                 
-                if(thisIpt.val() == ""){
-                    alert("비밀번호를 입력하세요.");
-                    return false;
-                }
-
                 if(confirm("댓글을 삭제하시겠습니까?") == false){
                     return false;
                 }
+                
                 var params = {
-                    reply_idx: reply_idx
+                    member_idx: member_idx
+                    ,reply_idx: reply_idx
                     ,reply_writer: reply_writer
-                    ,reply_pw: reply_pw
+                    // ,reply_pw: reply_pw
                 }
                 $.ajax({
                     url: '/api/deleteReply'
@@ -212,8 +211,8 @@
                         }
 
                         if(result.recordset[0].Result == 'Fail'){
-                            alert("올바른 비밀번호가 아닙니다.");
-                            thisIpt.val('');
+                            alert("직접 작성한 댓글만 삭제할 수 있습니다.");
+                            // thisIpt.val('');
                             return false;
                         }
                     }
@@ -225,13 +224,13 @@
         }
         
         // 댓글 삭제 취소 함수
-        function undoReplyX(){
+        /* function undoReplyX(){
             $('.btn_cancel5').click(function(){
                 $(this).prev().prev().val('');
                 $(this).parent().css('display','none');
                 $(this).parent().prev().css('display','block');
             });
-        }
+        } */
 
         // 댓글 조회 함수 선언
         var replyPageNo = 1;
@@ -260,8 +259,8 @@
                                 replyPageNo = pageNumber;
                                 getReply();
                                 clickReplyX();
-                                doReplyX();
-                                undoReplyX();
+                                // doReplyX();
+                                // undoReplyX();
                             }
                         });
                     }
@@ -276,8 +275,8 @@
                     }
                     $('.reply_list_box').html(html);
                     clickReplyX();
-                    doReplyX();
-                    undoReplyX();
+                    // doReplyX();
+                    // undoReplyX();
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(errorThrown);
@@ -296,9 +295,10 @@
                 $('.btn_update').show();
                 $('.btn_write2').show();
                 // $('.btn_update2').show();
-                $('input[name="re_password"]').hide();
+                $('.reply_box').show();
+                // $('input[name="re_password"]').hide();
                 $('input[name="re_name"]').val(loginObj.Nickname);
-                $('input[name="re_password"]').val(loginObj.Pw);
+                // $('input[name="re_password"]').val(loginObj.Pw);
                 $('.ipt_mr_writer').val(loginObj.Nickname);
                 $('.ipt_bt_writer').val(loginObj.Nickname);
             } else {
@@ -306,9 +306,10 @@
                 $('.btn_update').hide();
                 $('.btn_write2').hide();
                 $('.btn_update3').hide();
-                $('input[name="re_password"]').show();
+                $('.reply_box').hide();
+                // $('input[name="re_password"]').show();
                 $('input[name="re_name"]').removeAttr("readonly");
-                $('input[name="re_password"]').removeAttr("readonly");
+                // $('input[name="re_password"]').removeAttr("readonly");
             }
             if(typeof(loginObj) != "undefined"){
                 if(loginObj.AdminYn == "1"){
@@ -920,33 +921,36 @@
 
 
         // 5. 댓글 작성
+        
+        // 5-1. 
             $('.btn_reg').click(function(){
                 /* if(typeof(loginObj) != 'undefined'){
                     var member_idx = loginObj.MemberIdx;
                 } else {
                     var member_idx = 0;
                 } */
+                var member_idx = loginObj.MemberIdx;
                 var book_idx = $('.book_info ul .book_idx span').html();
                 var reply_name = $('input[name="re_name"]').val();
-                var reply_pw = $('input[name="re_password"]').val();
+                // var reply_pw = $('input[name="re_password"]').val();
                 var reply_content = $('.ipt_reply_content').val();
                 if(reply_content.length > 80){
                     alert("댓글은 80자 미만으로 입력해주세요.");
                     $('.ipt_reply_content').focus();
                     return false;
                 }
-                if(reply_name == "" || reply_pw == "" || reply_content == ""){
+                if(reply_name == "" || /* reply_pw == "" || */ reply_content == ""){
                     alert('이름과 비밀번호, 내용을 모두 입력하세요.');
                     return false;
                 }
                 
-                if(reply_name !== "" && reply_pw !== "" && reply_content !== ""){
+                if(reply_name !== "" && /* reply_pw !== "" &&  */reply_content !== ""){
                     var params = {
-                        // member_idx: member_idx
-                        book_idx: book_idx
+                        member_idx: member_idx
+                        ,book_idx: book_idx
                         ,reply_name: reply_name
                         ,reply_content: reply_content
-                        ,reply_pw: reply_pw
+                        // ,reply_pw: reply_pw
                     };
 
                     $.ajax({
@@ -1273,13 +1277,13 @@
                     <div class="reply_datetime_container">
                         <div class="reply_datetime">
                             <span>{Writedatetime}</span>
-                            <button class="btn_x">X</button>
+                            <button data-attr="{data-attr}" class="btn_x">X</button>
                         </div>
-                        <div class="reply_datetime2">
+                        <!-- <div class="reply_datetime2">
                             <input type="password" name="reply_pw" placeholder="비밀번호 입력">
-                            <button data-attr="{data-attr}" class="btn_delete3">삭제</button>
+                            <button  class="btn_delete3">삭제</button>
                             <button class="btn_cancel5">취소</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -1298,9 +1302,9 @@
                         <div class="ipt ipt_reply_name">
                             <input type="text" name="re_name" placeholder="작성자 명(20자 제한)" readonly>
                         </div>
-                        <div class="ipt ipt_reply_pw">
+                        <!-- <div class="ipt ipt_reply_pw">
                             <input type="password" name="re_password" placeholder="비밀번호" readonly>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="box reply_textarea_box">
                         <textarea name="textarea" class="ipt_reply_content" rows="3" placeholder="내용을 입력하세요."></textarea>

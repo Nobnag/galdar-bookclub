@@ -177,15 +177,7 @@ h4 {
 }
 
 .btn_update_info .btn_updateBook {
-    /* display: block; */
-    /* width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none; */
     margin-right: 5%;
-    /* cursor: pointer; */
 }
 
 
@@ -216,6 +208,7 @@ h4 {
 
 .sr_container ul p {
     font-size: 14px;
+    line-height: 80px;
     color: #5a5a5a;
 }
 
@@ -240,6 +233,7 @@ h4 {
     padding: 0;
     list-style-type: none;
     width: 90%;
+    height: 100%;
     /* line-height: 80px; */
     position: relative;
 }
@@ -270,7 +264,7 @@ h4 {
 
 @media screen and (max-width: 1400px){
     .slider strong {
-        font-size: 16px;
+        font-size: 20px;
     }
 }
 
@@ -282,7 +276,7 @@ h4 {
     /* line-height: 12px; */
     display: inline-block;
     position: absolute;
-    bottom: -5%;
+    bottom: 10%;
     right: 15%;
 }
 
@@ -354,108 +348,42 @@ h4 {
 }
 
 .btn_write {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none; */
     margin-right: 5%;
-    /* margin-top: 12px;
-    cursor: pointer; */
 }
 
 .btn_update {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
 .btn_regist {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
 .btn_cancel {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right:  5%;
 }
 
 .btn_delete5 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
 .btn_regist4 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
 .btn_cancel7 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 5%;
 }
 
 
 
 .mr_wrapper {
-    /* height: 620px; */
     height: auto;
     position: relative;
-    /* text-align: center; */
     padding-bottom: 60px;
 }
 
 .mr_container {
-    /* display: none; */
     width: auto;
     height: auto;
 }
@@ -563,15 +491,6 @@ h4 {
 
 
 .btn_write2 {
-   /*  display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 5%;
 }
 
@@ -581,29 +500,11 @@ h4 {
 
 
 .btn_cancel2 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 5%;
 }
 
 
 .btn_regist2 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
@@ -702,41 +603,14 @@ h4 {
 }
 
 .btn_cancel3 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 5%;
 }
 
 .btn_update2 {
-    /* display: none;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
 .btn_delete6 {
-    /* display: none;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
@@ -750,31 +624,7 @@ h4 {
     text-align: left;
 }
 
-/* 
-.btn_cancel2 {
-    display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-right: 5%;
-    margin-top: 12px;
-    cursor: pointer;
-} */
-
-
 .btn_update5 {
-   /*  display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
@@ -794,10 +644,6 @@ h4 {
     width: 80%;
 }
 
-
-
-
-
 .bt_wrapper {
     height: auto;
     padding-bottom: 60px;
@@ -808,8 +654,6 @@ h4 {
     height: 300px;
     background: #ededed;
 }
-
-
 
 .bt_container {
     width: 90%;
@@ -866,58 +710,13 @@ h4 {
 }
 
 .btn_update3 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
-/* 
-.btn_write3 {
-    display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer;
-    margin-right: %;
-} */
-
 
 .btn_regist3 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
-/* 
-.btn_cancel4 {
-    display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer;
-    margin-right: 2%;
-}
- */
+
 .bt_container3 {
     display: none;
     width: 90%;
@@ -944,46 +743,12 @@ h4 {
 }
 
 .btn_update4 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
 
 .btn_delete4 {
-    /* display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer; */
     margin-right: 2%;
 }
-/* 
-.btn_cancel6 {
-    display: block;
-    width: 120px;
-    height: 30px;
-    float: right;
-    background: #8a8a8a;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    cursor: pointer;
-    margin-right: 2%;
-} */
-
-
-
 
 
 .reply_wrapper {
@@ -1067,17 +832,17 @@ h4 {
 }
 
 .reply_datetime_container .reply_datetime .btn_x {
-    width: 10px;
+    width: 10px; 
     height: 10px;
     border: 0;
-    background: #8d8d8d;
+    background: #96A9C7;
     font-size: 8px;
     padding: 0;
     margin: 0;
     cursor: pointer;
     border-radius: 2px;
 }
-
+/* 
 .reply_datetime2 {
     display: none;
     float: right;
@@ -1104,7 +869,6 @@ h4 {
     padding: 0;
     border: 0;
     height: 16px;
-    /* float: right; */
     display: inline-block;
     cursor: pointer;
 }
@@ -1117,11 +881,10 @@ h4 {
     padding: 0;
     border: 0;
     height: 16px;
-    /* float: right; */
     display: inline-block;
     cursor: pointer;
 }
-
+ */
 .pagination_reply {
     /* display: inline-block; */
     display: block;
