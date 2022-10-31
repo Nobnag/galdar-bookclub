@@ -26,7 +26,7 @@ a {
     margin: 0 auto 8px;
 }
 .btn_Duplicate{
-    height: 36px;
+    height: 34px;
     position: absolute;
     top: 0;
     right: 0;
@@ -50,7 +50,7 @@ input {
     background-color: rgb(60, 155, 93);
     border-radius: 5px;
     border: 0;
-    width: 312px;
+    width: 304px;
     height: 30px;
     margin: 10px auto;
     display: block;
