@@ -59,7 +59,7 @@ a {
 
 .gnb_link {
     position: relative;
-    font-size: 15px;
+    font-size: 16px;
     margin-left: 30px;
     color: gray;
 }
@@ -69,10 +69,12 @@ a {
     top: 10px;
     display: inline-block;
     float: right;
+    margin-right: -12px;
+    font-size: 12px;
 }
 
 .gnb_button {
-    font-size: 16px;
+    font-size: 12px;
     color: gray;
     border: none;
     background: #fff;
