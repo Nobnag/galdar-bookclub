@@ -306,6 +306,8 @@
         });
         //해당tr 를 더블클릭해 각컬럼을 인풋박스로 만듬
         $(document).on("dblclick",".table_mamber_info tbody tr",function(){
+            $(this).css("background","#eee");
+            // $(this).find("input").css("onfocus","outline","none")
             //플래깅 한다. 방법1*****
             //선택자를 만들때 사용하는 방법으로 매소드 밖에다가 플러그를 설정.
             //if문 사용해서 인풋박스 반복바꿈현상 멈추기

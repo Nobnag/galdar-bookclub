@@ -57,6 +57,12 @@ h1, h2{
 table input{
     box-sizing: border-box;
     width: 100%;
+    border: 0;
+    size: 20px;
+};
+table tbody tr td input:focus{
+    outline: none;
+    background-color: #eee
 };
 .pagination_member {
     display: inline-block;
