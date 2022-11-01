@@ -4,41 +4,32 @@
 
 li{
     list-style: none; 
-    /* width: 220px; */
-    /* margin 35px, 45px; */
+
 }
 
 .book_list
     {
-    /* width: 60%;
-    min-width: 600px;
-    margin: 0 auto; */
-    width: 1006px; margin: 50px auto;
+    /* width: 60%;*/
+    width: 990px; 
+    margin: 50px auto;
     overflow: hidden;
     }
-    /* width: 940px; margin: 0 auto;
-    overflow: hidden; */
-
 
 h3{
-    /* margin-left: 10px; */
-    padding: 31px;
+    padding: 30px 0;
     font-size: 44px; 
-    width: 93%; height: 50px;
-    line-height: 50px; 
+    width: 100%; height: 50px;
     text-align: center;
     font-family: 'Nanum Myeongjo', serif;
 }
 
 li{
     float: left;
-    width: 235px; height: 299px;
-    margin: 42px 50px;
+    width: 250px; height: 370px;
+    margin: 40px;
 }
 
 a{
-    /* display: inline-block; */
-    /* display: block; */
     height: 100%;
     overflow: hidden;
     position: relative; 
@@ -64,18 +55,15 @@ figcaption{
 a:hover figcaption, .gallery a:focus figcaption{
     opacity: 1;
 }
+
 .btn-wrap {
     text-align: center;
     margin: 30px;
 }
-/* .list_load {
-    display: none;
-} */
+
 #list_load_contain{
     display: none;
 }
-
-
 .list_load.active {
     /* display: inline-block; */
     display: block;
@@ -116,22 +104,33 @@ a:hover figcaption, .gallery a:focus figcaption{
     float: bottom;
     width: 60px;
     height: 45px;
-}
-.list_write_button{
-    float: right;
-    /* margin-left: 50px; */
-}
-#topButtonImg{
     position: fixed;
     right: 20px;
     bottom: 350px;
 }
+
 .list_write_button{
     position: absolute;
-    margin-left: 265px;
-    width: 85px;
-    height: 31px;
-}         
+    /* float: right; */
+    margin-left: 230px;
+    width: 147px;
+    height: 34px;
+    background-color: #282828;
+    color: white;
+    cursor:pointer;
+    border-radius: 4px; 
+}        
+
+.list_title{
+    text-align: center;
+    font-family: 'Nanum Myeongjo', serif;
+    line-height: 180%;
+    display: block;
+    margin: -3px auto;
+    margin-bottom: 36px;
+    width: 65%;
+} 
+
 a.jcm-top {
     position: fixed;
     right: 15px;
@@ -147,18 +146,3 @@ a.jcm-top {
     z-index: 999;
     display: none;
 }
-/* span{
-    display: inline-block;
-} */
-/* pre{
-    display: block;
-    word-wrap:break-word; */
-
-    /* white-space: normal; */
-    /* white-space: pre-wrap;  */
-    /* display: table-cell;
-    vertical-align: middle; */
-
-   /* font-size: 17px;
-    
-} */
