@@ -6,17 +6,17 @@
     background-color: #eee;
 }
 .footer_top {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .footer_container{
-    padding-right: 15px;
-    padding-left: 15px;
+    /* padding-right: 15px;
+    padding-left: 15px; */
     margin:0 auto;
-    width: 80vw;
+    width: 60%;
 }
 .footer_content {
-    font-size: 15px;
+    font-size: 12px;
 }
 .footer_link{
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
