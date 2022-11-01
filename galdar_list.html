@@ -33,7 +33,6 @@
                             var addListHtml="";
                             if(data.recordset.length>0){
                                 for(var i=0;i<data.recordset.length;i++){
-
                                     var row = data.recordset[i];
                                     addListHtml += $(".list_template").html().replace("{BookImg}",row.BookImg).replace("{BookIdx}",
                                     row.BookIdx).replace("{BookTitle}",row.BookTitle).replace("{BookBtDate}",row.BookBtDate);
@@ -100,15 +99,14 @@
                 $("#js-btn-wrap .button_decorate").on("click", function () {
                     moreList();
                 });
-
-                
             })
             
         </script>
     </head>
     <body>
         <div class="book_list">
-            <h3>GBC 선정도서 </h3>
+            <h3>갈다 북클럽 선정도서</h3>
+            <p class="list_title">갈다 북클럽이 매월 선정하는 도서들을 소개합니다.<br>각 도서 이미지를 클릭하시면 회원들의 서평과 북토크 대화록을 열람할 수 있습니다 : )</p>        
             <div id="list_load">
                 <div class="list_template" style="display:none;">
                     <li class="list_load">
@@ -117,8 +115,8 @@
                                 <img class="Book_img" src="/uploads/{BookImg}" alt="이미지">
                                 <figcaption>
                                     <div class="book_title">
-                                        <p>도서이름</p>
-                                        <br>
+                                        <!-- <p>도서이름</p>
+                                        <br> -->
                                         <p>『{BookTitle}』</p>
                                     </div>
                                     <div class="book_btDate">
