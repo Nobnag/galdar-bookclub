@@ -11,7 +11,7 @@
         <title>도서등록페이지 </title>
         <script>
 
-            
+            var img_link = "result";  
             $(document).ready(function(){
 
 
@@ -91,7 +91,7 @@
                         $('.input_content input[name="BookRegWriter"]').val(tt8);
                         $('.image_update input[class="real-upload"]').val(tt9);
                         // $('.image_update input[id="file_route"]').val(tt10);
-                        document.querySelector(".real-upload").setAttribute("src", '/uploads/'+tt9);
+                        // document.querySelector(".real-upload").setAttribute("src", '/uploads/'+tt9);
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         console.log(errorThrown);
@@ -99,52 +99,6 @@
                     }
                     
                 });
-
-       
-        // var form = new FormData();
-        // form.append("image", "https://avatars0.githubusercontent.com/u/9919?s=280&v=4");
- 
-        // var settings = {
-        //   "url": "https://api.imgur.com/3/image",
-        //   "method": "POST",
-        //   "timeout": 0,
-        //   "headers": {
-        //     "Authorization": "Client-ID 8a31b073b14a6ab"
-        //   },
-        //   "processData": false,
-        //   "mimeType": "multipart/form-data",
-        //   "contentType": false,
-        //   "data": form
-        // };
- 
-        // $("#upload").click(function() {
-        //     $.ajax(settings).done(function (response) {
-        //       console.log(response);
-        //       alert(response);
-        //     });
-        // });
-
-//----------------------------------------------------------------------------
-        
-
-        // function uploadImageTest() {
-        //     var bodyData = new FormData();
-        //     var imageFile = document.querySelector("#upload_file").files[0];
-        //     bodyData.append("image", imageFile);
-        //     fetch("https://api.imgur.com/3/image", {
-        //         method: "POST",
-        //         headers: {
-        //             Authorization: "Client-ID 8a31b073b14a6ab",
-        //             Accept: "application/json",
-        //         },
-        //         body: bodyData,
-        //     }).then(function(res){
-        //         return res.json();
-        //     }).then(function(json){
-        //         console.log(json);
-        //     });	
-        // }
-
 
                 //도서목록 등록
                 $('.content_write').click(function(){
@@ -222,7 +176,7 @@
                             BookImg: $('#upload_file')[0].files
                         };
                         */
-                       //imgur 
+                       //imgur 이미지 보내기
                         var bodyData = new FormData();
                         var imageFile = $('#upload_file')[0].files[0];
                         bodyData.append("image", imageFile);
@@ -239,31 +193,37 @@
                             "data": bodyData,
                             "async":false
                         };
+                      
                         $.ajax(settings).done(function (response) {
-                        console.log(response);
-                        alert(response);
-                        });
+                            var result = response.split(",")[27].substring(8,42)
+                            console.log(result);
+                            var data = new FormData($("#create_book_form")[0])
+                            data.append('image_url', result);
 
-
-                       var data = new FormData($("#create_book_form")[0])
-
-                        $.ajax({
-                            url: '/api/createBook'
-                            ,data: data
-                            ,contentType: false
-                            ,processData: false
-                            ,cache: false
-                            ,type: 'post' 
-                            ,success: function(result){
-                                if(result.recordset.length > 0){
-                                alert('도서가 등록되었습니다.');
-                                location.href=('/galdar_list');
+                            $.ajax({
+                                url: '/api/createBook'
+                                ,data: data
+                                ,contentType: false
+                                ,processData: false
+                                ,cache: false
+                                ,type: 'post' 
+                                ,success: function(result){
+                                    if(result.recordset.length > 0){
+                                    alert('도서가 등록되었습니다.');
+                                    location.href=('/galdar_list');
+                                    }
+                                },
+                                error: function(jqXHR, textStatus, errorThrown){
+                                    console.log(errorThrown);
                                 }
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                console.log(errorThrown);
-                            }
+                            });
                         });
+                      
+                        
+                        
+                       
+
+                       
                     }
                 });
 

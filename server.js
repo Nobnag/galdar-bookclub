@@ -603,6 +603,7 @@ app.post('/api/createBook', upload.single('bookImg'), async function(req, res){
             .input('vi_BookRegWriter', req.body.BookRegWriter)
             .input('vi_BookDesc', req.body.BookDesc)
             .input('vi_BookImg', filename)
+            .input('vi_BookImg_url', req.body.image_url)
             .execute('[sp_book_register_byAdmin]')
         res.json(result);
     } catch(err) {
