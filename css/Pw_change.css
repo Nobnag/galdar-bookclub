@@ -1,66 +1,31 @@
-a {
-    text-decoration: none;
+a{
+text-decoration: none;
 }
-#wrap {
+
+.wrapper {
     width: 80%;
-    height: 52%;
+    height: 60%;
     margin: 4% auto;
     text-align: center;
 }
-.top {
-    margin-bottom: 50px;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    width: 100%;
-    font-size: 50px;
-}
-.join_info_warp {
-    font-size:20px;
-    margin: 0 auto;
-    width:50vw;
-}
-.Email_warp {
-    position: relative;
-    height: 30px;
-    display: inline-block;
-    margin: 0 auto 8px;
-}
-.btn_Duplicate{
-    height: 34px;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-.ipt_Email {
-    top: 0;
-    position: relative;
-    width: 300px;
-    height: 30px;
-    margin: 0 auto;
-    display: block;
-}
-input {
-    width: 300px;
-    height: 30px;
-    margin: 10px auto;
-    display: block;
-}
 
-.btn_join  { 
-    background-color: rgb(60, 155, 93);
-    border-radius: 5px;
-    border: 0;
-    width: 304px;
-    height: 30px;
-    margin: 10px auto;
-    display: block;
+h1  {
+    text-align:center;
 }
-.btn_join:hover{
-    background-color: rgb(107, 184, 134);
+.pw_change_container{
+    text-align:center;
+}
+input {   
+    display: block;
+    margin: 20px auto;
+    width: 300px;
+    height: 50px;
+}
+.main_btn_pw_change{
+    width: 300px;
+    height: 50px;
     border-radius: 5px;
     border: 0;
-    width: 312px;
-    height: 30px;
-    margin: 10px auto;
-    display: block;
+    cursor: pointer;
+    background-color: lightgray;
 }

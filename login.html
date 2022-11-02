@@ -25,7 +25,7 @@
             <input type="text" name="Email"placeholder="이메일을 입력해주세요" class="enter_keydown">
             <input type="password" name="Pw"placeholder="비밀번호를 입력해주세요" class="enter_keydown">
             <button type="text" class="main_btn_login">로그인</button><br>
-            <button type="text" class="btn_Pw_change Pw_change" onclick="linkPwChange()">비밀번호 찾기</button><br>
+            <button type="text" class="btn_Pw_change Pw_change" onclick="linkPwChange()">비밀번호 변경</button><br>
             <button type="text" class="btn_login kakao_btn_login">소셜 로그인</button>
         </div>
     </div>
@@ -91,6 +91,7 @@
             alert("소셜로그인 구현중에있습니다.열공하고 업데이트하겟습니다.감사합니다.")
         });
         function linkPwChange(){
+            alert("인증이 필요한 서비스입니다.")
             location.href = "/Pw_change"
         }
         

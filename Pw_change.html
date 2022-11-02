@@ -2,12 +2,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>galdar_login</title>
+    <title>galdar_Pw_change</title>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/gnb.css" />
         <script src="js/gnb.js"></script>
         <link rel="stylesheet" type="text/css" href="css/footer.css" />
-        <link rel="stylesheet" type="text/css" href="css/login.css" />
+        <link rel="stylesheet" type="text/css" href="css/Pw_change.css" />
         <script src="js/footer.js"></script>
         <script type="text/javascript" src="js/validation.js"></script>
         <style>
@@ -21,16 +21,21 @@
         <h1>
             비빌번호 찾기
         </h1>
-        <div class="login_container">
+        <div class="pw_change_container">
             <input type="text" name="Email"placeholder="이메일을 입력해주세요" class="enter_keydown">
             <input type="password" name="Pw"placeholder="비밀번호를 입력해주세요" class="enter_keydown">
-            <button type="text" class="main_btn_login"> 비밀번호 찾기찾기</button>
+            <input type="password" name="Pw_confirm"placeholder="비밀번호 확인" class="enter_keydown">
+            <button type="text" class="main_btn_pw_change"> 비밀번호 변경</button>
         </div>
     </div>
     <script>
-        $(document).on("click",".main_btn_login",function(){
+        $(document).ready(function(){
+            alert("인증이 완료되었습니다. 이메일과 변경할 비밀번호를 입력해주세요.")
+        })
+        $(document).on("click",".main_btn_pw_change",function(){
             var Email = $('input[name="Email"]').val().trim();
             var Pw = $('input[name="Pw"]').val().trim();
+            var Pw_confirm = $('input[name="Pw_confirm"]').val().trim();
             if(Email == ""){
                 alert("이메일을 입력하세요.");                        
                 $('input[name="Email"]').focus();
@@ -46,39 +51,45 @@
                 $('input[name="Pw"]').focus();
                 return false;
             }
-            if(Email !== "" && Pw !=="") {
-                var data = {
-                    Email: Email
-                    ,Pw: Pw
-                };
-                $.ajax({
-                    type: 'POST',
-                    url: '/login_process',
-                    dataType: 'json',
-                    data: data,
-                    success: function(result){ 
-                        if(result.result == "true"){
-                            location.href = "/galdar_list"
-                        }
-                        else{
-                            alert("아이디/비밀번호를 확인해주세요.");
-                        }
-                        
+            if(idRegExp.test(Pw) == false){
+                        alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('input[name="Pw"]').focus();
                         return false;
-                    },error: function(jqXHR,textStatus,errorThrown) {
-                    }
-                })
             }
+            if(Pw_confirm=="") {
+                    alert("비밀번호 확인을 입력하세요.");                        
+                    $('input[name="Pw_confirm"]').focus();
+                    return false;
+            }
+            if(Pw !=Pw_confirm) {
+                alert("비밀번호와 비밀번호확인이 일치하지 안습니다 비밀번호 확인하여 일치시켜주세요.")
+                $('input[name="Pw_confirm"]').focus();
+                return false;
+            }
+            var data = {
+                Email: Email
+                ,Pw: Pw
+            };
+            $.ajax({
+                type: 'post',
+                url: '/api/Pw_change',
+                dataType: 'json',
+                data: data,
+                success: function(result){ 
+                    alert("비밀번호가 변경되었습니다.");
+                    location.href = "/login"
+                    return false;
+                },
+                error: function(jqXHR,textStatus,errorThrown) {
+                }
+            })
         });
         $(document).on("keydown", ".enter_keydown",function(keynum){
                 if(keynum.keyCode ==13){
-                    $(".main_btn_login").click()
+                    $(".main_btn_pw_change").click()
                 };
             });
             
-app.get('/Pw_change',function(req,res) {
-    res.sendFile(__dirname + "/Pw_change.html")
-});
     </script>
 </body>
 </html>

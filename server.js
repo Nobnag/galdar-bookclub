@@ -172,6 +172,20 @@ app.get('/api/getmember_info', async function(req, res){
     }
 });
 
+app.post('/api/Pw_change', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_Email', req.body.Email)
+            .input('vi_Pw', req.body.Pw)
+            .execute('[sp_pw_update]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+
 //회원관리 페이지에서 해당 라인을 클릭시 불러온다.
 app.get('/api/getNickname', async function(req, res){
     try {
