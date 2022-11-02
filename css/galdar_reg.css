@@ -6,12 +6,19 @@
     /* margin-left: 67px; */
 
 }
+#create_book_form{
+    margin: 5% 0;
+}
 .image_update{
-    display: inline-block; margin:42px 30px 30px 30px;
+    display: inline-block; 
+    margin:42px 30px 30px 30px;
 }
 .real-upload{
-    margin-bottom: 20px;
-    display:inline-block; width:300px; height:400px; border-style: solid; border-width: 1px;
+    margin-bottom: 4px;
+    display:inline-block; 
+    width:300px; height:402px; 
+    border-style: solid; 
+    border-width: 1px;
 }
 h3{
     text-align: center;
@@ -20,18 +27,22 @@ h3{
     position: relative;
     display: inline-block; 
     /* position: absolute;  */
-    margin: 30px; padding-top: 14px;
+    margin: 30px; 
+  
 }
 
 .upload{
     display: block;
 }
 .name{
+    text-align: left;
     display: inline-block;
-    width: 139px;
+    width: 100px;
     font-size: 17px;
 }
 .text{
+    font-size: 15px;
+    text-align: center;
     width: 275px;height: 26px;
 }
 .text_inform{
@@ -52,6 +63,9 @@ label {
     padding: 7px 2px;
 }
 .content_write{
+    border-radius: 5px;
+    color: #fff;
+    background-color: rgba(0, 53, 109, 0.95);
     float: right;
     cursor: pointer;
     /* margin-right: 100px; */
@@ -63,6 +77,9 @@ p{
     margin: 6px;
 }
 .content_correct{
+    border-radius: 5px;
+    color: #fff;
+    background-color: rgba(0, 53, 109, 0.95);
     margin-right: 13px;
     float: right;
     cursor: pointer;
@@ -71,6 +88,9 @@ p{
     height: 30px;   
 }
 .content_delete{
+    border-radius: 5px;
+    color: #fff;
+    background-color: rgba(0, 53, 109, 0.95);
     float: right;
     cursor: pointer;
     /* margin-right: 100px; */

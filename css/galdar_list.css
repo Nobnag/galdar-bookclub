@@ -92,9 +92,10 @@ a:hover figcaption, .gallery a:focus figcaption{
     height:auto;
 }
 .book_title{
+    font-size: 22px;
     height:auto;
     display: block;
-    margin-top: 90px;
+    margin-top: 120px;
     /* display: block; */
     /* word-wrap:break-word; */
 }

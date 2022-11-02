@@ -34,7 +34,7 @@
                             if(data.recordset.length>0){
                                 for(var i=0;i<data.recordset.length;i++){
                                     var row = data.recordset[i];
-                                    addListHtml += $(".list_template").html().replace("{BookImg}",row.BookImg).replace("{BookIdx}",
+                                    addListHtml += $(".list_template").html().replace("{BookImg}",row.BookImg_url).replace("{BookIdx}",
                                     row.BookIdx).replace("{BookTitle}",row.BookTitle).replace("{BookBtDate}",row.BookBtDate);
                                 }
                                 $('.list_load_box').append(addListHtml);
@@ -112,7 +112,7 @@
                     <li class="list_load">
                         <a href='/book_detail?book_idx={BookIdx}'>
                              <figure> <!-- 삽화나 다이어그램, 사진 등과 같이 문서의 주요 흐름과는 독립적인 콘텐츠를 정의할 때 사용 -->
-                                <img class="Book_img" src="/uploads/{BookImg}" alt="이미지">
+                                <img class="Book_img" src="{BookImg}" referrerpolicy="no-referrer" alt="이미지">
                                 <figcaption>
                                     <div class="book_title">
                                         <!-- <p>도서이름</p>

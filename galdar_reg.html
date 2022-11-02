@@ -77,7 +77,7 @@
                         var tt7 = result.recordset[0].BookBtDate
                         var tt8 = result.recordset[0].BookRegWriter
                         var tt9 = result.recordset[0].BookImg
-                   
+                        var tt10 = result.recordset[0].BookImg_url                   
                         var html = $("#template_bookinfo").html();
                         html = html
                         $('.input_content input[name="BookCategory"]').val(tt);
@@ -89,15 +89,12 @@
                         $('.input_content input[name="BookPubDate"]').val(tt6);
                         $('.input_content input[name="BookBtDate"]').val(tt7);
                         $('.input_content input[name="BookRegWriter"]').val(tt8);
-                        $('.image_update input[class="real-upload"]').val(tt9);
-                        // $('.image_update input[id="file_route"]').val(tt10);
-                        // document.querySelector(".real-upload").setAttribute("src", '/uploads/'+tt9);
+                        $('.image_update input.real-upload').attr('src', tt10);
                     },
                     error: function(jqXHR, textStatus, errorThrown){
                         console.log(errorThrown);
                         alert("an error occured");
-                    }
-                    
+                    } 
                 });
 
                 //도서목록 등록
@@ -156,12 +153,6 @@
                         return false;
                     }
 
-                    /* var fileCheck = document.getElementById("upload_file").value;
-                        if(!fileCheck){
-                            alert("파일을 첨부해 주세요");
-                            return false;
-                        }
-                    */
                     if(BookTitle !== "" && BookAuthor !== "" && BookPublisher !== "" && BookPubDate!== "" && BookBtDate !== "" && BookCategory !== "" && BookRegWriter !== "" && BookDesc !== ""){
                         /*var params = {
                             BookTitle: BookTitle,
@@ -176,6 +167,7 @@
                             BookImg: $('#upload_file')[0].files
                         };
                         */
+
                        //imgur 이미지 보내기
                         var bodyData = new FormData();
                         var imageFile = $('#upload_file')[0].files[0];
@@ -195,7 +187,9 @@
                         };
                       
                         $.ajax(settings).done(function (response) {
-                            var result = response.split(",")[27].substring(8,42)
+                            var result = JSON.parse(response).data.link;  //JSON 문자열 객체로 선택적으로 가져온다.
+                            //JSON.stringify() 객체를 문자열로
+                            //toJSON() date객체를 문자열로
                             console.log(result);
                             var data = new FormData($("#create_book_form")[0])
                             data.append('image_url', result);
@@ -218,12 +212,6 @@
                                 }
                             });
                         });
-                      
-                        
-                        
-                       
-
-                       
                     }
                 });
 
@@ -326,10 +314,10 @@
                         alert("작성자명을 입력해주세요");
                         return false;
                     }
-                    if(BookImg == ""){
+                    /*if(BookImg == ""){
                         alert("책 이미지를 선택해주세요");
                         return false;
-                    }
+                    }*/
 
                     /* var fileCheck = document.getElementById("upload_file").value;
                         if(!fileCheck){
@@ -351,26 +339,72 @@
                             BookImg: $('#upload_file')[0].files
                         };
                         */
-                        var data = new FormData($("#create_book_form")[0])
-                        data.append('book_idx', getParam('book_idx'));
+                        if(BookImg != "") {
+                            var bodyData = new FormData();
+                            var imageFile = $('#upload_file')[0].files[0];
+                            bodyData.append("image", imageFile);
+                            var settings = {
+                                "url": "https://api.imgur.com/3/image",
+                                "method": "POST",
+                                "timeout": 0,
+                                "headers": {
+                                    "Authorization": "Client-ID 8a31b073b14a6ab"
+                                },
+                                "processData": false,
+                                "mimeType": "multipart/form-data",
+                                "contentType": false,
+                                "data": bodyData,
+                                "async":false
+                            };
 
-                        $.ajax({
-                            url: '/api/updateBook'
-                            ,data: data
-                            ,type: 'post' 
-                            ,contentType: false
-                            ,processData: false
-                            ,cache: false
-                            ,success: function(result){
-                                if(result.recordset.length > 0){
-                                alert('도서가 수정되었습니다.');
-                                location.href=('/galdar_list');
+                            $.ajax(settings).done(function (response) {
+                                var result = JSON.parse(response).data.link;
+                                console.log(result);
+                                var data = new FormData($("#create_book_form")[0])
+                                data.append('book_idx', getParam('book_idx'));
+                                data.append('image_url', result);
+
+                                $.ajax({
+                                    url: '/api/updateBook'
+                                    ,data: data
+                                    ,contentType: false
+                                    ,processData: false
+                                    ,cache: false
+                                    ,type: 'post' 
+                                    ,success: function(result){
+                                        if(result.recordset.length > 0){
+                                        alert('도서가 수정되었습니다.');
+                                        location.href=('/galdar_list');
+                                        }
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown){
+                                        console.log(errorThrown);
+                                    }
+                                });
+                            });
+                        } else {
+                            var data = new FormData($("#create_book_form")[0])
+                            data.append('book_idx', getParam('book_idx'));
+                            data.append('image_url', $('.real-upload').attr('src'));
+
+                            $.ajax({
+                                url: '/api/updateBook'
+                                ,data: data
+                                ,contentType: false
+                                ,processData: false
+                                ,cache: false
+                                ,type: 'post' 
+                                ,success: function(result){
+                                    if(result.recordset.length > 0){
+                                    alert('도서가 수정되었습니다.');
+                                    location.href=('/galdar_list');
+                                    }
+                                },
+                                error: function(jqXHR, textStatus, errorThrown){
+                                    console.log(errorThrown);
                                 }
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                console.log(errorThrown);
-                            }
-                        });
+                            });
+                        }
                     }
                 });
             });
@@ -381,7 +415,7 @@
         <div class="reg_wrapper">
             <form id="create_book_form" enctype="multipart/form-data" onsubmit="return false">
                 <div class="image_update">
-                    <input type="image" class="real-upload">
+                    <input type="image" class="real-upload" referrerpolicy="no-referrer">
                     <div class="file_upload_botton">
                         <!-- <p>이미지는 --- --- 로 등록하세요</p> -->
                         <input type="text" id="file_route" disabled="disabled" value="파일 선택">
