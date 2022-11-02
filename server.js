@@ -573,10 +573,10 @@ app.post('/galdar_list', async function(req,res){
     try {
         let query = "";
         if(typeof(req.body.StartBookIdx) == "undefined"){
-            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg, CONVERT(CHAR(10), BookBtDate, 23) as BookBtDate FROM BOOK ORDER BY BookIdx DESC';
+            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg_url, CONVERT(CHAR(10), BookBtDate, 23) as BookBtDate FROM BOOK ORDER BY BookIdx DESC';
         }
         else{
-            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg, CONVERT(CHAR(10), BookBtDate, 23) as BookBtDate FROM BOOK WHERE BookIdx <= '+req.body.StartBookIdx+' ORDER BY BookIdx DESC';
+            query = 'SELECT TOP '+req.body.ListCnt+' BookIdx, BookTitle, BookImg_url, CONVERT(CHAR(10), BookBtDate, 23) as BookBtDate FROM BOOK WHERE BookIdx <= '+req.body.StartBookIdx+' ORDER BY BookIdx DESC';
         }
 
         const pool = await poolPromise;
@@ -668,7 +668,7 @@ app.post('/api/deleteList', async function(req, res){
 // API - DB 도서리스트를 수정한다.
 app.post('/api/updateBook', upload.single('bookImg'), async function(req, res){
     try {
-        const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = req.file
+        //const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = req.file
         const pool = await poolPromise;
         let result = await pool.request()
             .input('vi_BookIdx', req.body.book_idx)
@@ -681,7 +681,8 @@ app.post('/api/updateBook', upload.single('bookImg'), async function(req, res){
             .input('vi_BookCategory', req.body.BookCategory)
             .input('vi_BookUpdateUser', req.body.BookRegWriter)
             .input('vi_BookDesc', req.body.BookDesc)
-            .input('vi_BookImg', filename)
+            //.input('vi_BookImg', filename)
+            .input('vi_BookImg_url', req.body.image_url)
             .execute('[sp_book_update_byAdmin]')
         res.json(result);
     } catch(err) {
