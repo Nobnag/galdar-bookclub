@@ -8,195 +8,209 @@
         <script src="js/gnb.js"></script>
         <link rel="stylesheet" type="text/css" href="css/footer.css" />
         <script src="js/footer.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/join.css" />
+        <link rel="stylesheet" type="text/css" href="css/myInfo.css" />
         <script type="text/javascript" src="js/validation.js"></script>
-        <style>
-        </style>
-    </head>
-    <body>
-        <div id="wrap">
-            <h1 class="top">
-                회원 가입
-            </h1>
-            <div class="join_info_warp">
-                <div class="Email_warp">
-                <input type="text" name="Email"placeholder="이메일" class="ipt_Email enter_keydown">
-                <button type="text" class="btn_Duplicate">중복확인</button>
-                </div>
-                <input type="password" name="Pw"placeholder="비밀번호" class="enter_keydown">
-                <input type="password" name="Pw_confirm"placeholder="비밀번호 확인" class="enter_keydown">
-                <input type="text" name="Nickname"placeholder="닉네임" class="enter_keydown">
-                <input type="text" name="Contact"placeholder="연락처" class="enter_keydown">
-                <button type="text" class="btn_join">가입하기</button>
-            </div>
-        </div>
-        
         <script type="text/javascript">
-             $(document).ready(function(){
-                $(".btn_Duplicate").click(function(){
-                var Email = $('input[name="Email"]').val().trim();
-                if(Email=="") {
-                        alert("이메일을 입력하세요");                        
-                        $('input[name="Email"]').focus();
-                        return false;
-                }
-                if(EmailRegExp.test(Email) == false){
-                        alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
-                        $('input[name="Email"]').focus();
-                        return false;
-                }
-                //ajax는 데이터를 주고받기 위한 도구로 생각
-                // 중복검사 api연결
-                $.ajax({
-                    type: 'post',
-                    url: '/api/Duplicate',
-                    dataType: 'json',
-                    async: false,
-                    data: {
-                        Email:Email
-                    },
-                    success: function(result){
-                        if(result.result == "false"){
-                            alert('중복된 이메일입니다. 다른 이메일을 사용해주세요')
-                            $('input[name="Email"]').focus();
-                            return false
-                        }
-                        if(result.result == "true"){
-                            alert('회원가입 가능한 이메일입니다. 회원가입을 진행해주세요.')
-                        return false
-                        }
-                    },
-                    error: function(jqXHR,textStatus,errorThrown) {
-                    }
-                });
-            
-            });
-        });
-        //인풋박스에서 엔터키를 키다운했을때 회원가입 버튼 클릭한다
-            $(document).on("keydown", ".enter_keydown",function(keynum){
-                if(keynum.keyCode ==13){
-                    $(".btn_join").click()
-                }
-            });
-
-            // $(document).on("click", ".btn_Duplicate",function(){
-            //     if(Email==""){
-            //             alert("이메일을 입력하세요");                        
-            //             $('input[name="Email"]').focus();
-            //             return false;
-            //     }
-            //     else {}
-            // });
-//회원가입 했을때 바로 로그인까지 되게하는 로직 추가 하면 좋을듯
-            //회원가입 버튼을 눌럿을때
             $(document).ready(function(){
-                $(".btn_join").click(function() {
-                var Email = $('input[name="Email"]').val().trim();
-                var Pw = $('input[name="Pw"]').val().trim();
-                var Pw_confirm = $('input[name="Pw_confirm"]').val().trim();
-                var Nickname = $('input[name="Nickname"]').val().trim();
-                var Contact = $('input[name="Contact"]').val().trim();
-
-                if(Email=="") {
-                        alert("이메일을 입력하세요");                        
-                        $('input[name="Email"]').focus();
-                        return false;
-                }
-                if(EmailRegExp.test(Email) == false){
-                        alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
-                        $('input[name="Email"]').focus();
-                        return false;
-                }
-                if(Pw=="") {
-                        alert("비밀번호를 입력하세요");                        
-                        $('input[name="Pw"]').focus();
-                        return false;
-                }
-                if(idRegExp.test(Pw) == false){
-                        alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
-                        $('input[name="Pw"]').focus();
-                        return false;
-                }
-                if(Pw_confirm=="") {
-                        alert("비밀번호 확인을 입력하세요.");                        
-                        $('input[name="Pw_confirm"]').focus();
-                        return false;
-                }
-                if(Pw !=Pw_confirm) {
-                    alert("비밀번호와 비밀번호확인이 일치하지 안습니다 비밀번호 확인하여 일치시켜주세요.")
-                    $('input[name="Pw_confirm"]').focus();
-                    return false;
-                }
-                if(Nickname=="") {
-                        alert("이름을 입력하세요.");                        
-                        $('input[name="Nickname"]').focus();
-                        return false;
-                }
-                if(NicknameRegExp.test(Nickname) == false){
-                        alert("닉네임은 한글 이름 2~6자 이내 영문 이름 2~10자 이내로 작성해주세요.")
-                        $('input[name="Nickname"]').focus();
-                        return false;
-                }
-                if(Contact=="") {
-                        alert("연락처를 입력하세요");                        
-                        $('input[name="Contact"]').focus();
-                        return false;
-                }
-                if(ContactRegExp.test(Contact)== false) {
-                        alert("연락처는 숫자만 사용가능합니다.");                        
-                        $('input[name="Contact"]').focus();
-                        return false;
-                }
-
-                //email중복검사를 실시
-                $.ajax({
-                    type: 'post',
-                    url: '/api/Duplicate',
-                    dataType: 'json',
-                    async: false,
-                    data: {
-                        Email:Email
-                    },
-                    success: function(result){
-                        if(result.result == "false"){
-                            alert('중복된 이메일입니다. 다른 이메일을 사용해주세요.')
-                            $('input[name="Email"]').focus();
-                            return false
-                        }
-                        if(result.result == "true"){
-                            if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "") {
-                            var data = {
-                            Email: Email
-                            ,Pw: Pw
-                            ,Nickname: Nickname
-                            ,Contact: Contact
-                            // ,PremiumMemberYn: 0
-                            // ,AdminYn:0
-                        };
-                        //회원가입 버튼 클릭시 느려젔을때 여러번클릭해서 회원가입이 중복값으로 복수형태로 들어가게됨 클릭여러번 못하게 막거나 클릭했을때 버튼 비활성화 하는방법 여쭤보기
-                        //email중복검사 해서 true값이 올때
-                        $.ajax({
-                            type: 'POST',
-                            url: '/member',
-                            dataType: 'json',
-                            data: data,
-                            //async: false, 동기 와 비동기 찾아보기
-                            success: function(result){ 
-                                    alert("회원가입 되었습니다.");
-                                    location.href = "/login"
-                                    return false;
-                            },error: function(jqXHR,textStatus,errorThrown) {
-                            }
-                        });
-                        }
-                        return false
-                        }
-                    },
-                    error: function(jqXHR,textStatus,errorThrown) {
+                var loginObj = getLoginObj();
+                // 개인 회원정보 조회 함수
+                function getMyInfo(){
+                    var params = {
+                        member_idx: loginObj.MemberIdx
                     }
+                    $.ajax({
+                        url: '/api/getMyInfo'
+                        ,data: params
+                        ,type: 'post'
+                        ,datatype: 'json'
+                        ,success: function(result){
+                            if(result.recordset.length == 0){
+                                alert("유효한 페이지가 아닙니다.");
+                                return false;
+                            }
+
+                            var data = result.recordset[0];
+                            var html = $(".info_wrap").html();
+                            html = html.replace(/{email}/gi, data.Email)
+                                    .replace(/{contact}/gi,data.Contact)
+                                    .replace(/{nickname}/gi,data.Nickname)
+                                    // .replace(/{title}/gi,data.BookTitle)
+                            $(".info_wrap").html(html);
+                        }
+                        ,error: function(jqXHR, textStatus, errorThrown){
+                            console.log(errorThrown);
+                        }
+                    });
+                }
+                
+                function updateMyInfo(){
+                    var updated_nickname = $('input[name="nickname"]').val().trim();
+                    var updated_contact = $('input[name="contact"]').val().trim();
+                    var params = {
+                        member_idx: loginObj.MemberIdx
+                        ,updated_nickname: updated_nickname
+                        ,updated_contact: updated_contact
+                        // ,updated_pw: updated_pw
+                    }
+                    $.ajax({
+                        type: 'post',
+                        url: '/api/updateMyInfo',
+                        dataType: 'json',
+                        data: params,
+                        success: function(result){
+                            if(result.recordset[0].Result == 'Success'){
+                                alert('회원정보가 변경되었습니다.');
+                            }
+                            var loginObj = getLoginObj();
+                            location.href = '/';
+                        },
+                        error: function(jqXHR,textStatus,errorThrown) {
+                            console.log("an error occured.")
+                        }
+                    });
+                }
+
+                // 닉네임 중복검사 함수
+                function checkNickname(){
+                    var updated_nickname = $('input[name="nickname"]').val().trim();
+                    $.ajax({
+                        type: 'post',
+                        url: '/api/NicknameDup',
+                        dataType: 'json',
+                        async: false,
+                        data: {
+                            Nickname: updated_nickname
+                        },
+                        success: function(result){
+                            if(result.result == "false"){
+                                alert('이미 존재하는 닉네임입니다.');
+                                return false
+                            } 
+                            if(result.result == "true"){
+                                updateMyInfo();
+                            }
+                        },
+                        error: function(jqXHR,textStatus,errorThrown) {
+                            console.log("an error occured.")
+                        }
+                    });
+                }
+
+                // 비밀번호 변경하러 가기 
+                $(document).on('click','.btn_pw', function(){
+                    $('.info_1').hide();
+                    $('.info_2').show();
                 });
+
+                // 회원정보 수정 버튼 클릭시
+                $(document).on('click','.btn_update', function(){
+                // 변수 선언
+                    var updated_nickname = $('input[name="nickname"]').val().trim();
+                    var updated_contact = $('input[name="contact"]').val().trim();
+                    var updated_pw = $('.ipt_pw').val().trim();
+                    var updated_pw_confirm = $('.ipt_pw_confirm').val().trim();
+                // 닉네임 정책
+                    // if(NicknameRegExp.test(updated_nickname) == false){
+                    if(updated_nickname.length > 6){
+                        alert("닉네임은 한글 이름 2~6자 이내 영문 이름 2~10자 이내로 작성해주세요.");
+                        // $('input[name="nickname"]').focus();
+                        return false;
+                    }
+                // 이미 사용중인 닉네임입니다.(닉네임 중복검사)
+                    checkNickname();
+                                        
+                // 수정 API
+                    
+                });
+
+                getMyInfo();
+
+                $(document).on('click','.btn_back',function(){
+                    $('.ipt_pw').val('');
+                    $('.ipt_pw_confirm').val('');
+                    $('.info_2').hide();
+                    $('.info_1').show();
+                })
+                $(document).on('click','.btn_update_pw',function(){
+                    var email = $('input[type="email"]').val().trim();
+                    var updated_pw = $('.ipt_pw').val().trim();
+                    var updated_pw_confirm = $('.ipt_pw_confirm').val().trim();
+                // 비밀번호 유효성 검증
+                    if(idRegExp.test(updated_pw) == false){
+                        alert("정책에 맞지 않는 비밀번호입니다.");
+                        return false;
+                    }
+                // 비밀번호 확인 불일치
+                    if(updated_pw !== updated_pw_confirm){
+                        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+                        return false;
+                    }
+                // 수정 API
+                    var params = {
+                        Email: email
+                        ,Pw: updated_pw
+                    }
+                    $.ajax({
+                        type: 'post',
+                        url: '/api/Pw_change',
+                        dataType: 'json',
+                        data: params,
+                        success: function(result){
+                            if(result.recordset[0].Result == 'Success'){
+                                alert('비밀번호가 변경되었습니다.');
+                            }
+                            location.href = '/';
+                        },
+                        error: function(jqXHR,textStatus,errorThrown) {
+                            console.log("an error occured.")
+                        }
+                    });
                 });
             });
         </script>
+    </head>
+    <body>
+        <div class="myInfo_container">
+            <h4 class="top">
+                내 정보
+            </h4>
+            <div class="info_wrap">
+                <div class="info_1">
+                    <p class="info_notice">※ 원하는 항목을 변경 후 <회원정보 수정> 버튼을 눌러주세요.</p>
+                    <p class="info_notice">※ 이메일은 변경이 불가합니다.</p>
+
+                    <div class="info info_email">
+                        <p class="user_info">이메일</p>
+                        <input type="email" value="{email}" readonly>
+                    </div>
+                    <div class="info info_nickname">
+                        <p class="user_info">닉네임</p>
+                        <input type="text" name="nickname" value="{nickname}" placeholder="닉네임은 한글 6자까지 입력 가능합니다.">
+                    </div>
+                    <div class="info info_contact">
+                        <p class="user_info">연락처</p>
+                        <input type="text" name="contact" value="{contact}">
+                    </div>
+                    <div class="buttons">
+                        <button class="button btn_pw">비밀번호 변경</button>
+                        <button class="button btn_update">회원정보 수정</button>
+                    </div>
+                </div>
+                <div class="info_2" style="display:none;">
+                    <div class="info info_pw">
+                        <p class="user_info">비밀번호<br><span class="pw_val">(영문/숫자 혼용 4-12자)</span></p>
+                        <input type="password" class="ipt_pw" placeholder="변경할 비밀번호를 입력하세요.">
+                    </div>
+                    <div class="info info_pw">
+                        <p class="user_info">비밀번호 확인</p>
+                        <input type="password" class="ipt_pw_confirm" placeholder="비밀번호 확인">
+                    </div>
+                    <div class="buttons">
+                        <button class="button btn_update_pw">비밀번호 변경</button>
+                        <button class="button btn_back">뒤로</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

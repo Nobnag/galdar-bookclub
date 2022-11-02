@@ -1,0 +1,89 @@
+a {
+    text-decoration: none;
+}
+
+.myInfo_container {
+    width: 60%;
+    height: auto;
+    margin: 4% auto;
+    text-align: justify;
+}
+
+.top {
+    padding-left: 10px;
+    border-left: 4px solid #4F5945;
+    margin: 0 0 20px;
+    font-size: 20px;
+}
+
+.info_wrap {
+    min-width: 350px;
+    width: 80%;
+    height: 220px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    border-radius: 3px;
+    padding: 16px 30px;
+}
+
+.info {
+    margin: 15px 0;
+    display: flex;
+}
+
+.info_notice {
+    font-size: 12px;
+    color: #777;
+}
+
+.user_info {
+    width: 140px;
+    margin-right: 24px;
+}
+
+.info_pw .pw_val {
+    display: block;
+    font-size: 10px;
+}
+.buttons {
+    width: 60%;
+    height: 30px;
+    margin: 0 auto;
+    display:flex;
+    justify-content: space-between;
+}
+
+
+.button {
+    display: block;
+    width: 120px;
+    height: 30px;
+    float: right;
+    background: #93A6BF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    /* margin: 12px 10px 0 10px; */
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #5D84A6;
+    font-weight: 600;
+    transition: 0.2s  ease-in-out;
+}
+
+.button:not(hover) {
+    transition: 0.2s  ease-in-out;
+}
+
+input {
+    height: 24px;
+    min-width: 170px;
+    width: 50%;
+    padding-left: 8px;
+}
+
+input:focus {
+    outline: none;
+}

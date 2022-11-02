@@ -131,7 +131,7 @@ app.get('/api/getLoginInfo', function(req,res) {
                 Nickname: req.session.Nickname,
                 PremiumMemberYn: req.session.PremiumMemberYn,
                 AdminYn: req.session.AdminYn,
-                Pw: req.session.Pw
+                // Pw: req.session.Pw
             });
         }
     } catch (err) {
@@ -276,6 +276,57 @@ BigInt.prototype.toJSON = function() { return this.toString(); };
 app.get('/myInfo',function(req,res){
     res.sendFile(__dirname + '/myInfo.html');
 });
+
+app.post('/api/getMyInfo', async function(req, res){
+    try {
+        const pool = await poolPromise
+        let result = await pool.request()
+            .input('vi_MemberIdx',req.body.member_idx)
+            .execute('[sp_myInfo_select_byUser]');
+        res.json(result);
+    } catch(err){
+        res.status(500);
+        res.send(err);
+    }
+});
+
+// API - 닉네임 중복확인
+app.post('/api/NicknameDup', async (req,res) => {
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('Nickname', req.body.Nickname)
+            .query('SELECT Nickname FROM Member WHERE Nickname=@Nickname');
+            
+        if(result.recordset.length > 0){
+            res.json({"result":"false"});
+        }
+        else{
+            res.json({"result":"true"});
+        }
+    }catch (err) {
+            res.status(500);
+            res.send(err);
+        }
+});
+
+// API(회원정보 U) - 수정한 회원정보를 DB로 보낸다.
+app.post('/api/updateMyInfo', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MemberIdx', req.body.member_idx)
+            .input('vi_Nickname', req.body.updated_nickname)
+            .input('vi_Contact', req.body.updated_contact)
+            .execute('[sp_myInfo_update_byUser]')
+        res.json(result)
+        req.session.Nickname = result.recordset[0].Nickname;
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+});
+
 
 
 app.get('/book_detail',function(req,res){
@@ -598,7 +649,7 @@ app.post('/galdar_list', async function(req,res){
         }
 
         const pool = await poolPromise;
-        let result = await pool.request()            
+        let result = await pool.    request()            
             .query(query);
         res.json(result);
     } catch(err) {
