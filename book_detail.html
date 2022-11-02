@@ -345,7 +345,7 @@
                     var data = result.recordset[0];
                     /* 첫번째 방법 */
                     var html = $(".container_book_contents").html();
-                    html = html.replace(/{img}/gi, data.BookImg)
+                    html = html.replace(/{img}/gi, data.BookImg_url)
                                 .replace(/{idx}/gi,data.BookIdx)
                                 .replace(/{category}/gi,"[\&nbsp\&nbsp\&nbsp"+data.BookCategory+"\&nbsp\&nbsp\&nbsp]")
                                 .replace(/{title}/gi,data.BookTitle)
