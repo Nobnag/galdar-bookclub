@@ -55,10 +55,10 @@ h4 {
 
 .book_img {
     /* background: #eee; */
-    width: 25%;
+    width: 250px;
     height: calc(250px * 1.14142);
     float: left;
-    margin: 0 5%;
+    margin: 0px 2.3%;
     text-align: center;
 }
 
@@ -957,4 +957,9 @@ h4 {
 .button:hover {
     background: #5D84A6;
     font-weight: 600;
+    transition: 0.2s  ease-in-out;
+}
+
+.button:not(hover) {
+    transition: 0.2s  ease-in-out;
 }

@@ -108,7 +108,7 @@
                     }
 
                     if(result.recordset.length == 0){
-                        var html = `<p>아직 작성된 게시물이 없습니다.</p>`;
+                        var html = `<tr><td>아직 작성된 게시물이 없습니다.</td></tr>`;
                         $('.mr_board table').html(html);
                     } else {
                         var html = "";
@@ -259,8 +259,6 @@
                                 replyPageNo = pageNumber;
                                 getReply();
                                 clickReplyX();
-                                // doReplyX();
-                                // undoReplyX();
                             }
                         });
                     }
@@ -939,8 +937,8 @@
                     $('.ipt_reply_content').focus();
                     return false;
                 }
-                if(reply_name == "" || /* reply_pw == "" || */ reply_content == ""){
-                    alert('이름과 비밀번호, 내용을 모두 입력하세요.');
+                if(/* reply_name == "" || reply_pw == "" || */ reply_content == ""){
+                    alert('내용을 입력하세요.');
                     return false;
                 }
                 

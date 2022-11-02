@@ -22,37 +22,51 @@ a {
 #gnb {
     background-color: white;
     width: 100%;
+    padding-top: 10px;
     margin: 0 auto;
-    height: 100px;
-    border-top: solid 1px gray;
-    border-bottom: solid 1px gray;
+    height: 90px;
+    border-top: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
 }
 
 .gnb_container {
+    position: relative;
     margin: 0 auto;
-    width: 80vw;
+    width: 65%;
     height: 100%;
+}
+
+@media screen and (max-width:1400px) {
+    .gnb_container {
+        width: 80%;
+    }
 }
 
 .gnb_home_link {
     position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 80px;
 }
 
 .gnb_logo {
     position: relative;
-    max-width: 50%;
-    height: 100%;
+    /* max-width: 50%; */
+    height: inherit;
+    width: inherit;
     display: inline-block;
     vertical-align: middle;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    /* word-wrap: break-word; */
+    /* text-overflow: ellipsis; */
+    /* overflow: hidden; */
 }
 
 .gnb_content {
     position: absolute;
     display: inline-block;
-    right: 10vw;
+    right: 0;
+    bottom: 10px;
+    margin-right: 5px;
     margin-top: 70px;
     font-weight: bolder;
 }
@@ -60,14 +74,12 @@ a {
 .gnb_link {
     position: relative;
     font-size: 16px;
-    margin-left: 30px;
+    margin-left: 40px;
     color: gray;
 }
 
 .gnb_right {
     position: relative;
-    top: 10px;
-    display: inline-block;
     float: right;
     margin-right: -2px;
     font-size: 12px;
