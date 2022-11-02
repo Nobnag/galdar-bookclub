@@ -30,6 +30,10 @@
     </div>
     <script>
         $(document).ready(function(){
+            var loginObj = getLoginObj();
+            if(typeof(loginObj) !== "undefined"){
+                location.href = "/"
+            }
             alert("인증이 완료되었습니다. 이메일과 변경할 비밀번호를 입력해주세요.")
         })
         $(document).on("click",".main_btn_pw_change",function(){
