@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> galdar_join</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/gnb.css" />
+        <script src="js/gnb.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/footer.css" />
+        <script src="js/footer.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/join.css" />
+        <script type="text/javascript" src="js/validation.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1 class="top">
+                회원 가입
+            </h1>
+            <div class="join_info_warp">
+                <div class="Email_warp">
+                <input type="text" name="Email"placeholder="이메일" class="ipt_Email enter_keydown">
+                <button type="text" class="btn_Duplicate">중복확인</button>
+                </div>
+                <input type="password" name="Pw"placeholder="비밀번호" class="enter_keydown">
+                <input type="password" name="Pw_confirm"placeholder="비밀번호 확인" class="enter_keydown">
+                <input type="text" name="Nickname"placeholder="닉네임" class="enter_keydown">
+                <input type="text" name="Contact"placeholder="연락처" class="enter_keydown">
+                <button type="text" class="btn_join">가입하기</button>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+             $(document).ready(function(){
+                $(".btn_Duplicate").click(function(){
+                var Email = $('input[name="Email"]').val().trim();
+                if(Email=="") {
+                        alert("이메일을 입력하세요");                        
+                        $('input[name="Email"]').focus();
+                        return false;
+                }
+                if(EmailRegExp.test(Email) == false){
+                        alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('input[name="Email"]').focus();
+                        return false;
+                }
+                //ajax는 데이터를 주고받기 위한 도구로 생각
+                // 중복검사 api연결
+                $.ajax({
+                    type: 'post',
+                    url: '/api/Duplicate',
+                    dataType: 'json',
+                    async: false,
+                    data: {
+                        Email:Email
+                    },
+                    success: function(result){
+                        if(result.result == "false"){
+                            alert('중복된 이메일입니다. 다른 이메일을 사용해주세요')
+                            $('input[name="Email"]').focus();
+                            return false
+                        }
+                        if(result.result == "true"){
+                            alert('회원가입 가능한 이메일입니다. 회원가입을 진행해주세요.')
+                        return false
+                        }
+                    },
+                    error: function(jqXHR,textStatus,errorThrown) {
+                    }
+                });
+            
+            });
+        });
+        //인풋박스에서 엔터키를 키다운했을때 회원가입 버튼 클릭한다
+            $(document).on("keydown", ".enter_keydown",function(keynum){
+                if(keynum.keyCode ==13){
+                    $(".btn_join").click()
+                }
+            });
+
+            // $(document).on("click", ".btn_Duplicate",function(){
+            //     if(Email==""){
+            //             alert("이메일을 입력하세요");                        
+            //             $('input[name="Email"]').focus();
+            //             return false;
+            //     }
+            //     else {}
+            // });
+//회원가입 했을때 바로 로그인까지 되게하는 로직 추가 하면 좋을듯
+            //회원가입 버튼을 눌럿을때
+            $(document).ready(function(){
+                $(".btn_join").click(function() {
+                var Email = $('input[name="Email"]').val().trim();
+                var Pw = $('input[name="Pw"]').val().trim();
+                var Pw_confirm = $('input[name="Pw_confirm"]').val().trim();
+                var Nickname = $('input[name="Nickname"]').val().trim();
+                var Contact = $('input[name="Contact"]').val().trim();
+
+                if(Email=="") {
+                        alert("이메일을 입력하세요");                        
+                        $('input[name="Email"]').focus();
+                        return false;
+                }
+                if(EmailRegExp.test(Email) == false){
+                        alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('input[name="Email"]').focus();
+                        return false;
+                }
+                if(Pw=="") {
+                        alert("비밀번호를 입력하세요");                        
+                        $('input[name="Pw"]').focus();
+                        return false;
+                }
+                if(idRegExp.test(Pw) == false){
+                        alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
+                        $('input[name="Pw"]').focus();
+                        return false;
+                }
+                if(Pw_confirm=="") {
+                        alert("비밀번호 확인을 입력하세요.");                        
+                        $('input[name="Pw_confirm"]').focus();
+                        return false;
+                }
+                if(Pw !=Pw_confirm) {
+                    alert("비밀번호와 비밀번호확인이 일치하지 안습니다 비밀번호 확인하여 일치시켜주세요.")
+                    $('input[name="Pw_confirm"]').focus();
+                    return false;
+                }
+                if(Nickname=="") {
+                        alert("이름을 입력하세요.");                        
+                        $('input[name="Nickname"]').focus();
+                        return false;
+                }
+                if(NicknameRegExp.test(Nickname) == false){
+                        alert("닉네임은 한글 이름 2~6자 이내 영문 이름 2~10자 이내로 작성해주세요.")
+                        $('input[name="Nickname"]').focus();
+                        return false;
+                }
+                if(Contact=="") {
+                        alert("연락처를 입력하세요");                        
+                        $('input[name="Contact"]').focus();
+                        return false;
+                }
+                if(ContactRegExp.test(Contact)== false) {
+                        alert("연락처는 숫자만 사용가능합니다.");                        
+                        $('input[name="Contact"]').focus();
+                        return false;
+                }
+
+                //email중복검사를 실시
+                $.ajax({
+                    type: 'post',
+                    url: '/api/Duplicate',
+                    dataType: 'json',
+                    async: false,
+                    data: {
+                        Email:Email
+                    },
+                    success: function(result){
+                        if(result.result == "false"){
+                            alert('중복된 이메일입니다. 다른 이메일을 사용해주세요.')
+                            $('input[name="Email"]').focus();
+                            return false
+                        }
+                        if(result.result == "true"){
+                            if(Email !== "" && Pw !=="" && Nickname !== "" && Contact !== "") {
+                            var data = {
+                            Email: Email
+                            ,Pw: Pw
+                            ,Nickname: Nickname
+                            ,Contact: Contact
+                            // ,PremiumMemberYn: 0
+                            // ,AdminYn:0
+                        };
+                        //회원가입 버튼 클릭시 느려젔을때 여러번클릭해서 회원가입이 중복값으로 복수형태로 들어가게됨 클릭여러번 못하게 막거나 클릭했을때 버튼 비활성화 하는방법 여쭤보기
+                        //email중복검사 해서 true값이 올때
+                        $.ajax({
+                            type: 'POST',
+                            url: '/member',
+                            dataType: 'json',
+                            data: data,
+                            //async: false, 동기 와 비동기 찾아보기
+                            success: function(result){ 
+                                    alert("회원가입 되었습니다.");
+                                    location.href = "/login"
+                                    return false;
+                            },error: function(jqXHR,textStatus,errorThrown) {
+                            }
+                        });
+                        }
+                        return false
+                        }
+                    },
+                    error: function(jqXHR,textStatus,errorThrown) {
+                    }
+                });
+                });
+            });
+        </script>
+    </body>
+</html>

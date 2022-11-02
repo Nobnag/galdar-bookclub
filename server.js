@@ -255,6 +255,11 @@ BigInt.prototype.toJSON = function() { return this.toString(); };
 
 // 정민
 
+app.get('/myInfo',function(req,res){
+    res.sendFile(__dirname + '/myInfo.html');
+});
+
+
 app.get('/book_detail',function(req,res){
     res.sendFile(__dirname + '/book_detail.html');
 });

@@ -20,7 +20,7 @@ $(document).ready(function(){
         else if(loginObj.AdminYn == "0"){
             html += '<p class="gnb_btn_login">'+loginObj.Nickname+'님 안녕하세요'+'</p>'
             html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button class="gnb_button">로그아웃</button></a>'
-            // html += '<a class="gnb_btn_login" href="/"><button class="gnb_button">내정보</button></a>'
+            html += '<a class="gnb_btn_login" href="/myInfo"><button class="gnb_button">내 정보</button></a>'
         }
     }
     else{
