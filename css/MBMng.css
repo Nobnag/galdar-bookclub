@@ -59,11 +59,11 @@ table input{
     width: 100%;
     border: 0;
     size: 20px;
-};
+}
 table tbody tr td input:focus{
     outline: none;
-    background-color: #eee
-};
+    background-color: #eee;
+}
 .pagination_member {
     display: inline-block;
     margin: 20px 0;
@@ -88,4 +88,10 @@ ul{
 }
 .td_email, .td_pw,.td_nickname,.td_contact,.td_joinDatetime{
     padding-left: 4px;
+}
+.td_joinDatetime{
+    width: 102px;
+}
+.td_contact{
+    width: 90px;
 }

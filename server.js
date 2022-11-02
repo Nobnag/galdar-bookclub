@@ -223,6 +223,10 @@ app.post('/api/Memberdelete', async function(req, res){
     }
 });
 
+app.get('/Pw_change',function(req,res) {
+    res.sendFile(__dirname + "/Pw_change.html")
+});
+
 app.get('/', function(req,res) {
     res.sendFile(__dirname + "/galdar_list.html")
 });

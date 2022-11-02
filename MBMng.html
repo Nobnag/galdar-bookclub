@@ -25,7 +25,6 @@
                     <tr>
                         <th>회원번호</th>
                         <th>회원이메일</th>
-                        <th>비밀번호</th>
                         <th>닉네임</th>
                         <th>연락처</th>
                         <th>가입일</th>
@@ -59,7 +58,7 @@
             
         <div class="btn_container">
             <input type="text" placeholder="검색명을 입력해주세요" class="ipt_sreach" id="enter_keydown">
-            <button  class="btn_sreach" onclick="getmember_sreach()">검색</button>
+            <button  class="btn_sreach" onclick="getMemberList(); setPagination();">검색</button>
             <button  class="btn_member_update">회원정보수정</button>
             <button class="btn_member_delete">회원탈퇴</button>
         </div>        
@@ -72,12 +71,16 @@
     <tr data-memberidx="{MemberIdx}" id="member_info_tr">
         <td class="td_memberIdx">{MemberIdx}</td>
         <td class="td_email">{Email}</td>
-        <td class="td_pw">{Pw}</td>
         <td class="td_nickname">{Nickname}</td>
         <td class="td_contact">{Contact}</td>
         <td class="td_joinDatetime" >{JoinDatetime}</td>
         <td class="td_premiumMemberYn">{PremiumMemberYn}</td>
         <td class="td_adminYn">{AdminYn}</td>
+    </tr>
+</template>
+<template id="template_member_info_row_none">
+    <tr data-memberidx="{MemberIdx}" id="member_info_tr">
+        <td colspan="7">검색된 데이터가 없습니다.</td>
     </tr>
 </template>
 <!-- (e)멘토님이 알려주신방식 템플릿 테크 사용 -->
@@ -112,22 +115,99 @@
     </template>
 
     <script>
-        var memberPageNo = 1;
+        //var memberPageNo = 1;
         //검색 후의 페이징
         // $(document).on("onclick",".btn_sreach",function(keynum){
         //     $(".pagination_member").html(html);
         // })
-        function getmember_sreach(){
-            var search = $('.ipt_sreach').val();
-            var data = {
-                search: search,
-                page_no: memberPageNo,
-                page_size: 5
+        //페이지네이션 관련 설정값
+        var paginationOptions = {
+            totalCnt: 0,
+            pageSize: 5,
+            currentPageNo: 1
+        };
+        function setPagination(){
+            if(paginationOptions.totalCnt > 0){
+                $(".pagination_member").pagination({
+                    items: paginationOptions.totalCnt,
+                    itemsOnPage: paginationOptions.pageSize,
+                    cssStyle: 'light-theme',
+                    prevText: '<',
+                    nextText: '>',
+                    onPageClick:function(pageNumber, event){
+                        paginationOptions.currentPageNo = pageNumber,
+                        $('#rp_wrapper').html("")
+                        getMemberList();
+                    }
+                });
+            }
+            else{
+                $(".pagination_member").html('');
+            }
+        }
+        function getMemberList(){
+            var params = {
+                search: $('.ipt_sreach').val(),
+                page_no: paginationOptions.currentPageNo,
+                page_size: paginationOptions.pageSize
             };
             $.ajax({
                 url: '/api/getmember_info',
                 type: 'get',
                 datatype: 'json',
+                async: false,
+                data:params,
+                // async: false,
+                success: function(result){
+                    if(result.recordset==""){
+                        alert("검색된 내용이 없습니다.");
+                        
+                        paginationOptions.totalCnt = 0;
+                        paginationOptions.currentPageNo = 1;
+
+                        $('.info_table table tbody').html($('#template_member_info_row_none').html());
+                        
+                        return false;
+                    }
+
+                    paginationOptions.totalCnt = result.recordset[0].recordsFiltered;
+                    paginationOptions.currentPageNo = 1;
+
+                    var html = "";
+                    for(var i = 0; i < result.recordset.length; i ++){
+                        var row = result.recordset[i];
+                            html += $("#template_member_info_row").html()
+                        //모든 {MemberIdx}를 바꾼다는 뜻 ie까지 연동
+                            .replace(/{MemberIdx}/gi, row.MemberIdx)
+                            .replace(/{Email}/gi,row.Email)
+                            .replace(/{Nickname}/gi,row.Nickname)
+                            .replace(/{Contact}/gi,row.Contact)
+                            .replace(/{JoinDatetime}/gi,row.JoinDatetime)
+                            .replace(/{PremiumMemberYn}/gi,row.PremiumMemberYn)
+                            .replace(/{AdminYn}/gi,row.AdminYn);
+                        $('.info_table table tbody').html(html);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown);
+                    alert("error");
+                }
+            });
+        }
+/*
+        function getmember_sreach(){
+            
+            var search = $('.ipt_sreach').val();
+            var data = {
+                search: search,
+                page_no: memberPageNo,
+                page_size: paginationOptions.pageSize
+            };
+            $.ajax({
+                url: '/api/getmember_info',
+                type: 'get',
+                datatype: 'json',
+                async: false,
                 data:data ,
                 // async: false,
                 success: function(result){
@@ -146,11 +226,12 @@
                                 prevText: '<',
                                 nextText: '>',
                                 onPageClick:function(pageNumber, event){
-                                    memberPageNo = pageNumber;
+                                    memberPageNo = pageNumber,
                                     $('#rp_wrapper').html("")
                                     getmember_sreach();
                                 }
                             })
+                            $(".pagination_member").pagination('selectPage',memberPageNo)
                         }
                     }
                     var html = "";
@@ -160,7 +241,6 @@
                         //모든 {MemberIdx}를 바꾼다는 뜻 ie까지 연동
                             .replace(/{MemberIdx}/gi, row.MemberIdx)
                             .replace(/{Email}/gi,row.Email)
-                            .replace(/{Pw}/gi,row.Pw)
                             .replace(/{Nickname}/gi,row.Nickname)
                             .replace(/{Contact}/gi,row.Contact)
                             .replace(/{JoinDatetime}/gi,row.JoinDatetime)
@@ -211,7 +291,6 @@
                         //모든 {MemberIdx}를 바꾼다는 뜻 ie까지 연동
                             .replace(/{MemberIdx}/gi, row.MemberIdx)
                             .replace(/{Email}/gi,row.Email)
-                            .replace(/{Pw}/gi,row.Pw)
                             .replace(/{Nickname}/gi,row.Nickname)
                             .replace(/{Contact}/gi,row.Contact)
                             .replace(/{JoinDatetime}/gi,row.JoinDatetime)
@@ -226,9 +305,12 @@
                 }
             });
         }
+        */
         // 맴버 정보를 불러온다.
         $(document).ready(function(){
-            getmember_info();
+            getMemberList();
+            setPagination();
+
             var loginObj = getLoginObj();
             if(typeof(loginObj) == "undefined"){
                 alert("잘못된 접근입니다.")
@@ -358,7 +440,6 @@
                 /* (s) 값을 가져온다. */
                 var MemberIdx = $(selectedRow).find('td.td_memberIdx').text();
                 var Email = $(selectedRow).find('td.td_email input').val();
-                var Pw = $(selectedRow).find('td.td_pw input').val();
                 var Nickname = $(selectedRow).find('td.td_nickname input').val();
                 var Contact = $(selectedRow).find('td.td_contact input').val();
                 var PremiumMemberYn = $(selectedRow).find('td.td_premiumMemberYn input').val();
@@ -374,11 +455,6 @@
                 if(EmailRegExp.test(Email) == false){
                         alert("이메일은 영문 대소문자와 숫자 4~12자리로 입력해야합니다.")
                         $(selectedRow).find('td.td_email input"]').focus();
-                        return false;
-                }
-                if(Pw==""||Pw==undefined) {
-                        alert("비밀번호를 입력하세요");                        
-                        $(selectedRow).find('td.td_pw input').focus();
                         return false;
                 }
                 if(Nickname==""||Nickname==undefined) {
