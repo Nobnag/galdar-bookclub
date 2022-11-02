@@ -48,11 +48,17 @@ a {
 .buttons {
     width: 60%;
     height: 30px;
-    margin: 0 auto;
+    margin: 20px auto;
     display:flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
+@media screen and (max-width: 1400px){
+    .buttons {
+        width: 80%;
+        margin: 10px auto;
+    }
+}
 
 .button {
     display: block;

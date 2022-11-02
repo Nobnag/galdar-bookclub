@@ -16,6 +16,7 @@ $(document).ready(function(){
             html += '<p class="gnb_btn_login">'+'관리자&nbsp;'+loginObj.Nickname+'님 안녕하세요'+'</p>'
             html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button class="gnb_button">로그아웃</button></a>'
             html += '<a class="gnb_btn_login" href="/MBMng"><button class="gnb_button">회원관리</button></a>'
+            html += '<a class="gnb_btn_login" href="/myInfo"><button class="gnb_button">내 정보</button></a>'
         }
         else if(loginObj.AdminYn == "0"){
             html += '<p class="gnb_btn_login">'+loginObj.Nickname+'님 안녕하세요'+'</p>'
