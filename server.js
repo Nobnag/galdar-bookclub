@@ -171,7 +171,7 @@ app.get('/api/getmember_info', async function(req, res){
         res.send(err)
     }
 });
-
+//fo비밀번호 변경페이지에서 회원의 비밀번호를 변경한다.
 app.post('/api/Pw_change', async function(req, res){
     try {
         const pool = await poolPromise;
@@ -179,6 +179,19 @@ app.post('/api/Pw_change', async function(req, res){
             .input('vi_Email', req.body.Email)
             .input('vi_Pw', req.body.Pw)
             .execute('[sp_pw_update]')
+        res.json(result);
+    } catch(err) {
+        res.status(500);
+        res.send(err)
+    }
+});
+//bo회원관리페이지에서 선택된 회원의 비밀번호를 초기화한다.
+app.post('/api/MemberPwReset', async function(req, res){
+    try {
+        const pool = await poolPromise;
+        let result = await pool.request()
+            .input('vi_MemberIdx', req.body.MemberIdx)
+            .execute('[sp_pw_Reset]')
         res.json(result);
     } catch(err) {
         res.status(500);

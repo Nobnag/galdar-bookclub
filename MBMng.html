@@ -522,6 +522,7 @@
             //값을 가져와서 수정 처리한다.
                 /* (s) 바뀐 ipt값을 text로 바꾼다. */
                 var ipt_list = $(".table_mamber_info tbody tr td input");
+                $(".table_mamber_info tbody tr").css("background","#fff")
                 for(var i = 0; i < ipt_list.length; i ++){
                     var value = $(ipt_list[i]).val();
                     $($(ipt_list[i])).parents("td").html(value);
@@ -589,9 +590,10 @@
                 alert("회원을 선택해 주세요.");
                 return false;
             }
-            if (!confirm("확인(예) 또는 취소(아니오)를 선택해주세요.")) {
+            if (!confirm("정말로 비밀번호 초기화 하시겠습니까?.")) {
                 alert("취소되었습니다.");
-            } else {
+            } 
+            else {
             //선택한 줄을 가져온다.
             var selectedRowList = [];
             var count = $('.table_mamber_info tbody tr').length;
@@ -609,7 +611,7 @@
                 var MemberIdx = $(selectedRow).find('td.td_memberIdx').text();
                 if(MemberIdx!==""){
                     $.ajax({
-                    url: '/api/MemberPwUpdate',
+                    url: '/api/MemberPwReset',
                     type: 'post',
                     datatype: 'json',
                     data : {
@@ -625,6 +627,14 @@
                     })
                 }
             }
+            /* (s) 바뀐 ipt값을 text로 바꾼다. */
+            var ipt_list = $(".table_mamber_info tbody tr td input");
+            $(".table_mamber_info tbody tr").css("background","#fff")
+                for(var i = 0; i < ipt_list.length; i ++){
+                    var value = $(ipt_list[i]).val();
+                    $($(ipt_list[i])).parents("td").html(value);
+                }
+            /* (e) 바뀐 ipt값을 text로 바꾼다. */
             }
         });
     </script>
