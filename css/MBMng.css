@@ -80,7 +80,7 @@ ul{
 }
 .ipt_sreach{
     width: 400px;
-    height: 20px;
+    height: 26px;
 }
 .td_memberIdx, .td_premiumMemberYn, .td_adminYn{
     text-align: center;
@@ -94,4 +94,14 @@ ul{
 }
 .td_contact{
     width: 90px;
+}
+.btn_in_container{
+    float: inherit;
+    padding-top: 10px;
+}
+button{
+    padding: 4px;
+}
+.rp_container{
+    margin-top: 40px;
 }

@@ -64,3 +64,6 @@ input {
     margin: 10px auto;
     display: block;
 }
+input::placeholder{
+    padding: 6px;
+}

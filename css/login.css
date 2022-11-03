@@ -49,3 +49,6 @@ input {
 .kakao_btn_login{
     background-color: yellow;
 }
+input::placeholder{
+    padding: 6px;
+}

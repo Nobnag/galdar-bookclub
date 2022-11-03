@@ -54,14 +54,18 @@
                 <div class="pagination pagination_member">
                 </div>  
             </div>
-            <!-- (e)페이지네이션 -->
-            
-        <div class="btn_container">
+            <!-- (e)페이지네이션 --> 
+    </div>
+    <div class="btn_container">
+        <div class="sreach_container">
             <input type="text" placeholder="검색명을 입력해주세요" class="ipt_sreach" id="enter_keydown">
             <button  class="btn_sreach" onclick="getMemberList(); setPagination();">검색</button>
+        </div>
+        <div class="btn_in_container">
+            <button  class="btn_member_pw_reset">비밀번호 초기화</button>
             <button  class="btn_member_update">회원정보수정</button>
             <button class="btn_member_delete">회원탈퇴</button>
-        </div>        
+        </div>
     </div>
     <div id="rp_wrapper">
         <!-- 템플릿 넣을자리 -->
@@ -86,7 +90,7 @@
 <!-- (e)멘토님이 알려주신방식 템플릿 테크 사용 -->
 <!-- 넣을 템플릿 -->
     <template id="template_Nickname">
-    <h1 data-memberidx="{MemberIdx}">{Nickname}</h1>
+    <h1 data-memberidx="{MemberIdx}" class="rp_container">{Nickname}</h1>
     <div class="member_use_contents">
         <div class="SRContent">
             <h2>작성한 한줄평</h2>
@@ -577,6 +581,50 @@
                             alert("error");
                         }
                     });
+            }
+        });
+        $(document).on("click",".btn_member_pw_reset",function(){
+            //input 박스가 있는지 체크해서, input박스가 있을 때만 실행한다.
+            if($('.table_mamber_info tbody tr input').length == 0){
+                alert("회원을 선택해 주세요.");
+                return false;
+            }
+            if (!confirm("확인(예) 또는 취소(아니오)를 선택해주세요.")) {
+                alert("취소되었습니다.");
+            } else {
+            //선택한 줄을 가져온다.
+            var selectedRowList = [];
+            var count = $('.table_mamber_info tbody tr').length;
+            for(var i = 0; i < count; i ++){
+                //수정 대상인지 체크한다.
+                var inputCnt = $($('.table_mamber_info tbody tr')[i]).find("input").length;
+                if(inputCnt == 0){
+                    continue;
+                }
+                selectedRowList.push($('.table_mamber_info tbody tr')[i]);
+            }
+            for(var i = 0; i < selectedRowList.length; i ++){
+                var selectedRow = $(selectedRowList[i]);
+                /* (s) 값을 가져온다. */
+                var MemberIdx = $(selectedRow).find('td.td_memberIdx').text();
+                if(MemberIdx!==""){
+                    $.ajax({
+                    url: '/api/MemberPwUpdate',
+                    type: 'post',
+                    datatype: 'json',
+                    data : {
+                        MemberIdx
+                    },
+                    success: function(result){
+                        alert("회원의 비밀번호가 초기화되었습니다.");
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log(errorThrown);
+                        alert("error");
+                    }
+                    })
+                }
+            }
             }
         });
     </script>
