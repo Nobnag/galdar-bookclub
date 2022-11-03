@@ -3,10 +3,16 @@ a {
 }
 
 .myInfo_container {
-    width: 60%;
+    width: 30%;
     height: 50%;
     margin: 10% auto;
     text-align: justify;
+}
+
+@media screen and (max-width: 750px) {
+    .myInfo_container {
+        width: 60%;
+    }
 }
 
 .top {
@@ -39,6 +45,8 @@ a {
 .user_info {
     width: 140px;
     margin-right: 24px;
+    font-size: 14px;
+    line-height: 28px;
 }
 
 .info_pw .pw_val {
@@ -46,7 +54,7 @@ a {
     font-size: 10px;
 }
 .buttons {
-    width: 60%;
+    width: 80%;
     height: 30px;
     margin: 20px auto;
     display:flex;

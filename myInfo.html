@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title> galdar_join</title>
+        <title>내 정보</title>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/gnb.css" />
         <script src="js/gnb.js"></script>
@@ -30,12 +30,13 @@
                             }
 
                             var data = result.recordset[0];
-                            var html = $(".info_wrap").html();
+                            // var html = $(".info_wrap").html();
+                            var html = $("#template-list-item").html();
                             html = html.replace(/{email}/gi, data.Email)
                                     .replace(/{contact}/gi,data.Contact)
                                     .replace(/{nickname}/gi,data.Nickname)
                                     // .replace(/{title}/gi,data.BookTitle)
-                            $(".info_wrap").html(html);
+                            $(".info_1").html(html);
                         }
                         ,error: function(jqXHR, textStatus, errorThrown){
                             console.log(errorThrown);
@@ -137,6 +138,11 @@
                     var updated_pw = $('.ipt_pw').val().trim();
                     var updated_pw_confirm = $('.ipt_pw_confirm').val().trim();
                 // 비밀번호 유효성 검증
+                    if(updated_pw == ""){
+                        alert('변경할 비밀번호를 입력해주세요.');
+                        return false;
+                    }
+
                     if(idRegExp.test(updated_pw) == false){
                         alert("정책에 맞지 않는 비밀번호입니다.");
                         return false;
@@ -175,12 +181,35 @@
             <h4 class="top">
                 내 정보
             </h4>
+            <script id="template-list-item" type="text/template">
+                <p class="info_notice">※ 원하는 항목을 변경 후 <회원정보 수정> 버튼을 눌러주세요.</p><br>
+                <p class="info_notice">※ 이메일은 변경이 불가합니다.</p>
+                <div class="info info_email">
+                    <p class="user_info">이메일</p>
+                    <input type="email" value="{email}" readonly>
+                </div>
+                <div class="info info_nickname">
+                    <p class="user_info">닉네임</p>
+                    <input type="text" name="nickname" value="{nickname}" placeholder="닉네임은 한글 6자까지 입력 가능합니다.">
+                </div>
+                <div class="info info_contact">
+                    <p class="user_info">연락처</p>
+                    <input type="text" name="contact" value="{contact}">
+                </div>
+                <div class="buttons">
+                    <button class="button btn_pw">비밀번호 변경</button>
+                    <button class="button btn_update">회원정보 수정</button>
+                </div>
+            </script>
+
+
+
             <div class="info_wrap">
                 <div class="info_1">
-                    <p class="info_notice">※ 원하는 항목을 변경 후 <회원정보 수정> 버튼을 눌러주세요.</p><br>
-                    <p class="info_notice">※ 이메일은 변경이 불가합니다.</p>
+                    <!-- <p class="info_notice">※ 원하는 항목을 변경 후 <회원정보 수정> 버튼을 눌러주세요.</p><br>
+                    <p class="info_notice">※ 이메일은 변경이 불가합니다.</p> -->
 
-                    <div class="info info_email">
+                    <!-- <div class="info info_email">
                         <p class="user_info">이메일</p>
                         <input type="email" value="{email}" readonly>
                     </div>
@@ -195,7 +224,7 @@
                     <div class="buttons">
                         <button class="button btn_pw">비밀번호 변경</button>
                         <button class="button btn_update">회원정보 수정</button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="info_2" style="display:none;">
                     <p class="info_notice">※ 비밀번호와 비밀번호 확인을  입력 후 <비밀번호 변경> 버튼을 눌러주세요.</p><br>

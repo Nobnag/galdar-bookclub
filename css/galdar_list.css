@@ -68,7 +68,7 @@ a:hover figcaption, .gallery a:focus figcaption{
 }
 
 .btn-wrap2 {
-    width: 69%;
+    width: 60%;
     height: 40px;
 }
 
@@ -134,6 +134,7 @@ a:hover figcaption, .gallery a:focus figcaption{
     color: white;
     cursor:pointer;
     border-radius: 4px; 
+    margin-right: 44px;
 }        
 
 .list_title{
