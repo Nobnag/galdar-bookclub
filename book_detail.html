@@ -344,7 +344,8 @@
 
                     var data = result.recordset[0];
                     /* 첫번째 방법 */
-                    var html = $(".container_book_contents").html();
+                    // var html = $(".container_book_contents").html();
+                    var html = $("#template-list-item").html();
                     html = html.replace(/{img}/gi, data.BookImg_url)
                                 .replace(/{idx}/gi,data.BookIdx)
                                 .replace(/{category}/gi,"[\&nbsp\&nbsp\&nbsp"+data.BookCategory+"\&nbsp\&nbsp\&nbsp]")
@@ -355,7 +356,7 @@
                                 .replace(/{publisher}/gi,data.BookPublisher)
                                 .replace(/{publishDate}/gi,data.BookPubDate)
                                 .replace(/{btDate}/gi,data.BookBtDate);
-                    $(".container_book_contents").html(html);
+                    $(".book_info").html(html);
                     if($('.book_translator span').html() == ""){
                         $('.book_translator').hide();
                     }
@@ -1036,47 +1037,50 @@
     </script>
 </head>
 <body>
+    
     <div class="container">
         <!-- 도서 정보 -->
         <div class="wrapper info_wrapper">
             <h4>도서 정보</h4>
             <div class="container_book_contents">
-                <div class="book_img">
-                    <img src="{img}" referrerpolicy="no-referrer">
-                </div>
-                <div class="book_info_wrapper">
-                    <div class="book_info">
-                        <ul>
-                        <li class="book_category">{category}</li>
-                        <h2 class="book_title">{title}</h2>
-                        <li class="book_desc"><em>{desc}</em></li>
-                        <li class="book_idx">
-                            <p>도서번호</p>
-                            <span>{idx}</span>
-                        </li>
-                        <li class="book_author">
-                            <p>저자</p>
-                            <span>{author}</span>
-                        </li>
-                        <li class="book_translator">
-                            <p>옮긴이</p>
-                            <span>{translator}</span>
-                        </li>
-                        <li class="book_publisher">
-                            <p>출판사</p>
-                            <span>{publisher}</span>
-                        </li>
-                        <li class="book_publishDate">
-                            <p>출간일</p>
-                            <span>{publishDate}</span>
-                        </li>
-                        <li class="book_btDate">
-                            <p>북토크 진행일자</p>
-                            <span>{btDate}</span>
-                        </li>
+                <script id="template-list-item" type="text/template">
+                    <div class="book_img">
+                        <img src="{img}" referrerpolicy="no-referrer">
+                    </div>
+                    <div class="book_info_wrapper">
+                        <ul>                        
+                            <h2 class="book_title">{title}</h2>
+                            <li class="book_desc"><em>{desc}</em></li>
+                            <li class="book_idx">
+                                <p>도서번호</p>
+                                <span>{idx}</span>
+                            </li>
+                            <li class="book_author">
+                                <p>저자</p>
+                                <span>{author}</span>
+                            </li>
+                            <li class="book_translator">
+                                <p>옮긴이</p>
+                                <span>{translator}</span>
+                            </li>
+                            <li class="book_publisher">
+                                <p>출판사</p>
+                                <span>{publisher}</span>
+                            </li>
+                            <li class="book_publishDate">
+                                <p>출간일</p>
+                                <span>{publishDate}</span>
+                            </li>
+                            <li class="book_btDate">
+                                <p>북토크 진행일자</p>
+                                <span>{btDate}</span>
+                            </li>                        
                         </ul>
                     </div>
-                </div>
+                </script>   
+                    <div class="book_info">
+                        
+                    </div>
             </div>
             <div class="btn_update_info">
                 <button class="button btn_updateBook">정보 수정</button>

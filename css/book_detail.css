@@ -60,6 +60,7 @@ h4 {
     float: left;
     margin: 0px 2.3%;
     text-align: center;
+    border-radius: 5px;
 }
 
 @media screen and (max-width: 1400px){
@@ -80,6 +81,7 @@ h4 {
     width: 64.5%;
     border: 1px solid #ccc;
     height: calc(250px * 1.14142);
+    border-radius: 5px;
     display: inline-block;
 }
 
