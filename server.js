@@ -191,6 +191,7 @@ app.post('/api/MemberPwReset', async function(req, res){
         const pool = await poolPromise;
         let result = await pool.request()
             .input('vi_MemberIdx', req.body.MemberIdx)
+            .input('vi_pw', 0)
             .execute('[sp_pw_Reset]')
         res.json(result);
     } catch(err) {
