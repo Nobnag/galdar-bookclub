@@ -56,7 +56,7 @@ a {
 @media screen and (max-width: 1400px){
     .buttons {
         width: 80%;
-        margin: 10px auto;
+        margin: 10px auto 0;
     }
 }
 
@@ -92,4 +92,7 @@ input {
 
 input:focus {
     outline: none;
+}
+.PW_buttons {
+    margin-top: 52px;
 }
