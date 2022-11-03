@@ -358,6 +358,7 @@
                             };
 
                             $.ajax(settings).done(function (response) {
+                                var book_idx = getParam('book_idx')
                                 var result = JSON.parse(response).data.link;
                                 console.log(result);
                                 var data = new FormData($("#create_book_form")[0])
@@ -374,7 +375,7 @@
                                     ,success: function(result){
                                         if(result.recordset.length > 0){
                                         alert('도서가 수정되었습니다.');
-                                        location.href=('/galdar_list');
+                                        location.href=('/book_detail?book_idx='+book_idx)
                                         }
                                     },
                                     error: function(jqXHR, textStatus, errorThrown){
@@ -383,6 +384,7 @@
                                 });
                             });
                         } else {
+                            var book_idx = getParam('book_idx')
                             var data = new FormData($("#create_book_form")[0])
                             data.append('book_idx', getParam('book_idx'));
                             data.append('image_url', $('.real-upload').attr('src'));
@@ -397,7 +399,7 @@
                                 ,success: function(result){
                                     if(result.recordset.length > 0){
                                     alert('도서가 수정되었습니다.');
-                                    location.href=('/galdar_list');
+                                    location.href=('/book_detail?book_idx='+book_idx)
                                     }
                                 },
                                 error: function(jqXHR, textStatus, errorThrown){
