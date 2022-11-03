@@ -273,10 +273,12 @@ BigInt.prototype.toJSON = function() { return this.toString(); };
 
 // 정민
 
+// 내 정보로 이동
 app.get('/myInfo',function(req,res){
     res.sendFile(__dirname + '/myInfo.html');
 });
 
+// DB의 내정보 화면에 불러오기
 app.post('/api/getMyInfo', async function(req, res){
     try {
         const pool = await poolPromise
@@ -319,16 +321,17 @@ app.post('/api/updateMyInfo', async function(req, res){
             .input('vi_Nickname', req.body.updated_nickname)
             .input('vi_Contact', req.body.updated_contact)
             .execute('[sp_myInfo_update_byUser]')
+            if(result.recordset.length > 0){
+                req.session.Nickname = req.body.updated_nickname;
+            }
         res.json(result)
-        req.session.Nickname = result.recordset[0].Nickname;
     } catch(err) {
         res.status(500);
         res.send(err);
     }
 });
 
-
-
+// 도서 상세 페이지로 이동
 app.get('/book_detail',function(req,res){
     res.sendFile(__dirname + '/book_detail.html');
 });
@@ -550,7 +553,6 @@ app.post('/api/updateBT', async function(req, res){
     }
 });
 
-
 // API(북토크 대화록 D) - DB에서 대화록을 삭제한다.
 app.post('/api/deleteBT', async function(req, res){
     try {
@@ -649,7 +651,7 @@ app.post('/galdar_list', async function(req,res){
         }
 
         const pool = await poolPromise;
-        let result = await pool.    request()            
+        let result = await pool.request()            
             .query(query);
         res.json(result);
     } catch(err) {

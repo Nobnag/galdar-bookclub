@@ -71,9 +71,11 @@
                         html += '<button class="list_write_button">글쓰기</button>'
                     }
                     else if(list_write.AdminYn == "0"){
+                        $('.btn-wrap').css('justify-content','center')
                     }
                 }
                 else{
+                    $('.btn-wrap').css('justify-content','center')
                 }
                 $(".btn-wrap").append(html);
 
@@ -133,7 +135,13 @@
                 </ol>
             </div>
         </div> 
-        <div id="js-btn-wrap" class="btn-wrap"> <a class="button"><button class="button_decorate">더보기</button></a> </div>
+        <div id="js-btn-wrap" class="btn-wrap">
+            <div class="btn-wrap2">
+                <a class="button">
+                    <button class="button_decorate">더보기</button>
+                </a>
+            </div>
+        </div>
         <!-- <a href="#" class="jcm-top"><img src="img/img_top.jpg" style="margin-bottom: 24px;width: 25px;"></a> -->
         <a href="#" class="jcm-top"><i class="icon icon-arrow-up"></i>⬆︎</a>
     </body>  

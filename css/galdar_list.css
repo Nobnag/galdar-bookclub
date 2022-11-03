@@ -29,9 +29,9 @@ li{
     margin: 40px;
 }
 
-a{
+a {
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative; 
 }
 
@@ -57,30 +57,43 @@ a:hover figcaption, .gallery a:focus figcaption{
 }
 
 .btn-wrap {
+    /* position: relative; */
+    display: flex;
+    justify-content: right;
     text-align: center;
-    margin: 30px;
+    margin: 30px auto;
+    width: 990px;
+    height: 40px;
+    /* padding: 0 40px; */
+}
+
+.btn-wrap2 {
+    width: 69%;
+    height: 40px;
 }
 
 #list_load_contain{
     display: none;
 }
+
 .list_load.active {
-    /* display: inline-block; */
     display: block;
 }
+
 .button_decorate{
-    height: 34px;
-    width: 147px;
+    border: none;
+    height: 40px;
+    width: 150px;
     border-radius: 4px;
     background-color: #282828;
     color: white;
     cursor:pointer;
 }
-
+/* 
 .button{
     display: inline-block;
 }
-
+ */
 .Book_img{
     width: 100%;
     height: 100%;
@@ -111,11 +124,12 @@ a:hover figcaption, .gallery a:focus figcaption{
 }
 
 .list_write_button{
-    position: absolute;
-    /* float: right; */
-    margin-left: 230px;
-    width: 147px;
-    height: 34px;
+    /* position: absolute; */
+    float: right;
+    /* margin-left: 230px; */
+    width: 150px;
+    height: 40px;
+    border: none;
     background-color: #282828;
     color: white;
     cursor:pointer;
