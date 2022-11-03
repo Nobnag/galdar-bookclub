@@ -19,36 +19,44 @@ h1  {
 
 input {
     display: block;
-    margin: 30px auto 0;
-    width: 300px; height: 50px;
+    margin: 20px auto;
+    width: 300px;
+    height: 50px;
+}
+
+button{
+    margin: 6px auto;
 }
 
 .btn_login {
-    margin-top:10px;
     width: 300px; height: 50px;
-    border-radius: 5px;
+    border-radius: 3px;
     border: 0;
 }
 .main_btn_login{
-    margin-top: 10px;
     width: 300px;
     height: 50px;
-    border-radius: 5px;
+    border-radius: 3px;
     border: 0;
     cursor: pointer;
 }
 .btn_Pw_change{
-    background-color: green;
-    margin-top: 10px;
     width: 300px;
     height: 50px;
-    border-radius: 5px;
-    border: 0;
+    border-radius: 3px;
+    border: none;
     cursor: pointer;
+    background: #93A6BF;
+    color: #fff;
 }
 .kakao_btn_login{
     background-color: yellow;
 }
 input::placeholder{
     padding: 6px;
+}
+.button:hover {
+    background: #5D84A6;
+    font-weight: 600;
+    transition: 0.2s  ease-in-out;
 }

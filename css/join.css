@@ -47,22 +47,20 @@ input {
 }
 
 .btn_join  { 
-    background-color: rgb(60, 155, 93);
-    border-radius: 5px;
-    border: 0;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    background: #93A6BF;
+    color: #fff;
     width: 304px;
     height: 30px;
     margin: 10px auto;
     display: block;
 }
 .btn_join:hover{
-    background-color: rgb(107, 184, 134);
-    border-radius: 5px;
-    border: 0;
-    width: 312px;
-    height: 30px;
-    margin: 10px auto;
-    display: block;
+    background: #5D84A6;
+    font-weight: 600;
+    transition: 0.2s  ease-in-out;
 }
 input::placeholder{
     padding: 6px;
