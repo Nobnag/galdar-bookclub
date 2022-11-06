@@ -25,7 +25,7 @@ a {
 .info_wrap {
     min-width: 350px;
     width: 80%;
-    height: 220px;
+    height: 230px;
     border: 1px solid #ccc;
     margin: 0 auto;
     border-radius: 3px;
@@ -43,11 +43,29 @@ a {
 }
 
 .user_info {
-    width: 140px;
+    width: 120px;
     margin-right: 24px;
     font-size: 14px;
     line-height: 28px;
 }
+
+.info_2 {
+    height: 210px;
+}
+
+.info_2 .info_notice {
+    margin-bottom: 20px;
+}
+
+.info_2 p:first-child {
+    line-height: 16px;
+}
+
+
+.info_2 p:last-child {
+    line-height: 28px;
+}
+
 
 .info_pw .pw_val {
     display: block;
@@ -94,13 +112,26 @@ a {
 input {
     height: 24px;
     min-width: 170px;
-    width: 50%;
+    width: 60%;
     padding-left: 8px;
 }
 
 input:focus {
     outline: none;
 }
-.PW_buttons {
+
+.buttons_pw {
     margin-top: 52px;
+}
+
+.btn {
+    border: none;
+    background: none;
+    float: right;
+    cursor: pointer;
+    color: #777;
+}
+
+.btn:hover{
+    text-decoration: underline;
 }

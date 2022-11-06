@@ -440,6 +440,7 @@ h4 {
 }
 
 .mr_wrapper .th_name {
+    min-width: 85px;
     width: 15%;
 }
 
@@ -796,6 +797,7 @@ h4 {
 
 .reply_writer {
     width: 18%;
+    min-width: 100px;
     border-top: 1px solid #ccc;
     /* border-bottom: 1px solid #ccc; */
     line-height: 22px;

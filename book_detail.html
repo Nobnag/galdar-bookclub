@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <title>도서 상세 페이지</title>
     <link rel="stylesheet" type="text/css" href="css/gnb.css" />
@@ -33,12 +34,12 @@
             var params = location.search.substr(location.search.indexOf("?") + 1);
             var sval = "";
             params = params.split("&");
-
-            for (var i = 0; i < params.length; i++) {
+            for(var i = 0; i < params.length; i++){
                 temp = params[i].split("=");
-                if ([temp[0]] == sname) { sval = temp[1]; }
+                if ([temp[0]] == sname){
+                    sval = temp[1];
+                }
             }
-
             return sval;
         }
 
@@ -72,8 +73,6 @@
                     // alert("an error occured");
                 }
             });
-        //  글쓰기 / 수정 버튼
-            
         }
 
         // 줄글 서평 글 조회 함수 선언
@@ -92,7 +91,6 @@
                 datatype: 'json',
                 // async: false,
                 success: function(result){
-                    // var data = result.recordset[0];
                     if(result.recordset.length > 0 && $(".pagination_mr").html().trim() == ""){
                          $(".pagination_mr").pagination({
                             items: result.recordset[0].totalCnt,
