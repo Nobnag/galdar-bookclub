@@ -19,12 +19,12 @@ a {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
 }
 
-#gnb {
+#gnb {    
     background-color: white;
     width: 100%;
-    padding-top: 10px;
+    padding-top: 1vh;
     margin: 0 auto;
-    height: 90px;
+    height: 10vh;
     border-top: solid 1px #ccc;
     border-bottom: solid 1px #ccc;
 }
@@ -73,7 +73,7 @@ a {
 
 .gnb_link {
     position: relative;
-    font-size: 16px;
+    font-size: 1.2em;
     margin-left: 40px;
     color: gray;
 }
@@ -82,11 +82,11 @@ a {
     position: relative;
     float: right;
     margin-right: -2px;
-    font-size: 12px;
+    font-size: 0.8em;
 }
 
 .gnb_button {
-    font-size: 12px;
+    font-size: 1em;
     color: gray;
     border: none;
     background: #fff;
@@ -104,4 +104,14 @@ a {
 
 p {
     display: inline-block;
+}
+@media screen and (max-width:767px){
+    .gnb_container {
+        width: 96%;
+    }
+    .gnb_right {
+        position: relative;
+        float: right;
+        font-size: 0.1em;
+    }
 }

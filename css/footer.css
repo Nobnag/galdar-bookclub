@@ -1,16 +1,16 @@
 #footer {
     padding: 20px 0;
     width: 100%;
-    font-size: 14px;
+    font-size: 1em;
     word-break: break-word;
     background-color: #eee;
 }
 .footer_top {
-    margin-bottom: 20px;
+    margin-bottom: 1vh;
 }
 .footer_container{
     margin:0 auto;
-    width: 65%;
+    width: 66%;
 }
 
 @media screen and (max-width:1400px) {
@@ -19,9 +19,17 @@
     }
 }
 .footer_content {
-    font-size: 12px;
+    font-size: 0.8em;
 }
 .footer_link{
-    margin-bottom: 5px;
+    margin-bottom: 0.2vh;
 }
-
+@media screen and (max-width:767px){
+    #footer {
+        padding: 1vh 0;
+        font-size: 0.8em;
+    }
+    .footer_container {
+        width: 94vw;
+    }
+}

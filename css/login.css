@@ -23,11 +23,6 @@ input {
     width: 30vw;
     height: 6vh;
 }
-
-button{
-    margin: 6px auto;
-}
-
 .btn_login {
     width: 30vw;
     height: 6vh;
@@ -39,6 +34,7 @@ button{
     border-radius: 3px;
     border: 0;
     cursor: pointer;
+    margin: 6px auto;
 }
 .btn_Pw_change{width: 30vw;
     height: 6vh;
@@ -47,15 +43,36 @@ button{
     cursor: pointer;
     background: #93A6BF;
     color: #fff;
+    margin: 6px auto;
 }
 .kakao_btn_login{
     background-color: yellow;
+    margin: 6px auto;
 }
 input::placeholder{
-    padding: 6px;
+    padding: 1vw;
+    font-size: 0.5em;
 }
 .button:hover {
     background: #5D84A6;
     font-weight: 600;
     transition: 0.2s  ease-in-out;
+}
+
+@media screen and (max-width:767px){
+    input {
+        display: block;
+        margin: 20px auto;
+        width: 80vw;
+        height: 6.4vh;
+    }
+    input::placeholder{
+        padding: 1vw;
+        font-size: 1em;
+    }
+    .btn_Pw_change ,.main_btn_login, .kakao_btn_login {
+        margin: 6px auto;
+        width: 80vw;
+        height: 6vh;
+    }
 }

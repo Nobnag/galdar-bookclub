@@ -2,8 +2,8 @@ a {
     text-decoration: none;
 }
 #wrap {
-    width: 80%;
-    height: 52%;
+    width: 80vw;
+    height: 60vh;
     margin: 4% auto;
     text-align: center;
 }
@@ -16,7 +16,6 @@ a {
 }
 .join_info_warp {
     margin: 0 auto;
-    width:50vw;
 }
 .Email_warp {
     position: relative;
@@ -24,7 +23,7 @@ a {
     margin: 0 auto;
 }
 .btn_Duplicate{
-    height: 3.6vh;
+    height: 4.4vh;
     position: absolute;
     top: 0;
     right: 0;
@@ -33,13 +32,13 @@ a {
     top: 0;
     position: relative;
     width: 30vw;
-    height: 3vh;
+    height: 4vh;
     margin: 0 auto;
     display: block;
 }
 input {
     width: 30vw;
-    height: 3vh;
+    height: 4vh;
     margin: 10px auto;
     display: block;
 }
@@ -62,4 +61,29 @@ input {
 }
 input::placeholder{
     padding: 1vw;
+}
+@media screen and (max-width:767px){
+    input{
+        display: block;
+        margin: 20px auto;
+        width: 80vw;
+        height: 6.2vh;
+    }
+    .ipt_Email{
+        display: block;
+        margin: 0 auto;
+        width: 80vw;
+        height: 6vh;
+    }
+    .btn_join {
+        margin: 6px auto;
+        width: 80vw;
+        height: 6vh;
+    }
+    .btn_Duplicate {
+        height: 6.5vh;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }
