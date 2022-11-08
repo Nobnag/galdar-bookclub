@@ -671,8 +671,8 @@
                         // $('.mr_container3').css('display','block');
                         // for(var i = 0; i < result.recordset.length; i ++){
                             var row = result.recordset[0];
-                            var html = $('.mr_container3').html().replace("{mr_writer}",row.MRWriter).replace("{mr_title}",row.MRTitle).replace("{mr_content}",row.MRContent).replace("{mr_writeDatetime}",row.MRWriteDatetime);
-                            $('.mr_container3').html(html);
+                            var html = $('#template-mr').html().replace("{mr_idx}",mr_idx).replace("{mr_writer}",row.MRWriter).replace("{mr_title}",row.MRTitle).replace("{mr_content}",row.MRContent).replace("{mr_writeDatetime}",row.MRWriteDatetime);
+                            $('.mr_container3 .mr_board').html(html);
                             if(loginObj.Nickname == row.MRWriter){
                                 $('.btn_update2').show();
                                 $('.btn_delete6').show();
@@ -710,6 +710,11 @@
                     var mr_writer = $('.mr_container4 .ipt_mr_writer').val();
                     var mr_title = $('.mr_container4 .ipt_mr_title').val();
                     var mr_content = $('.mr_container4 .ipt_mr_content').val();
+                    if(mr_title.length > 20){
+                        alert("제목은 20자 미만으로 입력해주세요.");
+                        $('.ipt_mr_title').focus();
+                        return false;
+                    }
                     var params = {
                         mr_idx: mr_idx
                         ,mr_writer: mr_writer
@@ -1132,7 +1137,7 @@
             <h4>회원들의 서평</h4>
             <div class="mr_container">
                 <div class="mr_board">
-                    <!-- 테이블 -->
+                    <!-- 웹페이지용 테이블 -->
                     <template id="tbody_template" style="display:none";>
                         <tr>
                             <td style="display:none;">
@@ -1144,7 +1149,7 @@
                             <td class="td_title">
                                 <span class="title_span" data-attr="{data-attr}" >{title}</span>
                             </td>
-                            <td>
+                            <td class="td_date">
                                 {date}
                             </td>
                         </tr>
@@ -1162,6 +1167,7 @@
                         <tbody>
                         </tbody>
                     </table>
+
                     <!-- 페이징 -->
                     <div class="pagination pagination_mr">
                     </div>
@@ -1185,27 +1191,31 @@
                 </div>
             </div>
 
+
+            <script id="template-mr" type="text/template">
+                <div class="detail detail_mr_idx" style="display:none;">{mr_idx}</div>
+                <div class="detail detail_mr_writer">
+                    <div class="cn12">
+                        <span class="cn cn_w">작성자</span>
+                        <span class="cn_user">{mr_writer}</span>
+                    </div>
+                    <div class="cn3">
+                        <span class="cn cn_d">작성일자</span>
+                        <span class="cn_dt">{mr_writeDatetime}</span>
+                    </div>
+                </div>
+                <div class="detail detail_mrtitle">
+                    <span class="cn cn_t">제목</span>
+                    <span class="cn_ttl">{mr_title}</span>
+                </div>
+                <div class="detail detail_mr_content">
+                    <div class="cn_ct">{mr_content}</div>
+                </div>
+            </script>
             <div class="mr_container3">
                 <div class="mr_board">
                     <div class="detail detail_mr_idx" style="display:none;">{mr_idx}</div>
-                    <div class="detail detail_mr_writer">
-                        <div class="cn12">
-                            <span class="cn cn_w">작성자</span>
-                            <span class="cn_user">{mr_writer}</span>
-                        </div>
-                        <div class="cn3">
-                            <span class="cn cn_d">작성일자</span>
-                            <span class="cn_dt">{mr_writeDatetime}</span>
-                        </div>
-                    </div>
-                    <!-- <div class="detail detail_mr_writeDatetime"></div> -->
-                    <div class="detail detail_mrtitle">
-                        <span class="cn cn_t">제목</span>
-                        <span class="cn_ttl">{mr_title}</span>
-                    </div>
-                    <div class="detail detail_mr_content">
-                        <div class="cn_ct">{mr_content}</div>
-                    </div>
+                    
                 </div>
                 <div class="mr_btn">
                     <button class="button btn_cancel3">목록</button>
