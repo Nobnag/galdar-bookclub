@@ -16,17 +16,6 @@ a {
     margin: 80px auto;
 }
 
-
-/* 태블릿, 모바일 */
-@media screen and (max-width: 767px) {
-    .container {
-        width: 98%;
-        min-width: unset;
-        margin: 40px auto;
-    }
-}
-
-
 h4 {
     padding-left: 10px;
     border-left: 4px solid #4F5945;
@@ -40,16 +29,6 @@ h4 {
     border-bottom: 1px solid #D8D9D7;
     margin: 25px 0;
 }
-
-
-/* 태블릿, 모바일 */
-@media screen and (max-width: 767px) {
-    .wrapper {
-        min-width: unset;
-        /* margin: 25px 0; */
-    }
-}
-
 
 .info_wrapper {
     position: relative;
@@ -116,20 +95,6 @@ h4 {
         height: auto;
     }
 }
-
-
-@media screen and (max-width: 767px){
-    .book_info_wrapper {
-        min-width: unset;
-        width: 90%;
-        /* margin: 0 auto;
-        display: block;
-        margin-top: 30px;
-        height: auto; */
-    }
-}
-
-
 .book_info {
     display: inline-block;
     /* background: #ededed; */
@@ -142,6 +107,17 @@ h4 {
     /* margin-left: 20px; */
     /* padding: 15px; */
 }
+/* 
+@media screen and (max-width: 1400px){
+    .book_info {
+        margin: 0 auto;
+        display: block;
+        min-width: 540px;
+        width: 53vw;
+        margin-top: 30px;
+        height: auto;
+    }
+} */
 
 .book_info ul {
     list-style-type: none;
@@ -153,15 +129,6 @@ h4 {
 @media screen and (max-width: 1400px){
     .book_info ul {
         margin: 0 100px;
-    }
-}
-
-
-@media screen and (max-width: 767px){
-    .book_info ul {
-        display: block;
-        width: 80%;
-        margin: 0 auto;
     }
 }
 
@@ -199,12 +166,6 @@ h4 {
     display: inline-block;
     width: 140px;
     margin: 0;
-}
-
-@media screen and (max-width: 767px) {
-    .book_info li p {
-        width: 100px;
-    }
 }
 
 .book_info li span {
@@ -309,12 +270,6 @@ h4 {
     }
 }
 
-@media screen and (max-width: 767px){
-    .slider strong {
-        font-size: 16px;
-    }
-}
-
 
 .slider em {
     padding: 0;
@@ -376,13 +331,6 @@ h4 {
     border: 1px solid #8d8d8d
 }
 
-@media screen and (max-width: 767px) {
-    .sr_box2 .sr_ipt {
-        width: inherit;
-    }
-    
-}
-
 .sr_box2 .sr_ipt:focus {
     outline: 1.5px solid #ccc;
     border-radius: 5px;
@@ -394,14 +342,6 @@ h4 {
     padding: 0 10px;
     border-radius: 5px;
     border: 1px solid #8d8d8d
-}
-
-
-@media screen and (max-width: 767px) {
-    .sr_box3 .sr_ipt2 {
-        width: inherit;
-    }
-    
 }
 
 .sr_box3 .sr_ipt2:focus {
@@ -512,21 +452,6 @@ h4 {
     width: 20%;
 }
 
-/*  */
-@media screen and (max-width: 767px) {
-    .mr_wrapper table {
-        width: 100%;
-    }
-
-    .mr_wrapper .th_date, .th_title, .th_name, .td_date, td:nth-child(2) {
-        display: none;
-    }    
-
-    /* .mr_wrapper .mr_board {
-        padding: 0;
-    } */
-}
-
 .mr_wrapper .td_title {
     padding-left: 20px;
     padding-right: 20px;
@@ -542,26 +467,6 @@ h4 {
     white-space: nowrap;
     overflow: hidden;
     vertical-align: middle;
-} 
-
-@media screen and (max-width: 767px) {   
-    .mr_wrapper .td_title {
-        padding: 0;
-        padding-left: 16px;
-        height: 30px;
-        /* border-bottom: 1px solid #ccc;
-        border-top: 1px solid #ccc; */
-        /* background: #ccc; */
-        /* text-align: center; */
-    } 
-
-    .mr_wrapper .td_title:active {
-        background: #ccc;
-    }
-    .mr_wrapper .td_title span {
-        min-width: unset;
-        width: 90%;
-    }
 }
 
 .mr_wrapper .td_title span:hover {
@@ -655,7 +560,7 @@ h4 {
 .cn {
     display: inline-block;
     width: 6vw;
-    min-width: 50px;
+    min-width: 75px;
     height: 24px;
     background: #eaeaea;
     padding: 5px 10px;
@@ -674,16 +579,10 @@ h4 {
 
 .cn_ttl {
     display: inline-block;
-    width: 72%;
+    width: 75%;
     height: 24px;
-    padding: 5px 0px 5px 10px;
+    padding: 5px 10px;
     line-height: 24px;
-}
-
-@media screen and (max-width: 767px) {
-    .mr_container3 .detail {
-        font-size: 12px;
-    }
 }
 
 
@@ -697,13 +596,6 @@ h4 {
     min-height: 300px;
     white-space: pre-wrap;
     line-height: 200%;
-}
-
-
-@media screen and (max-width: 767px) {
-    .mr_container3 .cn_ct {
-        padding: 15px;
-    }
 }
 
 .mr_container3 textarea {
@@ -1066,20 +958,12 @@ h4 {
     cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
-    .button {
-        width: 80px;
-        height: 20px; 
-        font-size: 12px;
-    }
-}
-
 .button:hover {
     background: #5D84A6;
     font-weight: 600;
     transition: 0.2s  ease-in-out;
 }
-    
+
 .button:not(hover) {
     transition: 0.2s  ease-in-out;
 }
