@@ -121,7 +121,7 @@ h4 {
 @media screen and (max-width: 767px){
     .book_info_wrapper {
         min-width: unset;
-        width: 90%;
+        width: 95%;
         /* margin: 0 auto;
         display: block;
         margin-top: 30px;
@@ -254,7 +254,7 @@ h4 {
 }
 
 .sr_box {
-    width: 90%;
+    width: 95%;
     height: 80px;
     margin: 0 auto;
     /* background: #ededed; */
@@ -347,7 +347,7 @@ h4 {
 }
 
 .sr_box2 {
-    width: 90%;
+    width: 95%;
     height: 80px;
     margin: 0 auto;
     /* background: #ededed; */
@@ -358,7 +358,7 @@ h4 {
 }
 
 .sr_box3 {
-    width: 90%;
+    width: 95%;
     height: 80px;
     margin: 0 auto;
     /* background: #ededed; */
@@ -378,7 +378,7 @@ h4 {
 
 @media screen and (max-width: 767px) {
     .sr_box2 .sr_ipt {
-        width: inherit;
+        width: 90%;
     }
     
 }
@@ -399,7 +399,7 @@ h4 {
 
 @media screen and (max-width: 767px) {
     .sr_box3 .sr_ipt2 {
-        width: inherit;
+        width: 90%;
     }
     
 }
@@ -457,7 +457,7 @@ h4 {
 }
 
 .mr_wrapper .mr_board {
-    width: 90%;
+    width: 95%;
     height: auto;
     margin: 0 auto;
     /* background: #ededed; */
@@ -767,7 +767,7 @@ h4 {
 }
 
 .bt_container {
-    width: 90%;
+    width: 95%;
     height: 100%;
     margin: 0 auto;
     /* line-height: 260px; */
@@ -797,7 +797,7 @@ h4 {
 
 .bt_container2 {
     display: none;
-    width: 90%;
+    width: 95%;
     height: auto;
     margin: 0 auto;
     background: #ededed;
@@ -878,7 +878,7 @@ h4 {
 
 .reply_list_box {
     /* background: #ededed; */
-    width: 90%;
+    width: 95%;
     margin: 15px auto 0 auto;
     height: auto;
     text-align: center;
