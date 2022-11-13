@@ -311,7 +311,7 @@ h4 {
 
 @media screen and (max-width: 767px){
     .slider strong {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 
@@ -415,6 +415,12 @@ h4 {
 
 .btn_update {
     margin-right: 2%;
+}
+
+@media screen and (max-width: 767px) {
+    .btn_update {
+        font-size: 11px;
+    }
 }
 
 .btn_regist {
@@ -882,8 +888,20 @@ h4 {
     margin: 15px auto 0 auto;
     height: auto;
     text-align: center;
+    border-bottom: 1px solid #ccc;
 }
 
+@media screen and (max-width:767px) {
+    .reply_list_box {
+        text-align: justify;
+    }
+
+    .reply_list_box p {
+        font-size: 0.7rem;
+        color: #4F5945;
+        padding-bottom: 5px;
+    }
+}
 .reply_list_box p {
     font-size: 14px;
 }
@@ -911,11 +929,29 @@ h4 {
     line-height: 22px;
 }
 
+.reply_writer2 {
+    display: inline-block;
+    padding: 0 0 5px 5px;
+    font-size: 0.75rem;
+    color: #4F5945;
+}
+
+.reply_writer2:after {
+    content: "|";
+}
+
 .reply_content {
     width: 66%;
     border-top: 1px solid #ccc;
     /* border-bottom: 1px solid #ccc; */
     line-height: 20px;
+}
+
+.reply_content2 {
+    width: calc(100%-10px);
+    border-top: 1px solid #ccc;
+    font-size: 0.9rem;
+    padding: 5px;
 }
 
 .reply_content span {
@@ -931,6 +967,12 @@ h4 {
     color: #5a5a5a;
 }
 
+.reply_datetime_container2 {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: #4F5945;
+}
+
 .reply_datetime_container {
     width: 16%;
     min-width: 120px;
@@ -943,7 +985,7 @@ h4 {
     justify-content: flex-end;
 }
 
-.reply_datetime_container .reply_datetime .btn_x {
+.btn_x {
     width: 10px; 
     height: 10px;
     border: 0;
@@ -1003,7 +1045,7 @@ h4 {
     width: 90%;
     /* margin: 20px 0; */
     margin: 20px auto;
-    border-top: 1px solid #ccc;
+    /* border-top: 1px solid #ccc; */
     text-align: center;
 }
 
@@ -1042,7 +1084,7 @@ h4 {
 }
 
 .reply_textarea_box textarea {
-    width: 100%;
+    width: 97%;
     padding: 5px 0 5px 10px;
     margin: 0;
 }

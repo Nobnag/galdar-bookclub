@@ -263,10 +263,18 @@
                     if(result.recordset.length == 0){
                         var html = `<p>아직 작성된 댓글이 없습니다.</p>`;
                     } else {
-                        var html = "";
-                        for(var i = 0; i < result.recordset.length; i ++){
-                        var row = result.recordset[i];
-                        html += $('#reply_template').html().replace("{ReplyWriter}",row.ReplyWriter).replace("{ReplyContent}",row.ReplyContent).replace("{Writedatetime}",row.ReplyWriteDatetime).replace("{data-attr}",row.ReplyIdx);
+                        if(window.matchMedia("screen and (max-width: 767px)").matches == true) {
+                            var html = "";
+                            for(var i = 0; i < result.recordset.length; i ++){
+                                var row = result.recordset[i];
+                                html += $('#reply_template2').html().replace("{ReplyWriter}",row.ReplyWriter).replace("{ReplyContent}",row.ReplyContent).replace("{Writedatetime}",row.ReplyWriteDatetime).replace("{data-attr}",row.ReplyIdx);
+                            }
+                        } else {
+                            var html = "";
+                            for(var i = 0; i < result.recordset.length; i ++){
+                                var row = result.recordset[i];
+                                html += $('#reply_template').html().replace("{ReplyWriter}",row.ReplyWriter).replace("{ReplyContent}",row.ReplyContent).replace("{Writedatetime}",row.ReplyWriteDatetime).replace("{data-attr}",row.ReplyIdx);
+                            }
                         }
                     }
                     $('.reply_list_box').html(html);
@@ -1297,6 +1305,23 @@
                     </div>
                 </div>
             </div>
+
+            <div id="reply_template2" style="display:none;">
+                <div class="reply reply_content2">
+                    <span>{ReplyContent}</span>
+                </div>
+                <div class="reply reply_writer2">
+                    <span>{ReplyWriter}</span>
+                </div>
+                <div class="reply_datetime_container2">
+                    <div class="reply_datetime2">
+                        <span>{Writedatetime}</span>
+                        <button data-attr="{data-attr}" class="btn_x">X</button>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="box reply_list_box">     
                 <!-- <span>아직 작성된 댓글이 없습니다.</span> -->
             </div>
