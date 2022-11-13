@@ -12,7 +12,7 @@ a {
 
 .container {
     width: 60%;
-    min-width: 600px;
+    min-width: 320px;
     margin: 80px auto;
 }
 
@@ -21,7 +21,7 @@ a {
 @media screen and (max-width: 767px) {
     .container {
         width: 98%;
-        min-width: unset;
+        min-width: 320px;
         margin: 40px auto;
     }
 }
@@ -35,7 +35,7 @@ h4 {
 
 .wrapper {
     width: 100%;
-    min-width: 600px;
+    /* min-width: 600px; */
     /* background: #cacaca; */
     border-bottom: 1px solid #D8D9D7;
     margin: 25px 0;
@@ -98,7 +98,7 @@ h4 {
 }
 
 .book_info_wrapper {
-    min-width: 527px;
+    /* min-width: 527px; */
     width: 64.5%;
     border: 1px solid #ccc;
     height: calc(250px * 1.14142);
@@ -110,7 +110,7 @@ h4 {
     .book_info_wrapper {
         margin: 0 auto;
         display: block;
-        min-width: 540px;
+        /* min-width: 540px; */
         width: 53vw;
         margin-top: 30px;
         height: auto;
@@ -254,7 +254,7 @@ h4 {
 }
 
 .sr_box {
-    width: 95%;
+    width: 90%;
     height: 80px;
     margin: 0 auto;
     /* background: #ededed; */
@@ -347,7 +347,7 @@ h4 {
 }
 
 .sr_box2 {
-    width: 95%;
+    width: 90%;
     height: 80px;
     margin: 0 auto;
     /* background: #ededed; */
@@ -358,7 +358,7 @@ h4 {
 }
 
 .sr_box3 {
-    width: 95%;
+    width: 90%;
     height: 80px;
     margin: 0 auto;
     /* background: #ededed; */
@@ -463,7 +463,7 @@ h4 {
 }
 
 .mr_wrapper .mr_board {
-    width: 95%;
+    width: 90%;
     height: auto;
     margin: 0 auto;
     /* background: #ededed; */
@@ -773,7 +773,7 @@ h4 {
 }
 
 .bt_container {
-    width: 95%;
+    width: 90%;
     height: 100%;
     margin: 0 auto;
     /* line-height: 260px; */
@@ -803,7 +803,7 @@ h4 {
 
 .bt_container2 {
     display: none;
-    width: 95%;
+    width: 90%;
     height: auto;
     margin: 0 auto;
     background: #ededed;
@@ -884,7 +884,7 @@ h4 {
 
 .reply_list_box {
     /* background: #ededed; */
-    width: 95%;
+    width: 90%;
     margin: 15px auto 0 auto;
     height: auto;
     text-align: center;
@@ -904,6 +904,8 @@ h4 {
 }
 .reply_list_box p {
     font-size: 14px;
+    padding-bottom: 5px;
+    color: #5a5a5a;
 }
 
 .reply_list {
@@ -1124,4 +1126,22 @@ h4 {
     
 .button:not(hover) {
     transition: 0.2s  ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+    .book_info_wrapper {
+        width: 95%;
+    }
+    .sr_box, .sr_box2, .sr_box3 {
+        width: 95%;
+    }
+    .mr_wrapper .mr_board {
+        width: 95%;
+    }
+    .bt_container, .bt_container2, .bt_container3 {
+        width: 95%;
+    }
+    .reply_list_box {
+        width: 95%;
+    }
 }

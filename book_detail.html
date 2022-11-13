@@ -279,12 +279,10 @@
                     }
                     $('.reply_list_box').html(html);
                     clickReplyX();
-                    // doReplyX();
-                    // undoReplyX();
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(errorThrown);
-                    // alert("an error occured");
+                    alert("an error occured");
                 }
             });
         }
@@ -1297,11 +1295,6 @@
                             <span>{Writedatetime}</span>
                             <button data-attr="{data-attr}" class="btn_x">X</button>
                         </div>
-                        <!-- <div class="reply_datetime2">
-                            <input type="password" name="reply_pw" placeholder="비밀번호 입력">
-                            <button  class="btn_delete3">삭제</button>
-                            <button class="btn_cancel5">취소</button>
-                        </div> -->
                     </div>
                 </div>
             </div>

@@ -3,16 +3,10 @@ a {
 }
 
 .myInfo_container {
-    width: 30%;
-    height: 50%;
+    width: 60%;
+    height: 60vh;
     margin: 10% auto;
     text-align: justify;
-}
-
-@media screen and (max-width: 750px) {
-    .myInfo_container {
-        width: 60%;
-    }
 }
 
 .top {
@@ -25,7 +19,7 @@ a {
 .info_wrap {
     min-width: 350px;
     width: 80%;
-    height: 230px;
+    height: 240px;
     border: 1px solid #ccc;
     margin: 0 auto;
     border-radius: 3px;
@@ -74,16 +68,9 @@ a {
 .buttons {
     width: 80%;
     height: 30px;
-    margin: 20px auto;
+    margin: 10px auto 0;
     display:flex;
     justify-content: space-evenly;
-}
-
-@media screen and (max-width: 1400px){
-    .buttons {
-        width: 80%;
-        margin: 10px auto 0;
-    }
 }
 
 .button {
@@ -134,4 +121,44 @@ input:focus {
 
 .btn:hover{
     text-decoration: underline;
+}
+
+
+@media screen and (max-width: 767px) {
+    .myInfo_container {
+        width: 95%;
+    }
+    .top {
+        font-size: 1rem;
+    }
+    .info_wrap {
+        width: 90%;
+        min-width: unset;
+        height: 330px;
+        padding: 16px;
+    }
+    .info {
+        display: block;
+    }
+    .info_pw {
+        margin: 40px 0;
+    }
+    .info1 {
+        width: 100%;
+    }
+    input {
+        min-width: unset;
+        width: 90%;
+    }
+    .buttons {
+        margin: 10px auto;
+    }
+    .button {
+        width: 180px;
+        height: 30px; 
+        font-size: 1rem;
+    }
+    .btn {
+        font-size: 0.8rem;
+    }
 }
