@@ -3,7 +3,7 @@ a {
 }
 #wrap {
     width: 80vw;
-    height: 60vh;
+    height: 69.6vh;
     margin: 4% auto;
     text-align: center;
 }
@@ -23,7 +23,7 @@ a {
     margin: 0 auto;
 }
 .btn_Duplicate{
-    height: 4.4vh;
+    height: 4.3vh;
     position: absolute;
     top: 0;
     right: 0;
@@ -41,6 +41,7 @@ input {
     height: 4vh;
     margin: 10px auto;
     display: block;
+    font-size: 1.5rem;
 }
 
 .btn_join  { 
@@ -60,7 +61,8 @@ input {
     transition: 0.2s  ease-in-out;
 }
 input::placeholder{
-    padding: 1vw;
+    padding: 0.5vw;
+    font-size: 1.2rem;
 }
 @media screen and (max-width:767px){
     input{
@@ -85,5 +87,11 @@ input::placeholder{
         position: absolute;
         top: 0;
         right: 0;
+    }
+    .top {
+        font-size: 2em;
+    }
+    #wrap {
+        height: 72vh;
     }
 }

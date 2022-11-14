@@ -13,20 +13,20 @@ $(document).ready(function(){
     var loginObj = getLoginObj();
     if(typeof(loginObj) != "undefined"){
         if(loginObj.AdminYn == "1"){
-            html += '<p class="gnb_btn_login">'+'관리자&nbsp;'+loginObj.Nickname+'님 안녕하세요'+'</p>'
-            html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button class="gnb_button">로그아웃</button></a>'
-            html += '<a class="gnb_btn_login" href="/MBMng"><button class="gnb_button">회원관리</button></a>'
-            html += '<a class="gnb_btn_login" href="/myInfo"><button class="gnb_button">내 정보</button></a>'
+            html += '<p class="gnb_btn_login gnb_text">'+'관리자&nbsp;'+loginObj.Nickname+'님 안녕하세요'+'</p>'
+            html += '<a class="gnb_btn_login gnb_top_btn" href="#" onClick="logout()"><button class="gnb_button">로그아웃</button></a>'
+            html += '<a class="gnb_btn_login gnb_top_btn" href="/MBMng"><button class="gnb_button">회원관리</button></a>'
+            html += '<a class="gnb_btn_login gnb_top_btn" href="/myInfo"><button class="gnb_button">내 정보</button></a>'
         }
         else if(loginObj.AdminYn == "0"){
-            html += '<p class="gnb_btn_login">'+loginObj.Nickname+'님 안녕하세요'+'</p>'
-            html += '<a class="gnb_btn_login" href="#" onClick="logout()"><button class="gnb_button">로그아웃</button></a>'
-            html += '<a class="gnb_btn_login" href="/myInfo"><button class="gnb_button">내 정보</button></a>'
+            html += '<p class="gnb_btn_login gnb_text">'+loginObj.Nickname+'님 안녕하세요'+'</p>'
+            html += '<a class="gnb_btn_login gnb_top_btn" href="#" onClick="logout()"><button class="gnb_button">로그아웃</button></a>'
+            html += '<a class="gnb_btn_login gnb_top_btn" href="/myInfo"><button class="gnb_button">내 정보</button></a>'
         }
     }
     else{
-        html += '<a class="gnb_btn_login" href="/login"><button class="gnb_button">로그인</button></a>'
-        html += '<a class="gnb_btn_login" href="/join"><button class="gnb_button">회원가입</button></a>'
+        html += '<a class="gnb_btn_login gnb_top_btn" href="/login"><button class="gnb_button">로그인</button></a>'
+        html += '<a class="gnb_btn_login gnb_top_btn" href="/join"><button class="gnb_button">회원가입</button></a>'
     }
     html += '</div>'
     html += '</div>'

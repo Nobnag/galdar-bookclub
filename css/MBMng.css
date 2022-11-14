@@ -23,7 +23,11 @@ tr{
     font-size: 12px;
 }
 td{
-    padding: 12px 0;
+    font-size: 30px;
+    padding: 1vh 0;
+}
+.member_use_contents{
+    font-size: 1rem;
 }
 .SR, .MR{
     list-style: none;
@@ -32,7 +36,7 @@ td{
     padding: 0 0 0 10px;
     border: solid 1px lightgray;
     padding: 13px;
-    font-size: 12px;
+    font-size: 20px;
     line-height: 160%;
 }
 p {
@@ -53,6 +57,7 @@ h1, h2{
 .btn_container{
     float: right;
     margin-top: 10px;
+    padding: 4px;
 }
 table input{
     box-sizing: border-box;
@@ -78,30 +83,120 @@ ul{
     text-align: center;
     height: 16px;
 }
-.ipt_sreach{
-    width: 400px;
-    height: 26px;
+.light-theme .current{
+    font-size: 2rem;
+    cursor: pointer;
 }
-.td_memberIdx, .td_premiumMemberYn, .td_adminYn{
+.pagination_container .pagination ul li a{
+    font-size: 2rem;
+    color: #333;
+    box-shadow: none;
+    cursor: default;
+    font-weight: bold;
+    cursor: pointer;
+}
+.ipt_sreach{
+    width: 32vw;
+    height: 3vh;
+}
+.btn_sreach{
+    width: 64px;
+    height: 3.4vh;
+}
+.td_memberIdx{
     text-align: center;
-    width: 40px;
+    width: 4vw;
+}
+.td_premiumMemberYn, .td_adminYn{
+    text-align: center;
+    width: 6vw;
 }
 .td_email, .td_pw,.td_nickname,.td_contact,.td_joinDatetime{
     padding-left: 4px;
 }
 .td_joinDatetime{
-    width: 102px;
+    width: 10vw;
+    font-size: 18px;
 }
 .td_contact{
-    width: 90px;
+    width: 8vw;
+    font-size: 20px;
 }
 .btn_in_container{
-    float: inherit;
-    padding-top: 10px;
+    float: right;
+    padding-top: 4px;
 }
-button{
-    padding: 4px;
+.btn_in_container button{
+    height: 3vh;
+    padding:0 0.2vw 0 0.2vw;
 }
 .rp_container{
-    margin-top: 40px;
+    margin-top: 80px;
+}
+.sreach_container{
+    width: 100%;
+}
+.btn_container input::placeholder{
+    padding: 4px;
+    font-size: 1.4em;
+}
+#rp_wrapper{
+    padding-bottom: 10px;
+}
+@media screen and (max-width:767px){
+    th{
+        font-size: 6px;
+    }
+    td{
+        font-size: 1em;
+    }
+    .td_contact{
+        font-size: 1em;
+    }
+    .td_joinDatetime{
+        font-size: 1em;
+    }
+    .btn_container{
+        width: 100%;
+    }
+    .light-theme .current{
+        font-size: 1rem;
+    }
+    .pagination_container .pagination ul li a{
+        font-size: 1rem;
+    }
+    .sreach_container {
+        text-align: center;
+        margin: 5px 0 5px 0;
+    }
+    .sreach_container input {
+        width: 64vw;
+    }
+    .btn_in_container {
+        text-align: center;
+        float: none;
+    }
+    .SRContent {
+        float: none;
+        width: 100%;
+    }
+    .MRContent {
+        float: none;
+        width: 100%;
+    }
+    .SR, .MR{
+        font-size: 12px;
+    }
+    #rp_wrapper h1{
+        font-size: 1.4rem;
+    }
+    #rp_wrapper h2{
+        font-size: 1rem;
+    }
+    .btn_in_container button {
+        margin:  0 4px 0 4px;
+    }
+    .btn_container input::placeholder{
+        font-size: 1em;
+    }
 }

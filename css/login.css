@@ -22,6 +22,7 @@ input {
     margin: 20px auto;
     width: 30vw;
     height: 6vh;
+    font-size: 1.5rem;
 }
 .btn_login {
     width: 30vw;
@@ -29,7 +30,8 @@ input {
     border-radius: 3px;
     border: 0;
 }
-.main_btn_login{width: 30vw;
+.main_btn_login{
+    width: 30vw;
     height: 6vh;
     border-radius: 3px;
     border: 0;
@@ -50,8 +52,8 @@ input {
     margin: 6px auto;
 }
 input::placeholder{
-    padding: 1vw;
-    font-size: 0.5em;
+    padding: 0.5vw;
+    font-size: 1.2rem;
 }
 .button:hover {
     background: #5D84A6;
@@ -74,5 +76,8 @@ input::placeholder{
         margin: 6px auto;
         width: 80vw;
         height: 6vh;
+    }
+    .wrapper {
+        height: 70vh;
     }
 }

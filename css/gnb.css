@@ -45,20 +45,16 @@ a {
 .gnb_home_link {
     position: relative;
     display: inline-block;
-    width: 90px;
-    height: 80px;
+    width: 120px;
+    height: 9vh;
 }
 
 .gnb_logo {
     position: relative;
-    /* max-width: 50%; */
     height: inherit;
     width: inherit;
     display: inline-block;
     vertical-align: middle;
-    /* word-wrap: break-word; */
-    /* text-overflow: ellipsis; */
-    /* overflow: hidden; */
 }
 
 .gnb_content {
@@ -73,7 +69,7 @@ a {
 
 .gnb_link {
     position: relative;
-    font-size: 1.2em;
+    font-size: 1.4em;
     margin-left: 40px;
     color: gray;
 }
@@ -82,7 +78,7 @@ a {
     position: relative;
     float: right;
     margin-right: -2px;
-    font-size: 0.8em;
+    font-size: 1em;
 }
 
 .gnb_button {
@@ -113,5 +109,19 @@ p {
         position: relative;
         float: right;
         font-size: 0.1em;
+    }
+    .gnb_home_link {
+        width: 80px;
+        height: 9vh;
+    }
+}
+@media screen and (max-width:392px){
+    .gnb_right .gnb_text{
+        margin: 0 0 0 18px;
+        padding: 0;
+        display: block;
+    }
+    .gnb_right .gnb_top_btn {
+        margin: 0 16px 0 0;
     }
 }
