@@ -97,3 +97,13 @@ p{
     width: 78px;
     height: 30px;   
 }
+
+@media screen and (max-width:767px){
+    .text{
+        width: 190px;
+    }
+} 
+.reg_wrapper{
+    width:100%;
+    overflow-x:hidden;
+    }

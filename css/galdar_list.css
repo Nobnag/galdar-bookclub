@@ -9,8 +9,10 @@ li{
 
 .book_list
     {
-    /* width: 60%;*/
-    width: 990px; 
+    /* width: 62em; */
+    /* width: 70%; */
+    width: 990px;
+    /* width: 62rem; */
     margin: 50px auto;
     overflow: hidden;
     }
@@ -18,10 +20,25 @@ li{
 h3{
     padding: 30px 0;
     font-size: 44px; 
-    width: 100%; height: 50px;
+    /* width: 100%; height: 50px; */
     text-align: center;
     font-family: 'Nanum Myeongjo', serif;
+    /* width: 70vw; */
+    margin: 0;
 }
+
+.list_title{
+    text-align: center;
+    font-family: 'Nanum Myeongjo', serif;
+    line-height: 180%;
+    display: block;
+    /* margin: -3px auto; */
+    margin-bottom: 36px;
+    /* width: 65%; */
+    /* width: 70vw; */
+   
+
+} 
 
 li{
     float: left;
@@ -61,14 +78,18 @@ a:hover figcaption, .gallery a:focus figcaption{
     display: flex;
     justify-content: right;
     text-align: center;
-    margin: 30px auto;
+    /* margin: 30px auto; */
     width: 990px;
     height: 40px;
     /* padding: 0 40px; */
+    width: 100vw;
+    margin: 0;
+    margin-bottom: 40px;
 }
 
 .btn-wrap2 {
-    width: 60%;
+    /* width: 60%; */
+    width: 41%;
     height: 40px;
 }
 
@@ -88,6 +109,7 @@ a:hover figcaption, .gallery a:focus figcaption{
     background-color: #282828;
     color: white;
     cursor:pointer;
+
 }
 /* 
 .button{
@@ -134,18 +156,9 @@ a:hover figcaption, .gallery a:focus figcaption{
     color: white;
     cursor:pointer;
     border-radius: 4px; 
-    margin-right: 44px;
+    /* margin-right: 83px; */
+    margin-right: 19%;
 }        
-
-.list_title{
-    text-align: center;
-    font-family: 'Nanum Myeongjo', serif;
-    line-height: 180%;
-    display: block;
-    margin: -3px auto;
-    margin-bottom: 36px;
-    width: 65%;
-} 
 
 a.jcm-top {
     position: fixed;
@@ -162,3 +175,120 @@ a.jcm-top {
     z-index: 999;
     display: none;
 }
+
+@media screen and (max-width:767px){
+    .list_title{
+        font-size: 13px;
+        margin: 0px 15px 30px 15px;
+        /* text-align: center;
+        font-family: 'Nanum Myeongjo', serif;
+        line-height: 180%;
+        display: block; */
+        /* margin: 0 5px 36px; */
+
+    } 
+} 
+
+@media screen and (max-width:767px){
+    h3{
+        padding: 20px 0;
+        font-size: 27px; 
+        /* width: 100%; height: 50px; */
+        /* text-align: center;
+        font-family: 'Nanum Myeongjo', serif; */
+        /* width: 100vw; */
+        /* margin: 40px; */
+    }
+} 
+
+@media screen and (max-width:767px){
+    .Book_img{
+        height: 100vw;
+
+        /* align-items: center;
+        width: 100%;
+        height: 100vw;
+        border-radius: 5px; */
+    }
+} 
+
+@media screen and (max-width:767px){
+    li{
+        display: contents;
+        /* align-items: center;
+        display: contents; */
+        /* display: flex; */
+        /* float: left; */
+        /* width: 100%; height: 15rem;
+        text-align: -webkit-center;
+        margin: 0 0 65px; */
+    }
+
+} 
+
+@media screen and (max-width:767px){
+    figure{
+        margin-bottom: 25px;
+        width: 80%; 
+        /* height: 100%;
+        align-items: center; */
+     }
+
+} 
+
+@media screen and (max-width:767px){
+    .book_list
+    {
+        margin: 50px auto;
+        width: 100%;
+        /* width: 990px; */
+        /* width: 62rem; */
+        /* margin: 50px auto;
+        overflow: hidden;
+        text-align: -webkit-center;
+        margin-left: 10%; */
+    }
+} 
+
+/* @media screen and (max-width:767px){
+    figcaption{
+        opacity: 0;  
+        margin-left: 10%;
+        width: 80%; height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        position: absolute; 
+        top: 0; left: 0;
+        color: #fff; text-align: center;
+        line-height: 25px;
+        transition: 0.3s;
+        font-family: 'Nanum Myeongjo', serif;
+        border-radius: 5px; 
+    }
+}  */
+
+@media screen and (max-width:767px){
+    .btn-wrap{
+        margin-bottom: 10%;
+    }
+} 
+
+@media screen and (max-width:767px){
+    a:hover figcaption, .gallery a:focus figcaption{
+        opacity: 0;
+    }
+} 
+@media screen and (max-width:767px){
+    .btn-wrap2{
+        width: 100%;   
+    }
+}  
+
+@media screen and (max-width:767px){
+    .list_load_box{
+        text-align: -webkit-center;
+    }
+} 
+
+
+/* 
+767 */
