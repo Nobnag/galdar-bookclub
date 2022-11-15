@@ -2,6 +2,10 @@
 
 *{ padding: 0;margin: 0;}
 
+body{
+    overflow-x:hidden; overflow-y:auto;
+}
+
 li{
     list-style: none; 
 
@@ -279,6 +283,8 @@ a.jcm-top {
 } 
 @media screen and (max-width:767px){
     .btn-wrap2{
+        
+        /* padding-left: 25%; */
         width: 100%;   
     }
 }  
@@ -286,6 +292,19 @@ a.jcm-top {
 @media screen and (max-width:767px){
     .list_load_box{
         text-align: -webkit-center;
+    }
+} 
+@media screen and (max-width:767px){
+    .list_write_button{
+        position: absolute;
+        width: 18%;
+        margin-right: 10%
+    }
+} 
+@media screen and (max-width:767px){
+    .button_decorate{
+        width: 40%;
+        /* margin-right: -35%; */
     }
 } 
 
