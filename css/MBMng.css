@@ -23,7 +23,7 @@ tr{
     font-size: 12px;
 }
 td{
-    font-size: 22px;
+    font-size: 18px;
     padding: 1vh 0;
 }
 .member_use_contents{
@@ -116,11 +116,11 @@ ul{
 }
 .td_joinDatetime{
     width: 10vw;
-    font-size: 18px;
+    font-size: 12px;
 }
 .td_contact{
     width: 8vw;
-    font-size: 20px;
+    font-size: 12px;
 }
 .btn_in_container{
     float: right;
