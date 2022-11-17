@@ -47,7 +47,7 @@ details div {
     padding: 15px;
     line-height: 200%;
 }
-@media screen and (max-width:420px){
+@media screen and (max-width:767px){
     #wrap {
         padding: 3vh 1vw;
         font-size: 0.8em;
@@ -63,7 +63,7 @@ details div {
     details {
         padding: 0.2em 0.2em 0;
         margin-bottom: 0.4em;
-        width: 96vw;
+        width: 94vw;
     }
     details[open] {
         padding: 0.2em;

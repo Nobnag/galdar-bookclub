@@ -9,7 +9,8 @@ text-decoration: none;
     text-align: center;
 }
 
-h1  {
+.wrapper h1  {
+    font-size: 50px;
     text-align:center;
 }
 
@@ -20,40 +21,42 @@ h1  {
 input {
     display: block;
     margin: 20px auto;
-    width: 30vw;
-    height: 6vh;
+    width: 450px;
+    height: 80px;
     font-size: 1.5rem;
 }
+
+button{
+    margin: 6px auto;
+}
+
 .btn_login {
-    width: 30vw;
-    height: 6vh;
+    width: 450px;
+    height: 80px;
     border-radius: 3px;
     border: 0;
 }
 .main_btn_login{
-    width: 30vw;
-    height: 6vh;
+    width: 450px;
+    height: 80px;
     border-radius: 3px;
     border: 0;
     cursor: pointer;
-    margin: 6px auto;
 }
-.btn_Pw_change{width: 30vw;
-    height: 6vh;
+.btn_Pw_change{
+    width: 450px;
+    height: 80px;
     border-radius: 3px;
     border: none;
     cursor: pointer;
     background: #93A6BF;
     color: #fff;
-    margin: 6px auto;
 }
 .kakao_btn_login{
     background-color: yellow;
-    margin: 6px auto;
 }
 input::placeholder{
-    padding: 0.5vw;
-    font-size: 1.2rem;
+    padding: 6px;
 }
 .button:hover {
     background: #5D84A6;
