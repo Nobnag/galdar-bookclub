@@ -108,14 +108,14 @@ p {
     .gnb_right {
         position: relative;
         float: right;
-        font-size: 0.1em;
+        font-size: 14px;
     }
     .gnb_home_link {
         width: 80px;
         height: 86px;
     }
 }
-@media screen and (max-width:392px){
+@media screen and (max-width:490px){
     .gnb_right .gnb_text{
         margin: 0 0 0 18px;
         padding: 0;
