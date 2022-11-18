@@ -77,7 +77,7 @@ a {
 .gnb_right {
     position: relative;
     float: right;
-    margin-right: -2px;
+    margin-right: -8px;
     font-size: 14px;
 }
 
