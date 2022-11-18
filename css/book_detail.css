@@ -20,7 +20,7 @@ a {
 /* 태블릿, 모바일 */
 @media screen and (max-width: 767px) {
     .container {
-        width: 98%;
+        width: 93%;
         min-width: 320px;
         margin: 40px auto;
     }
@@ -217,7 +217,7 @@ h4 {
     height: auto;
 }
 
-.btn_update_info .btn_updateBook {
+.btn_updateBook {
     margin-right: 5%;
 }
 
@@ -1112,9 +1112,12 @@ h4 {
 
 @media screen and (max-width: 767px) {
     .button {
-        width: 80px;
-        height: 20px; 
+        width: 90px;
+        height: 25px; 
         font-size: 12px;
+    }
+    .btn_updateBook, .btn_write, .btn_write2 {
+        margin-right: 2%;
     }
 }
 
