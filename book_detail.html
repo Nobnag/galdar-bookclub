@@ -292,7 +292,9 @@
             if(typeof(loginObj) != "undefined"){
                 $('.btn_write').show();
                 $('.btn_update').show();
+                $('.btn_update2').show();
                 $('.btn_write2').show();
+                $('.btn_delete6').show();
                 // $('.btn_update2').show();
                 $('.btn_x').show();
                 $('.reply_box').show();
@@ -304,7 +306,9 @@
             } else {
                 $('.btn_write').hide();
                 $('.btn_update').hide();
+                $('.btn_update2').hide();
                 $('.btn_write2').hide();
+                $('.btn_delete6').hide();
                 $('.btn_update3').hide();
                 $('.btn_x').hide();
                 $('.reply_box').hide();
@@ -703,6 +707,10 @@
                 var mr_writer = $('.mr_container3 .cn_user').html();
                 var mr_title = $('.mr_container3 .cn_ttl').html();
                 var mr_content = $('.mr_container3 .cn_ct').html();
+                if(mr_writer != loginObj.Nickname){
+                        alert("자신의 서평만 수정할 수 있습니다.");
+                        return false;
+                    }
                 $('.mr_container3').css('display','none');
                 $('.mr_container4').css('display','block');
                 $('.mr_container4 .detail_mr_idx').html(mr_idx)
@@ -752,21 +760,29 @@
                     mr_idx: mr_idx
                     ,mr_writer: mr_writer
                 }
-                $.ajax({
-                    url: '/api/deleteMR'
-                    ,data: params
-                    ,type: 'post'
-                    ,datatype: 'json'
-                    ,success: function(result){
-                        if(result.recordset[0].Result == "Success"){
-                            alert("삭제가 완료되었습니다.");
-                            location.reload();
+                if(mr_writer != loginObj.Nickname){
+                        alert("자신의 서평만 삭제할 수 있습니다.");
+                        return false;
+                    }
+                if(confirm("삭제 하시겠습니까?")!=true){
+                    return false;
+                } else {
+                    $.ajax({
+                        url: '/api/deleteMR'
+                        ,data: params
+                        ,type: 'post'
+                        ,datatype: 'json'
+                        ,success: function(result){
+                            if(result.recordset[0].Result == "Success"){                                
+                                alert("삭제가 완료되었습니다.");
+                                location.reload();
+                            }
                         }
-                    }
-                    ,error: function(jqXHR, textStatus, errorThrown){
+                        ,error: function(jqXHR, textStatus, errorThrown){
                         console.log(errorThrown);
-                    }
-                });
+                        }
+                    });
+                }
             });
 
 
