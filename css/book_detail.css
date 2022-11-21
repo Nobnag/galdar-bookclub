@@ -657,9 +657,9 @@ input:focus, textarea:focus {
 .cn {
     display: inline-block;
     width: 6vw;
-    min-width: 50px;
+    min-width: 56px;
     height: 24px;
-    background: #eaeaea;
+    background: #eef5ff;
     padding: 5px 10px;
     line-height: 24px;
 }
@@ -680,6 +680,12 @@ input:focus, textarea:focus {
     height: 24px;
     padding: 5px 0px 5px 10px;
     line-height: 24px;
+}
+
+@media screen and (max-width: 400px) {
+    .cn_ttl{
+        width: 80%;
+    }
 }
 
 @media screen and (max-width: 767px) {
