@@ -14,16 +14,17 @@ th, td {
     border: 1px solid #444444;
 }
 th{
+    height: 32px;
     background-color: #f1f5f9;
     color: #56688A;
     font-size: 12px;
 }
 tr{
-    background-color: #fff;
+    background-color: #d6efff9e;
     font-size: 12px;
 }
 td{
-    font-size: 18px;
+    font-size: 12px;
     padding: 1vh 0;
 }
 .member_use_contents{
@@ -84,11 +85,11 @@ ul{
     height: 16px;
 }
 .light-theme .current{
-    font-size: 2rem;
+    font-size: 12px;
     cursor: pointer;
 }
 .pagination_container .pagination ul li a{
-    font-size: 2rem;
+    font-size: 12px;
     color: #333;
     box-shadow: none;
     cursor: default;
@@ -100,14 +101,18 @@ ul{
     height: 3vh;
 }
 .btn_sreach{
-    width: 64px;
+    width: 58px;
     height: 3.4vh;
 }
 .td_memberIdx{
     text-align: center;
-    width: 4vw;
+    width: 5vw;
 }
-.td_premiumMemberYn, .td_adminYn{
+.td_premiumMemberYn{
+    text-align: center;
+    width: 7vw;
+}
+.td_adminYn{
     text-align: center;
     width: 6vw;
 }
@@ -138,11 +143,24 @@ ul{
 }
 .btn_container input::placeholder{
     padding: 4px;
-    font-size: 1.4em;
+    font-size: 12px;
 }
 #rp_wrapper{
     padding-bottom: 10px;
 }
+.btn_container button{
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: #93A6BF;
+    color: #fff;
+}
+.btn_container button:hover{
+    background: #5D84A6;
+    font-weight: 600;
+    transition: 0.2s  ease-in-out;
+}
+
 @media screen and (max-width:767px){
     th{
         font-size: 6px;
