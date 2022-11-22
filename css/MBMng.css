@@ -149,11 +149,12 @@ ul{
     padding-bottom: 10px;
 }
 .btn_container button{
-    border-radius: 12px;
+    border-radius: 5px;
     border: none;
     cursor: pointer;
     background: #93A6BF;
     color: #fff;
+    padding: 0px 10px;
 }
 .btn_container button:hover{
     background: #5D84A6;
